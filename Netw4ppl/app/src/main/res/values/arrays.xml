@@ -1,0 +1,12 @@
+<resources>
+    <!-- Settings Sending Option Preference -->
+    <string-array name="settings_sending_option_entries">
+        <item>Send to server</item>
+        <item>Send by email</item>
+    </string-array>
+
+    <string-array name="settings_sending_option_values">
+        <item>send_to_server</item>
+        <item>send_by_email</item>
+    </string-array>
+</resources>

@@ -1,0 +1,77 @@
+<resources>
+    <string name="app_name">Netw4ppl</string>
+
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_manage_relations">Manage Relations</string>
+    <string name="title_activity_manage_persons">Manage Persons</string>
+    <string name="title_send_data">Send Data</string>
+
+    <!-- Preference Titles -->
+    <string name="action_settings">Settings</string>
+    <string name="settings_server_header">Server</string>
+    <string name="settings_email_header">Email</string>
+    <string name="settings_sending_option_header">Sending option</string>
+    <string name="settings_delete_option_header">Clear data</string>
+
+    <!-- Sending Option Preferences -->
+    <string name="settings_sending_option_title">Sending option</string>
+
+    <string name="settings_sending_option_key" translatable="false">default_sending_option</string>
+
+    <!-- Server Preferences -->
+    <string name="settings_server_token_title">Token Server</string>
+    <string name="settings_server_ip_port_title">Server address</string>
+
+    <string name="settings_server_token_key" translatable="false">default_server_token</string>
+    <string name="settings_server_ip_port_key" translatable="false">default_server_ip_port_key</string>
+
+    <!-- Email Preferences -->
+    <string name="settings_email_category" translatable="false">settings_email_category</string>
+    <string name="settings_email_default_title">Submitting Email Address</string>
+
+    <string name="settings_email_default_key" translatable="false">default_email_destination_key</string>
+
+    <!-- Delete Preferences -->
+    <string name="settings_delete_option_key" translatable="false">settings_delete</string>
+    <string name="settings_delete_option_title">Clear data</string>
+
+    <string name="settings_delete_button_key" translatable="false">delete_button</string>
+    <string name="settings_delete_button_title">Clear</string>
+    <string name="settings_delete_button_summary">Delete the files on this device</string>
+
+    <!-- Alert Dialog Messages -->
+    <!-- Strings Submit status -->
+    <string name="main_submit_success_title">Submit successful</string>
+    <string name="main_submit_fail_title">Submit failed</string>
+    <string name="main_submit_success_msg">The submitting was a success. You can now delete the files</string>
+    <string name="main_submit_fail_msg">We are sorry but an unknown error was encountered, please try again later</string>
+
+    <!-- Strings Submit server settings error -->
+    <string name="main_submit_ip_port_fail_title">Server address</string>
+    <string name="main_submit_ip_port_fail_msg">Please enter the IP address and the port number values in the settings</string>
+    <string name="main_submit_token_fail_title">Token Value</string>
+    <string name="main_submit_token_fail_msg">Please enter a value of the token in the settings</string>
+
+    <!-- Strings Passwords hashing messages -->
+    <string name="settings_default_pwd_hashing_pending_title">Securing your password…</string>
+    <string name="settings_default_pwd_hashing_pending_message">Your password is being secured and saved, please wait…</string>
+    <string name="settings_default_pwd_hashing_error_title">Hashing Error</string>
+    <string name="settings_default_pwd_hashing_error_message">An error occurred while trying to secure and save your password.</string>
+    <string name="settings_default_pwd_hashing_success_title">Password remembered</string>
+    <string name="settings_default_pwd_hashing_success_message">Your password has been successfully secured and saved.</string>
+
+    <!-- Strings Alert Dialog Button Messages -->
+    <string name="change_settings">GO TO SETTINGS</string>
+
+    <!-- Strings toast delete files -->
+    <string name="toast_delete_success">Deletion successful</string>
+    <string name="toast_delete_fail">Deletion failed</string>
+    <string name="toast_delete_processing">Deletion ...</string>
+
+
+    <string name="files_path" translatable="false">/cases/</string>
+
+    <string name="bottom_menu_page_1">Page 1</string>
+    <string name="bottom_menu_page_2">Page 2</string>
+
+</resources>
