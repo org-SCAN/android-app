@@ -60,6 +60,15 @@ public class FileUtils {
         return result_creation;
     }
 
+    public static boolean createDirectory(String path) {
+        boolean result = true;
+        File dir = new File(path);
+        if (!dir.isDirectory())
+            result = dir.mkdir();
+
+        return result;
+    }
+
     /**
      * Create a file and initialize its content
      *
@@ -190,16 +199,22 @@ public class FileUtils {
 
     public static JSONObject loadConfigFromFile(Context context) throws IOException {
         // check if the file "fields.json" in "config/" directory exists
-        String path_file = context.getFilesDir()+"/config/fields.json";
-        File file = new File(path_file);
+        String path_dir = context.getFilesDir()+"/config";
+        String filename = "/fields.json";
+        File file = new File(path_dir+filename);
 
         String file_content;
         if (file.exists()) {
-            file_content = readFile(path_file);
+            // chargement du fichier depuis le dossier config/
+            file_content = readFile(path_dir+filename);
         }
         else {
             InputStream is = context.getResources().openRawResource(context.getResources().getIdentifier("fields", "raw", context.getPackageName()));
             file_content = readFileInputStream(is);
+            // créer le dossier config/
+            createDirectory(path_dir);
+            // ecriture du content dans le fichier config/fields.json
+            writeFile(path_dir+filename, file_content);
         }
 
         JSONObject fields = null;

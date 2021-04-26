@@ -1,0 +1,324 @@
+{
+  "fields": {
+    "unique_id" : {
+      "displayed_value": {
+        "eng": "Unique ID",
+        "fra": "Unique ID",
+        "spa": "Unico ID"
+      },
+      "placeholder": "AAA-000001",
+      "android_type": "EditText",
+      "linked_list": "",
+      "required": 0,
+      "order": 1
+    },
+    "full_name": {
+      "displayed_value": {
+        "eng": "Full name",
+        "fra": "Nom complet"
+      },
+      "placeholder": "John Doe",
+      "android_type": "EditText",
+      "linked_list": "",
+      "required": 1,
+      "order": 2
+    },
+    "age": {
+      "displayed_value": {
+        "eng": "Age (years)",
+        "fra": "Age (années)"
+      },
+      "placeholder": "25",
+      "android_type": "EditText",
+      "linked_list": "",
+      "required": 1,
+      "order": 3
+    },
+    "gender": {
+      "displayed_value": {
+        "eng": "Sex",
+        "fra": "Sexe"
+      },
+      "placeholder": "Female",
+      "android_type": "Spinner",
+      "linked_list": "Gender",
+      "required": 1,
+      "order": 4
+    },
+    "nationality": {
+      "displayed_value": {
+        "eng": "Nationality",
+        "fra": "Nationalité"
+      },
+      "placeholder": "Switzerland",
+      "android_type": "AutoCompleteTextView",
+      "linked_list": "Country",
+      "required": 2,
+      "order": 5
+    },
+    "other_names": {
+      "displayed_value": {
+        "eng": "Other names",
+        "fra": "Autres noms"
+      },
+      "placeholder": "",
+      "android_type": "EditText",
+      "linked_list": "",
+      "required": 3,
+      "order": 6
+    },
+    "alias": {
+      "displayed_value": {
+        "eng": "Alias",
+        "fra": "Alias"
+      },
+      "placeholder": "Big Joe",
+      "android_type": "EditText",
+      "linked_list": "",
+      "required": 3,
+      "order": 7
+    },
+    "role": {
+      "displayed_value": {
+        "eng": "Status",
+        "fra": "Statut"
+      },
+      "placeholder": "",
+      "android_type": "Spinner",
+      "linked_list": "Role",
+      "required": 2,
+      "order": 8
+    },
+    "birth_date": {
+      "displayed_value": {
+        "eng": "Date of birth",
+        "fra": "Date de naissance"
+      },
+      "placeholder": "YYYY-MM-DD",
+      "android_type": "CalendarView",
+      "linked_list": "",
+      "required": 2,
+      "order": 9
+    },
+    "birth_place": {
+      "displayed_value": {
+        "eng": "Birth place",
+        "fra": "Lieu de naissance"
+      },
+      "placeholder": "Paris",
+      "android_type": "EditText",
+      "linked_list": "",
+      "required": 2,
+      "order": 10
+    },
+    "passport_number": {
+      "displayed_value": {
+        "eng": "Passport number",
+        "fra": "Numéro de passeport"
+      },
+      "placeholder": "",
+      "android_type": "EditText",
+      "linked_list": "",
+      "required": 2,
+      "order": 11
+    },
+    "destination": {
+      "displayed_value": {
+        "eng": "Travel to",
+        "fra": "Destination"
+      },
+      "placeholder": "",
+      "android_type": "AutoCompleteTextView",
+      "linked_list": "Country",
+      "required": 2,
+      "order": 12
+    },
+    "detention_place": {
+      "displayed_value": {
+        "eng": "Place(s) of detention",
+        "fra": "Lieu(x) de détention"
+      },
+      "placeholder": "Aleppo",
+      "android_type": "EditText",
+      "linked_list": "",
+      "required": 3,
+      "order": 13
+    },
+    "embarkation_place": {
+      "displayed_value": {
+        "eng": "Place of embarkation",
+        "fra": "Lieu d'embarquement"
+      },
+      "placeholder": "Roubaix",
+      "android_type": "EditText",
+      "linked_list": "",
+      "required": 3,
+      "order": 14
+    },
+    "route": {
+      "displayed_value": {
+        "eng": "Route",
+        "fra": "Route"
+      },
+      "placeholder": "",
+      "android_type": "Spinner",
+      "linked_list": "Route",
+      "required": 2,
+      "order": 17
+    },
+    "residence": {
+      "displayed_value": {
+        "eng": "Country of residence",
+        "fra": "Pays de résidence"
+      },
+      "placeholder": "Syria",
+      "android_type": "AutoCompleteTextView",
+      "linked_list": "Country",
+      "required": 2,
+      "order": 18
+    },
+    "embarkation_date": {
+      "displayed_value": {
+        "eng": "Embarkation date",
+        "fra": "Date d'embarquement"
+      },
+      "placeholder": "YYYY-MM-DD",
+      "android_type": "CalendarView",
+      "linked_list": "",
+      "required": 3,
+      "order": 19
+    },
+    "date_last_seen": {
+      "displayed_value": {
+        "eng": "Date when last seen well",
+        "fra": "Prénom NOM"
+      },
+      "placeholder": "YYYY-MM-DD",
+      "android_type": "CalendarView",
+      "linked_list": "",
+      "required": 3,
+      "order": 20
+    },
+    "mothers_names": {
+      "displayed_value": {
+        "eng": "Mother's full name",
+        "fra": "Nom complet de la mère"
+      },
+      "placeholder": "Marina DOE",
+      "android_type": "EditText",
+      "linked_list": "",
+      "required": 3,
+      "order": 21
+    },
+    "fathers_names": {
+      "displayed_value": {
+        "eng": "Father's full name",
+        "fra": "Nom complet du père"
+      },
+      "placeholder": "Patrice DOE",
+      "android_type": "EditText",
+      "linked_list": "",
+      "required": 3,
+      "order": 22
+    }
+  },
+  "Route": {
+    "CM": {
+      "displayed_value": {
+        "eng": "Central Mediterranean",
+        "fra": "Méditerranée Centrale"
+      }
+    },
+    "EM": {
+      "displayed_value": {
+        "eng": "Eastern Mediterranean",
+        "fra": "Méditerranée de l'Est"
+      }
+    },
+    "WM": {
+      "displayed_value": {
+        "eng": "Western Mediterranean",
+        "fra": "Méditerranée de l'Ouest"
+      }
+    }
+  },
+  "Role": {
+    "informant": {
+      "displayed_value": {
+        "eng": "informant",
+        "fra": "informateur"
+      }
+    },
+    "possibly sought": {
+      "displayed_value": {
+        "eng": "possibly sought",
+        "fra": "possiblement recherché"
+      }
+    },
+    "relative": {
+      "displayed_value": {
+        "eng": "Full name",
+        "fra": "Prénom NOM"
+      }
+    },
+    "sought": {
+      "displayed_value": {
+        "eng": "sought",
+        "fra": "recherché"
+      }
+    },
+    "survivor": {
+      "displayed_value": {
+        "eng": "survivor",
+        "fra": "survivant"
+      }
+    },
+    "witness": {
+      "displayed_value": {
+        "eng": "witness",
+        "fra": "témoin"
+      }
+    }
+  },
+  "Country": {
+    "AFG": {
+      "displayed_value": {
+        "eng": "AFGHANISTAN",
+        "fra": "AFGHANISTAN"
+      }
+    },
+    "FRA": {
+      "displayed_value": {
+        "eng": "FRANCE",
+        "fra": "FRANCE"
+      }
+    },
+    "CHE":
+    {
+      "displayed_value": {
+        "eng": "SWITZERLAND",
+        "fra": "SUISSE"
+      }
+    }
+  },
+  "Gender": {
+    "F": {
+      "displayed_value": {
+        "eng": "Female",
+        "fra": "Femme"
+      }
+    },
+    "M": {
+      "displayed_value": {
+        "eng": "Male",
+        "fra": "Homme"
+      }
+    },
+    "O": {
+      "displayed_value": {
+        "eng": "Other",
+        "fra": "Autre"
+      }
+    }
+  }
+}
