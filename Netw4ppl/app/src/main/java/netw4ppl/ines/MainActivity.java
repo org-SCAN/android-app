@@ -12,6 +12,7 @@ import netw4ppl.ines.utils.FileUtils;
 import netw4ppl.ines.utils.SubmitData;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,14 +47,14 @@ public class MainActivity extends AppCompatActivity{
         mSendDataBtn = findViewById(R.id.main_activity_send_data_btn);
 
         // add listeners to every buttons
-        mManagePersonsBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ManagePersonsActivity.class);
-            startActivity(intent);
-        });
-        mManageRelationsBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ManageRelationsActivity.class);
-            startActivity(intent);
-        });
+//        mManagePersonsBtn.setOnClickListener(v -> {
+//            Intent intent = new Intent(MainActivity.this, ManagePersonsActivity.class);
+//            startActivity(intent);
+//        });
+//        mManageRelationsBtn.setOnClickListener(v -> {
+//            Intent intent = new Intent(MainActivity.this, ManageRelationsActivity.class);
+//            startActivity(intent);
+//        });
         mSendDataBtn.setOnClickListener(v -> {
             SubmitData.manageSend(this, "/cases/");
         });
@@ -64,19 +65,10 @@ public class MainActivity extends AppCompatActivity{
 
         // si c'est le lancement de l'application, chargement en mémoire des json de configuration
         if (mLancementApplication) {
+            // lecture du json de config
             try {
-                // si un fichier de configuration existe dans le dossier files/config -> le charger
-                // TODO gestion du fichier de config dans le dossier files/config
-                if (new File(getApplicationContext().getFilesDir().toString()+"/config/fields.json").exists()) {
-                    FileUtils.loadJSONFromAsset(getApplicationContext());
-                    Log.d("general-display", "Un fichier de configuration existe dans files/config/");
-                }
-                else {
-                    // sinon charger le fichier par défaut
-                    FileUtils.loadJSONFromAssetDefault(getApplicationContext());
-                    Log.d("general-display", "Aucun fichier de config n'existe dans files/config, chargement du fichier par défaut");
-                }
-            } catch (IOException | JSONException e) {
+                JSONObject fields = FileUtils.loadConfigFromFile(this);
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 

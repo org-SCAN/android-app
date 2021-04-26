@@ -139,11 +139,12 @@ public class SettingsActivity extends AppCompatActivity {
                 displayToast(this.getContext(), res.getString(R.string.toast_delete_processing));
                 Log.d("general-display", "Efface les fichiers de l'appareil");
 
-                boolean result_deletion = FileUtils.clearDir(SettingsFragment.this.getContext().getFilesDir());
-                ManagePersonsActivity.array_persons = new JSONArray();
+                boolean result_deletion = FileUtils.clearDirectory(SettingsFragment.this.getContext().getFilesDir().getPath());
+                //ManagePersonsActivity.array_persons = new JSONArray();
 
                 // create the new empty ones
-                boolean result_creation = FileUtils.createFiles(SettingsFragment.this.getContext().getFilesDir().toString()+"/cases/");
+                String[] filenames = {"persons.json", "relations.json"};
+                boolean result_creation = FileUtils.createFiles(SettingsFragment.this.getContext().getFilesDir().toString()+"/cases/", filenames);
                 Log.d("general-display", result_creation ? "Creation successfull" : "Creation failed");
 
                 displayToast(this.getContext(), result_deletion ? res.getString(R.string.toast_delete_success) : res.getString(R.string.toast_delete_fail));
