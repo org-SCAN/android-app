@@ -23,17 +23,17 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity
-            android:name=".ManageRelationsActivity"
-            android:label="@string/title_activity_manage_relations"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".AddPerson"
-            android:label="@string/title_activity_add_person"
-            android:parentActivityName=".ManagePersonsActivity" />
-        <activity
-            android:name=".ManagePersonsActivity"
-            android:parentActivityName=".MainActivity" />
+<!--        <activity-->
+<!--            android:name=".ManageRelationsActivity"-->
+<!--            android:label="@string/title_activity_manage_relations"-->
+<!--            android:parentActivityName=".MainActivity" />-->
+<!--        <activity-->
+<!--            android:name=".AddPerson"-->
+<!--            android:label="@string/title_activity_add_person"-->
+<!--            android:parentActivityName=".ManagePersonsActivity" />-->
+<!--        <activity-->
+<!--            android:name=".ManagePersonsActivity"-->
+<!--            android:parentActivityName=".MainActivity" />-->
 
         <provider
             android:name="androidx.core.content.FileProvider"

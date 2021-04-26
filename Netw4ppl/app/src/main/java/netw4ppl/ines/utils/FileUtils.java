@@ -212,9 +212,10 @@ public class FileUtils {
             InputStream is = context.getResources().openRawResource(context.getResources().getIdentifier("fields", "raw", context.getPackageName()));
             file_content = readFileInputStream(is);
             // créer le dossier config/
-            createDirectory(path_dir);
+            boolean result_dir = createDirectory(path_dir);
             // ecriture du content dans le fichier config/fields.json
-            writeFile(path_dir+filename, file_content);
+            boolean result_file = writeFile(path_dir+filename, file_content);
+            Log.d("display", result_dir && result_file ? "Création dossier config et création fichier successful" : "Echec creation fichier fields.json");
         }
 
         JSONObject fields = null;

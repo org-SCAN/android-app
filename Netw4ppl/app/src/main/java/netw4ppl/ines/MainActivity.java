@@ -68,8 +68,7 @@ public class MainActivity extends AppCompatActivity{
             // lecture du json de config
             try {
                 JSONObject fields = FileUtils.loadConfigFromFile(this);
-                Log.d("display", fields.toString(2));
-            } catch (IOException | JSONException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
