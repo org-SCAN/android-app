@@ -1,10 +1,23 @@
 package netw4ppl.ines.utils;
 
+import android.content.Context;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 
 public class FileUtils {
 
@@ -74,7 +87,7 @@ public class FileUtils {
      *
      * @param path path to file
      * @param content the content to be written in the file, must be of type String
-     * @return return a boolean true if teh writing was a success, false if not
+     * @return return a boolean true if the writing was a success, false if not
      */
     public static boolean writeFile(String path, String content) {
         boolean writing_success = true;
@@ -87,6 +100,32 @@ public class FileUtils {
             writing_success = false;
         }
         return writing_success;
+    }
+
+    /**
+     * Read content of file
+     *
+     * @param path path to file
+     * @return return a String of the content of the file
+     */
+    public static String readFile(String path) throws IOException {
+        InputStream is = new FileInputStream(path); // !!Modify so we can give a real argument
+        Writer writer = new StringWriter();
+        char[] buffer = new char[1024];
+        try {
+            Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            int n;
+            while ((n = reader.read(buffer)) != -1) {
+                writer.write(buffer, 0, n);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            is.close();
+        }
+        return writer.toString();
     }
 
 }
