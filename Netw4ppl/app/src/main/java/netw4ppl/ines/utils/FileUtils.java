@@ -5,6 +5,7 @@ import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -110,6 +111,16 @@ public class FileUtils {
      */
     public static String readFile(String path) throws IOException {
         InputStream is = new FileInputStream(path); // !!Modify so we can give a real argument
+        return readFileInputStream(is);
+    }
+
+    /**
+     * Read content of file
+     *
+     * @param is inputstream of the file
+     * @return return a String of the content of the file
+     */
+    public static String readFileInputStream(InputStream is) throws IOException {
         Writer writer = new StringWriter();
         char[] buffer = new char[1024];
         try {
@@ -175,6 +186,30 @@ public class FileUtils {
         }
 
         return result;
+    }
+
+    public static JSONObject loadConfigFromFile(Context context) throws IOException {
+        // check if the file "fields.json" in "config/" directory exists
+        String path_file = context.getFilesDir()+"/config/fields.json";
+        File file = new File(path_file);
+
+        String file_content;
+        if (file.exists()) {
+            file_content = readFile(path_file);
+        }
+        else {
+            InputStream is = context.getResources().openRawResource(context.getResources().getIdentifier("fields", "raw", context.getPackageName()));
+            file_content = readFileInputStream(is);
+        }
+
+        JSONObject fields = null;
+        try {
+            fields = new JSONObject(file_content);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return fields;
     }
 
 }
