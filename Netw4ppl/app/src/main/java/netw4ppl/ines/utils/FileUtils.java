@@ -145,7 +145,7 @@ public class FileUtils {
      * @param directory_path path to the directory
      * @return true if the directory content was completely deleted
      */
-    public static boolean clearDir(String directory_path) {
+    public static boolean clearDirectory(String directory_path) {
         boolean result = true;
 
         File file = new File(directory_path);
@@ -162,7 +162,7 @@ public class FileUtils {
             for (File f : arr) {
                 // if it's a directory, call the function on itself
                 if (f.isDirectory())
-                    clearDir(f.getPath());
+                    clearDirectory(f.getPath());
                     // else perform the deletion
                 else {
                     Log.d("life-cycle", "I need to delete this file: " + f.getName());
