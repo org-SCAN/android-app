@@ -26,11 +26,6 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        try {
-            MainActivity.device_language = FileUtils.setLanguage();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);

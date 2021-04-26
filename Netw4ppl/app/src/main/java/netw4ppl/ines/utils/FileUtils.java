@@ -1,4 +1,4 @@
 package netw4ppl.ines.utils;
 
-public class FIleUtils {
+public class FileUtils {
 }
