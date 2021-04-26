@@ -128,4 +128,53 @@ public class FileUtils {
         return writer.toString();
     }
 
+    /**
+     * Deletes a file
+     *
+     * @param path path to file
+     * @return true if file was deleted
+     */
+    public static boolean deleteFile(String path) {
+        File file = new File(path);
+        return file.exists() && file.delete();
+    }
+
+    /**
+     * Deletes a directory content
+     *
+     * @param directory_path path to the directory
+     * @return true if the directory content was completely deleted
+     */
+    public static boolean clearDir(String directory_path) {
+        boolean result = true;
+
+        File file = new File(directory_path);
+        if (file.isDirectory()) {
+            File[] arr = file.listFiles();
+
+            // if the directory is already empty
+            if (arr == null) {
+                Log.d("life-cycle", "The directory is already empty");
+                return false;
+            }
+
+            // for each element in the directory
+            for (File f : arr) {
+                // if it's a directory, call the function on itself
+                if (f.isDirectory())
+                    clearDir(f.getPath());
+                    // else perform the deletion
+                else {
+                    Log.d("life-cycle", "I need to delete this file: " + f.getName());
+                    result &= deleteFile(f.getPath());
+                }
+            }
+        }
+        else {
+            deleteFile(file.getPath());
+        }
+
+        return result;
+    }
+
 }
