@@ -82,9 +82,14 @@
     <string name="manage_relations_activity_title">Manage Relations</string>
 
 
-    <string name="files_path" translatable="false">/cases/</string>
+    <string name="directory_files" translatable="false">/cases</string>
+    <string name="filename_persons" translatable="false">/persons.json</string>
+    <string name="filename_relations" translatable="false">/relations.json</string>
 
     <string name="bottom_menu_page_1">Page 1</string>
     <string name="bottom_menu_page_2">Page 2</string>
+
+    <string name="age_title">Age: </string>
+    <string name="sex_title">Sex: </string>
 
 </resources>

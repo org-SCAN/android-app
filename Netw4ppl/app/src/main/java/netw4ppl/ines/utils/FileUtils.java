@@ -75,6 +75,11 @@ public class FileUtils {
         return dir.exists() && dir.isDirectory();
     }
 
+    public static boolean fileExists(String path) {
+        File file = new File(path);
+        return file.exists();
+    }
+
     /**
      * Create a file and initialize its content
      *
