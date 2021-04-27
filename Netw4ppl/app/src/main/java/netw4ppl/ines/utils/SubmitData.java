@@ -102,12 +102,14 @@ public class SubmitData {
         File[] arrFiles = directory.listFiles();
 
         // for every file present in the directory, add it in the attachments list
-        for (File f : arrFiles){
-            Uri attachment = FileProvider.getUriForFile(context, MainActivity.class.getPackage().getName() + ".fileprovider", new File(String.valueOf(f)));
-            attachments.add(attachment);
-        }
+        if (arrFiles != null) {
+            for (File f : arrFiles){
+                Uri attachment = FileProvider.getUriForFile(context, MainActivity.class.getPackage().getName() + ".fileprovider", new File(String.valueOf(f)));
+                attachments.add(attachment);
+            }
 
-        emailIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, attachments);
+            emailIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, attachments);
+        }
 
         context.startActivity(emailIntent);
     }
