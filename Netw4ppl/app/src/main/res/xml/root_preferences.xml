@@ -24,6 +24,12 @@
             app:title="@string/settings_server_ip_port_title"
             app:useSimpleSummaryProvider="true" />
 
+        <SwitchPreference
+            app:key="@string/settings_server_maj_auto_key"
+            app:title="@string/settings_server_maj_title"
+            app:switchTextOff="@string/settings_server_maj_off"
+            app:switchTextOn="@string/settings_server_maj_on"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory

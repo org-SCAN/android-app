@@ -135,7 +135,6 @@ public class SettingsActivity extends AppCompatActivity {
             // add a listener to the delete file
             findPreference(res.getString(R.string.settings_delete_button_key)).setOnPreferenceClickListener(e -> {
                 // delete the files
-                // TODO delete the files
                 displayToast(this.getContext(), res.getString(R.string.toast_delete_processing));
                 Log.d("general-display", "Efface les fichiers de l'appareil");
 

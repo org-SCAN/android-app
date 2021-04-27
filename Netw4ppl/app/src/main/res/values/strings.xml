@@ -21,9 +21,13 @@
     <!-- Server Preferences -->
     <string name="settings_server_token_title">Token Server</string>
     <string name="settings_server_ip_port_title">Server address</string>
+    <string name="settings_server_maj_title">Auto update</string>
+    <string name="settings_server_maj_off">Deactivated</string>
+    <string name="settings_server_maj_on">Activated</string>
 
     <string name="settings_server_token_key" translatable="false">default_server_token</string>
     <string name="settings_server_ip_port_key" translatable="false">default_server_ip_port_key</string>
+    <string name="settings_server_maj_auto_key" translatable="false">default_server_maj_auto</string>
 
     <!-- Email Preferences -->
     <string name="settings_email_category" translatable="false">settings_email_category</string>
