@@ -13,6 +13,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Netw4ppl">
+        <activity
+            android:name=".DisplayDetailsRelationActivity"
+            android:label="@string/display_details_relation_activity_title"
+            android:parentActivityName=".ManageRelationsActivity"/>
+        <activity
+            android:name=".DisplayDetailsPersonActivity"
+            android:label="@string/display_details_person_activity_title"
+            android:parentActivityName=".ManagePersonsActivity"/>
+        <activity
+            android:label="@string/add_relation_activity_title"
+            android:parentActivityName=".ManageRelationsActivity"
+            android:name=".AddRelationActivity" />
+        <activity
+            android:name=".ManageRelationsActivity"
+            android:label="@string/manage_relations_activity_title"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".AddPersonActivity"
+            android:label="@string/add_person_activity_title"
+            android:parentActivityName=".ManagePersonsActivity"/>
+        <activity
+            android:name=".ManagePersonsActivity"
+            android:label="@string/manage_persons_activity_title"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,19 +47,7 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity"/>
-<!--        <activity-->
-<!--            android:name=".ManageRelationsActivity"-->
-<!--            android:label="@string/title_activity_manage_relations"-->
-<!--            android:parentActivityName=".MainActivity" />-->
-<!--        <activity-->
-<!--            android:name=".AddPerson"-->
-<!--            android:label="@string/title_activity_add_person"-->
-<!--            android:parentActivityName=".ManagePersonsActivity" />-->
-<!--        <activity-->
-<!--            android:name=".ManagePersonsActivity"-->
-<!--            android:parentActivityName=".MainActivity" />-->
-
+            android:parentActivityName=".MainActivity" /> <!-- <activity -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="netw4ppl.ines.fileprovider"

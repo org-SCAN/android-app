@@ -73,6 +73,15 @@
     <string name="toast_delete_processing">Deletion ...</string>
 
 
+    <!-- Activity names -->
+    <string name="add_person_activity_title">Add Person</string>
+    <string name="add_relation_activity_title">Add Relation</string>
+    <string name="display_details_relation_activity_title">Details Relation</string>
+    <string name="display_details_person_activity_title">Details Person</string>
+    <string name="manage_persons_activity_title">Manage Persons</string>
+    <string name="manage_relations_activity_title">Manage Relations</string>
+
+
     <string name="files_path" translatable="false">/cases/</string>
 
     <string name="bottom_menu_page_1">Page 1</string>

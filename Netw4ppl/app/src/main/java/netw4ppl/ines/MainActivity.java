@@ -47,14 +47,14 @@ public class MainActivity extends AppCompatActivity{
         mSendDataBtn = findViewById(R.id.main_activity_send_data_btn);
 
         // add listeners to every buttons
-//        mManagePersonsBtn.setOnClickListener(v -> {
-//            Intent intent = new Intent(MainActivity.this, ManagePersonsActivity.class);
-//            startActivity(intent);
-//        });
-//        mManageRelationsBtn.setOnClickListener(v -> {
-//            Intent intent = new Intent(MainActivity.this, ManageRelationsActivity.class);
-//            startActivity(intent);
-//        });
+        mManagePersonsBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ManagePersonsActivity.class);
+            startActivity(intent);
+        });
+        mManageRelationsBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ManageRelationsActivity.class);
+            startActivity(intent);
+        });
         mSendDataBtn.setOnClickListener(v -> {
             SubmitData.manageSend(this, "/cases/");
         });
