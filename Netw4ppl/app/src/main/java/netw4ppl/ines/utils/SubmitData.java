@@ -13,8 +13,12 @@ import androidx.preference.PreferenceManager;
 import netw4ppl.ines.MainActivity;
 import netw4ppl.ines.R;
 import netw4ppl.ines.SettingsActivity;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class SubmitData {
@@ -27,7 +31,7 @@ public class SubmitData {
      * @param context context of the activity
      * @param filePath path to the file
      */
-    public static void manageSend(Context context, String filePath) {
+    public static void manageSend(Context context, String filePath) throws IOException {
 
         // récupère l'option d'envoi sélectionnée par l'utilisateurs dans les paramètres
         String sending_option = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_sending_option_key), null);
@@ -70,7 +74,9 @@ public class SubmitData {
                 return;
             }
 
-            boolean submit_result = sendToServer(context, new File(context.getFilesDir(), filePath).getPath());
+            OkHttpClient client = new OkHttpClient();
+
+            boolean submit_result = getFromServer(context, new File(context.getFilesDir(), filePath).getPath(), ip_port, token_server, client);
             showSubmitResultDialog(context, submit_result);
         }
     }
@@ -115,17 +121,46 @@ public class SubmitData {
     }
 
     /**
-     * Create the subject for the email sending option. Composed of the name of the application
-     * added with a '-' and the name of the file
+     * Sends the informations to the server in form of a String read from the filePath given in
+     * parameter
      *
      * @param context context of the activity
      * @param filePath path to the file
+     * @param server_url ip address of the server
+     * @param token_server individual token of the user
+     * @param http_client http client of OkHttp
      * @return boolean which tells us if the sending was a success or not
      */
-    public static boolean sendToServer(Context context, String filePath) {
+    public static boolean sendToServer(Context context, String filePath, String server_url, String token_server, OkHttpClient http_client) {
         // TODO envoi au serveur
         // faire les requêtes HTTP
 
+        return true;
+    }
+
+    /**
+     * Receive a String object from the server containing new configuration files (the config Json
+     * for exemple)
+     * A Json file is created with the received String and put at the filePath
+     *
+     * @param context context of the activity
+     * @param filePath path to the file
+     * @param server_url ip address of the server
+     * @param token_server individual token of the user
+     * @param http_client http client of OkHttp
+     * @return boolean which tells us if the reception was a success or not
+     */
+
+    public static boolean getFromServer(Context context, String filePath, String server_url, String token_server, OkHttpClient http_client) throws IOException {
+        Request request = new Request.Builder()
+                .url("http://"+server_url)
+                .method("GET", null)
+                .addHeader("Accept", "application/json")
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Authorization", token_server)
+                .build();
+        Response response = http_client.newCall(request).execute();
+        Log.d("GetResponse", response.body().string());
         return true;
     }
 
