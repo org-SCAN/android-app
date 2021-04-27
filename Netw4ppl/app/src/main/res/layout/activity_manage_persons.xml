@@ -27,8 +27,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/list_resume_persons"
+        android:id="@+id/list_nutshell_persons"
         android:layout_alignParentLeft="true" >
-
     </ListView>
 </RelativeLayout>
