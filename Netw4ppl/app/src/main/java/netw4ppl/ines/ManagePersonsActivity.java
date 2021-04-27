@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -24,6 +25,7 @@ public class ManagePersonsActivity extends AppCompatActivity {
 
     FloatingActionButton mButtonAdd;
     ListView mListView;
+    SearchView mSearchBar;
     public static ArrayList<Person> array_persons = new ArrayList<Person>();
 
     @Override
@@ -39,6 +41,8 @@ public class ManagePersonsActivity extends AppCompatActivity {
         });
 
         mListView = (ListView) findViewById(R.id.list_nutshell_persons);
+
+        mSearchBar = (SearchView) findViewById(R.id.searchViewPerson);
 
 
         // lire le fichier files/cases/refugees.json et initialiser array_persons

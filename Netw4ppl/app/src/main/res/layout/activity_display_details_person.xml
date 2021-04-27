@@ -3,7 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" >
 
     <!-- Layouts avec les boutons -->
     <LinearLayout
@@ -44,8 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/display_person_add_relation"
-                android:text="@string/button_add_relation"
-                />
+                android:text="@string/button_add_relation" />
 
         </LinearLayout>
 
