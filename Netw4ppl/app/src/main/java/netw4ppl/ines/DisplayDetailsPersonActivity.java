@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.json.JSONException;
+
 import netw4ppl.ines.utils.Person;
 
 public class DisplayDetailsPersonActivity extends AppCompatActivity {
@@ -51,7 +53,11 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         if (index_person != -1) {
             Person person = ManagePersonsActivity.array_persons.get(index_person);
 
-            mTextViewFullnameTitle.setText(person.getInfoByKey("full_name"));
+            try {
+                mTextViewFullnameTitle.setText(person.getInfoByKey("full_name"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
     }
