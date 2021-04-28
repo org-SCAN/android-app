@@ -56,52 +56,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <!-- Layout From Relations -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
-        <ListView
-            android:id="@+id/list_from_relations"
+        <!-- Layout From Relations -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_weight="1"></ListView>
+            android:layout_weight="3">
 
-    </LinearLayout>
+            <ListView
+                android:id="@+id/list_from_relations"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp" />
 
-    <!-- Layout Detail Person -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:baselineAligned="false">
+        </LinearLayout>
 
-        <ListView
-            android:id="@+id/list_details_person"
+        <!-- Layout Detail Person -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_weight="2"></ListView>
+            android:layout_weight="2">
 
-    </LinearLayout>
+            <ListView
+                android:id="@+id/list_details_person"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"/>
 
-    <!-- Layout To Relations -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+        </LinearLayout>
 
-        <ListView
-            android:id="@+id/list_to_relations"
+        <!-- Layout To Relations -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_weight="1"></ListView>
+            android:layout_weight="3">
+
+            <ListView
+                android:id="@+id/list_to_relations"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
 
 </LinearLayout>
