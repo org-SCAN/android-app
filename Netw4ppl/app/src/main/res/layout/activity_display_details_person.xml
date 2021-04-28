@@ -11,12 +11,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <!-- Title fullname person -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="32sp"
             android:layout_margin="5dp"
-            android:text="Jon DOE"
             android:id="@+id/details_title_full_name"/>
 
         <TextView
@@ -92,7 +92,7 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/display_person_modify"
+                    android:id="@+id/display_person_edit"
                     android:text="@string/button_edit_title"
                     android:backgroundTint="@color/blue_doge"
                     android:layout_margin="5dp"/>

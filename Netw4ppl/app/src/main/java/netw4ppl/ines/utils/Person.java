@@ -21,6 +21,10 @@ public class Person {
         this.infos_person = new JSONObject(data_refugee.toString());
     }
 
+    public JSONObject getInfosPerson() {
+        return this.infos_person;
+    }
+
     public String getInfoByKey(String key) {
         String value;
         try {
