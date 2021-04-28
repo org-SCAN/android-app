@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity{
             Log.d("Send Data","ON EST LA");
             try {
                 SubmitData.manageSend(this, "/cases/");
-            } catch (IOException e) {
+            } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
         });

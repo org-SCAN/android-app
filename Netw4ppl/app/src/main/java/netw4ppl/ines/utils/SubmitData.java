@@ -31,7 +31,7 @@ public class SubmitData {
      * @param context context of the activity
      * @param filePath path to the file
      */
-    public static void manageSend(Context context, String filePath) throws IOException {
+    public static void manageSend(Context context, String filePath) throws IOException, InterruptedException {
 
         // récupère l'option d'envoi sélectionnée par l'utilisateurs dans les paramètres
         String sending_option = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_sending_option_key), null);
@@ -151,16 +151,30 @@ public class SubmitData {
      * @return boolean which tells us if the reception was a success or not
      */
 
-    public static boolean getFromServer(Context context, String filePath, String server_url, String token_server, OkHttpClient http_client) throws IOException {
-        Request request = new Request.Builder()
-                .url("http://"+server_url)
-                .method("GET", null)
-                .addHeader("Accept", "application/json")
-                .addHeader("Content-Type", "application/json")
-                .addHeader("Authorization", token_server)
-                .build();
-        Response response = http_client.newCall(request).execute();
-        Log.d("GetResponse", response.body().string());
+    public static boolean getFromServer(Context context, String filePath, String server_url, String token_server, OkHttpClient http_client) throws IOException, InterruptedException {
+        Thread thread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try  {
+                    Request request = new Request.Builder()
+                            .url("http://"+server_url+"/api/fields")
+                            .method("GET", null)
+                            .addHeader("Accept", "application/json")
+                            .addHeader("Content-Type", "application/json")
+                            .addHeader("Authorization", "Bearer "+token_server)
+                            .build();
+                    Response response = http_client.newCall(request).execute();
+                    Log.d("GetResponse", response.body().string());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
+        thread.join();
+
         return true;
     }
 
