@@ -28,7 +28,25 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_details_person);
 
-        mTextViewFullnameTitle = findViewById(R.id.details_title_full_name);
+        mTextViewFullnameTitle = (TextView) findViewById(R.id.details_title_full_name);
+
+        mButtonAddRelationFrom = (Button) findViewById(R.id.display_person_add_relation_from);
+        mButtonAddRelationTo = (Button) findViewById(R.id.display_person_add_relation_to);
+        mButtonEditPerson = (Button) findViewById(R.id.display_person_edit);
+        mButtonDeletePerson = (Button) findViewById(R.id.display_person_delete);
+
+        mButtonAddRelationFrom.setOnClickListener(v -> {
+
+        });
+        mButtonEditPerson.setOnClickListener(v -> {
+
+        });
+        mButtonDeletePerson.setOnClickListener(v-> {
+
+        });
+        mButtonAddRelationTo.setOnClickListener(v -> {
+
+        });
 
         if (index_person != -1) {
             Person person = ManagePersonsActivity.array_persons.get(index_person);

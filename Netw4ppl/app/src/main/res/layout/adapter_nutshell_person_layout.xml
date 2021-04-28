@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="10dp">
 
     <!-- ID Layout -->
     <LinearLayout
@@ -17,6 +18,7 @@
             android:gravity="center"
             android:text="AAA-000000"
             android:textAlignment="center"
+            android:textSize="20sp"
             android:padding="5dp"
             android:textStyle="bold" />
 
@@ -41,6 +43,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:text="John DOE"
+                android:textSize="20sp"
                 android:textAlignment="center" />
 
         </LinearLayout>
@@ -65,6 +68,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/age_title"
+                    android:textSize="15sp"
                     android:textAlignment="textEnd" />
 
                 <TextView
@@ -72,6 +76,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="40"
+                    android:textSize="15sp"
                     android:id="@+id/age_person"/>
             </LinearLayout>
 
@@ -88,6 +93,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/sex_title"
                     android:layout_weight="1"
+                    android:textSize="15sp"
                     android:textAlignment="textEnd" />
 
                 <TextView
@@ -95,6 +101,7 @@
                     android:layout_height="match_parent"
                     android:text="M"
                     android:layout_weight="1"
+                    android:textSize="15sp"
                     android:id="@+id/sex_person"/>
 
             </LinearLayout>

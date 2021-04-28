@@ -2,6 +2,7 @@ package netw4ppl.ines;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,36 +47,9 @@ public class ManagePersonsActivity extends AppCompatActivity {
 
         mSearchBar = (SearchView) findViewById(R.id.searchViewPerson);
 
-
         // lire le fichier files/cases/refugees.json et initialiser array_persons
         try {
-            String dir_name = getString(R.string.directory_files);
-            String file_name = getString(R.string.filename_persons);
-            String path_dir = getFilesDir().getPath()+dir_name;
-            String path_file = getFilesDir().getPath()+dir_name+file_name;
-            String content_file = "";
-            JSONArray jsonArray_persons = null;
-            this.array_persons = new ArrayList<Person>();
-            if (FileUtils.directoryExists(path_dir) && FileUtils.fileExists(path_file)) {
-                content_file = FileUtils.readFile(path_file);
-                jsonArray_persons = new JSONArray(content_file);
-                for (int i=0; i<jsonArray_persons.length(); i++) {
-                    JSONObject json_person = jsonArray_persons.getJSONObject(i);
-                    this.array_persons.add(new Person(json_person.toString()));
-                }
-            }
-            else if (FileUtils.directoryExists(path_dir)) {
-                // juste le dossier existe mais pas le fichier
-                FileUtils.createFile(path_file);
-            }
-            else {
-                // créer le dossier ET le fichier
-                FileUtils.createDirectory(path_dir);
-                FileUtils.createFile(path_file);
-            }
-
-            Log.d("general-display", array_persons.size() != 0 ? jsonArray_persons.toString(2) : "File does not exists or is just empty");
-
+            readPersonsFile(this);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
@@ -92,5 +66,32 @@ public class ManagePersonsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public static void readPersonsFile(Context context) throws IOException, JSONException {
+        String dir_name = context.getString(R.string.directory_files);
+        String file_name = context.getString(R.string.filename_persons);
+        String path_dir = context.getFilesDir().getPath()+dir_name;
+        String path_file = context.getFilesDir().getPath()+dir_name+file_name;
+        String content_file = "";
+        JSONArray jsonArray_persons = null;
+        array_persons = new ArrayList<Person>();
+        if (FileUtils.directoryExists(path_dir) && FileUtils.fileExists(path_file)) {
+            content_file = FileUtils.readFile(path_file);
+            jsonArray_persons = new JSONArray(content_file);
+            for (int i=0; i<jsonArray_persons.length(); i++) {
+                JSONObject json_person = jsonArray_persons.getJSONObject(i);
+                array_persons.add(new Person(json_person.toString()));
+            }
+        }
+        else if (FileUtils.directoryExists(path_dir)) {
+            // juste le dossier existe mais pas le fichier
+            FileUtils.createFile(path_file);
+        }
+        else {
+            // créer le dossier ET le fichier
+            FileUtils.createDirectory(path_dir);
+            FileUtils.createFile(path_file);
+        }
     }
 }
