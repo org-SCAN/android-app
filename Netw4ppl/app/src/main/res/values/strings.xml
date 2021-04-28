@@ -92,4 +92,10 @@
     <string name="age_title">Age: </string>
     <string name="sex_title">Sex: </string>
 
+    <string name="button_edit_title">Edit</string>
+    <string name="button_delete_title">Delete</string>
+    <string name="button_add_relation_to">Add relation to</string>
+    <string name="button_add_relation_from">Add relation from</string>
+    <string name="details_title_full_name">Informations</string>
+
 </resources>
