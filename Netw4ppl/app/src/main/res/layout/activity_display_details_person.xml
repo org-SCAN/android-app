@@ -30,6 +30,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/display_person_delete"
                 android:text="@string/button_delete_title"
+                android:backgroundTint="@color/red"
                 android:layout_margin="5dp"/>
 
         </LinearLayout>
