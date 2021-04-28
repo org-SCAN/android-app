@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -81,5 +83,14 @@ public class ManagePersonsActivity extends AppCompatActivity {
         // faire l'affichage
         PersonListAdapter adapter = new PersonListAdapter(this, R.layout.adapter_nutshell_person_layout, ManagePersonsActivity.array_persons);
         mListView.setAdapter(adapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+                DisplayDetailsPersonActivity.index_person = position;
+                Intent intent = new Intent(ManagePersonsActivity.this, DisplayDetailsPersonActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
