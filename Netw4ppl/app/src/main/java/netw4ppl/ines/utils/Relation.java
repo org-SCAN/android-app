@@ -17,6 +17,10 @@ public class Relation extends JSONObject {
         this.put("detail", detail_input);
     }
 
+    public Relation(String infos_relat) throws JSONException {
+        super(infos_relat);
+    }
+
     public String getInfoByKey(String key) {
         String res = "";
         try {

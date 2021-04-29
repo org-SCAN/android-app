@@ -18,6 +18,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 
+import static netw4ppl.ines.ManagePersonsActivity.readPersonsFile;
+import static netw4ppl.ines.ManageRelationsActivity.readRelationsFile;
+
 public class MainActivity extends AppCompatActivity{
 
     Button mManagePersonsBtn;
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity{
     public static String device_language;
 
     public static boolean mLancementApplication = true;
+    public static JSONObject fields;
 
     static boolean FLAG_EMAIL_SUCCESS;
 
@@ -70,10 +74,20 @@ public class MainActivity extends AppCompatActivity{
 
         // si c'est le lancement de l'application, chargement en mémoire des json de configuration
         if (mLancementApplication) {
-            // lecture du json de config
+            // lecture de tous les json
             try {
-                JSONObject fields = FileUtils.loadConfigFromFile(this);
-            } catch (IOException e) {
+                fields = FileUtils.loadConfigFromFile(this);
+                String ids = FileUtils.loadIdsFromFile(this);
+                if (ids.equals(""))
+                    AddPersonActivity.json_ids = new JSONObject();
+                else
+                    AddPersonActivity.json_ids = new JSONObject(ids);
+                readPersonsFile(this);
+                readRelationsFile(this);
+
+                Log.d("test-read-ids", AddPersonActivity.json_ids.toString(2));
+
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
 
