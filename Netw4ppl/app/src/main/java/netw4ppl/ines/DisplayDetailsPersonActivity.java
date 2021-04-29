@@ -9,7 +9,10 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
+
 import netw4ppl.ines.utils.Person;
+import netw4ppl.ines.utils.PersonDetailsListAdapter;
 
 public class DisplayDetailsPersonActivity extends AppCompatActivity {
 
@@ -20,7 +23,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
     Button mButtonAddRelationTo;
 
     ListView mListRelationsFrom;
-    ListView mDetailsPerson;
+    ListView mListDetailsPerson;
     ListView mListRelationsTo;
 
     public static int index_person = -1;
@@ -36,6 +39,8 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         mButtonAddRelationTo = (Button) findViewById(R.id.display_person_add_relation_to);
         mButtonEditPerson = (Button) findViewById(R.id.display_person_edit);
         mButtonDeletePerson = (Button) findViewById(R.id.display_person_delete);
+        
+        mListDetailsPerson = (ListView) findViewById(R.id.list_details_person); 
 
         mButtonAddRelationFrom.setOnClickListener(v -> {
 
@@ -58,6 +63,9 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
+            PersonDetailsListAdapter adapter_details_person = new PersonDetailsListAdapter(this, R.layout.adapter_details_person_fields, MainActivity.array_fields);
+            mListDetailsPerson.setAdapter(adapter_details_person);
         }
 
     }
