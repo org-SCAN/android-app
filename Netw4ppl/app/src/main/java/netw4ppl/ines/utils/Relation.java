@@ -16,4 +16,28 @@ public class Relation extends JSONObject {
         this.put("date", date_ajout);
         this.put("detail", detail_input);
     }
+
+    public String getInfoByKey(String key) {
+        String res = "";
+        try {
+            res = this.getString(key);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    public boolean isSameRelation(Relation relat) {
+        boolean res_uid_from = false;
+        boolean res_uid_to = false;
+        boolean res_relation = false;
+        try {
+            res_uid_from = this.getString("from_unique_id").equals(relat.getString("from_unique_id"));
+            res_relation = this.getString("relation").equals(relat.getString("relation"));
+            res_uid_to = this.getString("to_unique_id").equals(relat.getString("to_unique_id"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return res_relation && res_uid_from && res_uid_to;
+    }
 }
