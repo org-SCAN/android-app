@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity{
         mSendDataBtn.setOnClickListener(v -> {
             Log.d("Send Data","ON EST LA");
             try {
-                SubmitData.manageSend(this, "/cases/");
+                SubmitData.manageSend(this, getString(R.string.directory_files));
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
