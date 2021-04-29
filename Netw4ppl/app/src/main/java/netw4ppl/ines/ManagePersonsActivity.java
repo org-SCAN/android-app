@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import netw4ppl.ines.utils.FileUtils;
 import netw4ppl.ines.utils.Person;
@@ -93,5 +94,13 @@ public class ManagePersonsActivity extends AppCompatActivity {
             FileUtils.createDirectory(path_dir);
             FileUtils.createFile(path_file);
         }
+    }
+
+    public static String formatterJsonFile() throws JSONException {
+        JSONArray json_array = new JSONArray();
+        for (int i=0; i<array_persons.size(); i++) {
+            json_array.put(array_persons.get(i));
+        }
+        return json_array.toString(2);
     }
 }

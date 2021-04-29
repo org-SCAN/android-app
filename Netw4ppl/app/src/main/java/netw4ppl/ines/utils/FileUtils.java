@@ -81,29 +81,6 @@ public class FileUtils {
     }
 
     /**
-     * Create a file and initialize its content
-     *
-     * @param path path of the file
-     * @param content content to be written in the file
-     * @return a boolean to determine whether the file was created successfully or not
-     */
-    public static boolean createFileWithContent(String path, String content) {
-        File file = new File(path);
-
-        if (file.exists())
-            file.delete();
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // ecriture du content dans le fichier
-        writeFile(path, content);
-        return file.exists();
-    }
-
-    /**
      * Write content in file
      *
      * @param path path to file
@@ -208,16 +185,33 @@ public class FileUtils {
         return result;
     }
 
+    public static String loadIdsFromFile(Context context) throws IOException {
+        String path_dir = context.getFilesDir()+"/config";
+        String filename_ids = "/ids.json";
+        File file = new File(path_dir+filename_ids);
+
+        String file_content = "";
+        if (file.exists()) {
+            file_content = readFile(path_dir+filename_ids);
+        }
+        else {
+            // create the file
+            boolean result_file = createFile(path_dir + filename_ids);
+        }
+
+        return file_content;
+    }
+
     public static JSONObject loadConfigFromFile(Context context) throws IOException {
         // check if the file "fields.json" in "config/" directory exists
         String path_dir = context.getFilesDir()+"/config";
-        String filename = "/fields.json";
-        File file = new File(path_dir+filename);
+        String filename_fields = "/fields.json";
+        File file = new File(path_dir+filename_fields);
 
         String file_content;
         if (file.exists()) {
             // chargement du fichier depuis le dossier config/
-            file_content = readFile(path_dir+filename);
+            file_content = readFile(path_dir+filename_fields);
         }
         else {
             InputStream is = context.getResources().openRawResource(context.getResources().getIdentifier("fields", "raw", context.getPackageName()));
@@ -225,7 +219,8 @@ public class FileUtils {
             // créer le dossier config/
             boolean result_dir = createDirectory(path_dir);
             // ecriture du content dans le fichier config/fields.json
-            boolean result_file = writeFile(path_dir+filename, file_content);
+            boolean result_file = writeFile(path_dir+filename_fields, file_content);
+            // creation du fichier ids
             Log.d("display", result_dir && result_file ? "Création dossier config et création fichier successful" : "Echec creation fichier fields.json");
         }
 
