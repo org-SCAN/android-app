@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import org.json.JSONException;
 import org.w3c.dom.Text;
 
 import java.nio.channels.InterruptedByTimeoutException;
@@ -44,10 +45,6 @@ public class PersonListAdapter extends ArrayAdapter<Person> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         // get the person informations
         Person person = getItem(position);
-        String unique_id = person.getInfoByKey("unique_id");
-        String fullname = person.getInfoByKey("full_name");
-        String age = person.getInfoByKey("age");
-        String sex = person.getInfoByKey("gender");
 
         final View result;
         ViewHolder holder;
@@ -71,10 +68,14 @@ public class PersonListAdapter extends ArrayAdapter<Person> {
 
         this.lastPosition = position;
 
-        holder.mUniqueID.setText(person.getInfoByKey("unique_id"));
-        holder.mSex.setText(person.getInfoByKey("gender"));
-        holder.mFullName.setText(person.getInfoByKey("full_name"));
-        holder.mAge.setText(person.getInfoByKey("age"));
+        try {
+            holder.mUniqueID.setText(person.getInfoByKey("unique_id"));
+            holder.mSex.setText(person.getInfoByKey("gender"));
+            holder.mFullName.setText(person.getInfoByKey("full_name"));
+            holder.mAge.setText(person.getInfoByKey("age"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         return convertView;
     }

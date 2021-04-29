@@ -5,56 +5,30 @@ import org.json.JSONObject;
 
 import java.util.Iterator;
 
-public class Person {
-
-    private JSONObject infos_person;
-
+public class Person extends JSONObject {
     public Person(){
-        this.infos_person = new JSONObject();
+        super();
     }
 
-    public Person(String data_refugee) throws JSONException {
-        this.infos_person = new JSONObject(data_refugee);
+    public Person(String data_person) throws JSONException {
+        super(data_person);
     }
 
-    public Person(JSONObject data_refugee) throws JSONException {
-        this.infos_person = new JSONObject(data_refugee.toString());
+    public Person(JSONObject data_person) throws JSONException {
+        super(data_person.toString());
     }
 
-    public JSONObject getInfosPerson() {
-        return this.infos_person;
-    }
-
-    public String getInfoByKey(String key) {
+    public String getInfoByKey(String key) throws JSONException {
         String value;
-        try {
-            value = infos_person.getString(key);
-        }
-        catch (JSONException e) {
+
+        if (this.has(key))
+            value = this.getString(key);
+        else
             value = "";
-        }
         return value;
     }
 
-    public boolean samePerson(Person new_person) {
-        Iterator<String> iterator = infos_person.keys();
-        String key;
-        while (iterator.hasNext()) {
-            key = iterator.next();
-            if (!getInfoByKey(key).equals(new_person.getInfoByKey(key)))  {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public String getElementSearched(String query) throws JSONException {
-        Iterator<String> iterator = infos_person.keys();
-        while (iterator.hasNext()) {
-            String key = iterator.next();
-            if (infos_person.getString(key).toLowerCase().contains(query.toLowerCase()))
-                return this.infos_person.toString();
-        }
-        return null;
+    public boolean isSamePerson(Person individu) throws JSONException {
+        return this.getInfoByKey("unique_id").equals(individu.getInfoByKey("unique_id"));
     }
 }
