@@ -56,7 +56,12 @@ public class MainActivity extends AppCompatActivity{
             startActivity(intent);
         });
         mSendDataBtn.setOnClickListener(v -> {
-            SubmitData.manageSend(this, "/cases/");
+            Log.d("Send Data","ON EST LA");
+            try {
+                SubmitData.manageSend(this, "/cases/");
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
         });
         mSettingsBtn.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);

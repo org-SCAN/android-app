@@ -12,7 +12,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Netw4ppl">
+        android:theme="@style/Theme.Netw4ppl"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".DisplayDetailsRelationActivity"
             android:label="@string/display_details_relation_activity_title"
