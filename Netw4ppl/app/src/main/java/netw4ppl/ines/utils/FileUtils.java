@@ -81,29 +81,6 @@ public class FileUtils {
     }
 
     /**
-     * Create a file and initialize its content
-     *
-     * @param path path of the file
-     * @param content content to be written in the file
-     * @return a boolean to determine whether the file was created successfully or not
-     */
-    public static boolean createFileWithContent(String path, String content) {
-        File file = new File(path);
-
-        if (file.exists())
-            file.delete();
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // ecriture du content dans le fichier
-        writeFile(path, content);
-        return file.exists();
-    }
-
-    /**
      * Write content in file
      *
      * @param path path to file
