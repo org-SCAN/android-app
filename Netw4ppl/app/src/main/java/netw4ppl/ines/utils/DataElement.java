@@ -39,6 +39,6 @@ public class DataElement extends JSONObject {
 
     @Override
     public String toString() {
-        return getTitle();
+        return getKey() + " - " + getTitle();
     }
 }
