@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import netw4ppl.ines.utils.Field;
 import netw4ppl.ines.utils.FileUtils;
 import netw4ppl.ines.utils.SubmitData;
 
@@ -16,6 +17,8 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Locale;
 
 import static netw4ppl.ines.ManagePersonsActivity.readPersonsFile;
@@ -31,7 +34,7 @@ public class MainActivity extends AppCompatActivity{
     public static String device_language;
 
     public static boolean mLancementApplication = true;
-    public static JSONObject fields;
+    public static ArrayList<Field> array_fields = new ArrayList<Field>();
 
     static boolean FLAG_EMAIL_SUCCESS;
 
@@ -76,7 +79,8 @@ public class MainActivity extends AppCompatActivity{
         if (mLancementApplication) {
             // lecture de tous les json
             try {
-                fields = FileUtils.loadConfigFromFile(this);
+                JSONObject config_content = FileUtils.loadConfigFromFile(this);
+                createArrayFields(config_content.getJSONObject("fields"));
                 String ids = FileUtils.loadIdsFromFile(this);
                 if (ids.equals(""))
                     AddPersonActivity.json_ids = new JSONObject();
@@ -92,6 +96,18 @@ public class MainActivity extends AppCompatActivity{
             }
 
             mLancementApplication = false;
+        }
+    }
+
+    private void createArrayFields(JSONObject fields) {
+        Iterator<String> iterator = fields.keys();
+        while (iterator.hasNext()) {
+            String key = iterator.next();
+            try {
+                array_fields.add(new Field(key, fields.getJSONObject(key).toString()));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 

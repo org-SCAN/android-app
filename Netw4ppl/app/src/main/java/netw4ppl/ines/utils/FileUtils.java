@@ -208,7 +208,7 @@ public class FileUtils {
         String filename_fields = "/fields.json";
         File file = new File(path_dir+filename_fields);
 
-        String file_content;
+        String file_content = "";
         if (file.exists()) {
             // chargement du fichier depuis le dossier config/
             file_content = readFile(path_dir+filename_fields);
@@ -224,14 +224,14 @@ public class FileUtils {
             Log.d("display", result_dir && result_file ? "Création dossier config et création fichier successful" : "Echec creation fichier fields.json");
         }
 
-        JSONObject fields = null;
+        JSONObject config_content = null;
         try {
-            fields = new JSONObject(file_content);
+            config_content = new JSONObject(file_content);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return fields;
+        return config_content;
     }
 
 }
