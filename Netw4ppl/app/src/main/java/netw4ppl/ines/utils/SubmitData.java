@@ -76,7 +76,7 @@ public class SubmitData {
 
             OkHttpClient client = new OkHttpClient();
 
-            boolean submit_result = getFromServer(context, new File(context.getFilesDir(), filePath).getPath(), ip_port, token_server, client);
+            boolean submit_result = getFromServer(context, new File(context.getFilesDir(), filePath).getPath(), ip_port, token_server, client); //Pour l'instant il fait la lecture
             showSubmitResultDialog(context, submit_result);
         }
     }
