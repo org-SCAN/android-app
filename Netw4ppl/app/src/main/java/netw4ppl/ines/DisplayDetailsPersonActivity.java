@@ -64,9 +64,8 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            PersonDetailsListAdapter adapter_details_person = new PersonDetailsListAdapter(this, R.layout.adapter_details_person_fields, MainActivity.array_fields);
+            PersonDetailsListAdapter adapter_details_person = new PersonDetailsListAdapter(this, R.layout.adapter_details_person_fields, MainActivity.mConfiguration.getArrayFields());
             mListDetailsPerson.setAdapter(adapter_details_person);
         }
-
     }
 }
