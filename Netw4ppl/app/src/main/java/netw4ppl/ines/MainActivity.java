@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import netw4ppl.ines.utils.Configuration;
 import netw4ppl.ines.utils.DataElement;
 import netw4ppl.ines.utils.Field;
 import netw4ppl.ines.utils.FileUtils;
@@ -36,8 +37,8 @@ public class MainActivity extends AppCompatActivity{
     public static String device_language;
 
     public static boolean mLancementApplication = true;
-    public static ArrayList<Field> array_fields = new ArrayList<Field>();
-    public static HashMap<String, ArrayList<DataElement>> hashMap_database= new HashMap<String, ArrayList<DataElement>>();
+
+    public static Configuration mConfiguration;
 
     static boolean FLAG_EMAIL_SUCCESS;
 
@@ -83,10 +84,10 @@ public class MainActivity extends AppCompatActivity{
             // lecture de tous les json
             try {
                 JSONObject config_content = FileUtils.loadConfigFromFile(this);
-                createArrayFields(config_content.getJSONObject("fields"));
-                createHashMapDatabase(config_content);
 
-                Log.d("general-display", "Hashmap database content: " + hashMap_database.toString());
+                mConfiguration = new Configuration(MainActivity.this, config_content);
+
+                Log.d("general-display", "Hashmap database content: " + mConfiguration.getHashMapDatabase().toString());
 
                 String ids = FileUtils.loadIdsFromFile(this);
                 if (ids.equals(""))
@@ -103,45 +104,6 @@ public class MainActivity extends AppCompatActivity{
             }
 
             mLancementApplication = false;
-        }
-    }
-
-    private void createHashMapDatabase(JSONObject config_content) {
-        // récupère toutes les clés de l'objet json config_content
-        Iterator<String> iterator_table = config_content.keys();
-        while (iterator_table.hasNext()) {
-            String key_table = iterator_table.next();
-            try {
-                JSONObject table = config_content.getJSONObject(key_table);
-                // récupère toutes les clés de l'objet iterator_table
-                Iterator<String> iterator_elements = table.keys();
-
-                if (!key_table.equals("fields")) {
-                    // create the ArrayList
-                    ArrayList<DataElement> data_array = new ArrayList<DataElement>();
-                    while (iterator_elements.hasNext()) {
-                        String key_element = iterator_elements.next();
-                        JSONObject element = table.getJSONObject(key_element);
-                        data_array.add(new DataElement(key_element, element.toString()));
-                    }
-                    // then add everything to the HashMap
-                    hashMap_database.put(key_table, data_array);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void createArrayFields(JSONObject fields) {
-        Iterator<String> iterator = fields.keys();
-        while (iterator.hasNext()) {
-            String key = iterator.next();
-            try {
-                array_fields.add(new Field(key, fields.getJSONObject(key).toString()));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
         }
     }
 
