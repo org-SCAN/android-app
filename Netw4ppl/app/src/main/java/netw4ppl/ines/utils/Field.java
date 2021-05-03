@@ -10,12 +10,15 @@ import java.util.Locale;
 
 public class Field extends DataElement {
 
+    private int view_type;
+
     public Field() {
         super();
     }
 
     public Field(String key, String string_fields) throws JSONException {
         super(key, string_fields);
+        setViewType(this.getString("android_type"));
     }
 
     public String getElementByKey(String key) {
@@ -27,6 +30,29 @@ public class Field extends DataElement {
             }
         }
         return null;
+    }
+
+    public int getViewType() {
+        return this.view_type;
+    }
+
+    public void setViewType(String android_type) {
+        switch (android_type) {
+            case "EditText":
+                this.view_type = 0;
+                break;
+            case "Spinner":
+                this.view_type = 1;
+                break;
+            case "AutoCompleteTextView":
+                this.view_type = 2;
+                break;
+            case "CalendarView":
+                this.view_type = 3;
+                break;
+            default:
+                this.view_type = 4;
+        }
     }
 
     /*

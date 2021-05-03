@@ -20,7 +20,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private LayoutInflater mInflater;
     private Context mContext;
-    private ArrayList<Field> mData;
+    private ArrayList<Field> mFields;
 
     class ViewHolderUniqueID extends RecyclerView.ViewHolder {
         com.google.android.material.textfield.TextInputLayout mTitle;
@@ -82,7 +82,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     public AdapterViewFields(Context context, ArrayList<Field> fields) {
         this.mContext = context;
         this.mInflater = LayoutInflater.from(context);
-        this.mData = fields;
+        this.mFields = fields;
     }
 
     @NonNull
@@ -108,9 +108,9 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         // changer le texte dans cette fonction
 
         // avec un peu de chance c'est la position dans l'array fields
-        Field field = mData.get(position);
+        Field field = mFields.get(position);
 
-        switch (holder.getItemViewType()) {
+        switch (field.getViewType()) {
             case 0:
                 break;
             case 1:
@@ -126,8 +126,6 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mFields.size();
     }
-
-
 }
