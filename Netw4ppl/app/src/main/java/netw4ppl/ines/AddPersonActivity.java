@@ -27,9 +27,9 @@ public class AddPersonActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recycler_view_add_person);
 
         // set up the RecyclerView
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         AdapterViewFields adapter = new AdapterViewFields(this, MainActivity.mConfiguration.getArrayFields());
         mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     public String getDefaultKey() {

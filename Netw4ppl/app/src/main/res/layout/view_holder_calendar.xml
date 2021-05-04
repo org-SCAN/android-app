@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/customborder"
+    android:padding="5dp"
     android:layout_margin="5dp">
 
-    <com.google.android.material.textfield.TextInputLayout
+    <TextView
         android:id="@+id/date_picker_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        android:layout_height="wrap_content" />
 
         <DatePicker
             android:id="@+id/date_picker_object"
@@ -17,7 +18,5 @@
             android:datePickerMode="spinner"
             android:calendarViewShown="false"
             android:layout_gravity="center"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
 
 </LinearLayout>
