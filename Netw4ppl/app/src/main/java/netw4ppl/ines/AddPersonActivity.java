@@ -30,6 +30,8 @@ public class AddPersonActivity extends AppCompatActivity {
         AdapterViewFields adapter = new AdapterViewFields(this, MainActivity.mConfiguration.getArrayFields());
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // TODO à changer parce que c'est de la merde
+        mRecyclerView.setItemViewCacheSize(MainActivity.mConfiguration.getArrayFields().size());
     }
 
     public String getDefaultKey() {

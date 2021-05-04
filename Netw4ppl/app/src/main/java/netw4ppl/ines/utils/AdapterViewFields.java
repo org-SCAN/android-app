@@ -88,8 +88,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater mInflater = LayoutInflater.from(context);
+        LayoutInflater mInflater = LayoutInflater.from(parent.getContext());
 
         View view;
         switch (viewType) {
