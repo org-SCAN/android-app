@@ -20,6 +20,8 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
+import netw4ppl.ines.R;
+
 public class FileUtils {
 
     /**
@@ -107,7 +109,7 @@ public class FileUtils {
      * @return return a String of the content of the file
      */
     public static String readFile(String path) throws IOException {
-        InputStream is = new FileInputStream(path); // !!Modify so we can give a real argument
+        InputStream is = new FileInputStream(path);
         return readFileInputStream(is);
     }
 
@@ -204,14 +206,17 @@ public class FileUtils {
 
     public static JSONObject loadConfigFromFile(Context context) throws IOException {
         // check if the file "fields.json" in "config/" directory exists
-        String path_dir = context.getFilesDir()+"/config";
-        String filename_fields = "/fields.json";
-        File file = new File(path_dir+filename_fields);
+        String dir_name = context.getString(R.string.config_files);
+        String file_name = context.getString(R.string.filename_fields);
+        String path_dir = context.getFilesDir().getPath()+dir_name;
+        String path_file = context.getFilesDir().getPath()+dir_name+file_name;
+
+        File file = new File(path_file);
 
         String file_content = "";
         if (file.exists()) {
             // chargement du fichier depuis le dossier config/
-            file_content = readFile(path_dir+filename_fields);
+            file_content = readFile(path_file);
         }
         else {
             InputStream is = context.getResources().openRawResource(context.getResources().getIdentifier("fields", "raw", context.getPackageName()));
@@ -219,7 +224,7 @@ public class FileUtils {
             // créer le dossier config/
             boolean result_dir = createDirectory(path_dir);
             // ecriture du content dans le fichier config/fields.json
-            boolean result_file = writeFile(path_dir+filename_fields, file_content);
+            boolean result_file = writeFile(path_file, file_content);
             // creation du fichier ids
             Log.d("display", result_dir && result_file ? "Création dossier config et création fichier successful" : "Echec creation fichier fields.json");
         }

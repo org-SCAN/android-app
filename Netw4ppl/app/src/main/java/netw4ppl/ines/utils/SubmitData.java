@@ -4,22 +4,33 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
 import androidx.preference.PreferenceManager;
 
+import org.json.JSONException;
+
 import netw4ppl.ines.MainActivity;
+import netw4ppl.ines.ManagePersonsActivity;
 import netw4ppl.ines.R;
 import netw4ppl.ines.SettingsActivity;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class SubmitData {
 
@@ -31,7 +42,7 @@ public class SubmitData {
      * @param context context of the activity
      * @param filePath path to the file
      */
-    public static void manageSend(Context context, String filePath) throws IOException, InterruptedException {
+    public static void manageSend(Context context, String filePath) throws IOException, InterruptedException, JSONException {
 
         // récupère l'option d'envoi sélectionnée par l'utilisateurs dans les paramètres
         String sending_option = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_sending_option_key), null);
@@ -76,7 +87,7 @@ public class SubmitData {
 
             OkHttpClient client = new OkHttpClient();
 
-            boolean submit_result = getFromServer(context, new File(context.getFilesDir(), filePath).getPath(), ip_port, token_server, client); //Pour l'instant il fait la lecture
+            boolean submit_result = sendToServer(context, new File(context.getFilesDir(), filePath).getPath(), ip_port, token_server, client); //Pour l'instant il fait la lecture
             showSubmitResultDialog(context, submit_result);
         }
     }
@@ -131,11 +142,40 @@ public class SubmitData {
      * @param http_client http client of OkHttp
      * @return boolean which tells us if the sending was a success or not
      */
-    public static boolean sendToServer(Context context, String filePath, String server_url, String token_server, OkHttpClient http_client) {
-        // TODO envoi au serveur
-        // faire les requêtes HTTP
+    public static boolean sendToServer(Context context, String filePath, String server_url, String token_server, OkHttpClient http_client) throws InterruptedException, JSONException {
+
+        String unique_app_id = PersistentDatas.getAppUUID()+"HH";
+        String data_to_send = ManagePersonsActivity.formatterJsonFile();
+
+        MediaType mediaType = MediaType.parse("application/json");
+        RequestBody body = RequestBody.create(mediaType, data_to_send);
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try  {
+                    Request request = new Request.Builder()
+                            .url("http://"+server_url+"/api/manage_refugees")
+                            .method("POST", body)
+                            .addHeader("unique_app_id", unique_app_id)
+                            .addHeader("Accept", "application/json")
+                            .addHeader("Content-Type", "application/json")
+                            .addHeader("Authorization", "Bearer "+token_server)
+                            .build();
+                    Response response = http_client.newCall(request).execute();
+                    Log.d("GetResponse", response.body().string());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
+        thread.join();
 
         return true;
+        // TODO envoi au serveur
+        // faire les requêtes HTTP
     }
 
     /**

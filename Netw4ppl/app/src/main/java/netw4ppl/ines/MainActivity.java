@@ -1,7 +1,10 @@
 package netw4ppl.ines;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -51,6 +54,9 @@ public class MainActivity extends AppCompatActivity{
 
         Log.d("life-cycle", "Main onCreate()");
 
+        //TimeStamp for sending message
+        Long ts = System.currentTimeMillis();
+
         // get the button views from the xml file
         mManagePersonsBtn = findViewById(R.id.main_activity_manage_persons_btn);
         mManageRelationsBtn = findViewById(R.id.main_activity_manage_relations_btn);
@@ -70,7 +76,7 @@ public class MainActivity extends AppCompatActivity{
             Log.d("Send Data","ON EST LA");
             try {
                 SubmitData.manageSend(this, getString(R.string.directory_files));
-            } catch (IOException | InterruptedException e) {
+            } catch (IOException | InterruptedException | JSONException e) {
                 e.printStackTrace();
             }
         });

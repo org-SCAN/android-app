@@ -79,7 +79,13 @@ public class ManagePersonsActivity extends AppCompatActivity {
         array_persons = new ArrayList<Person>();
         if (FileUtils.directoryExists(path_dir) && FileUtils.fileExists(path_file)) {
             content_file = FileUtils.readFile(path_file);
-            jsonArray_persons = new JSONArray(content_file);
+
+            if (content_file.equals("")){
+                jsonArray_persons = new JSONArray();
+            }else{
+                jsonArray_persons = new JSONArray(content_file);
+            }
+
             for (int i=0; i<jsonArray_persons.length(); i++) {
                 JSONObject json_person = jsonArray_persons.getJSONObject(i);
                 array_persons.add(new Person(json_person.toString()));
