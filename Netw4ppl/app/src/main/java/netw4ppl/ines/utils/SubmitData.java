@@ -31,6 +31,7 @@ import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 public class SubmitData {
 
@@ -142,14 +143,26 @@ public class SubmitData {
      * @param http_client http client of OkHttp
      * @return boolean which tells us if the sending was a success or not
      */
-    public static boolean sendToServer(Context context, String filePath, String server_url, String token_server, OkHttpClient http_client) throws InterruptedException, JSONException {
+    public static boolean sendToServer(Context context, String filePath, String server_url, String token_server, OkHttpClient http_client) throws InterruptedException, JSONException, IOException {
 
-        String unique_app_id = PersistentDatas.getAppUUID()+"HH";
+        String android_id_file_path = context.getFilesDir().getPath()+"/config/android_id.txt";
+        String unique_app_id;
+
+        if (FileUtils.fileExists(android_id_file_path)){
+            unique_app_id = FileUtils.readFile(android_id_file_path);
+        }else{
+            unique_app_id = UUID.randomUUID().toString();
+            FileUtils.writeFile(android_id_file_path, unique_app_id);
+        }
+
+        //Log.d("Test ANDROID ID 2", "H"+unique_app_id+"H");
+
         String data_to_send = ManagePersonsActivity.formatterJsonFile();
 
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body = RequestBody.create(mediaType, data_to_send);
 
+        String final_unique_app_id = unique_app_id;
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -157,7 +170,7 @@ public class SubmitData {
                     Request request = new Request.Builder()
                             .url("http://"+server_url+"/api/manage_refugees")
                             .method("POST", body)
-                            .addHeader("unique_app_id", unique_app_id)
+                            .addHeader("Application-id", final_unique_app_id)
                             .addHeader("Accept", "application/json")
                             .addHeader("Content-Type", "application/json")
                             .addHeader("Authorization", "Bearer "+token_server)
@@ -174,8 +187,6 @@ public class SubmitData {
         thread.join();
 
         return true;
-        // TODO envoi au serveur
-        // faire les requêtes HTTP
     }
 
     /**
