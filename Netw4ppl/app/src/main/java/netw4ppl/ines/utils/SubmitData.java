@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
 import androidx.preference.PreferenceManager;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 
 import netw4ppl.ines.MainActivity;
@@ -87,10 +88,11 @@ public class SubmitData {
             }
 
             OkHttpClient client = new OkHttpClient();
+            boolean get_info = getFromServer(context, new File(context.getFilesDir(), filePath).getPath()+"/persons.json", ip_port, token_server, client);
 
-            boolean submit_persons = sendToServer(context, new File(context.getFilesDir(), filePath).getPath()+"/persons.json", ip_port, token_server, client, "manage_refugees");
-            boolean submit_relations = sendToServer(context, new File(context.getFilesDir(), filePath).getPath()+"/relations.json", ip_port, token_server, client, "links");
-            boolean submit_result =  (submit_persons && submit_relations);//Pour l'instant il fait la lecture
+            //boolean submit_persons = sendToServer(context, new File(context.getFilesDir(), filePath).getPath()+"/persons.json", ip_port, token_server, client, "manage_refugees");
+            //boolean submit_relations = sendToServer(context, new File(context.getFilesDir(), filePath).getPath()+"/relations.json", ip_port, token_server, client, "links");
+            boolean submit_result =  get_info;//(submit_persons && submit_relations);//Pour l'instant il fait la lecture
             Log.d("Fichier", new File(context.getFilesDir(), filePath).getPath()+"HHH");
             showSubmitResultDialog(context, submit_result);
         }
@@ -215,9 +217,10 @@ public class SubmitData {
                             .build();
                     Response response = http_client.newCall(request).execute();
                     String response_string = response.body().string();
+                    Log.d("Code de réception", String.valueOf(response.code()));
                     Log.d("GetResponse", response_string);
 
-                    if (response_string.equals("Success !")) {
+                    if (response.code()==201) {
                         http_success[0] = true;
                     }
                 } catch (Exception e) {
@@ -246,6 +249,18 @@ public class SubmitData {
      */
 
     public static boolean getFromServer(Context context, String filePath, String server_url, String token_server, OkHttpClient http_client) throws IOException, InterruptedException {
+        String data_path = context.getFilesDir().getPath();
+
+        String android_id_file_path = data_path+"/config/android_id.txt";
+        String unique_app_id;
+
+        if (FileUtils.fileExists(android_id_file_path)){
+            unique_app_id = FileUtils.readFile(android_id_file_path);
+        }else{
+            unique_app_id = UUID.randomUUID().toString();
+            FileUtils.writeFile(android_id_file_path, unique_app_id);
+        }
+
         final boolean[] http_success = {false};
         Thread thread = new Thread(new Runnable() {
 
@@ -257,14 +272,17 @@ public class SubmitData {
                             .method("GET", null)
                             .addHeader("Accept", "application/json")
                             .addHeader("Content-Type", "application/json")
+                            .addHeader("Application-id",unique_app_id)
                             .addHeader("Authorization", "Bearer "+token_server)
                             .build();
                     Response response = http_client.newCall(request).execute();
+                    Log.d("Code de réception", String.valueOf(response.code()));
                     String response_string = response.body().string();
                     Log.d("GetResponse", response_string);
 
-                    if (response_string.equals("Success !")) {
+                    if (response.code()==200) {
                         http_success[0] = true;
+                        FileUtils.writeFile(data_path+"/config/fields.json", response_string);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
