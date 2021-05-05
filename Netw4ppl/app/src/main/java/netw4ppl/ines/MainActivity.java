@@ -54,9 +54,6 @@ public class MainActivity extends AppCompatActivity{
 
         Log.d("life-cycle", "Main onCreate()");
 
-        //TimeStamp for sending message
-        Long ts = System.currentTimeMillis();
-
         // get the button views from the xml file
         mManagePersonsBtn = findViewById(R.id.main_activity_manage_persons_btn);
         mManageRelationsBtn = findViewById(R.id.main_activity_manage_relations_btn);

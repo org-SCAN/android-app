@@ -88,7 +88,10 @@ public class SubmitData {
 
             OkHttpClient client = new OkHttpClient();
 
-            boolean submit_result = sendToServer(context, new File(context.getFilesDir(), filePath).getPath(), ip_port, token_server, client); //Pour l'instant il fait la lecture
+            boolean submit_persons = sendToServer(context, new File(context.getFilesDir(), filePath).getPath()+"/persons.json", ip_port, token_server, client, "manage_refugees");
+            boolean submit_relations = sendToServer(context, new File(context.getFilesDir(), filePath).getPath()+"/relations.json", ip_port, token_server, client, "links");
+            boolean submit_result =  (submit_persons && submit_relations);//Pour l'instant il fait la lecture
+            Log.d("Fichier", new File(context.getFilesDir(), filePath).getPath()+"HHH");
             showSubmitResultDialog(context, submit_result);
         }
     }
@@ -143,9 +146,44 @@ public class SubmitData {
      * @param http_client http client of OkHttp
      * @return boolean which tells us if the sending was a success or not
      */
-    public static boolean sendToServer(Context context, String filePath, String server_url, String token_server, OkHttpClient http_client) throws InterruptedException, JSONException, IOException {
+    public static boolean sendToServer(Context context, String filePath, String server_url, String token_server, OkHttpClient http_client, String target) throws InterruptedException, JSONException, IOException {
 
-        String android_id_file_path = context.getFilesDir().getPath()+"/config/android_id.txt";
+        String data_path = context.getFilesDir().getPath();
+
+        // Ecriture dans les fichiers Relations et Refugees pour des buts de Test!!
+        //Persons
+        FileUtils.writeFile(data_path+"/cases/persons.json","[\n" +
+                "    {\n" +
+                "    \"age\":12,\n" +
+                "    \"gender\":\"F\",\n" +
+                "    \"unique_id\" : \"BBB-000001\",\n" +
+                "    \"full_name\" : \"Lucas\",\n" +
+                "    \"nationality\" : \"FRA\",\n" +
+                "    \"date\" : \"2021-04-12\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "    \"age\":12,\n" +
+                "    \"gender\":\"F\",\n" +
+                "    \"unique_id\" : \"BBB-000002\",\n" +
+                "    \"full_name\" : \"Luc\",\n" +
+                "    \"nationality\" : \"USA\",\n" +
+                "    \"date\" : \"2021-04-12\"\n" +
+                "    }\n" +
+                "]");
+
+        //Relations
+        FileUtils.writeFile(data_path+"/cases/relations.json","[\n" +
+                "    {\n" +
+                "    \"from_unique_id\" : \"BBB-000001\",\n" +
+                "    \"from_full_name\" : \"Lucas\",\n" +
+                "    \"to_unique_id\" : \"BBB-000002\",\n" +
+                "    \"to_full_name\" : \"Luc\",\n" +
+                "    \"relation\" : \"6e12f143-69fe-40d3-987f-1a7825e38247\",\n" +
+                "    \"detail\" : \"at the port\"\n" +
+                "    }\n" +
+                "]");
+
+        String android_id_file_path = data_path+"/config/android_id.txt";
         String unique_app_id;
 
         if (FileUtils.fileExists(android_id_file_path)){
@@ -155,20 +193,24 @@ public class SubmitData {
             FileUtils.writeFile(android_id_file_path, unique_app_id);
         }
 
-        //Log.d("Test ANDROID ID 2", "H"+unique_app_id+"H");
-
-        String data_to_send = ManagePersonsActivity.formatterJsonFile();
+        String data_to_send = FileUtils.readFile(filePath);
 
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body = RequestBody.create(mediaType, data_to_send);
 
         String final_unique_app_id = unique_app_id;
+
+
         Thread thread = new Thread(new Runnable() {
+            boolean success = false;
+            public boolean getSuccessValue(){
+                return success;
+            }
             @Override
             public void run() {
                 try  {
                     Request request = new Request.Builder()
-                            .url("http://"+server_url+"/api/manage_refugees")
+                            .url("http://"+server_url+"/api/"+target)
                             .method("POST", body)
                             .addHeader("Application-id", final_unique_app_id)
                             .addHeader("Accept", "application/json")
@@ -177,6 +219,7 @@ public class SubmitData {
                             .build();
                     Response response = http_client.newCall(request).execute();
                     Log.d("GetResponse", response.body().string());
+                    success=true;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -225,7 +268,6 @@ public class SubmitData {
 
         thread.start();
         thread.join();
-
         return true;
     }
 
