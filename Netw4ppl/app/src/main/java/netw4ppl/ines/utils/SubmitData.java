@@ -200,12 +200,8 @@ public class SubmitData {
 
         String final_unique_app_id = unique_app_id;
 
-
+        final boolean[] http_success = {false};
         Thread thread = new Thread(new Runnable() {
-            boolean success = false;
-            public boolean getSuccessValue(){
-                return success;
-            }
             @Override
             public void run() {
                 try  {
@@ -218,8 +214,12 @@ public class SubmitData {
                             .addHeader("Authorization", "Bearer "+token_server)
                             .build();
                     Response response = http_client.newCall(request).execute();
-                    Log.d("GetResponse", response.body().string());
-                    success=true;
+                    String response_string = response.body().string();
+                    Log.d("GetResponse", response_string);
+
+                    if (response_string.equals("Success !")) {
+                        http_success[0] = true;
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -229,7 +229,7 @@ public class SubmitData {
         thread.start();
         thread.join();
 
-        return true;
+        return http_success[0];
     }
 
     /**
@@ -246,6 +246,7 @@ public class SubmitData {
      */
 
     public static boolean getFromServer(Context context, String filePath, String server_url, String token_server, OkHttpClient http_client) throws IOException, InterruptedException {
+        final boolean[] http_success = {false};
         Thread thread = new Thread(new Runnable() {
 
             @Override
@@ -259,7 +260,12 @@ public class SubmitData {
                             .addHeader("Authorization", "Bearer "+token_server)
                             .build();
                     Response response = http_client.newCall(request).execute();
-                    Log.d("GetResponse", response.body().string());
+                    String response_string = response.body().string();
+                    Log.d("GetResponse", response_string);
+
+                    if (response_string.equals("Success !")) {
+                        http_success[0] = true;
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -268,7 +274,7 @@ public class SubmitData {
 
         thread.start();
         thread.join();
-        return true;
+        return http_success[0];
     }
 
     /**
