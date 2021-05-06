@@ -88,11 +88,10 @@ public class SubmitData {
             }
 
             OkHttpClient client = new OkHttpClient();
-            boolean get_info = getFromServer(context, new File(context.getFilesDir(), filePath).getPath()+"/persons.json", ip_port, token_server, client);
 
-            //boolean submit_persons = sendToServer(context, new File(context.getFilesDir(), filePath).getPath()+"/persons.json", ip_port, token_server, client, "manage_refugees");
-            //boolean submit_relations = sendToServer(context, new File(context.getFilesDir(), filePath).getPath()+"/relations.json", ip_port, token_server, client, "links");
-            boolean submit_result =  get_info;//(submit_persons && submit_relations);//Pour l'instant il fait la lecture
+            boolean submit_persons = sendToServer(context, new File(context.getFilesDir(), filePath).getPath()+"/persons.json", ip_port, token_server, client, "manage_refugees");
+            boolean submit_relations = sendToServer(context, new File(context.getFilesDir(), filePath).getPath()+"/relations.json", ip_port, token_server, client, "links");
+            boolean submit_result = (submit_persons && submit_relations);
             Log.d("Fichier", new File(context.getFilesDir(), filePath).getPath()+"HHH");
             showSubmitResultDialog(context, submit_result);
         }
@@ -185,6 +184,7 @@ public class SubmitData {
                 "    }\n" +
                 "]");
 
+        //Get the unique application ID
         String android_id_file_path = data_path+"/config/android_id.txt";
         String unique_app_id;
 
@@ -195,12 +195,18 @@ public class SubmitData {
             FileUtils.writeFile(android_id_file_path, unique_app_id);
         }
 
+        //Get the actual TimeStamp
+        String timestamp = String.valueOf(System.currentTimeMillis());
+        Log.d("TimeStamp", timestamp);
+
+        //Create the sent application ID
+        String application_id = unique_app_id+"::"+timestamp;
+        Log.d("APPLICATION ID", application_id);
+
         String data_to_send = FileUtils.readFile(filePath);
 
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body = RequestBody.create(mediaType, data_to_send);
-
-        String final_unique_app_id = unique_app_id;
 
         final boolean[] http_success = {false};
         Thread thread = new Thread(new Runnable() {
@@ -210,7 +216,7 @@ public class SubmitData {
                     Request request = new Request.Builder()
                             .url("http://"+server_url+"/api/"+target)
                             .method("POST", body)
-                            .addHeader("Application-id", final_unique_app_id)
+                            .addHeader("Application-id", application_id)
                             .addHeader("Accept", "application/json")
                             .addHeader("Content-Type", "application/json")
                             .addHeader("Authorization", "Bearer "+token_server)
@@ -241,16 +247,19 @@ public class SubmitData {
      * A Json file is created with the received String and put at the filePath
      *
      * @param context context of the activity
-     * @param filePath path to the file
      * @param server_url ip address of the server
      * @param token_server individual token of the user
      * @param http_client http client of OkHttp
      * @return boolean which tells us if the reception was a success or not
+     *
+     * Appel de la fonction : boolean get_info = getFromServer(context, ip_port, token_server, client);
      */
 
-    public static boolean getFromServer(Context context, String filePath, String server_url, String token_server, OkHttpClient http_client) throws IOException, InterruptedException {
+    public static boolean getFromServer(Context context, String server_url, String token_server, OkHttpClient http_client) throws IOException, InterruptedException {
+
         String data_path = context.getFilesDir().getPath();
 
+        //Get the unique application ID
         String android_id_file_path = data_path+"/config/android_id.txt";
         String unique_app_id;
 
@@ -260,6 +269,14 @@ public class SubmitData {
             unique_app_id = UUID.randomUUID().toString();
             FileUtils.writeFile(android_id_file_path, unique_app_id);
         }
+
+        //Get the actual TimeStamp
+        String timestamp = String.valueOf(System.currentTimeMillis());
+        Log.d("TimeStamp", timestamp);
+
+        //Create the sent application ID
+        String application_id = unique_app_id+"::"+timestamp;
+        Log.d("APPLICATION ID", application_id);
 
         final boolean[] http_success = {false};
         Thread thread = new Thread(new Runnable() {
@@ -272,7 +289,7 @@ public class SubmitData {
                             .method("GET", null)
                             .addHeader("Accept", "application/json")
                             .addHeader("Content-Type", "application/json")
-                            .addHeader("Application-id",unique_app_id)
+                            .addHeader("Application-id",application_id)
                             .addHeader("Authorization", "Bearer "+token_server)
                             .build();
                     Response response = http_client.newCall(request).execute();
