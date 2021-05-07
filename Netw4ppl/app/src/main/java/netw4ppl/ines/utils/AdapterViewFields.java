@@ -1,11 +1,14 @@
 package netw4ppl.ines.utils;
 
 import android.content.Context;
+import android.text.Editable;
 import android.text.Layout;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -25,6 +28,7 @@ import netw4ppl.ines.R;
 public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private ArrayList<Field> mFields;
+    private Person person;
 
     class ViewHolderUniqueID extends RecyclerView.ViewHolder {
         com.google.android.material.textfield.TextInputLayout mTitle;
@@ -73,16 +77,25 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     class ViewHolderEditText extends RecyclerView.ViewHolder {
         TextView mTitle;
         EditText mText;
+        MyCustomEditTextListener myCustomEditTextListener;
 
-        public ViewHolderEditText(@NonNull View itemView) {
+        public ViewHolderEditText(@NonNull View itemView, MyCustomEditTextListener customEditTextListener) {
             super(itemView);
+            this.myCustomEditTextListener = customEditTextListener;
             mTitle = itemView.findViewById(R.id.textview_title);
             mText = itemView.findViewById(R.id.textview_object);
+            mText.addTextChangedListener(this.myCustomEditTextListener);
         }
     }
 
     public AdapterViewFields(Context context, ArrayList<Field> fields) {
         this.mFields = fields;
+        this.person = new Person();
+    }
+
+    public AdapterViewFields(Context context, ArrayList<Field> fields, Person person) {
+        this.mFields = fields;
+        this.person = person;
     }
 
     @NonNull
@@ -94,7 +107,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         switch (viewType) {
             case 0:
                 view = mInflater.inflate(R.layout.view_holder_textview, parent, false);
-                return new ViewHolderEditText(view);
+                return new ViewHolderEditText(view, new MyCustomEditTextListener());
             case 1:
                 view = mInflater.inflate(R.layout.view_holder_spinner, parent, false);
                 return new ViewHolderSpinner(view);
@@ -118,6 +131,8 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         switch (field.getViewType()) {
             case 0:
                 ((ViewHolderEditText) holder).mTitle.setHint(field.getTitle());
+                ((ViewHolderEditText) holder).myCustomEditTextListener.updatePosition(holder.getAdapterPosition());
+                ((ViewHolderEditText) holder).mText.setText(person.getInfoByKey(field.getKey()));
                 // TODO c'est a cet endroit là si on veut l'initialiser avec une valeur !!!! enfin je croyais
                 break;
             case 1:
@@ -152,5 +167,36 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public int getItemCount() {
         return mFields.size();
+    }
+
+    // we make TextWatcher to be aware of the position it currently works with
+    // this way, once a new item is attached in onBindViewHolder, it will
+    // update current position MyCustomEditTextListener, reference to which is kept by ViewHolder
+    private class MyCustomEditTextListener implements TextWatcher {
+        private int position;
+
+        public void updatePosition(int position) {
+            this.position = position;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            // no op
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            try {
+                String field_key = mFields.get(position).getKey();
+                person.put(field_key, charSequence.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            // no op
+        }
     }
 }

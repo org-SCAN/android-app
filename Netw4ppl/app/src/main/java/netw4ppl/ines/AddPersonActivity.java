@@ -27,11 +27,11 @@ public class AddPersonActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recycler_view_add_person);
 
         // set up the RecyclerView
-        AdapterViewFields adapter = new AdapterViewFields(this, MainActivity.mConfiguration.getArrayFields());
+        AdapterViewFields adapter = new AdapterViewFields(this, MainActivity.mConfiguration.getArrayFields(), person);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         // TODO à changer parce que c'est de la merde
-        mRecyclerView.setItemViewCacheSize(MainActivity.mConfiguration.getArrayFields().size());
+//        mRecyclerView.setItemViewCacheSize(MainActivity.mConfiguration.getArrayFields().size());
     }
 
     public String getDefaultKey() {

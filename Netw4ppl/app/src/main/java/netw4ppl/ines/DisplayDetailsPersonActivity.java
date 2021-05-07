@@ -58,11 +58,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         if (index_person != -1) {
             Person person = ManagePersonsActivity.array_persons.get(index_person);
 
-            try {
-                mTextViewFullnameTitle.setText(person.getInfoByKey("full_name"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            mTextViewFullnameTitle.setText(person.getInfoByKey("full_name"));
 
             PersonDetailsListAdapter adapter_details_person = new PersonDetailsListAdapter(this, R.layout.adapter_details_person_fields, MainActivity.mConfiguration.getArrayFields());
             mListDetailsPerson.setAdapter(adapter_details_person);
