@@ -3,7 +3,14 @@ package netw4ppl.ines;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.SearchView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,16 +21,51 @@ import java.util.ArrayList;
 
 import netw4ppl.ines.utils.FileUtils;
 import netw4ppl.ines.utils.Person;
+import netw4ppl.ines.utils.PersonListAdapter;
 import netw4ppl.ines.utils.Relation;
+import netw4ppl.ines.utils.RelationListAdapter;
 
 public class ManageRelationsActivity extends AppCompatActivity {
 
+    FloatingActionButton mButtonAdd;
+    ListView mListView;
+    SearchView mSearchBar;
     public static ArrayList<Relation> array_relations = new ArrayList<Relation>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_relations);
+
+        mButtonAdd = (FloatingActionButton) findViewById(R.id.add_relation_fab);
+
+        mButtonAdd.setOnClickListener(v -> {
+            Intent intent = new Intent(ManageRelationsActivity.this, AddRelationActivity.class);
+            startActivity(intent);
+        });
+
+        mListView = (ListView) findViewById(R.id.list_nutshell_relations);
+
+        mSearchBar = (SearchView) findViewById(R.id.searchViewRelation);
+
+        // lire le fichier files/cases/relations.json et initialiser array_relations
+        try {
+            readRelationsFile(this);
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+
+        // faire l'affichage
+        RelationListAdapter adapter = new RelationListAdapter(this, R.layout.adapter_nutshell_relation_layout, ManageRelationsActivity.array_relations);
+        mListView.setAdapter(adapter);
+        /*mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+                DisplayDetailsRelationActivity.index_relation = position;
+                Intent intent = new Intent(ManageRelationsActivity.this, DisplayDetailsRelationActivity.class);
+                startActivity(intent);
+            }
+        });*/
     }
 
     public static void readRelationsFile(Context context) throws IOException, JSONException {

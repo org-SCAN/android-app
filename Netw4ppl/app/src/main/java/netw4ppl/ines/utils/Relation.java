@@ -10,7 +10,7 @@ public class Relation extends JSONObject {
 
         this.put("from_unique_id", from.getInfoByKey("unique_id"));
         this.put("from_full_name", from.getInfoByKey("full_name"));
-        this.put("to_unique_id", from.getInfoByKey("unique_id"));
+        this.put("to_unique_id", to.getInfoByKey("unique_id"));
         this.put("to_full_name", to.getInfoByKey("full_name"));
         this.put("relation", key_relation);
         this.put("date", date_ajout);
