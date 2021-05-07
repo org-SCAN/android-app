@@ -1,7 +1,10 @@
 package netw4ppl.ines;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -70,7 +73,7 @@ public class MainActivity extends AppCompatActivity{
             Log.d("Send Data","ON EST LA");
             try {
                 SubmitData.manageSend(this, getString(R.string.directory_files));
-            } catch (IOException | InterruptedException e) {
+            } catch (IOException | InterruptedException | JSONException e) {
                 e.printStackTrace();
             }
         });

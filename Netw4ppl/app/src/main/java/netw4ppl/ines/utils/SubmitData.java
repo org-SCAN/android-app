@@ -4,22 +4,35 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
 import androidx.preference.PreferenceManager;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import netw4ppl.ines.MainActivity;
+import netw4ppl.ines.ManagePersonsActivity;
 import netw4ppl.ines.R;
 import netw4ppl.ines.SettingsActivity;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 public class SubmitData {
 
@@ -31,7 +44,7 @@ public class SubmitData {
      * @param context context of the activity
      * @param filePath path to the file
      */
-    public static void manageSend(Context context, String filePath) throws IOException, InterruptedException {
+    public static void manageSend(Context context, String filePath) throws IOException, InterruptedException, JSONException {
 
         // récupère l'option d'envoi sélectionnée par l'utilisateurs dans les paramètres
         String sending_option = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_sending_option_key), null);
@@ -76,7 +89,10 @@ public class SubmitData {
 
             OkHttpClient client = new OkHttpClient();
 
-            boolean submit_result = getFromServer(context, new File(context.getFilesDir(), filePath).getPath(), ip_port, token_server, client);
+            boolean submit_persons = sendToServer(context, new File(context.getFilesDir(), filePath).getPath()+"/persons.json", ip_port, token_server, client, "manage_refugees");
+            boolean submit_relations = sendToServer(context, new File(context.getFilesDir(), filePath).getPath()+"/relations.json", ip_port, token_server, client, "links");
+            boolean submit_result = (submit_persons && submit_relations);
+            Log.d("Fichier", new File(context.getFilesDir(), filePath).getPath()+"HHH");
             showSubmitResultDialog(context, submit_result);
         }
     }
@@ -131,11 +147,98 @@ public class SubmitData {
      * @param http_client http client of OkHttp
      * @return boolean which tells us if the sending was a success or not
      */
-    public static boolean sendToServer(Context context, String filePath, String server_url, String token_server, OkHttpClient http_client) {
-        // TODO envoi au serveur
-        // faire les requêtes HTTP
+    public static boolean sendToServer(Context context, String filePath, String server_url, String token_server, OkHttpClient http_client, String target) throws InterruptedException, JSONException, IOException {
 
-        return true;
+        String data_path = context.getFilesDir().getPath();
+
+        // Ecriture dans les fichiers Relations et Refugees pour des buts de Test!!
+        //Persons
+        FileUtils.writeFile(data_path+"/cases/persons.json","[\n" +
+                "    {\n" +
+                "    \"age\":12,\n" +
+                "    \"gender\":\"F\",\n" +
+                "    \"unique_id\" : \"BBB-000001\",\n" +
+                "    \"full_name\" : \"Lucas\",\n" +
+                "    \"nationality\" : \"FRA\",\n" +
+                "    \"date\" : \"2021-04-12\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "    \"age\":12,\n" +
+                "    \"gender\":\"F\",\n" +
+                "    \"unique_id\" : \"BBB-000002\",\n" +
+                "    \"full_name\" : \"Luc\",\n" +
+                "    \"nationality\" : \"USA\",\n" +
+                "    \"date\" : \"2021-04-12\"\n" +
+                "    }\n" +
+                "]");
+
+        //Relations
+        FileUtils.writeFile(data_path+"/cases/relations.json","[\n" +
+                "    {\n" +
+                "    \"from_unique_id\" : \"BBB-000001\",\n" +
+                "    \"from_full_name\" : \"Lucas\",\n" +
+                "    \"to_unique_id\" : \"BBB-000002\",\n" +
+                "    \"to_full_name\" : \"Luc\",\n" +
+                "    \"relation\" : \"6e12f143-69fe-40d3-987f-1a7825e38247\",\n" +
+                "    \"detail\" : \"at the port\"\n" +
+                "    }\n" +
+                "]");
+
+        //Get the unique application ID
+        String android_id_file_path = data_path+"/config/android_id.txt";
+        String unique_app_id;
+
+        if (FileUtils.fileExists(android_id_file_path)){
+            unique_app_id = FileUtils.readFile(android_id_file_path);
+        }else{
+            unique_app_id = UUID.randomUUID().toString();
+            FileUtils.writeFile(android_id_file_path, unique_app_id);
+        }
+
+        //Get the actual TimeStamp
+        String timestamp = String.valueOf(System.currentTimeMillis());
+        Log.d("TimeStamp", timestamp);
+
+        //Create the sent application ID
+        String application_id = unique_app_id+"::"+timestamp;
+        Log.d("APPLICATION ID", application_id);
+
+        String data_to_send = FileUtils.readFile(filePath);
+
+        MediaType mediaType = MediaType.parse("application/json");
+        RequestBody body = RequestBody.create(mediaType, data_to_send);
+
+        final boolean[] http_success = {false};
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try  {
+                    Request request = new Request.Builder()
+                            .url("http://"+server_url+"/api/"+target)
+                            .method("POST", body)
+                            .addHeader("Application-id", application_id)
+                            .addHeader("Accept", "application/json")
+                            .addHeader("Content-Type", "application/json")
+                            .addHeader("Authorization", "Bearer "+token_server)
+                            .build();
+                    Response response = http_client.newCall(request).execute();
+                    String response_string = response.body().string();
+                    Log.d("Code de réception", String.valueOf(response.code()));
+                    Log.d("GetResponse", response_string);
+
+                    if (response.code()==201) {
+                        http_success[0] = true;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
+        thread.join();
+
+        return http_success[0];
     }
 
     /**
@@ -144,14 +247,38 @@ public class SubmitData {
      * A Json file is created with the received String and put at the filePath
      *
      * @param context context of the activity
-     * @param filePath path to the file
      * @param server_url ip address of the server
      * @param token_server individual token of the user
      * @param http_client http client of OkHttp
      * @return boolean which tells us if the reception was a success or not
+     *
+     * Appel de la fonction : boolean get_info = getFromServer(context, ip_port, token_server, client);
      */
 
-    public static boolean getFromServer(Context context, String filePath, String server_url, String token_server, OkHttpClient http_client) throws IOException, InterruptedException {
+    public static boolean getFromServer(Context context, String server_url, String token_server, OkHttpClient http_client) throws IOException, InterruptedException {
+
+        String data_path = context.getFilesDir().getPath();
+
+        //Get the unique application ID
+        String android_id_file_path = data_path+"/config/android_id.txt";
+        String unique_app_id;
+
+        if (FileUtils.fileExists(android_id_file_path)){
+            unique_app_id = FileUtils.readFile(android_id_file_path);
+        }else{
+            unique_app_id = UUID.randomUUID().toString();
+            FileUtils.writeFile(android_id_file_path, unique_app_id);
+        }
+
+        //Get the actual TimeStamp
+        String timestamp = String.valueOf(System.currentTimeMillis());
+        Log.d("TimeStamp", timestamp);
+
+        //Create the sent application ID
+        String application_id = unique_app_id+"::"+timestamp;
+        Log.d("APPLICATION ID", application_id);
+
+        final boolean[] http_success = {false};
         Thread thread = new Thread(new Runnable() {
 
             @Override
@@ -162,10 +289,18 @@ public class SubmitData {
                             .method("GET", null)
                             .addHeader("Accept", "application/json")
                             .addHeader("Content-Type", "application/json")
+                            .addHeader("Application-id",application_id)
                             .addHeader("Authorization", "Bearer "+token_server)
                             .build();
                     Response response = http_client.newCall(request).execute();
-                    Log.d("GetResponse", response.body().string());
+                    Log.d("Code de réception", String.valueOf(response.code()));
+                    String response_string = response.body().string();
+                    Log.d("GetResponse", response_string);
+
+                    if (response.code()==200) {
+                        http_success[0] = true;
+                        FileUtils.writeFile(data_path+"/config/fields.json", response_string);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -174,8 +309,7 @@ public class SubmitData {
 
         thread.start();
         thread.join();
-
-        return true;
+        return http_success[0];
     }
 
     /**
