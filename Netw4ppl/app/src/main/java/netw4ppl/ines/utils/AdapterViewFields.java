@@ -3,6 +3,7 @@ package netw4ppl.ines.utils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.text.Editable;
 import android.text.Layout;
 import android.text.TextWatcher;
@@ -96,6 +97,8 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             mTitle = itemView.findViewById(R.id.textview_title);
             mText = itemView.findViewById(R.id.textview_object);
             mText.addTextChangedListener(this.myCustomEditTextListener);
+
+            // configure everything no multiline allowed etc
         }
     }
 
@@ -139,8 +142,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         // position va de 0 à 19, car actuellement on 20 champs à saisir
-
-        // avec un peu de chance c'est la position dans l'array fields faux, c'est la position sur l'écran
+        
         Field field = mFields.get(position);
 
         switch (field.getViewType()) {
@@ -162,12 +164,12 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
                 }
                 break;
             case 0:
-                ((ViewHolderEditText) holder).mTitle.setHint(field.getTitle());
+                ((ViewHolderEditText) holder).mTitle.setText(field.getTitle());
                 ((ViewHolderEditText) holder).myCustomEditTextListener.updatePosition(holder.getAdapterPosition());
                 ((ViewHolderEditText) holder).mText.setText(person.getInfoByKey(field.getKey()));
                 break;
             case 1:
-                ((ViewHolderSpinner) holder).mTitle.setHint(field.getTitle());
+                ((ViewHolderSpinner) holder).mTitle.setText(field.getTitle());
                 try {
                     ((ViewHolderSpinner) holder).mSpinner.setAdapter(MainActivity.mConfiguration.getArrayAdapter(field.getString("linked_list")));
                 } catch (JSONException e) {
@@ -226,7 +228,10 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
             try {
-                String field_key = "unique_id";
+                String field_key = mFields.get(position).getKey();
+                // il faut récupérer les deux champs associés problème, on a pas la view
+                // TODO c'est la merde là
+
                 person.put(field_key, charSequence.toString());
             } catch (JSONException e) {
                 e.printStackTrace();

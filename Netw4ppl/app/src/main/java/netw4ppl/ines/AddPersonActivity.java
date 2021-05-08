@@ -37,13 +37,14 @@ public class AddPersonActivity extends AppCompatActivity {
     }
 
     public static int getNextId(String key) {
-        int last_id;
-        try {
-            last_id = json_ids.getInt(key);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            last_id = 0;
-        }
+        int last_id = 0;
+        if (json_ids.has(key))
+            try {
+                last_id = json_ids.getInt(key);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                last_id = 0;
+            }
         return last_id+1;
     }
 }

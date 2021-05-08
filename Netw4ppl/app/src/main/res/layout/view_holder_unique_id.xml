@@ -11,7 +11,6 @@
         android:orientation="vertical"
         android:background="@drawable/customborder"
         android:padding="5dp"
-        android:layout_margin="5dp"
         android:layout_weight="3">
 
         <TextView
@@ -22,8 +21,9 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/unique_id_text_letters" />
-
+            android:id="@+id/unique_id_text_letters"
+            android:inputType="text"
+            android:maxLines="1"/>
     </LinearLayout>
 
     <LinearLayout
@@ -32,7 +32,7 @@
         android:background="@drawable/customborder"
         android:padding="5dp"
         android:orientation="vertical"
-        android:layout_margin="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_weight="1">
 
         <TextView
@@ -44,7 +44,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/unique_id_text_figures"
-            android:enabled="false"/>
+            android:enabled="false"
+            android:inputType="text"
+            android:maxLines="1"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -17,6 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Value"
-        android:id="@+id/textview_object" />
+        android:id="@+id/textview_object"
+        android:inputType="text"
+        android:maxLines="1"/>
 
 </LinearLayout>
