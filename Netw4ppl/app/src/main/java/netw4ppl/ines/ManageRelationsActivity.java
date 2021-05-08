@@ -58,14 +58,14 @@ public class ManageRelationsActivity extends AppCompatActivity {
         // faire l'affichage
         RelationListAdapter adapter = new RelationListAdapter(this, R.layout.adapter_nutshell_relation_layout, ManageRelationsActivity.array_relations);
         mListView.setAdapter(adapter);
-        /*mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
                 DisplayDetailsRelationActivity.index_relation = position;
                 Intent intent = new Intent(ManageRelationsActivity.this, DisplayDetailsRelationActivity.class);
                 startActivity(intent);
             }
-        });*/
+        });
     }
 
     public static void readRelationsFile(Context context) throws IOException, JSONException {
