@@ -32,11 +32,11 @@ public class AddPersonActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    public String getDefaultKey() {
+    public static String getDefaultKey() {
         return "AAA";
     }
 
-    public int getNextId(String key) {
+    public static int getNextId(String key) {
         int last_id;
         try {
             last_id = json_ids.getInt(key);

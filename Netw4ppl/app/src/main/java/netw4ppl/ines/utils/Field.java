@@ -18,7 +18,7 @@ public class Field extends DataElement {
 
     public Field(String key, String string_fields) throws JSONException {
         super(key, string_fields);
-        setViewType(this.getString("android_type"));
+        setViewType(this.getString("android_type"), this.getInt("required"));
     }
 
     public String getElementByKey(String key) {
@@ -36,10 +36,13 @@ public class Field extends DataElement {
         return this.view_type;
     }
 
-    public void setViewType(String android_type) {
+    public void setViewType(String android_type, int required) {
         switch (android_type) {
             case "EditText":
-                this.view_type = 0;
+                if (required == 0)
+                    this.view_type = -1;
+                else
+                    this.view_type = 0;
                 break;
             case "Spinner":
                 this.view_type = 1;

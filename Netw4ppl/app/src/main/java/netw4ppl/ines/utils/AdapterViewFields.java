@@ -1,5 +1,6 @@
 package netw4ppl.ines.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.text.Editable;
@@ -24,6 +25,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
+import netw4ppl.ines.AddPersonActivity;
 import netw4ppl.ines.MainActivity;
 import netw4ppl.ines.R;
 
@@ -33,13 +35,20 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     private Person person;
 
     class ViewHolderUniqueID extends RecyclerView.ViewHolder {
-        com.google.android.material.textfield.TextInputLayout mTitle;
-        com.google.android.material.textfield.TextInputEditText mValue;
+        TextView mTitleLetters;
+        TextView mTitleFigures;
+        EditText mValueLetters;
+        EditText mValueFigures;
+        CustomUniqueIDTextListener customUniqueIDTextListener;
 
-        public ViewHolderUniqueID(@NonNull View itemView) {
+        public ViewHolderUniqueID(@NonNull View itemView, CustomUniqueIDTextListener myCustomTextListener) {
             super(itemView);
-            mTitle = itemView.findViewById(R.id.key_id_title);
-            mValue = itemView.findViewById(R.id.key_id_text);
+            customUniqueIDTextListener = myCustomTextListener;
+            mTitleLetters = itemView.findViewById(R.id.unique_id_title_letters);
+            mTitleFigures = itemView.findViewById(R.id.unique_id_title_figures);
+            mValueLetters = itemView.findViewById(R.id.unique_id_text_letters);
+            mValueFigures = itemView.findViewById(R.id.unique_id_text_figures);
+            mValueLetters.addTextChangedListener(customUniqueIDTextListener);
         }
     }
 
@@ -107,6 +116,9 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         View view;
         switch (viewType) {
+            case -1:
+                view = mInflater.inflate(R.layout.view_holder_unique_id, parent, false);
+                return new ViewHolderUniqueID(view, new CustomUniqueIDTextListener());
             case 0:
                 view = mInflater.inflate(R.layout.view_holder_textview, parent, false);
                 return new ViewHolderEditText(view, new MyCustomEditTextListener());
@@ -123,6 +135,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         return null;
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         // position va de 0 à 19, car actuellement on 20 champs à saisir
@@ -131,11 +144,27 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         Field field = mFields.get(position);
 
         switch (field.getViewType()) {
+            case -1:
+                ((ViewHolderUniqueID) holder).mTitleFigures.setText(field.getTitle());
+                ((ViewHolderUniqueID) holder).mTitleLetters.setText(field.getTitle());
+                ((ViewHolderUniqueID) holder).customUniqueIDTextListener.updatePosition(holder.getAdapterPosition());
+
+                // split the unique_id value in two parts
+                String[] unique_id = person.getInfoByKey(field.getKey()).split("-");
+                if (unique_id.length == 2) {
+                    ((ViewHolderUniqueID) holder).mValueLetters.setText(unique_id[0]);
+                    ((ViewHolderUniqueID) holder).mValueFigures.setText(unique_id[1]);
+                }
+                else {
+                    String default_key = AddPersonActivity.getDefaultKey();
+                    ((ViewHolderUniqueID) holder).mValueLetters.setText(default_key);
+                    ((ViewHolderUniqueID) holder).mValueFigures.setText(String.format("%06d", AddPersonActivity.getNextId(default_key)));
+                }
+                break;
             case 0:
                 ((ViewHolderEditText) holder).mTitle.setHint(field.getTitle());
                 ((ViewHolderEditText) holder).myCustomEditTextListener.updatePosition(holder.getAdapterPosition());
                 ((ViewHolderEditText) holder).mText.setText(person.getInfoByKey(field.getKey()));
-                // TODO c'est a cet endroit là si on veut l'initialiser avec une valeur !!!! enfin je croyais
                 break;
             case 1:
                 ((ViewHolderSpinner) holder).mTitle.setHint(field.getTitle());
@@ -177,6 +206,37 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public int getItemCount() {
         return mFields.size();
+    }
+
+    // we make TextWatcher to be aware of the position it currently works with
+    // this way, once a new item is attached in onBindViewHolder, it will
+    // update current position MyCustomEditTextListener, reference to which is kept by ViewHolder
+    private class CustomUniqueIDTextListener implements TextWatcher {
+        private int position;
+
+        public void updatePosition(int position) {
+            this.position = position;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            // no op
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            try {
+                String field_key = "unique_id";
+                person.put(field_key, charSequence.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            // no op
+        }
     }
 
     // we make TextWatcher to be aware of the position it currently works with
