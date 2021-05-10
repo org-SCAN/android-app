@@ -16,6 +16,7 @@ public class AddPersonActivity extends AppCompatActivity {
 
     public static JSONObject json_ids = new JSONObject();
     public static Person person = new Person();
+    public static boolean new_person = true;
 
     RecyclerView mRecyclerView;
 
@@ -26,8 +27,13 @@ public class AddPersonActivity extends AppCompatActivity {
 
         mRecyclerView = findViewById(R.id.recycler_view_add_person);
 
+        // on regarde si on vient de DetailsPersonActivity ou pas
+        if (new_person) {
+            person = new Person();
+        }
+
         // set up the RecyclerView
-        AdapterViewFields adapter = new AdapterViewFields(this, MainActivity.mConfiguration.getArrayFields(), person);
+        AdapterViewFields adapter = new AdapterViewFields(this, MainActivity.mConfiguration.getArrayFields());
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -51,6 +57,6 @@ public class AddPersonActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        person = new Person();
+        new_person = true;
     }
 }

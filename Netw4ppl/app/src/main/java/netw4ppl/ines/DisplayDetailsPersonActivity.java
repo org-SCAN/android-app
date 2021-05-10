@@ -55,6 +55,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         });
         mButtonEditPerson.setOnClickListener(v -> {
             AddPersonActivity.person = person;
+            AddPersonActivity.new_person = false;
             Intent intent = new Intent(DisplayDetailsPersonActivity.this, AddPersonActivity.class);
             startActivity(intent);
         });

@@ -2,9 +2,11 @@ package netw4ppl.ines.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Build;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.Layout;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -25,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import netw4ppl.ines.AddPersonActivity;
 import netw4ppl.ines.MainActivity;
@@ -33,9 +36,8 @@ import netw4ppl.ines.R;
 public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private ArrayList<Field> mFields;
-    private Person person;
-    private boolean new_person;
     LayoutInflater mInflater;
+    private Context mContext;
 
     class ViewHolderUniqueID extends RecyclerView.ViewHolder {
         TextView mTitleLetters;
@@ -82,12 +84,36 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     class ViewHolderCalendarView  extends RecyclerView.ViewHolder {
         TextView mTitle;
-        DatePicker mDatePicker;
+        DatePickerDialog mDatePicker;
+        EditText mDateText;
+        MyCustomEditTextListener myCustomEditTextListener;
 
-        public ViewHolderCalendarView(@NonNull View itemView) {
+        public ViewHolderCalendarView(@NonNull View itemView, MyCustomEditTextListener customEditTextListener) {
             super(itemView);
+            this.myCustomEditTextListener = customEditTextListener;
             mTitle = itemView.findViewById(R.id.date_picker_title);
-            mDatePicker = itemView.findViewById(R.id.date_picker_object);
+            mDateText = itemView.findViewById(R.id.date_picker_edittext_object);
+
+            mDateText.setInputType(InputType.TYPE_NULL);
+            mDateText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final Calendar cldr = Calendar.getInstance();
+                    int day = cldr.get(Calendar.DAY_OF_MONTH);
+                    int month = cldr.get(Calendar.MONTH);
+                    int year = cldr.get(Calendar.YEAR);
+                    // date picker dialog
+                    mDatePicker = new DatePickerDialog(mContext,
+                            new DatePickerDialog.OnDateSetListener() {
+                                @Override
+                                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                    mDateText.setText(year + "-" + String.format("%02d", (monthOfYear + 1)) + "-" + String.format("%02d", dayOfMonth));
+                                }
+                            }, year, month, day);
+                    mDatePicker.show();
+                }
+            });
+            mDateText.addTextChangedListener(this.myCustomEditTextListener);
         }
     }
 
@@ -108,16 +134,8 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public AdapterViewFields(Context context, ArrayList<Field> fields) {
+        this.mContext = context;
         this.mFields = fields;
-        this.person = new Person();
-        this.new_person = true;
-        this.mInflater = LayoutInflater.from(context);
-    }
-
-    public AdapterViewFields(Context context, ArrayList<Field> fields, Person person) {
-        this.mFields = fields;
-        this.person = person;
-        this.new_person = false;
         this.mInflater = LayoutInflater.from(context);
     }
 
@@ -142,7 +160,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
                 return new ViewHolderAutoComplete(view);
             case 3:
                 view = mInflater.inflate(R.layout.view_holder_calendar, parent, false);
-                return new ViewHolderCalendarView(view);
+                return new ViewHolderCalendarView(view, new MyCustomEditTextListener());
         }
         return null;
     }
@@ -161,7 +179,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
                 ((ViewHolderUniqueID) holder).customUniqueIDTextListener.updatePosition(holder.getAdapterPosition());
 
                 // split the unique_id value in two parts
-                String[] unique_id = person.getInfoByKey(field.getKey()).split("-");
+                String[] unique_id = AddPersonActivity.person.getInfoByKey(field.getKey()).split("-");
                 if (unique_id.length == 2) {
                     ((ViewHolderUniqueID) holder).mValueLetters.setText(unique_id[0]);
                     ((ViewHolderUniqueID) holder).mValueFigures.setText(unique_id[1]);
@@ -175,7 +193,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             case 0:
                 ((ViewHolderEditText) holder).mTitle.setText(field.getTitle());
                 ((ViewHolderEditText) holder).myCustomEditTextListener.updatePosition(holder.getAdapterPosition());
-                ((ViewHolderEditText) holder).mText.setText(person.getInfoByKey(field.getKey()));
+                ((ViewHolderEditText) holder).mText.setText(AddPersonActivity.person.getInfoByKey(field.getKey()));
                 break;
             case 1:
                 ((ViewHolderSpinner) holder).mTitle.setText(field.getTitle());
@@ -189,12 +207,12 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
                 ((ViewHolderAutoComplete) holder).mTitle.setHint(field.getTitle());
                 try {
                     ((ViewHolderAutoComplete) holder).mAutoComplete.setAdapter(MainActivity.mConfiguration.getArrayAdapter(field.getString("linked_list")));
-                    ((ViewHolderAutoComplete) holder).mAutoComplete.setText(person.getInfoByKey(field.getKey()));
+                    ((ViewHolderAutoComplete) holder).mAutoComplete.setText(AddPersonActivity.person.getInfoByKey(field.getKey()));
                     ((ViewHolderAutoComplete) holder).mAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             DataElement data_element = (DataElement) ((ViewHolderAutoComplete) holder).mAutoComplete.getAdapter().getItem(position);
-                            person.putInfo(field.getKey(), data_element.getKey());
+                            AddPersonActivity.person.putInfo(field.getKey(), data_element.getKey());
                         }
                     });
                 } catch (JSONException e) {
@@ -203,6 +221,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
                 break;
             case 3:
                 ((ViewHolderCalendarView) holder).mTitle.setHint(field.getTitle());
+                ((ViewHolderCalendarView) holder).mDateText.setText(AddPersonActivity.person.getInfoByKey(field.getKey()));
                 break;
             default:
                 break;
@@ -256,7 +275,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
                 mView.mValueFigures.setText(id_figures);
 
                 // save the id written
-                person.put(field_key, id_letters+"-"+id_figures);
+                AddPersonActivity.person.put(field_key, id_letters+"-"+id_figures);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -287,7 +306,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
             try {
                 String field_key = mFields.get(position).getKey();
-                person.put(field_key, charSequence.toString());
+                AddPersonActivity.person.put(field_key, charSequence.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }

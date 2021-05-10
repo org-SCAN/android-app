@@ -11,12 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-        <DatePicker
-            android:id="@+id/date_picker_object"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:datePickerMode="spinner"
-            android:calendarViewShown="false"
-            android:layout_gravity="center"/>
+<!--        <DatePicker-->
+<!--            android:id="@+id/date_picker_object"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:datePickerMode="spinner"-->
+<!--            android:calendarViewShown="false"-->
+<!--            android:layout_gravity="center"/>-->
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/date_picker_edittext_object"
+        android:maxLines="1"/>
 
 </LinearLayout>
