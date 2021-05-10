@@ -31,4 +31,15 @@ public class Person extends JSONObject {
     public boolean isSamePerson(Person individu) throws JSONException {
         return this.getInfoByKey("unique_id").equals(individu.getInfoByKey("unique_id"));
     }
+
+    public String toString(){
+        String res = null;
+        try {
+            res = this.getInfoByKey("full_name");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
 }

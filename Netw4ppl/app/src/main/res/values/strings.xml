@@ -106,4 +106,7 @@
     <string name="relation_to_indication">To</string>
     <string name="relation_comment_indication">Comments</string>
 
+    <string name="button_relation_save_title">Save</string>
+    <string name="button_relation_cancel_title">Cancel</string>
+
 </resources>

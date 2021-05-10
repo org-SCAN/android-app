@@ -52,12 +52,31 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FileUtils.writeFile(this.getFilesDir().getPath()+"/cases/persons.json","[\n" +
+                "    {\n" +
+                "    \"unique_id\" : \"ABC-000001\",\n" +
+                "    \"full_name\" : \"Patrice\",\n" +
+                "    \"nationality\" : \"FRA\",\n" +
+                "    \"date\" : \"2021-04-12\",\n" +
+                "    \"age\" : 68,\n" +
+                "    \"gender\" : \"F\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "    \"unique_id\" : \"ABC-000002\",\n" +
+                "    \"full_name\" : \"Maryse\",\n" +
+                "    \"nationality\" : \"USA\",\n" +
+                "    \"date\" : \"2021-04-12\",\n" +
+                "    \"age\" : 92,\n" +
+                "    \"gender\" : \"F\"\n" +
+                "    }\n" +
+                "]");
+
         //Ajout Relation Crade!!!
         FileUtils.writeFile(this.getFilesDir().getPath()+"/cases/relations.json", "[\n" +
                 "  {\n" +
                 "    \"date\": \"2020-04-07\",\n" +
                 "    \"relation\": \"Step Brother\",\n"+
-                "    \"detail\" : \"Ceci est un détail sur la relation\",\n" +
+                "    \"detail\" : \"Ceci est un détail sur la relation \",\n" +
                 "    \"from_unique_id\": \"UQO-311916\",\n" +
                 "    \"from_full_name\": \"Dr. Gay Hane\",\n" +
                 "    \"to_unique_id\": \"QFL-290254\",\n" +
