@@ -34,6 +34,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private ArrayList<Field> mFields;
     private Person person;
+    private boolean new_person;
 
     class ViewHolderUniqueID extends RecyclerView.ViewHolder {
         TextView mTitleLetters;
@@ -105,11 +106,13 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     public AdapterViewFields(Context context, ArrayList<Field> fields) {
         this.mFields = fields;
         this.person = new Person();
+        this.new_person = true;
     }
 
     public AdapterViewFields(Context context, ArrayList<Field> fields, Person person) {
         this.mFields = fields;
         this.person = person;
+        this.new_person = false;
     }
 
     @NonNull
