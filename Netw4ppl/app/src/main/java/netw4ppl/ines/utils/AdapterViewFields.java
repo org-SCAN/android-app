@@ -142,7 +142,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         // position va de 0 à 19, car actuellement on 20 champs à saisir
-        
+
         Field field = mFields.get(position);
 
         switch (field.getViewType()) {
