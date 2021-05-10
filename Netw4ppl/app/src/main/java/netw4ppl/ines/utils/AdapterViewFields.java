@@ -35,6 +35,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     private ArrayList<Field> mFields;
     private Person person;
     private boolean new_person;
+    LayoutInflater mInflater;
 
     class ViewHolderUniqueID extends RecyclerView.ViewHolder {
         TextView mTitleLetters;
@@ -43,14 +44,17 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         EditText mValueFigures;
         CustomUniqueIDTextListener customUniqueIDTextListener;
 
-        public ViewHolderUniqueID(@NonNull View itemView, CustomUniqueIDTextListener myCustomTextListener) {
+        public ViewHolderUniqueID(@NonNull View itemView) {
             super(itemView);
-            customUniqueIDTextListener = myCustomTextListener;
             mTitleLetters = itemView.findViewById(R.id.unique_id_title_letters);
             mTitleFigures = itemView.findViewById(R.id.unique_id_title_figures);
             mValueLetters = itemView.findViewById(R.id.unique_id_text_letters);
             mValueFigures = itemView.findViewById(R.id.unique_id_text_figures);
-            mValueLetters.addTextChangedListener(customUniqueIDTextListener);
+        }
+
+        public void setTextListener(CustomUniqueIDTextListener customUniqueIDTextListener) {
+            this.customUniqueIDTextListener = customUniqueIDTextListener;
+            mValueLetters.addTextChangedListener(this.customUniqueIDTextListener);
         }
     }
 
@@ -107,24 +111,26 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.mFields = fields;
         this.person = new Person();
         this.new_person = true;
+        this.mInflater = LayoutInflater.from(context);
     }
 
     public AdapterViewFields(Context context, ArrayList<Field> fields, Person person) {
         this.mFields = fields;
         this.person = person;
         this.new_person = false;
+        this.mInflater = LayoutInflater.from(context);
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater mInflater = LayoutInflater.from(parent.getContext());
-
         View view;
         switch (viewType) {
             case -1:
                 view = mInflater.inflate(R.layout.view_holder_unique_id, parent, false);
-                return new ViewHolderUniqueID(view, new CustomUniqueIDTextListener());
+                ViewHolderUniqueID vUniqueId = new ViewHolderUniqueID(view);
+                vUniqueId.setTextListener(new CustomUniqueIDTextListener(vUniqueId));
+                return vUniqueId;
             case 0:
                 view = mInflater.inflate(R.layout.view_holder_textview, parent, false);
                 return new ViewHolderEditText(view, new MyCustomEditTextListener());
@@ -218,6 +224,12 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     // update current position MyCustomEditTextListener, reference to which is kept by ViewHolder
     private class CustomUniqueIDTextListener implements TextWatcher {
         private int position;
+        ViewHolderUniqueID mView;
+
+        public CustomUniqueIDTextListener(ViewHolderUniqueID v) {
+            super();
+            mView = v;
+        }
 
         public void updatePosition(int position) {
             this.position = position;
@@ -228,14 +240,23 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             // no op
         }
 
+        @SuppressLint("DefaultLocale")
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
             try {
+                // get the field key (even if for this case we know it's "unique_id")
                 String field_key = mFields.get(position).getKey();
-                // il faut récupérer les deux champs associés problème, on a pas la view
-                // TODO c'est la merde là
 
-                person.put(field_key, charSequence.toString());
+                // convert the CharSequence in String
+                String id_letters = charSequence.toString();
+
+                // with the 3-letters code, get the next numerical id
+                int id_figures_int = AddPersonActivity.getNextId(id_letters);
+                String id_figures = String.format("%06d", id_figures_int);
+                mView.mValueFigures.setText(id_figures);
+
+                // save the id written
+                person.put(field_key, id_letters+"-"+id_figures);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

@@ -47,4 +47,10 @@ public class AddPersonActivity extends AppCompatActivity {
             }
         return last_id+1;
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        person = new Person();
+    }
 }
