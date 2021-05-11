@@ -11,6 +11,7 @@ public class DataElement extends JSONObject {
 
     public DataElement() {
         super();
+        this.key = "";
     }
 
     public DataElement (String key, String string_fields) throws JSONException {
