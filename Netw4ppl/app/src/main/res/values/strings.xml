@@ -101,4 +101,7 @@
     <string name="button_add_relation_from">Add relation from</string>
     <string name="details_title_full_name">Informations</string>
 
+    <string name="hint_unique_id_key" translatable="false">AAA</string>
+    <string name="hint_unique_id_value" translatable="false">000000</string>
+
 </resources>
