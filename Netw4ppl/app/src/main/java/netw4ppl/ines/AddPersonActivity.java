@@ -54,10 +54,8 @@ public class AddPersonActivity extends AppCompatActivity {
         });
 
         mButtonSave.setOnClickListener(v -> {
-            // deux cas à différencier
-
+            /* Ajout d'une nouvelle personne */
             if (new_person) {
-                Log.d("general-display", "Ajout d'une nouvelle personne");
 
                 // ajout du champ date indispensable pour la database
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -70,17 +68,15 @@ public class AddPersonActivity extends AppCompatActivity {
 
                 // ajout de l'id au dico des IDS et sauvegarde les toutes dans le fichier associé
                 String[] id = person.getInfoByKey("unique_id").split("-");
-                boolean save_ids = true;
                 try {
                     json_ids.put(id[0], Integer.valueOf(id[1]));
-                    save_ids = FileUtils.saveIdsToFile(this, json_ids.toString(2));
+                    FileUtils.saveIdsToFile(this, json_ids.toString(2));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
+            /* Modification d'une personne existante */
             else {
-                Log.d("general-display", "Modification d'une personne deja existante");
-
                 // on supprime l'ancienne version avant d'ajouter la nouvelle
                 int index = DisplayDetailsPersonActivity.index_person;
                 ManagePersonsActivity.array_persons.remove(index);
@@ -93,16 +89,10 @@ public class AddPersonActivity extends AppCompatActivity {
             // reset some variables
             new_person = true;
 
-            try {
-                Log.d("general-display", person.toString(2));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
             if (save_persons)
                 finish();
             else {
-                Log.d("general-display", "sauvegarde réussie des fichiers");
+                // TODO faire apparaitre un toast pour dire que la sauvegarde a échoué
             }
         });
     }
