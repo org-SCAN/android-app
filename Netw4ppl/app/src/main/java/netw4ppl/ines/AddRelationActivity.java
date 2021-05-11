@@ -16,6 +16,7 @@ import android.widget.TextView;
 import org.json.JSONException;
 
 import netw4ppl.ines.utils.DataElement;
+import netw4ppl.ines.utils.FileUtils;
 import netw4ppl.ines.utils.Person;
 import netw4ppl.ines.utils.PersonListAdapter;
 import netw4ppl.ines.utils.Relation;
@@ -24,6 +25,11 @@ public class AddRelationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddRelationActivity";
     public static Relation single_relation;
+
+    private static Person from_person;
+    private static Person to_person;
+    private static String relation_type;
+    private static String relation_details;
 
     AutoCompleteTextView mAutoTextViewRelationFrom;
     AutoCompleteTextView mAutoTextViewRelationTo;
@@ -43,21 +49,47 @@ public class AddRelationActivity extends AppCompatActivity {
         mButtonRelationCancel = findViewById(R.id.display_add_relation_cancel);
 
         generateViews();
+        setListeners();
 
         mButtonRelationSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // récupère les infos saisies sur la personne
-                getRelationInputsFromViews();
+                // Get the details about the Relation
+                relation_details = mEditTextRelationComments.getText().toString();
+
+                relation_type = mSpinnerRelationType.getSelectedItem().toString();
+                // récupère les infos saisies sur la relation
+                try {
+                    generateRelationFromInformations();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 ManageRelationsActivity.array_relations.add(single_relation);
-                /*boolean save_result = FileUtils.saveJsonToFile(ManageRefugeesActivity.refugees, getApplicationContext().getFilesDir().toString()+"/cases/refugees.json");
-                single_refugee = null;
+                boolean save_result = FileUtils.writeFile(getApplicationContext().getFilesDir().toString()+"/cases/relations.json",ManageRelationsActivity.array_relations.toString());
+                //single_refugee = null;
 
                 if (save_result) {
                     Log.d("general-display", "sauvegarde effectuée, retour vers l'écran de management");
                     finish();
-                }*/
+                }
+            }
+        });
+    }
+
+    private void setListeners(){
+
+        mAutoTextViewRelationFrom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                from_person = (Person) parent.getAdapter().getItem(position);
+            }
+        });
+
+        mAutoTextViewRelationTo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                to_person = (Person) parent.getAdapter().getItem(position);
             }
         });
     }
@@ -79,14 +111,7 @@ public class AddRelationActivity extends AppCompatActivity {
         mEditTextRelationComments = findViewById(R.id.add_relation_comments);
     }
 
-    private void getRelationInputsFromViews() {
-        final Person[] tmp_from = new Person[1];
-        mAutoTextViewRelationFrom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                tmp_from[0] = (Person) mAutoTextViewRelationFrom.getAdapter().getItem(position);
-            }
-        });
-        Log.d(TAG,tmp_from[0].toString());
+    private void generateRelationFromInformations() throws JSONException {
+        single_relation = new Relation(from_person,relation_type,to_person,String.valueOf(System.currentTimeMillis()), relation_details);
     }
 }
