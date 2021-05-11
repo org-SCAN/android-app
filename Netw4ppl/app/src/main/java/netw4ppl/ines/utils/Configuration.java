@@ -33,6 +33,7 @@ public class Configuration {
                 if (!key_table.equals("fields")) {
                     // create the ArrayList
                     ArrayList<DataElement> data_array = new ArrayList<DataElement>();
+                    data_array.add(new DataElement());
                     while (iterator_elements.hasNext()) {
                         String key_element = iterator_elements.next();
                         JSONObject element = table.getJSONObject(key_element);

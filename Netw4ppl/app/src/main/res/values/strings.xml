@@ -109,4 +109,7 @@
     <string name="button_relation_save_title">Save</string>
     <string name="button_relation_cancel_title">Cancel</string>
 
+    <string name="hint_unique_id_key" translatable="false">AAA</string>
+    <string name="hint_unique_id_value" translatable="false">000000</string>
+
 </resources>

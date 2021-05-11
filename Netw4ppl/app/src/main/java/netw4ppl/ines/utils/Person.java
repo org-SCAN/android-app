@@ -18,14 +18,25 @@ public class Person extends JSONObject {
         super(data_person.toString());
     }
 
-    public String getInfoByKey(String key) throws JSONException {
-        String value;
+    public String getInfoByKey(String key) {
+        String value = "";
 
-        if (this.has(key))
-            value = this.getString(key);
-        else
-            value = "";
+        if (this.has(key)) {
+            try {
+                value = this.getString(key);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
         return value;
+    }
+
+    public void putInfo(String key, String value) {
+        try {
+            this.put(key, value);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean isSamePerson(Person individu) throws JSONException {

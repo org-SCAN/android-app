@@ -67,11 +67,7 @@ public class PersonDetailsListAdapter extends ArrayAdapter<Field> {
         }
 
         holder.mTitle.setHint(field.getTitle());
-        try {
-            holder.mText.setText(mPerson.getInfoByKey(field.getKey()));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        holder.mText.setText(mPerson.getInfoByKey(field.getKey()));
 
         return convertView;
     }
