@@ -2,6 +2,7 @@ package netw4ppl.ines;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -66,13 +67,7 @@ public class AddRelationActivity extends AppCompatActivity {
                 }
 
                 ManageRelationsActivity.array_relations.add(single_relation);
-                boolean save_result = FileUtils.writeFile(getApplicationContext().getFilesDir().toString()+"/cases/relations.json",ManageRelationsActivity.array_relations.toString());
-                //single_refugee = null;
-
-                if (save_result) {
-                    Log.d("general-display", "sauvegarde effectuée, retour vers l'écran de management");
-                    finish();
-                }
+                writeRelationToFile(getApplicationContext());
             }
         });
     }
@@ -104,7 +99,7 @@ public class AddRelationActivity extends AppCompatActivity {
         mAutoTextViewRelationTo.setAdapter(autocomplete_adapter);
 
         mSpinnerRelationType = findViewById(R.id.add_relation_type);
-        ArrayAdapter<DataElement> spinner_adapter = MainActivity.mConfiguration.getArrayAdapter("relations");
+        ArrayAdapter<DataElement> spinner_adapter = MainActivity.mConfiguration.getArrayAdapter("Relations");
         mSpinnerRelationType.setAdapter(spinner_adapter);
 
 
@@ -113,5 +108,18 @@ public class AddRelationActivity extends AppCompatActivity {
 
     private void generateRelationFromInformations() throws JSONException {
         single_relation = new Relation(from_person,relation_type,to_person,String.valueOf(System.currentTimeMillis()), relation_details);
+    }
+
+    private void writeRelationToFile(Context context){
+        String dir_name = context.getString(R.string.directory_files);
+        String file_name = context.getString(R.string.filename_relations);
+        String path_file = context.getFilesDir().getPath()+dir_name+file_name;
+        boolean save_result = FileUtils.writeFile(path_file,ManageRelationsActivity.array_relations.toString());
+        //single_refugee = null;
+
+        if (save_result) {
+            Log.d("general-display", "sauvegarde effectuée, retour vers l'écran de management");
+            finish();
+        }
     }
 }
