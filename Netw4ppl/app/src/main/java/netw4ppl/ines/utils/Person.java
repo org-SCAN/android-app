@@ -45,11 +45,7 @@ public class Person extends JSONObject {
 
     public String toString(){
         String res = null;
-        try {
-            res = this.getInfoByKey("unique_id") + " - " + this.getInfoByKey("full_name");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        res = this.getInfoByKey("unique_id") + " - " + this.getInfoByKey("full_name");
         return res;
     }
 

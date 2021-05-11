@@ -132,10 +132,21 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             mDateText.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final Calendar cldr = Calendar.getInstance();
-                    int day = cldr.get(Calendar.DAY_OF_MONTH);
-                    int month = cldr.get(Calendar.MONTH);
-                    int year = cldr.get(Calendar.YEAR);
+                    // si mDateText est vide
+                    int day, month, year;
+                    if (mDateText.getText().toString().equals("")) {
+                        final Calendar cldr = Calendar.getInstance();
+                        day = cldr.get(Calendar.DAY_OF_MONTH);
+                        month = cldr.get(Calendar.MONTH);
+                        year = cldr.get(Calendar.YEAR);
+                    }
+                    else {
+                        String[] date = mDateText.getText().toString().split("-");
+                        year = Integer.parseInt(date[0]);
+                        month = Integer.parseInt(date[1]);
+                        day = Integer.parseInt(date[2]);
+                    }
+
                     // date picker dialog
                     mDatePicker = new DatePickerDialog(mContext,
                             new DatePickerDialog.OnDateSetListener() {
