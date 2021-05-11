@@ -11,7 +11,7 @@ public class DataElement extends JSONObject {
 
     public DataElement() {
         super();
-        this.key = "";
+        this.key = "NA";
     }
 
     public DataElement (String key, String string_fields) throws JSONException {
@@ -27,10 +27,12 @@ public class DataElement extends JSONObject {
         String res = "";
         String language = Locale.getDefault().getISO3Language();
         try {
-            if (this.getJSONObject("displayed_value").has(language))
-                return this.getJSONObject("displayed_value").getString(language);
-            else
-                return this.getJSONObject("displayed_value").getString("eng");
+            if (this.has("displayed_value")) {
+                if (this.getJSONObject("displayed_value").has(language))
+                    return this.getJSONObject("displayed_value").getString(language);
+                else
+                    return this.getJSONObject("displayed_value").getString("eng");
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

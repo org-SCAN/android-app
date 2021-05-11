@@ -71,14 +71,46 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
-    class ViewHolderSpinner  extends RecyclerView.ViewHolder {
+    class ViewHolderSpinner  extends RecyclerView.ViewHolder implements AdapterView.OnItemSelectedListener {
         TextView mTitle;
         Spinner mSpinner;
+        String key_field;
+        int spinner_position;
 
         public ViewHolderSpinner(@NonNull View itemView) {
             super(itemView);
+
             mTitle = itemView.findViewById(R.id.spinner_title);
             mSpinner = itemView.findViewById(R.id.spinner_object);
+            mSpinner.setOnItemSelectedListener(this);
+            this.spinner_position = 0;
+        }
+
+        public int getPositionElement() {
+            return this.spinner_position;
+        }
+
+        public void setKey(String key) {
+            this.key_field = key;
+        }
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            DataElement data_element = (DataElement) parent.getItemAtPosition(position);
+            if (!data_element.getKey().equals("NA")) {
+                AddPersonActivity.person.putInfo(this.key_field, data_element.getKey());
+                this.spinner_position = position;
+            }
+            try {
+                Log.d("general-display", AddPersonActivity.person.toString(2));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            // don't do anything
         }
     }
 
@@ -87,12 +119,14 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         DatePickerDialog mDatePicker;
         EditText mDateText;
         MyCustomEditTextListener myCustomEditTextListener;
+        String mKey;
 
         public ViewHolderCalendarView(@NonNull View itemView, MyCustomEditTextListener customEditTextListener) {
             super(itemView);
             this.myCustomEditTextListener = customEditTextListener;
             mTitle = itemView.findViewById(R.id.date_picker_title);
             mDateText = itemView.findViewById(R.id.date_picker_edittext_object);
+            mDateText.addTextChangedListener(this.myCustomEditTextListener);
 
             mDateText.setInputType(InputType.TYPE_NULL);
             mDateText.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +147,10 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
                     mDatePicker.show();
                 }
             });
-            mDateText.addTextChangedListener(this.myCustomEditTextListener);
+        }
+
+        public void setKey(String key) {
+            this.mKey = key;
         }
     }
 
@@ -193,12 +230,24 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             case 0:
                 ((ViewHolderEditText) holder).mTitle.setText(field.getTitle());
                 ((ViewHolderEditText) holder).myCustomEditTextListener.updatePosition(holder.getAdapterPosition());
+                ((ViewHolderEditText) holder).myCustomEditTextListener.setKey(field.getKey());
                 ((ViewHolderEditText) holder).mText.setText(AddPersonActivity.person.getInfoByKey(field.getKey()));
                 break;
             case 1:
                 ((ViewHolderSpinner) holder).mTitle.setText(field.getTitle());
                 try {
                     ((ViewHolderSpinner) holder).mSpinner.setAdapter(MainActivity.mConfiguration.getArrayAdapter(field.getString("linked_list")));
+                    ((ViewHolderSpinner) holder).setKey(field.getKey());
+                    if (!AddPersonActivity.person.getInfoByKey(field.getKey()).equals("NA")) {
+                        ((ViewHolderSpinner) holder).mSpinner.setSelection(((ViewHolderSpinner) holder).getPositionElement());
+                    }
+
+                    // récupérer la table de la database associée
+
+                    // récupérer la valeur du champ sauvegardé dans personne
+
+                    // trouver la position de cette valeur dans l'ArrayAdapter
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -221,6 +270,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
                 break;
             case 3:
                 ((ViewHolderCalendarView) holder).mTitle.setHint(field.getTitle());
+                ((ViewHolderCalendarView) holder).myCustomEditTextListener.setKey(field.getKey());
                 ((ViewHolderCalendarView) holder).mDateText.setText(AddPersonActivity.person.getInfoByKey(field.getKey()));
                 break;
             default:
@@ -292,6 +342,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     // update current position MyCustomEditTextListener, reference to which is kept by ViewHolder
     private class MyCustomEditTextListener implements TextWatcher {
         private int position;
+        private String key_field;
 
         public void updatePosition(int position) {
             this.position = position;
@@ -305,8 +356,9 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
             try {
-                String field_key = mFields.get(position).getKey();
-                AddPersonActivity.person.put(field_key, charSequence.toString());
+//                String field_key = mFields.get(position).getKey();
+                if (!charSequence.toString().equals(""))
+                    AddPersonActivity.person.put(this.key_field, charSequence.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -315,6 +367,10 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         @Override
         public void afterTextChanged(Editable editable) {
             // no op
+        }
+
+        public void setKey(String key) {
+            this.key_field = key;
         }
     }
 }
