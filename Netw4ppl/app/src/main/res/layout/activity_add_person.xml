@@ -16,12 +16,45 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/recycler_view_add_person"/>
+            android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/recycler_view_add_person" />
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:gravity="center_horizontal"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/button_add_person_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/button_relation_cancel_title"
+                android:layout_margin="5dp" />
+
+            <Button
+                android:id="@+id/button_add_person_save"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/forestgreen"
+                android:text="@string/button_relation_save_title"
+                android:layout_margin="5dp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

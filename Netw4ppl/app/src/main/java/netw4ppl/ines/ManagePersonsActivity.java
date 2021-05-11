@@ -102,11 +102,16 @@ public class ManagePersonsActivity extends AppCompatActivity {
         }
     }
 
-    public static String formatterJsonFile() throws JSONException {
+    public static String formatterJsonFile() {
         JSONArray json_array = new JSONArray();
         for (int i=0; i<array_persons.size(); i++) {
             json_array.put(array_persons.get(i));
         }
-        return json_array.toString(2);
+        try {
+            return json_array.toString(2);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }
