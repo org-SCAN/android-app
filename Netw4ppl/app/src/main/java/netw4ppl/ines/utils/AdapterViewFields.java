@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -176,8 +177,6 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             mTitle = itemView.findViewById(R.id.textview_title);
             mText = itemView.findViewById(R.id.textview_object);
             mText.addTextChangedListener(this.myCustomEditTextListener);
-
-            // configure everything no multiline allowed etc
         }
     }
 
@@ -222,16 +221,19 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         switch (field.getViewType()) {
             case -1:
+                /* Section UNIQUE ID */
                 ((ViewHolderUniqueID) holder).mTitleFigures.setText(field.getTitle());
                 ((ViewHolderUniqueID) holder).mTitleLetters.setText(field.getTitle());
                 ((ViewHolderUniqueID) holder).customUniqueIDTextListener.updatePosition(holder.getAdapterPosition());
 
                 // split the unique_id value in two parts
                 String[] unique_id = AddPersonActivity.person.getInfoByKey(field.getKey()).split("-");
+                // si cette personne a un unique id
                 if (unique_id.length == 2) {
                     ((ViewHolderUniqueID) holder).mValueLetters.setText(unique_id[0]);
                     ((ViewHolderUniqueID) holder).mValueFigures.setText(unique_id[1]);
                 }
+                //sinon lui mettre l'ID par défaut
                 else {
                     String default_key = AddPersonActivity.getDefaultKey();
                     ((ViewHolderUniqueID) holder).mValueLetters.setText(default_key);
@@ -239,6 +241,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
                 }
                 break;
             case 0:
+                /* Section EditText basique */
                 ((ViewHolderEditText) holder).mTitle.setText(field.getTitle());
                 ((ViewHolderEditText) holder).myCustomEditTextListener.updatePosition(holder.getAdapterPosition());
                 ((ViewHolderEditText) holder).myCustomEditTextListener.setKey(field.getKey());
@@ -247,18 +250,15 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             case 1:
                 ((ViewHolderSpinner) holder).mTitle.setText(field.getTitle());
                 try {
-                    ((ViewHolderSpinner) holder).mSpinner.setAdapter(MainActivity.mConfiguration.getArrayAdapter(field.getString("linked_list")));
+                    // set l'adapter associé au Spinner
+                    ArrayAdapter adapter = MainActivity.mConfiguration.getArrayAdapter(field.getString("linked_list"));
+                    ((ViewHolderSpinner) holder).mSpinner.setAdapter(adapter);
+
+                    // set le spinner a une valeur donnée
                     ((ViewHolderSpinner) holder).setKey(field.getKey());
-                    if (!AddPersonActivity.person.getInfoByKey(field.getKey()).equals("NA")) {
-                        ((ViewHolderSpinner) holder).mSpinner.setSelection(((ViewHolderSpinner) holder).getPositionElement());
-                    }
-
-                    // récupérer la table de la database associée
-
-                    // récupérer la valeur du champ sauvegardé dans personne
-
-                    // trouver la position de cette valeur dans l'ArrayAdapter
-
+                    String key_val_pers = AddPersonActivity.person.getInfoByKey(field.getKey());
+                    int pos_in_adapt = getPositionInAdapter(adapter, key_val_pers);
+                    ((ViewHolderSpinner) holder).mSpinner.setSelection(pos_in_adapt);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -287,6 +287,16 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             default:
                 break;
         }
+    }
+
+    public int getPositionInAdapter(Adapter adapter, String key_val_pers) {
+        DataElement data_element;
+        for (int i=0; i<adapter.getCount(); i++) {
+            data_element = (DataElement) adapter.getItem(i);
+            if (data_element.getKey().equals(key_val_pers))
+                return i;
+        }
+        return 0;
     }
 
     @Override
