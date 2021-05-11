@@ -101,6 +101,14 @@
     <string name="button_add_relation_from">Add relation from</string>
     <string name="details_title_full_name">Informations</string>
 
+    <string name="relation_from_indication">From</string>
+    <string name="relation_type_indication">Relation type</string>
+    <string name="relation_to_indication">To</string>
+    <string name="relation_comment_indication">Comments</string>
+
+    <string name="button_relation_save_title">Save</string>
+    <string name="button_relation_cancel_title">Cancel</string>
+
     <string name="hint_unique_id_key" translatable="false">AAA</string>
     <string name="hint_unique_id_value" translatable="false">000000</string>
 
