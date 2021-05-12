@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 
@@ -66,9 +67,11 @@ public class AddRelationActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                if (testExistingRelation(single_relation)){
+                if (single_relation!=null && testExistingRelation(single_relation)){
+                    Log.d(TAG, "onClick: ecriture de la relation");
                     ManageRelationsActivity.array_relations.add(single_relation);
                     writeRelationToFile(getApplicationContext());
+                    single_relation=null;
                 }
 
 
@@ -112,6 +115,7 @@ public class AddRelationActivity extends AppCompatActivity {
 
     private void generateRelationFromInformations() throws JSONException {
         if (testSamePersonRelation(from_person,to_person)){
+            Log.d(TAG, "generateRelationFromInformations: ecriture de la relation");
             single_relation = new Relation(from_person,relation_type,to_person,String.valueOf(System.currentTimeMillis()), relation_details);
         }
     }
@@ -131,16 +135,20 @@ public class AddRelationActivity extends AppCompatActivity {
 
     private boolean testSamePersonRelation(Person p1, Person p2){
         boolean test = (p1.equals(p2));
+        String toast_text = this.getString(R.string.toast_same_person_relation);
         if (test == true){
-            Log.d(TAG, "Deso c est la meme personne");
+            Toast toast = Toast.makeText(this, toast_text, Toast.LENGTH_SHORT);
+            toast.show();
         }
         return (!test);
     }
 
     private boolean testExistingRelation(Relation relation){
+        String toast_text = this.getString(R.string.toast_already_existing_relation);
         for(int i=0 ; i<ManageRelationsActivity.array_relations.size();i++){
             if (relation.isSameRelation(ManageRelationsActivity.array_relations.get(i))){
-                Log.d(TAG, "testExistingRelation: déso j existe deja");
+                Toast toast = Toast.makeText(this, toast_text, Toast.LENGTH_SHORT);
+                toast.show();
                 return false;
             }
         }

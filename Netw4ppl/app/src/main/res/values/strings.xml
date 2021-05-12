@@ -72,6 +72,10 @@
     <string name="toast_delete_fail">Deletion failed</string>
     <string name="toast_delete_processing">Deletion ...</string>
 
+    <!-- Add Relations Alerts-->
+    <string name="toast_already_existing_relation">This relation already exists</string>
+    <string name="toast_same_person_relation">The persons of a relation must be different</string>
+
 
     <!-- Activity names -->
     <string name="add_person_activity_title">Add Person</string>
