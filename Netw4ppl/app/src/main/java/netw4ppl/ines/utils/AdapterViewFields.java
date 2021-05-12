@@ -102,11 +102,6 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
                 AddPersonActivity.person.putInfo(this.key_field, data_element.getKey());
                 this.spinner_position = position;
             }
-            try {
-                Log.d("general-display", AddPersonActivity.person.toString(2));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
         }
 
         @Override
@@ -333,6 +328,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         @SuppressLint("DefaultLocale")
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            // TODO C'est ici que l'ID fout la merde
             try {
                 // get the field key (even if for this case we know it's "unique_id")
                 String field_key = mFields.get(position).getKey();

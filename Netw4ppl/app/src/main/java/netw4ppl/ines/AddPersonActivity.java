@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import netw4ppl.ines.utils.AdapterViewFields;
 import netw4ppl.ines.utils.FileUtils;
@@ -54,14 +55,17 @@ public class AddPersonActivity extends AppCompatActivity {
         });
 
         mButtonSave.setOnClickListener(v -> {
+            Calendar calendar = Calendar.getInstance();
             /* Ajout d'une nouvelle personne */
             if (new_person) {
 
                 // ajout du champ date indispensable pour la database
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                Calendar calendar = Calendar.getInstance();
+
                 String date_creation = dateFormat.format(calendar.getTime());
                 person.putInfo("date", date_creation);
+
+                // TODO rajouter le champs application_id
 
                 // ajout dans l'array de personnes
                 ManagePersonsActivity.array_persons.add(person);
@@ -77,6 +81,16 @@ public class AddPersonActivity extends AppCompatActivity {
             }
             /* Modification d'une personne existante */
             else {
+                // ajout de la date d'update
+                TimeZone tz = TimeZone.getTimeZone("UTC");
+                calendar.setTimeZone(tz);
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                dateFormat.setTimeZone(tz);
+                String date_update = dateFormat.format(calendar.getTime());
+
+                person.putInfo("date_update", date_update);
+
                 // on supprime l'ancienne version avant d'ajouter la nouvelle
                 int index = DisplayDetailsPersonActivity.index_person;
                 ManagePersonsActivity.array_persons.remove(index);
