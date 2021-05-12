@@ -75,6 +75,7 @@
     <!-- Add Relations Alerts-->
     <string name="toast_already_existing_relation">This relation already exists</string>
     <string name="toast_same_person_relation">The persons of a relation must be different</string>
+    <string name="toast_relation_type_non_selected">You must select a valid relation type</string>
 
 
     <!-- Activity names -->

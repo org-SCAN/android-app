@@ -114,8 +114,7 @@ public class AddRelationActivity extends AppCompatActivity {
     }
 
     private void generateRelationFromInformations() throws JSONException {
-        if (testSamePersonRelation(from_person,to_person)){
-            Log.d(TAG, "generateRelationFromInformations: ecriture de la relation");
+        if (testSamePersonRelation(from_person,to_person)&& testRelationType(relation_type)){
             single_relation = new Relation(from_person,relation_type,to_person,String.valueOf(System.currentTimeMillis()), relation_details);
         }
     }
@@ -153,5 +152,15 @@ public class AddRelationActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    private boolean testRelationType(String type){
+        String toast_text = this.getString(R.string.toast_relation_type_non_selected);
+        boolean test_relation_type = type.equals("NA - ");
+        if (test_relation_type){
+            Toast toast = Toast.makeText(this, toast_text, Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        return (!test_relation_type);
     }
 }
