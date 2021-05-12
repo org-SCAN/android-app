@@ -27,6 +27,7 @@ public class AddRelationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddRelationActivity";
     public static Relation single_relation;
+    public static boolean new_relation = true;
 
     private static Person from_person;
     private static Person to_person;
@@ -47,6 +48,7 @@ public class AddRelationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_relation);
+
         mButtonRelationSave = findViewById(R.id.display_add_relation_save);
         mButtonRelationCancel = findViewById(R.id.display_add_relation_cancel);
 
@@ -111,10 +113,14 @@ public class AddRelationActivity extends AppCompatActivity {
 
 
         mEditTextRelationComments = findViewById(R.id.add_relation_comments);
+
+        if (new_relation==false){
+            setEditInformation();
+        }
     }
 
     private void generateRelationFromInformations() throws JSONException {
-        if (testSamePersonRelation(from_person,to_person)&& testRelationType(relation_type)){
+        if (testSamePersonRelation(from_person,to_person) && testRelationType(relation_type)){
             single_relation = new Relation(from_person,relation_type,to_person,String.valueOf(System.currentTimeMillis()), relation_details);
         }
     }
@@ -144,11 +150,13 @@ public class AddRelationActivity extends AppCompatActivity {
 
     private boolean testExistingRelation(Relation relation){
         String toast_text = this.getString(R.string.toast_already_existing_relation);
-        for(int i=0 ; i<ManageRelationsActivity.array_relations.size();i++){
-            if (relation.isSameRelation(ManageRelationsActivity.array_relations.get(i))){
-                Toast toast = Toast.makeText(this, toast_text, Toast.LENGTH_SHORT);
-                toast.show();
-                return false;
+        if (new_relation){
+            for(int i=0 ; i<ManageRelationsActivity.array_relations.size();i++){
+                if (relation.isSameRelation(ManageRelationsActivity.array_relations.get(i))){
+                    Toast toast = Toast.makeText(this, toast_text, Toast.LENGTH_SHORT);
+                    toast.show();
+                    return false;
+                }
             }
         }
         return true;
@@ -162,5 +170,18 @@ public class AddRelationActivity extends AppCompatActivity {
             toast.show();
         }
         return (!test_relation_type);
+    }
+
+    private void setEditInformation(){
+        mAutoTextViewRelationFrom.setText(single_relation.getFrom().toString());
+        mAutoTextViewRelationTo.setText(single_relation.getTo().toString());
+
+        /*this.put("from_unique_id", from.getInfoByKey("unique_id"));
+        this.put("from_full_name", from.getInfoByKey("full_name"));
+        this.put("to_unique_id", to.getInfoByKey("unique_id"));
+        this.put("to_full_name", to.getInfoByKey("full_name"));
+        this.put("relation", key_relation);
+        this.put("date", date_ajout);
+        this.put("detail", detail_input);*/
     }
 }
