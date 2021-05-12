@@ -310,10 +310,12 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     private class CustomUniqueIDTextListener implements TextWatcher {
         private int position;
         ViewHolderUniqueID mView;
+        String previous_value;
 
         public CustomUniqueIDTextListener(ViewHolderUniqueID v) {
             super();
-            mView = v;
+            this.mView = v;
+            this.previous_value = null;
         }
 
         public void updatePosition(int position) {
@@ -323,6 +325,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
             // no op
+            this.previous_value = charSequence.toString() + "-" + mView.mValueFigures.getText();
         }
 
         @SuppressLint("DefaultLocale")
@@ -332,17 +335,24 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             try {
                 // get the field key (even if for this case we know it's "unique_id")
                 String field_key = mFields.get(position).getKey();
+                int id_figures_int;
+                String id_figures;
 
                 // convert the CharSequence in String
                 String id_letters = charSequence.toString();
 
                 // with the 3-letters code, get the next numerical id
-                int id_figures_int = AddPersonActivity.getNextId(id_letters);
-                String id_figures = String.format("%06d", id_figures_int);
-                mView.mValueFigures.setText(id_figures);
+                id_figures_int = AddPersonActivity.getNextId(id_letters);
+                id_figures = String.format("%06d", id_figures_int);
 
-                // save the id written
-                AddPersonActivity.person.put(field_key, id_letters+"-"+id_figures);
+                String new_value = id_letters+"-"+id_figures;
+
+                if (!new_value.equals(this.previous_value)) {
+                    mView.mValueFigures.setText(id_figures);
+                    // save the id written
+                    AddPersonActivity.person.put(field_key, new_value);
+                }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
