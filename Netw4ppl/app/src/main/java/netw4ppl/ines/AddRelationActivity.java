@@ -66,8 +66,12 @@ public class AddRelationActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                ManageRelationsActivity.array_relations.add(single_relation);
-                writeRelationToFile(getApplicationContext());
+                if (testExistingRelation(single_relation)){
+                    ManageRelationsActivity.array_relations.add(single_relation);
+                    writeRelationToFile(getApplicationContext());
+                }
+
+
             }
         });
     }
@@ -107,7 +111,9 @@ public class AddRelationActivity extends AppCompatActivity {
     }
 
     private void generateRelationFromInformations() throws JSONException {
-        single_relation = new Relation(from_person,relation_type,to_person,String.valueOf(System.currentTimeMillis()), relation_details);
+        if (testSamePersonRelation(from_person,to_person)){
+            single_relation = new Relation(from_person,relation_type,to_person,String.valueOf(System.currentTimeMillis()), relation_details);
+        }
     }
 
     private void writeRelationToFile(Context context){
@@ -121,5 +127,23 @@ public class AddRelationActivity extends AppCompatActivity {
             Log.d("general-display", "sauvegarde effectuée, retour vers l'écran de management");
             finish();
         }
+    }
+
+    private boolean testSamePersonRelation(Person p1, Person p2){
+        boolean test = (p1.equals(p2));
+        if (test == true){
+            Log.d(TAG, "Deso c est la meme personne");
+        }
+        return (!test);
+    }
+
+    private boolean testExistingRelation(Relation relation){
+        for(int i=0 ; i<ManageRelationsActivity.array_relations.size();i++){
+            if (relation.isSameRelation(ManageRelationsActivity.array_relations.get(i))){
+                Log.d(TAG, "testExistingRelation: déso j existe deja");
+                return false;
+            }
+        }
+        return true;
     }
 }

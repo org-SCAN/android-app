@@ -195,14 +195,6 @@ public class SubmitData {
             FileUtils.writeFile(android_id_file_path, unique_app_id);
         }
 
-        //Get the actual TimeStamp
-        String timestamp = String.valueOf(System.currentTimeMillis());
-        Log.d("TimeStamp", timestamp);
-
-        //Create the sent application ID
-        String application_id = unique_app_id+"::"+timestamp;
-        Log.d("APPLICATION ID", application_id);
-
         String data_to_send = FileUtils.readFile(filePath);
 
         MediaType mediaType = MediaType.parse("application/json");
@@ -216,7 +208,7 @@ public class SubmitData {
                     Request request = new Request.Builder()
                             .url("http://"+server_url+"/api/"+target)
                             .method("POST", body)
-                            .addHeader("Application-id", application_id)
+                            .addHeader("Application-id", unique_app_id)
                             .addHeader("Accept", "application/json")
                             .addHeader("Content-Type", "application/json")
                             .addHeader("Authorization", "Bearer "+token_server)
