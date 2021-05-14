@@ -38,7 +38,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private ArrayList<Field> mFields;
     LayoutInflater mInflater;
-    private Context mContext;
+    private final Context mContext;
 
     class ViewHolderUniqueID extends RecyclerView.ViewHolder {
         TextView mTitleLetters;
@@ -101,11 +101,6 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             if (!data_element.getKey().equals("NA")) {
                 AddPersonActivity.person.putInfo(this.key_field, data_element.getKey());
                 this.spinner_position = position;
-            }
-            try {
-                Log.d("general-display", AddPersonActivity.person.toString(2));
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
         }
 
@@ -222,7 +217,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         switch (field.getViewType()) {
             case -1:
                 /* Section UNIQUE ID */
-                ((ViewHolderUniqueID) holder).mTitleFigures.setText(field.getTitle());
+                ((ViewHolderUniqueID) holder).mTitleFigures.setText("");
                 ((ViewHolderUniqueID) holder).mTitleLetters.setText(field.getTitle());
                 ((ViewHolderUniqueID) holder).customUniqueIDTextListener.updatePosition(holder.getAdapterPosition());
 
@@ -318,7 +313,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         public CustomUniqueIDTextListener(ViewHolderUniqueID v) {
             super();
-            mView = v;
+            this.mView = v;
         }
 
         public void updatePosition(int position) {
@@ -333,28 +328,36 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         @SuppressLint("DefaultLocale")
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-            try {
-                // get the field key (even if for this case we know it's "unique_id")
-                String field_key = mFields.get(position).getKey();
-
-                // convert the CharSequence in String
-                String id_letters = charSequence.toString();
-
-                // with the 3-letters code, get the next numerical id
-                int id_figures_int = AddPersonActivity.getNextId(id_letters);
-                String id_figures = String.format("%06d", id_figures_int);
-                mView.mValueFigures.setText(id_figures);
-
-                // save the id written
-                AddPersonActivity.person.put(field_key, id_letters+"-"+id_figures);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            // no op
         }
 
         @Override
         public void afterTextChanged(Editable editable) {
             // no op
+            String actual_value = editable.toString();
+            // get the field key (even if for this case we know it's "unique_id")
+            String field_key = mFields.get(position).getKey();
+
+            Log.d("general-settings", "Tricode after changes: " + actual_value);
+            String id_person = AddPersonActivity.person.getInfoByKey(field_key);
+            String[] ids = id_person.split("-");
+            String letters = ids[0];
+
+            if (!actual_value.equals(letters)) {
+                // on va récupérer la valeur suivante de tricode
+                int id_figures_int = AddPersonActivity.getNextId(actual_value);
+                String id_figures = String.format("%06d", id_figures_int);
+                String new_value = actual_value+"-"+id_figures;
+
+                // on change le champs de texte pour les chiffres
+                mView.mValueFigures.setText(id_figures);
+                // on ajoute l'unique ID à la personne
+                try {
+                    AddPersonActivity.person.put(field_key, new_value);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

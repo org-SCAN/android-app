@@ -29,6 +29,7 @@ public class ManagePersonsActivity extends AppCompatActivity {
 
     FloatingActionButton mButtonAdd;
     ListView mListView;
+    PersonListAdapter mAdapter;
     SearchView mSearchBar;
     public static ArrayList<Person> array_persons = new ArrayList<Person>();
 
@@ -56,8 +57,8 @@ public class ManagePersonsActivity extends AppCompatActivity {
         }
 
         // faire l'affichage
-        PersonListAdapter adapter = new PersonListAdapter(this, R.layout.adapter_nutshell_person_layout, ManagePersonsActivity.array_persons);
-        mListView.setAdapter(adapter);
+        mAdapter = new PersonListAdapter(this, R.layout.adapter_nutshell_person_layout, ManagePersonsActivity.array_persons);
+        mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
@@ -67,6 +68,12 @@ public class ManagePersonsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onResume () {
+        super.onResume();
+        mAdapter.notifyDataSetChanged();
     }
 
     public static void readPersonsFile(Context context) throws IOException, JSONException {
@@ -102,11 +109,16 @@ public class ManagePersonsActivity extends AppCompatActivity {
         }
     }
 
-    public static String formatterJsonFile() throws JSONException {
+    public static String formatterJsonFile() {
         JSONArray json_array = new JSONArray();
         for (int i=0; i<array_persons.size(); i++) {
             json_array.put(array_persons.get(i));
         }
-        return json_array.toString(2);
+        try {
+            return json_array.toString(2);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

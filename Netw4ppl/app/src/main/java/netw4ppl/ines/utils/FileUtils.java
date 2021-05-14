@@ -204,6 +204,20 @@ public class FileUtils {
         return file_content;
     }
 
+    public static boolean saveIdsToFile(Context context, String content) {
+        String dir_name = context.getString(R.string.config_files);
+        String file_name = context.getString(R.string.filename_ids);
+        String path_file = context.getFilesDir().getPath()+dir_name+file_name;
+        return writeFile(path_file, content);
+    }
+
+    public static boolean savePersonsToFile(Context context, String content) {
+        String dir_name = context.getString(R.string.directory_files);
+        String file_name = context.getString(R.string.filename_persons);
+        String path_file = context.getFilesDir().getPath()+dir_name+file_name;
+        return writeFile(path_file, content);
+    }
+
     public static JSONObject loadConfigFromFile(Context context) throws IOException {
         // check if the file "fields.json" in "config/" directory exists
         String dir_name = context.getString(R.string.config_files);
