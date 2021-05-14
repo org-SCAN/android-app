@@ -23,6 +23,8 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
     Button mButtonDeletePerson;
     Button mButtonAddRelationTo;
 
+    PersonDetailsListAdapter adapter_details_person;
+
     ListView mListRelationsFrom;
     ListView mListDetailsPerson;
     ListView mListRelationsTo;
@@ -47,7 +49,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
 
         mTextViewFullnameTitle.setText(person.getInfoByKey("full_name"));
 
-        PersonDetailsListAdapter adapter_details_person = new PersonDetailsListAdapter(this, R.layout.adapter_details_person_fields, MainActivity.mConfiguration.getArrayFields());
+        adapter_details_person = new PersonDetailsListAdapter(this, R.layout.adapter_details_person_fields, MainActivity.mConfiguration.getArrayFields());
         mListDetailsPerson.setAdapter(adapter_details_person);
 
         mButtonAddRelationFrom.setOnClickListener(v -> {
@@ -65,5 +67,11 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         mButtonAddRelationTo.setOnClickListener(v -> {
 
         });
+    }
+
+    @Override
+    protected void onResume () {
+        super.onResume();
+        adapter_details_person.notifyDataSetChanged();
     }
 }

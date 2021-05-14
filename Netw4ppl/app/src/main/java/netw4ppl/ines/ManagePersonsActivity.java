@@ -79,7 +79,22 @@ public class ManagePersonsActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-                DisplayDetailsPersonActivity.index_person = position;
+                // position correspond à la position de la personne dans l'adapter
+                boolean got_it = false;
+                int index_reel = 0;
+                int i=0;
+                Person p = (Person) adapter.getItemAtPosition(position);
+                while (i < array_persons.size() && !got_it) {
+                    if (array_persons.get(i).equals(p)) {
+                        index_reel = i;
+                        got_it = true;
+                    }
+                    i++;
+                }
+
+                // associer cette position à la position réelle dans l'array de base
+
+                DisplayDetailsPersonActivity.index_person = index_reel;
                 Intent intent = new Intent(ManagePersonsActivity.this, DisplayDetailsPersonActivity.class);
                 startActivity(intent);
             }

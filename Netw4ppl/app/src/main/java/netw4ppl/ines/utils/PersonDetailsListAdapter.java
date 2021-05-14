@@ -36,6 +36,7 @@ public class PersonDetailsListAdapter extends ArrayAdapter<Field> {
         mResource = resource;
     }
 
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
