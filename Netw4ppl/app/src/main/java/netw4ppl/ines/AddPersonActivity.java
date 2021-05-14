@@ -51,7 +51,7 @@ public class AddPersonActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mButtonCancel.setOnClickListener(v -> {
-
+            this.finish();
         });
 
         mButtonSave.setOnClickListener(v -> {
