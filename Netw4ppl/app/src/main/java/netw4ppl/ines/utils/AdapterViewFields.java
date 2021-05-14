@@ -310,12 +310,10 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     private class CustomUniqueIDTextListener implements TextWatcher {
         private int position;
         ViewHolderUniqueID mView;
-        String previous_value;
 
         public CustomUniqueIDTextListener(ViewHolderUniqueID v) {
             super();
             this.mView = v;
-            this.previous_value = null;
         }
 
         public void updatePosition(int position) {
@@ -325,42 +323,41 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
             // no op
-            this.previous_value = charSequence.toString() + "-" + mView.mValueFigures.getText();
         }
 
         @SuppressLint("DefaultLocale")
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-            // TODO C'est ici que l'ID fout la merde
-            try {
-                // get the field key (even if for this case we know it's "unique_id")
-                String field_key = mFields.get(position).getKey();
-                int id_figures_int;
-                String id_figures;
-
-                // convert the CharSequence in String
-                String id_letters = charSequence.toString();
-
-                // with the 3-letters code, get the next numerical id
-                id_figures_int = AddPersonActivity.getNextId(id_letters);
-                id_figures = String.format("%06d", id_figures_int);
-
-                String new_value = id_letters+"-"+id_figures;
-
-                if (!new_value.equals(this.previous_value)) {
-                    mView.mValueFigures.setText(id_figures);
-                    // save the id written
-                    AddPersonActivity.person.put(field_key, new_value);
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            // no op
         }
 
         @Override
         public void afterTextChanged(Editable editable) {
             // no op
+            String actual_value = editable.toString();
+            // get the field key (even if for this case we know it's "unique_id")
+            String field_key = mFields.get(position).getKey();
+
+            Log.d("general-settings", "Tricode after changes: " + actual_value);
+            String id_person = AddPersonActivity.person.getInfoByKey(field_key);
+            String[] ids = id_person.split("-");
+            String letters = ids[0];
+
+            if (!actual_value.equals(letters)) {
+                // on va récupérer la valeur suivante de tricode
+                int id_figures_int = AddPersonActivity.getNextId(actual_value);
+                String id_figures = String.format("%06d", id_figures_int);
+                String new_value = actual_value+"-"+id_figures;
+
+                // on change le champs de texte pour les chiffres
+                mView.mValueFigures.setText(id_figures);
+                // on ajoute l'unique ID à la personne
+                try {
+                    AddPersonActivity.person.put(field_key, new_value);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

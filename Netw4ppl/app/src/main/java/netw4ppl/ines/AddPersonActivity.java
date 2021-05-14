@@ -68,16 +68,8 @@ public class AddPersonActivity extends AppCompatActivity {
                 // TODO rajouter le champs application_id
 
                 // ajout dans l'array de personnes
+                // TODO si ajout en première position, il faut notifier l'adapter etc
                 ManagePersonsActivity.array_persons.add(person);
-
-                // ajout de l'id au dico des IDS et sauvegarde les toutes dans le fichier associé
-                String[] id = person.getInfoByKey("unique_id").split("-");
-                try {
-                    json_ids.put(id[0], Integer.valueOf(id[1]));
-                    FileUtils.saveIdsToFile(this, json_ids.toString(2));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
             }
             /* Modification d'une personne existante */
             else {
@@ -97,13 +89,15 @@ public class AddPersonActivity extends AppCompatActivity {
                 ManagePersonsActivity.array_persons.add(index, person);
             }
 
+            boolean save_ids = saveIds(this, person);
+
             // enregistre les données dans le fichier associé
             boolean save_persons = FileUtils.savePersonsToFile(this, ManagePersonsActivity.formatterJsonFile());
 
             // reset some variables
             new_person = true;
 
-            if (save_persons)
+            if (save_persons && save_ids)
                 finish();
             else {
                 // TODO faire apparaitre un toast pour dire que la sauvegarde a échoué
@@ -127,14 +121,36 @@ public class AddPersonActivity extends AppCompatActivity {
         return last_id+1;
     }
 
-    public static boolean savePersonsFile(Context context) {
-        String dir_name = context.getString(R.string.directory_files);
-        String file_name = context.getString(R.string.filename_persons);
-        String path_file = context.getFilesDir().getPath()+dir_name+file_name;
+    public boolean saveIds(Context context, Person person) {
+        // ajout de l'id au dico des IDS et sauvegarde les toutes dans le fichier associé
+        String[] id = person.getInfoByKey("unique_id").split("-");
+        String letters_id = id[0];
+        int figures_id = Integer.parseInt(id[1]);
+        boolean save_ids = true;
 
+        // regarder si la figures_id est > à celle contenu à la même clé dans le dict
+        try {
+            if (json_ids.getInt(letters_id) < figures_id) {
+                json_ids.put(letters_id, figures_id);
+            }
+            // no need to change the value
 
+        } catch (JSONException e) {
+            // it means its the first value for this tricode so we need to save it
+            try {
+                json_ids.put(letters_id, figures_id);
+            } catch (JSONException jsonException) {
+                jsonException.printStackTrace();
+            }
+        }
 
-        return true;
+        try {
+            save_ids = FileUtils.saveIdsToFile(this, json_ids.toString(2));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return save_ids;
     }
 
     @Override
