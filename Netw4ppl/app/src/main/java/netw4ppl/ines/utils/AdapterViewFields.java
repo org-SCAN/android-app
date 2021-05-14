@@ -38,7 +38,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private ArrayList<Field> mFields;
     LayoutInflater mInflater;
-    private Context mContext;
+    private final Context mContext;
 
     class ViewHolderUniqueID extends RecyclerView.ViewHolder {
         TextView mTitleLetters;
@@ -217,7 +217,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         switch (field.getViewType()) {
             case -1:
                 /* Section UNIQUE ID */
-                ((ViewHolderUniqueID) holder).mTitleFigures.setText(field.getTitle());
+                ((ViewHolderUniqueID) holder).mTitleFigures.setText("");
                 ((ViewHolderUniqueID) holder).mTitleLetters.setText(field.getTitle());
                 ((ViewHolderUniqueID) holder).customUniqueIDTextListener.updatePosition(holder.getAdapterPosition());
 
