@@ -2,6 +2,7 @@ package netw4ppl.ines;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ListView;
@@ -41,24 +42,30 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
         mButtonEditRelation = (Button) findViewById(R.id.display_relation_edit);
         mButtonDeleteRelation = (Button) findViewById(R.id.display_relation_delete);
 
-        mButtonEditRelation.setOnClickListener(v -> {
+        Relation relation = ManageRelationsActivity.array_relations.get(index_relation);
 
+        setViews(relation);
+
+        mButtonEditRelation.setOnClickListener(v -> {
+            AddRelationActivity.single_relation = relation;
+            AddRelationActivity.new_relation = false;
+            Intent intent = new Intent(DisplayDetailsRelationActivity.this, AddRelationActivity.class);
+            startActivity(intent);
         });
         mButtonDeleteRelation.setOnClickListener(v-> {
 
         });
 
-        if (index_relation != -1) {
-            Relation relation = ManageRelationsActivity.array_relations.get(index_relation);
+    }
 
-            mTextViewFullnameTitle.setText(relation.getInfoByKey("from_full_name")+relation.getInfoByKey("to_full_name"));
-            mTextViewFromFullname.setText(relation.getInfoByKey("from_full_name"));
-            mTextViewRelationType.setText(relation.getInfoByKey("relation"));
-            mTextViewToFullname.setText(relation.getInfoByKey("to_full_name"));
-            mTextViewComments.setText(relation.getInfoByKey("detail"));
+    private void setViews(Relation relation){
 
-            /*PersonDetailsListAdapter adapter_details_person = new PersonDetailsListAdapter(this, R.layout.adapter_details_person_fields, MainActivity.mConfiguration.getArrayFields());
-            mListDetails.setAdapter(adapter_details_person);*/
-        }
+        mTextViewFullnameTitle.setText(relation.getInfoByKey("from_full_name")+relation.getInfoByKey("to_full_name"));
+        mTextViewFromFullname.setText(relation.getInfoByKey("from_full_name"));
+        mTextViewRelationType.setText(relation.getInfoByKey("relation"));
+        mTextViewToFullname.setText(relation.getInfoByKey("to_full_name"));
+        mTextViewComments.setText(relation.getInfoByKey("detail"));
+
+
     }
 }

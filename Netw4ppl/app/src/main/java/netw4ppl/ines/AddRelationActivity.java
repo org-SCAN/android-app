@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 
@@ -26,6 +27,7 @@ public class AddRelationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddRelationActivity";
     public static Relation single_relation;
+    public static boolean new_relation = true;
 
     private static Person from_person;
     private static Person to_person;
@@ -46,6 +48,7 @@ public class AddRelationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_relation);
+
         mButtonRelationSave = findViewById(R.id.display_add_relation_save);
         mButtonRelationCancel = findViewById(R.id.display_add_relation_cancel);
 
@@ -66,8 +69,14 @@ public class AddRelationActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                ManageRelationsActivity.array_relations.add(single_relation);
-                writeRelationToFile(getApplicationContext());
+                if (single_relation!=null && testExistingRelation(single_relation)){
+                    Log.d(TAG, "onClick: ecriture de la relation");
+                    ManageRelationsActivity.array_relations.add(single_relation);
+                    writeRelationToFile(getApplicationContext());
+                    single_relation=null;
+                }
+
+
             }
         });
     }
@@ -104,10 +113,16 @@ public class AddRelationActivity extends AppCompatActivity {
 
 
         mEditTextRelationComments = findViewById(R.id.add_relation_comments);
+
+        if (new_relation==false){
+            setEditInformation();
+        }
     }
 
     private void generateRelationFromInformations() throws JSONException {
-        single_relation = new Relation(from_person,relation_type,to_person,String.valueOf(System.currentTimeMillis()), relation_details);
+        if (testSamePersonRelation(from_person,to_person) && testRelationType(relation_type)){
+            single_relation = new Relation(from_person,relation_type,to_person,String.valueOf(System.currentTimeMillis()), relation_details);
+        }
     }
 
     private void writeRelationToFile(Context context){
@@ -121,5 +136,52 @@ public class AddRelationActivity extends AppCompatActivity {
             Log.d("general-display", "sauvegarde effectuée, retour vers l'écran de management");
             finish();
         }
+    }
+
+    private boolean testSamePersonRelation(Person p1, Person p2){
+        boolean test = (p1.equals(p2));
+        String toast_text = this.getString(R.string.toast_same_person_relation);
+        if (test == true){
+            Toast toast = Toast.makeText(this, toast_text, Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        return (!test);
+    }
+
+    private boolean testExistingRelation(Relation relation){
+        String toast_text = this.getString(R.string.toast_already_existing_relation);
+        if (new_relation){
+            for(int i=0 ; i<ManageRelationsActivity.array_relations.size();i++){
+                if (relation.isSameRelation(ManageRelationsActivity.array_relations.get(i))){
+                    Toast toast = Toast.makeText(this, toast_text, Toast.LENGTH_SHORT);
+                    toast.show();
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean testRelationType(String type){
+        String toast_text = this.getString(R.string.toast_relation_type_non_selected);
+        boolean test_relation_type = type.equals("NA - ");
+        if (test_relation_type){
+            Toast toast = Toast.makeText(this, toast_text, Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        return (!test_relation_type);
+    }
+
+    private void setEditInformation(){
+        mAutoTextViewRelationFrom.setText(single_relation.getFrom().toString());
+        mAutoTextViewRelationTo.setText(single_relation.getTo().toString());
+
+        /*this.put("from_unique_id", from.getInfoByKey("unique_id"));
+        this.put("from_full_name", from.getInfoByKey("full_name"));
+        this.put("to_unique_id", to.getInfoByKey("unique_id"));
+        this.put("to_full_name", to.getInfoByKey("full_name"));
+        this.put("relation", key_relation);
+        this.put("date", date_ajout);
+        this.put("detail", detail_input);*/
     }
 }

@@ -5,8 +5,18 @@ import org.json.JSONObject;
 
 public class Relation extends JSONObject {
 
+    private Person from;
+    private Person to;
+    private String relation_type;
+    private String details;
+
     public Relation(Person from, String key_relation, Person to, String date_ajout, String detail_input) throws JSONException {
         super();
+
+        this.from = from;
+        this.to = to;
+        this.relation_type = key_relation;
+        this.details = detail_input;
 
         this.put("from_unique_id", from.getInfoByKey("unique_id"));
         this.put("from_full_name", from.getInfoByKey("full_name"));
@@ -43,5 +53,21 @@ public class Relation extends JSONObject {
             e.printStackTrace();
         }
         return res_relation && res_uid_from && res_uid_to;
+    }
+
+    public Person getFrom() {
+        return from;
+    }
+
+    public Person getTo() {
+        return to;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public String getRelation_type() {
+        return relation_type;
     }
 }

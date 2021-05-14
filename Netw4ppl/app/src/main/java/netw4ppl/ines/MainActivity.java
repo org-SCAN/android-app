@@ -60,6 +60,25 @@ public class MainActivity extends AppCompatActivity{
         mSettingsBtn = findViewById(R.id.main_activity_settings_btn);
         mSendDataBtn = findViewById(R.id.main_activity_send_data_btn);
 
+        FileUtils.writeFile(this.getFilesDir().getPath()+"/cases/persons.json","[\n" +
+                "    {\n" +
+                "    \"unique_id\" : \"ABC-000001\",\n" +
+                "    \"full_name\" : \"Patrice\",\n" +
+                "    \"nationality\" : \"FRA\",\n" +
+                "    \"date\" : \"2021-04-12\",\n" +
+                "    \"age\" : 68,\n" +
+                "    \"gender\" : \"F\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "    \"unique_id\" : \"ABC-000002\",\n" +
+                "    \"full_name\" : \"Maryse\",\n" +
+                "    \"nationality\" : \"USA\",\n" +
+                "    \"date\" : \"2021-04-12\",\n" +
+                "    \"age\" : 92,\n" +
+                "    \"gender\" : \"F\"\n" +
+                "    }\n" +
+                "]");
+
         // add listeners to every buttons
         mManagePersonsBtn.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, ManagePersonsActivity.class);
