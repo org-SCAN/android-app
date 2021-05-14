@@ -19,7 +19,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import netw4ppl.ines.utils.FileUtils;
 import netw4ppl.ines.utils.Person;
@@ -38,6 +37,13 @@ public class ManagePersonsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_persons);
 
+        // lire le fichier files/cases/refugees.json et initialiser array_persons
+        try {
+            readPersonsFile(this);
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+
         mButtonAdd = (FloatingActionButton) findViewById(R.id.add_person_fab);
 
         mButtonAdd.setOnClickListener(v -> {
@@ -49,16 +55,27 @@ public class ManagePersonsActivity extends AppCompatActivity {
 
         mSearchBar = (SearchView) findViewById(R.id.searchViewPerson);
 
-        // lire le fichier files/cases/refugees.json et initialiser array_persons
-        try {
-            readPersonsFile(this);
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
-        }
-
         // faire l'affichage
         mAdapter = new PersonListAdapter(this, R.layout.adapter_nutshell_person_layout, ManagePersonsActivity.array_persons);
         mListView.setAdapter(mAdapter);
+
+        // attach setOnQueryTextListener
+        // to search view defined above
+        mSearchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (query.length() > 0)
+                    mAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
