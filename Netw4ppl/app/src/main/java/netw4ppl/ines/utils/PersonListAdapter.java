@@ -91,7 +91,9 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 mObjects_tmp = (ArrayList<Person>) results.values;
+                // si on fait la recherche avec une chaine vide (aucun texte saisi)
                 if (constraint.toString().equals("") || constraint == null) {
+                    // réinitialiser la liste de l'adapter
                     mObjects_tmp = mObjects;
                 }
                 notifyDataSetChanged();

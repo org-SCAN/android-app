@@ -1,5 +1,6 @@
 package netw4ppl.ines;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,6 +13,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
+import netw4ppl.ines.utils.FileUtils;
 import netw4ppl.ines.utils.Person;
 import netw4ppl.ines.utils.PersonDetailsListAdapter;
 
@@ -62,7 +64,28 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
             startActivity(intent);
         });
         mButtonDeletePerson.setOnClickListener(v-> {
-
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.delete_person_title)
+                    .setMessage(R.string.delete_person_message)
+                    .setCancelable(true)
+                    .setPositiveButton(R.string.yes, (a,b) -> {
+                        // supprime la personne de l'array
+                        ManagePersonsActivity.array_persons.remove(index_person);
+                        // sauvegarde le fichier
+                        boolean save_persons = FileUtils.savePersonsToFile(this, ManagePersonsActivity.formatterJsonFile());
+                        // quitte l'activité
+                        if (save_persons) {
+                            // maj de la listview de l'activité ManagePersonActivity
+                            // TODO pas forcément necessaire car effectué dans le onResume() de l'activité ManagePersonActivity
+                            ManagePersonsActivity.updateAdapter();
+                            finish();
+                        }
+                    })
+                    .setNegativeButton(R.string.button_relation_cancel_title, (a,b) -> {
+                        // no op
+                    })
+                    .create()
+                    .show();
         });
         mButtonAddRelationTo.setOnClickListener(v -> {
 
