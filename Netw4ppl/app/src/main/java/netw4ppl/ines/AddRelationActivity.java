@@ -3,6 +3,7 @@ package netw4ppl.ines;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -73,8 +74,12 @@ public class AddRelationActivity extends AppCompatActivity {
                     Log.d(TAG, "onClick: ecriture de la relation");
                     ManageRelationsActivity.array_relations.add(single_relation);
                     writeRelationToFile(getApplicationContext());
+
+                    Intent intent = new Intent(AddRelationActivity.this, ManageRelationsActivity.class);
+                    startActivity(intent);
                     single_relation=null;
                 }
+
 
 
             }
@@ -122,6 +127,7 @@ public class AddRelationActivity extends AppCompatActivity {
     private void generateRelationFromInformations() throws JSONException {
         if (testSamePersonRelation(from_person,to_person) && testRelationType(relation_type)){
             single_relation = new Relation(from_person,relation_type,to_person,String.valueOf(System.currentTimeMillis()), relation_details);
+            //Log.d(TAG, single_relation.getFrom().toString());
         }
     }
 
@@ -173,8 +179,12 @@ public class AddRelationActivity extends AppCompatActivity {
     }
 
     private void setEditInformation(){
-        mAutoTextViewRelationFrom.setText(single_relation.getFrom().toString());
-        mAutoTextViewRelationTo.setText(single_relation.getTo().toString());
+        mAutoTextViewRelationFrom.setText(single_relation.getInfoByKey("from_unique_id") + " - " +single_relation.getInfoByKey("from_full_name"), false);
+        mAutoTextViewRelationTo.setText(single_relation.getInfoByKey("to_unique_id") + " - " +single_relation.getInfoByKey("to_full_name"), false);
+
+        mSpinnerRelationType.setSelection(1);
+
+        mEditTextRelationComments.setText(single_relation.getInfoByKey("detail"));
 
         /*this.put("from_unique_id", from.getInfoByKey("unique_id"));
         this.put("from_full_name", from.getInfoByKey("full_name"));

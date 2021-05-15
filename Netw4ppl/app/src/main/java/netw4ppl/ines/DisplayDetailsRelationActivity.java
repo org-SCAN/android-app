@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -45,6 +46,7 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
         Relation relation = ManageRelationsActivity.array_relations.get(index_relation);
 
         setViews(relation);
+        Log.d("TEST ANTE", relation.getInfoByKey("from_full_name"));
 
         mButtonEditRelation.setOnClickListener(v -> {
             AddRelationActivity.single_relation = relation;
