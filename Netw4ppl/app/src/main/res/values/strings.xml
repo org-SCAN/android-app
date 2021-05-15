@@ -117,4 +117,9 @@
     <string name="hint_unique_id_key" translatable="false">AAA</string>
     <string name="hint_unique_id_value" translatable="false">000000</string>
 
+    <string name="delete_person_title">Delete Person</string>
+    <string name="delete_person_message">Do you really want to delete this person from the application?</string>
+
+    <string name="yes">Yes</string>
+
 </resources>

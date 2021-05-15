@@ -105,10 +105,21 @@ public class AddPersonActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Get the 3-letters code by default. Set by default at "AAA"
+     *
+     * @return a String which gives the 3-letters code by default
+     */
     public static String getDefaultKey() {
         return "AAA";
     }
 
+    /**
+     * Return the next id available for a specific key given
+     *
+     * @param key a String of letters, usually a 3-letters code
+     * @return an int of the first value available for this 3-letters code
+     */
     public static int getNextId(String key) {
         int last_id = 0;
         if (json_ids.has(key))
@@ -121,6 +132,14 @@ public class AddPersonActivity extends AppCompatActivity {
         return last_id+1;
     }
 
+    /**
+     * Save the file containing the ids (3-letters code + the value associated)
+     * Check before saving if for the 3-letters code, the value associated is the biggest one or not.
+     *
+     * @param context context of the activity/application
+     * @param person the person currently being added/edited
+     * @return a boolean to determine whether the file was successfully saved or not
+     */
     public boolean saveIds(Context context, Person person) {
         // ajout de l'id au dico des IDS et sauvegarde les toutes dans le fichier associé
         String[] id = person.getInfoByKey("unique_id").split("-");

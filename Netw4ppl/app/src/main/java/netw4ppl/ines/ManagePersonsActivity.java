@@ -19,7 +19,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import netw4ppl.ines.utils.FileUtils;
 import netw4ppl.ines.utils.Person;
@@ -27,9 +26,9 @@ import netw4ppl.ines.utils.PersonListAdapter;
 
 public class ManagePersonsActivity extends AppCompatActivity {
 
+    private static PersonListAdapter mAdapter;
     FloatingActionButton mButtonAdd;
     ListView mListView;
-    PersonListAdapter mAdapter;
     SearchView mSearchBar;
     public static ArrayList<Person> array_persons = new ArrayList<Person>();
 
@@ -37,6 +36,13 @@ public class ManagePersonsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_persons);
+
+        // lire le fichier files/cases/refugees.json et initialiser array_persons
+        try {
+            readPersonsFile(this);
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
 
         mButtonAdd = (FloatingActionButton) findViewById(R.id.add_person_fab);
 
@@ -49,20 +55,47 @@ public class ManagePersonsActivity extends AppCompatActivity {
 
         mSearchBar = (SearchView) findViewById(R.id.searchViewPerson);
 
-        // lire le fichier files/cases/refugees.json et initialiser array_persons
-        try {
-            readPersonsFile(this);
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
-        }
-
         // faire l'affichage
         mAdapter = new PersonListAdapter(this, R.layout.adapter_nutshell_person_layout, ManagePersonsActivity.array_persons);
         mListView.setAdapter(mAdapter);
+
+        // attach setOnQueryTextListener
+        // to search view defined above
+        mSearchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // si on appuie sur le bouton de recherche
+                if (query.length() > 0)
+                    mAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // dès qu'on ajoute ou enlève une lettre
+                mAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-                DisplayDetailsPersonActivity.index_person = position;
+                // position correspond à la position de la personne dans l'adapter
+                boolean got_it = false;
+                int index_reel = 0;
+                int i=0;
+                Person p = (Person) adapter.getItemAtPosition(position);
+                // associer cette position à la position réelle dans l'array de base
+                while (i < array_persons.size() && !got_it) {
+                    if (array_persons.get(i).equals(p)) {
+                        index_reel = i;
+                        got_it = true;
+                    }
+                    i++;
+                }
+
+                DisplayDetailsPersonActivity.index_person = index_reel;
                 Intent intent = new Intent(ManagePersonsActivity.this, DisplayDetailsPersonActivity.class);
                 startActivity(intent);
             }
@@ -70,12 +103,23 @@ public class ManagePersonsActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onResume () {
-        super.onResume();
+    public static void updateAdapter() {
         mAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    protected void onResume () {
+        super.onResume();
+        mSearchBar.setQuery("", true);
+        updateAdapter();
+    }
+
+    /**
+     * Read the Persons File associated with this application.
+     * The path is determined based on strings in the strings.xml file
+     *
+     * @param context the context of the current activity
+     */
     public static void readPersonsFile(Context context) throws IOException, JSONException {
         String dir_name = context.getString(R.string.directory_files);
         String file_name = context.getString(R.string.filename_persons);
@@ -109,6 +153,12 @@ public class ManagePersonsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Convert the ArrayList of Persons in JSONArray to then convert it in a String because the server
+     * is expecting such format.
+     *
+     * @return a String containing the Persons contained in person, on a JSONArray format
+     */
     public static String formatterJsonFile() {
         JSONArray json_array = new JSONArray();
         for (int i=0; i<array_persons.size(); i++) {

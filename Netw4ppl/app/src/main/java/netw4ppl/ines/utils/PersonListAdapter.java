@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,15 +19,18 @@ import org.w3c.dom.Text;
 
 import java.nio.channels.InterruptedByTimeoutException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import netw4ppl.ines.ManagePersonsActivity;
 import netw4ppl.ines.R;
 
-public class PersonListAdapter extends ArrayAdapter<Person> {
+public class PersonListAdapter extends ArrayAdapter<Person> implements Filterable {
 
     private Context mContext;
     private int mResource;
     private int lastPosition = -1;
+    public ArrayList<Person> mObjects;
+    public ArrayList<Person> mObjects_tmp;
 
     private static class ViewHolder {
         TextView mFullName;
@@ -38,13 +43,73 @@ public class PersonListAdapter extends ArrayAdapter<Person> {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;
+        mObjects = objects;
+        mObjects_tmp = objects;
+    }
+
+    @NonNull
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults filterResults = new FilterResults();
+                ArrayList<Person> tempList = new ArrayList<Person>();
+
+                // constraints is the query
+                // objects is the dataset
+                if (constraint != null && mObjects != null) {
+                    int length = mObjects.size();
+                    int i=0;
+                    while (i < length) {
+                        Person p = mObjects.get(i);
+
+                        // do the comparison
+                        Iterator<String> keys = p.keys();
+                        boolean has_it = false;
+                        String key_field;
+                        while (keys.hasNext() && !has_it) {
+                            // on regarde toutes les valeurs des clés
+                            key_field = keys.next();
+                            String value_field = String.valueOf(p.getInfoByKey(key_field));
+                            if (value_field.toLowerCase().contains(constraint.toString().toLowerCase()))
+                                has_it = true;
+                        }
+
+                        if (has_it) {
+                            tempList.add(p);
+                        }
+                        i++;
+                    }
+
+                    filterResults.values = tempList;
+                    filterResults.count = tempList.size();
+                }
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                mObjects_tmp = (ArrayList<Person>) results.values;
+                // si on fait la recherche avec une chaine vide (aucun texte saisi)
+                if (constraint.toString().equals("") || constraint == null) {
+                    // réinitialiser la liste de l'adapter
+                    mObjects_tmp = mObjects;
+                }
+                notifyDataSetChanged();
+            }
+        };
+    }
+
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         // get the person informations
-        Person person = getItem(position);
+        Person person = mObjects_tmp.get(position);
 
         final View result;
         ViewHolder holder;
@@ -74,5 +139,20 @@ public class PersonListAdapter extends ArrayAdapter<Person> {
         holder.mAge.setText(person.getInfoByKey("age"));
 
         return convertView;
+    }
+
+    @Override
+    public int getCount() {
+        return mObjects_tmp.size();
+    }
+
+    @Override
+    public Person getItem(int position) {
+        return mObjects_tmp.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 }

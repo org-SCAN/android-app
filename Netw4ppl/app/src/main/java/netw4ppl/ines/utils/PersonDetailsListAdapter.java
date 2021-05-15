@@ -25,6 +25,10 @@ public class PersonDetailsListAdapter extends ArrayAdapter<Field> {
     private final Context mContext;
     private final int mResource;
 
+    /**
+     * A simple ViewHolder containing a title (of a field) and the text associated to it in the person data
+     *
+     */
     private static class ViewHolder {
         com.google.android.material.textfield.TextInputLayout mTitle;
         com.google.android.material.textfield.TextInputEditText mText;
@@ -35,6 +39,7 @@ public class PersonDetailsListAdapter extends ArrayAdapter<Field> {
         mContext = context;
         mResource = resource;
     }
+
 
     @NonNull
     @Override
