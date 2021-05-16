@@ -46,7 +46,6 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
         Relation relation = ManageRelationsActivity.array_relations.get(index_relation);
 
         setViews(relation);
-        Log.d("TEST ANTE", relation.getInfoByKey("from_full_name"));
 
         mButtonEditRelation.setOnClickListener(v -> {
             AddRelationActivity.single_relation = relation;
@@ -69,5 +68,11 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
         mTextViewComments.setText(relation.getInfoByKey("detail"));
 
 
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        setViews(ManageRelationsActivity.array_relations.get(index_relation));
     }
 }
