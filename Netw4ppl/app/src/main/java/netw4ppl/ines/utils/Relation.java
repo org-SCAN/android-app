@@ -38,15 +38,13 @@ public class Relation extends JSONObject {
     public boolean isSameRelation(Relation relat) {
         boolean res_uid_from = false;
         boolean res_uid_to = false;
-        boolean res_relation = false;
         try {
             res_uid_from = this.getString("from_unique_id").equals(relat.getString("from_unique_id"));
-            res_relation = this.getString("relation").equals(relat.getString("relation"));
             res_uid_to = this.getString("to_unique_id").equals(relat.getString("to_unique_id"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return res_relation && res_uid_from && res_uid_to;
+        return res_uid_from && res_uid_to;
     }
 
     public String getFrom() {
