@@ -3,9 +3,11 @@ package netw4ppl.ines;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -44,6 +46,8 @@ public class AddRelationActivity extends AppCompatActivity {
     Button mButtonRelationSave;
     Button mButtonRelationCancel;
 
+    ArrayAdapter<DataElement> spinner_adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +65,10 @@ public class AddRelationActivity extends AppCompatActivity {
                 // Get the details about the Relation
                 relation_details = mEditTextRelationComments.getText().toString();
 
-                relation_type = mSpinnerRelationType.getSelectedItem().toString();
+
+                DataElement data_element = (DataElement) mSpinnerRelationType.getSelectedItem();
+                relation_type = data_element.getKey();
+
                 // récupère les infos saisies sur la relation
                 try {
                     generateRelationFromInformations();
@@ -69,14 +76,28 @@ public class AddRelationActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                if (single_relation!=null && testExistingRelation(single_relation)){
-                    Log.d(TAG, "onClick: ecriture de la relation");
-                    ManageRelationsActivity.array_relations.add(single_relation);
-                    writeRelationToFile(getApplicationContext());
-                    single_relation=null;
+                boolean success_write=false;
+
+                if (new_relation){
+                    if (single_relation!=null && testExistingRelation(single_relation)){
+                        Log.d(TAG, "onClick: ecriture de la relation");
+                        ManageRelationsActivity.array_relations.add(single_relation);
+                        success_write = FileUtils.saveRelationsToFile(getApplicationContext(),ManageRelationsActivity.formatterJsonFile());
+                    }
+                }else {
+                    int index_relation = DisplayDetailsRelationActivity.index_relation;
+                    ManageRelationsActivity.array_relations.remove(index_relation);
+                    ManageRelationsActivity.array_relations.add(index_relation,single_relation);
+                    success_write = FileUtils.saveRelationsToFile(getApplicationContext() ,ManageRelationsActivity.formatterJsonFile());
+
                 }
 
+                single_relation=null;
 
+                new_relation=true;
+                if (success_write){
+                    finish();
+                }
             }
         });
     }
@@ -108,7 +129,7 @@ public class AddRelationActivity extends AppCompatActivity {
         mAutoTextViewRelationTo.setAdapter(autocomplete_adapter);
 
         mSpinnerRelationType = findViewById(R.id.add_relation_type);
-        ArrayAdapter<DataElement> spinner_adapter = MainActivity.mConfiguration.getArrayAdapter("Relations");
+        spinner_adapter = MainActivity.mConfiguration.getArrayAdapter("Relations");
         mSpinnerRelationType.setAdapter(spinner_adapter);
 
 
@@ -121,21 +142,18 @@ public class AddRelationActivity extends AppCompatActivity {
 
     private void generateRelationFromInformations() throws JSONException {
         if (testSamePersonRelation(from_person,to_person) && testRelationType(relation_type)){
-            single_relation = new Relation(from_person,relation_type,to_person,String.valueOf(System.currentTimeMillis()), relation_details);
+            single_relation = new Relation(from_person,relation_type,to_person, relation_details);
+            single_relation.setCreationDate();
         }
     }
 
-    private void writeRelationToFile(Context context){
+    private boolean writeRelationToFile(Context context){
         String dir_name = context.getString(R.string.directory_files);
         String file_name = context.getString(R.string.filename_relations);
         String path_file = context.getFilesDir().getPath()+dir_name+file_name;
-        boolean save_result = FileUtils.writeFile(path_file,ManageRelationsActivity.array_relations.toString());
-        //single_refugee = null;
+        boolean save_result = FileUtils.writeFile(path_file,ManageRelationsActivity.formatterJsonFile());
 
-        if (save_result) {
-            Log.d("general-display", "sauvegarde effectuée, retour vers l'écran de management");
-            finish();
-        }
+        return save_result;
     }
 
     private boolean testSamePersonRelation(Person p1, Person p2){
@@ -164,7 +182,7 @@ public class AddRelationActivity extends AppCompatActivity {
 
     private boolean testRelationType(String type){
         String toast_text = this.getString(R.string.toast_relation_type_non_selected);
-        boolean test_relation_type = type.equals("NA - ");
+        boolean test_relation_type = type.equals("NA");
         if (test_relation_type){
             Toast toast = Toast.makeText(this, toast_text, Toast.LENGTH_SHORT);
             toast.show();
@@ -173,15 +191,23 @@ public class AddRelationActivity extends AppCompatActivity {
     }
 
     private void setEditInformation(){
-        mAutoTextViewRelationFrom.setText(single_relation.getFrom().toString());
-        mAutoTextViewRelationTo.setText(single_relation.getTo().toString());
+        mAutoTextViewRelationFrom.setText(single_relation.getInfoByKey("from_unique_id") + " - " +single_relation.getInfoByKey("from_full_name"), false);
+        mAutoTextViewRelationTo.setText(single_relation.getInfoByKey("to_unique_id") + " - " +single_relation.getInfoByKey("to_full_name"), false);
 
-        /*this.put("from_unique_id", from.getInfoByKey("unique_id"));
-        this.put("from_full_name", from.getInfoByKey("full_name"));
-        this.put("to_unique_id", to.getInfoByKey("unique_id"));
-        this.put("to_full_name", to.getInfoByKey("full_name"));
-        this.put("relation", key_relation);
-        this.put("date", date_ajout);
-        this.put("detail", detail_input);*/
+        String relation_key = single_relation.getInfoByKey("relation");
+        int pos_in_adapter = getPositionInAdapter(spinner_adapter, relation_key);
+        mSpinnerRelationType.setSelection(pos_in_adapter);
+
+        mEditTextRelationComments.setText(single_relation.getInfoByKey("detail"));
+    }
+
+    public int getPositionInAdapter(Adapter adapter, String key_val_pers) {
+        DataElement data_element;
+        for (int i=0; i<adapter.getCount(); i++) {
+            data_element = (DataElement) adapter.getItem(i);
+            if (data_element.getKey().equals(key_val_pers))
+                return i;
+        }
+        return 0;
     }
 }

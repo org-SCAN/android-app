@@ -31,6 +31,7 @@ public class ManageRelationsActivity extends AppCompatActivity {
     ListView mListView;
     SearchView mSearchBar;
     public static ArrayList<Relation> array_relations = new ArrayList<Relation>();
+    public static RelationListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +57,8 @@ public class ManageRelationsActivity extends AppCompatActivity {
         }
 
         // faire l'affichage
-        RelationListAdapter adapter = new RelationListAdapter(this, R.layout.adapter_nutshell_relation_layout, ManageRelationsActivity.array_relations);
-        mListView.setAdapter(adapter);
+        mAdapter = new RelationListAdapter(this, R.layout.adapter_nutshell_relation_layout, ManageRelationsActivity.array_relations);
+        mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
@@ -95,11 +96,32 @@ public class ManageRelationsActivity extends AppCompatActivity {
         }
     }
 
-    public static String formatterJsonFile() throws JSONException {
+    /**
+     * Convert the ArrayList of Relations in JSONArray to then convert it in a String because the server
+     * is expecting such format.
+     *
+     * @return a String containing the Relations contained in person, on a JSONArray format
+     */
+    public static String formatterJsonFile() {
         JSONArray json_array = new JSONArray();
         for (int i=0; i<array_relations.size(); i++) {
             json_array.put(array_relations.get(i));
         }
-        return json_array.toString(2);
+        try {
+            return json_array.toString(2);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        updateAdapter();
+    }
+
+    public static void updateAdapter(){
+        mAdapter.notifyDataSetChanged();
     }
 }

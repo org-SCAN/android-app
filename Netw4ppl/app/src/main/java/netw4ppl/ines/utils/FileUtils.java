@@ -218,6 +218,13 @@ public class FileUtils {
         return writeFile(path_file, content);
     }
 
+    public static boolean saveRelationsToFile(Context context, String content) {
+        String dir_name = context.getString(R.string.directory_files);
+        String file_name = context.getString(R.string.filename_relations);
+        String path_file = context.getFilesDir().getPath()+dir_name+file_name;
+        return writeFile(path_file, content);
+    }
+
     public static JSONObject loadConfigFromFile(Context context) throws IOException {
         // check if the file "fields.json" in "config/" directory exists
         String dir_name = context.getString(R.string.config_files);
