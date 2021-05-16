@@ -31,7 +31,7 @@ public class ManageRelationsActivity extends AppCompatActivity {
     ListView mListView;
     SearchView mSearchBar;
     public static ArrayList<Relation> array_relations = new ArrayList<Relation>();
-    RelationListAdapter mAdapter;
+    public static RelationListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +118,10 @@ public class ManageRelationsActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+        updateAdapter();
+    }
+
+    public static void updateAdapter(){
         mAdapter.notifyDataSetChanged();
     }
 }

@@ -120,6 +120,9 @@
     <string name="delete_person_title">Delete Person</string>
     <string name="delete_person_message">Do you really want to delete this person from the application?</string>
 
+    <string name="delete_relation_title">Delete Relation</string>
+    <string name="delete_relation_message">Do you really want to delete this relation from the application?</string>
+
     <string name="yes">Yes</string>
 
 </resources>

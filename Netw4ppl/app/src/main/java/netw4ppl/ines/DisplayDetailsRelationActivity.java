@@ -1,5 +1,6 @@
 package netw4ppl.ines;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 
+import netw4ppl.ines.utils.FileUtils;
 import netw4ppl.ines.utils.Person;
 import netw4ppl.ines.utils.PersonDetailsListAdapter;
 import netw4ppl.ines.utils.Relation;
@@ -53,7 +55,30 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
             Intent intent = new Intent(DisplayDetailsRelationActivity.this, AddRelationActivity.class);
             startActivity(intent);
         });
+
         mButtonDeleteRelation.setOnClickListener(v-> {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.delete_relation_title)
+                    .setMessage(R.string.delete_relation_message)
+                    .setCancelable(true)
+                    .setPositiveButton(R.string.yes, (a,b) -> {
+                        // supprime la relation de l'array
+                        ManageRelationsActivity.array_relations.remove(index_relation);
+                        // sauvegarde le fichier
+                        boolean save_relations = FileUtils.saveRelationsToFile(this, ManageRelationsActivity.formatterJsonFile());
+                        // quitte l'activité
+                        if (save_relations) {
+                            // maj de la listview de l'activité ManagePersonActivity
+                            // TODO pas forcément necessaire car effectué dans le onResume() de l'activité ManagePersonActivity
+                            ManageRelationsActivity.updateAdapter();
+                            finish();
+                        }
+                    })
+                    .setNegativeButton(R.string.button_relation_cancel_title, (a,b) -> {
+                        // no op
+                    })
+                    .create()
+                    .show();
 
         });
 

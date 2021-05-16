@@ -82,13 +82,13 @@ public class AddRelationActivity extends AppCompatActivity {
                     if (single_relation!=null && testExistingRelation(single_relation)){
                         Log.d(TAG, "onClick: ecriture de la relation");
                         ManageRelationsActivity.array_relations.add(single_relation);
-                        success_write = writeRelationToFile(getApplicationContext());
+                        success_write = FileUtils.saveRelationsToFile(getApplicationContext(),ManageRelationsActivity.formatterJsonFile());
                     }
                 }else {
                     int index_relation = DisplayDetailsRelationActivity.index_relation;
                     ManageRelationsActivity.array_relations.remove(index_relation);
                     ManageRelationsActivity.array_relations.add(index_relation,single_relation);
-                    success_write = writeRelationToFile(getApplicationContext());
+                    success_write = FileUtils.saveRelationsToFile(getApplicationContext() ,ManageRelationsActivity.formatterJsonFile());
 
                 }
 
