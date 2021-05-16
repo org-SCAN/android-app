@@ -3,13 +3,16 @@ package netw4ppl.ines.utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class Relation extends JSONObject {
 
     public Relation(){
         super();
     }
 
-    public Relation(Person from, String key_relation, Person to, String date_ajout, String detail_input) throws JSONException {
+    public Relation(Person from, String key_relation, Person to, String detail_input) throws JSONException {
         super();
 
         this.put("from_unique_id", from.getInfoByKey("unique_id"));
@@ -17,7 +20,6 @@ public class Relation extends JSONObject {
         this.put("to_unique_id", to.getInfoByKey("unique_id"));
         this.put("to_full_name", to.getInfoByKey("full_name"));
         this.put("relation", key_relation);
-        this.put("date", date_ajout);
         this.put("detail", detail_input);
     }
 
@@ -63,5 +65,19 @@ public class Relation extends JSONObject {
     public String getRelation_type() {
 
         return (this.getInfoByKey("relation"));
+    }
+
+    public void setCreationDate(){
+
+        Calendar calendar = Calendar.getInstance();
+// ajout du champ date indispensable pour la database
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String date_creation = dateFormat.format(calendar.getTime());
+
+        try {
+            this.put("date", date_creation);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -142,8 +142,8 @@ public class AddRelationActivity extends AppCompatActivity {
 
     private void generateRelationFromInformations() throws JSONException {
         if (testSamePersonRelation(from_person,to_person) && testRelationType(relation_type)){
-            single_relation = new Relation(from_person,relation_type,to_person,String.valueOf(System.currentTimeMillis()), relation_details);
-            //Log.d(TAG, single_relation.getFrom().toString());
+            single_relation = new Relation(from_person,relation_type,to_person, relation_details);
+            single_relation.setCreationDate();
         }
     }
 
@@ -151,7 +151,7 @@ public class AddRelationActivity extends AppCompatActivity {
         String dir_name = context.getString(R.string.directory_files);
         String file_name = context.getString(R.string.filename_relations);
         String path_file = context.getFilesDir().getPath()+dir_name+file_name;
-        boolean save_result = FileUtils.writeFile(path_file,ManageRelationsActivity.array_relations.toString());
+        boolean save_result = FileUtils.writeFile(path_file,ManageRelationsActivity.formatterJsonFile());
 
         return save_result;
     }
