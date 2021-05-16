@@ -31,6 +31,7 @@ public class ManageRelationsActivity extends AppCompatActivity {
     ListView mListView;
     SearchView mSearchBar;
     public static ArrayList<Relation> array_relations = new ArrayList<Relation>();
+    RelationListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +57,8 @@ public class ManageRelationsActivity extends AppCompatActivity {
         }
 
         // faire l'affichage
-        RelationListAdapter adapter = new RelationListAdapter(this, R.layout.adapter_nutshell_relation_layout, ManageRelationsActivity.array_relations);
-        mListView.setAdapter(adapter);
+        mAdapter = new RelationListAdapter(this, R.layout.adapter_nutshell_relation_layout, ManageRelationsActivity.array_relations);
+        mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
@@ -101,5 +102,11 @@ public class ManageRelationsActivity extends AppCompatActivity {
             json_array.put(array_relations.get(i));
         }
         return json_array.toString(2);
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        mAdapter.notifyDataSetChanged();
     }
 }
