@@ -39,24 +39,21 @@ public class ManageRelationsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_manage_relations);
 
         mButtonAdd = (FloatingActionButton) findViewById(R.id.add_relation_fab);
-
         mButtonAdd.setOnClickListener(v -> {
             Intent intent = new Intent(ManageRelationsActivity.this, AddRelationActivity.class);
             startActivity(intent);
         });
 
         mListView = (ListView) findViewById(R.id.list_nutshell_relations);
-
         mSearchBar = (SearchView) findViewById(R.id.searchViewRelation);
 
-        // lire le fichier files/cases/relations.json et initialiser array_relations
+        // Read the relation.json file and initializing array_relations
         try {
             readRelationsFile(this);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
 
-        // faire l'affichage
         mAdapter = new RelationListAdapter(this, R.layout.adapter_nutshell_relation_layout, ManageRelationsActivity.array_relations);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -69,6 +66,12 @@ public class ManageRelationsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Read the Relations File associated with this application.
+     * The path is determined based on strings in the strings.xml file
+     *
+     * @param context the context of the current activity
+     */
     public static void readRelationsFile(Context context) throws IOException, JSONException {
         String dir_name = context.getString(R.string.directory_files);
         String file_name = context.getString(R.string.filename_relations);
@@ -86,11 +89,11 @@ public class ManageRelationsActivity extends AppCompatActivity {
             }
         }
         else if (FileUtils.directoryExists(path_dir)) {
-            // juste le dossier existe mais pas le fichier
+            // directory exists but file does not
             FileUtils.createFile(path_file);
         }
         else {
-            // créer le dossier ET le fichier
+            // creates directory and file
             FileUtils.createDirectory(path_dir);
             FileUtils.createFile(path_file);
         }
@@ -100,7 +103,7 @@ public class ManageRelationsActivity extends AppCompatActivity {
      * Convert the ArrayList of Relations in JSONArray to then convert it in a String because the server
      * is expecting such format.
      *
-     * @return a String containing the Relations contained in person, on a JSONArray format
+     * @return a String containing the Relations contained in relation, on a JSONArray format
      */
     public static String formatterJsonFile() {
         JSONArray json_array = new JSONArray();

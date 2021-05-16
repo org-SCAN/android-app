@@ -65,11 +65,11 @@ public class AddRelationActivity extends AppCompatActivity {
                 // Get the details about the Relation
                 relation_details = mEditTextRelationComments.getText().toString();
 
-
+                //Get the relation_type key
                 DataElement data_element = (DataElement) mSpinnerRelationType.getSelectedItem();
                 relation_type = data_element.getKey();
 
-                // récupère les infos saisies sur la relation
+                //Get the informations about the relation in the views
                 try {
                     generateRelationFromInformations();
                 } catch (JSONException e) {
@@ -102,6 +102,11 @@ public class AddRelationActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Sets the listeners of the autocompleteTextView
+     * onItemClick methods initialize from_person and to_person with the Persons clicked in the
+     * AutoCompletTextView dropdown
+     */
     private void setListeners(){
 
         mAutoTextViewRelationFrom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -147,15 +152,16 @@ public class AddRelationActivity extends AppCompatActivity {
         }
     }
 
-    private boolean writeRelationToFile(Context context){
-        String dir_name = context.getString(R.string.directory_files);
-        String file_name = context.getString(R.string.filename_relations);
-        String path_file = context.getFilesDir().getPath()+dir_name+file_name;
-        boolean save_result = FileUtils.writeFile(path_file,ManageRelationsActivity.formatterJsonFile());
-
-        return save_result;
-    }
-
+    /**
+     * Checks if the two Persons given for the relation are different or not
+     *
+     * @param p1 , first person of the test
+     * @param p2, second person of the test
+     *
+     * @return a boolean corresponding to the result of the test
+     * Warning, it returns the opposite of the equal test
+     * True if p1 and p2 are different
+     */
     private boolean testSamePersonRelation(Person p1, Person p2){
         boolean test = (p1.equals(p2));
         String toast_text = this.getString(R.string.toast_same_person_relation);
@@ -166,6 +172,13 @@ public class AddRelationActivity extends AppCompatActivity {
         return (!test);
     }
 
+    /**
+     * Checks if the relation that is being created does not already exist
+     * Considers if the relation is being edited or is a new one
+     *
+     * @param relation Relation to be compared to the already existing ones
+     * @return Boolean true if the Relation does not exist, else false
+     */
     private boolean testExistingRelation(Relation relation){
         String toast_text = this.getString(R.string.toast_already_existing_relation);
         if (new_relation){
@@ -180,6 +193,11 @@ public class AddRelationActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Checks if the given relation_type is a valid one
+     * @param type selected type of relation
+     * @return a boolean corresponding to the validity of the relation_type
+     */
     private boolean testRelationType(String type){
         String toast_text = this.getString(R.string.toast_relation_type_non_selected);
         boolean test_relation_type = type.equals("NA");
@@ -190,6 +208,10 @@ public class AddRelationActivity extends AppCompatActivity {
         return (!test_relation_type);
     }
 
+    /**
+     * Gets the informations of the relation that is being edited
+     * Sets the Views of the activity so they contain the informations of the edited relation
+     */
     private void setEditInformation(){
         mAutoTextViewRelationFrom.setText(single_relation.getInfoByKey("from_unique_id") + " - " +single_relation.getInfoByKey("from_full_name"), false);
         mAutoTextViewRelationTo.setText(single_relation.getInfoByKey("to_unique_id") + " - " +single_relation.getInfoByKey("to_full_name"), false);
@@ -201,6 +223,12 @@ public class AddRelationActivity extends AppCompatActivity {
         mEditTextRelationComments.setText(single_relation.getInfoByKey("detail"));
     }
 
+    /**
+     * Returns the index of an item identified by a key in an adapter
+     * @param adapter
+     * @param key_val_pers
+     * @return an int corresponding to the index of the key in the adapter
+     */
     public int getPositionInAdapter(Adapter adapter, String key_val_pers) {
         DataElement data_element;
         for (int i=0; i<adapter.getCount(); i++) {
