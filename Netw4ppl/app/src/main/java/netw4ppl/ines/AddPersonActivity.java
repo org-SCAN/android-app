@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -77,7 +78,7 @@ public class AddPersonActivity extends AppCompatActivity {
                 TimeZone tz = TimeZone.getTimeZone("UTC");
                 calendar.setTimeZone(tz);
 
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 dateFormat.setTimeZone(tz);
                 String date_update = dateFormat.format(calendar.getTime());
 
