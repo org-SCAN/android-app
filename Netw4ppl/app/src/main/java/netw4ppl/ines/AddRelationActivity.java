@@ -146,7 +146,7 @@ public class AddRelationActivity extends AppCompatActivity {
     }
 
     private void generateRelationFromInformations() throws JSONException {
-        if (testSamePersonRelation(from_person,to_person) && testRelationType(relation_type)){
+        if (testValidRelation()){
             single_relation = new Relation(from_person,relation_type,to_person, relation_details);
             single_relation.setCreationDate();
         }
@@ -206,6 +206,29 @@ public class AddRelationActivity extends AppCompatActivity {
             toast.show();
         }
         return (!test_relation_type);
+    }
+
+    /**
+     * Checks if the given person is a valid one
+     * @param tested_person person to be tested
+     * @return a boolean corresponding to the validity of the person
+     * if the person was not initialized, returns false
+     */
+    private boolean testValidPerson(Person tested_person){
+        if (tested_person == null){
+            String toast_text = this.getString(R.string.toast_person_not_selected);
+            Toast toast = Toast.makeText(this,toast_text, Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        return (tested_person != null);
+    }
+
+    /**
+     * Aggregates all the test to generate a relation
+     * @return a boolean to know if the relation can be written
+     */
+    private boolean testValidRelation(){
+        return (testRelationType(relation_type) && testValidPerson(from_person) && testValidPerson(to_person) && testSamePersonRelation(from_person,to_person));
     }
 
     /**
