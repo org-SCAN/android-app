@@ -107,19 +107,32 @@ public class AddRelationActivity extends AppCompatActivity {
      * onItemClick methods initialize from_person and to_person with the Persons clicked in the
      * AutoCompletTextView dropdown
      */
-    private void setListeners(){
+    private void setListeners() {
+        String toast_text = getApplicationContext().getString(R.string.toast_edit_person_relation);
 
         mAutoTextViewRelationFrom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                from_person = (Person) parent.getAdapter().getItem(position);
+                if (new_relation) {
+                    from_person = (Person) parent.getAdapter().getItem(position);
+                } else {
+                    mAutoTextViewRelationFrom.setText(single_relation.getInfoByKey("from_unique_id") + " - " + single_relation.getInfoByKey("from_full_name"), false);
+                    Toast toast = Toast.makeText(getApplicationContext(), toast_text, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         });
 
         mAutoTextViewRelationTo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                to_person = (Person) parent.getAdapter().getItem(position);
+                if (new_relation) {
+                    to_person = (Person) parent.getAdapter().getItem(position);
+                } else {
+                    mAutoTextViewRelationTo.setText(single_relation.getInfoByKey("to_unique_id") + " - " + single_relation.getInfoByKey("to_full_name"), false);
+                    Toast toast = Toast.makeText(getApplicationContext(), toast_text, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         });
     }
