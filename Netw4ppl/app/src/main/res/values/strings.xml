@@ -55,6 +55,8 @@
     <string name="main_submit_ip_port_fail_msg">Please enter the IP address and the port number values in the settings</string>
     <string name="main_submit_token_fail_title">Token Value</string>
     <string name="main_submit_token_fail_msg">Please enter a value of the token in the settings</string>
+    <string name="no_submit_option_title">Submit option</string>
+    <string name="no_submit_option_msg">Please select a submit option</string>
 
     <!-- Strings Passwords hashing messages -->
     <string name="settings_default_pwd_hashing_pending_title">Securing your password…</string>
