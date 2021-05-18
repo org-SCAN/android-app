@@ -69,17 +69,22 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
                     .setMessage(R.string.delete_person_message)
                     .setCancelable(true)
                     .setPositiveButton(R.string.yes, (a,b) -> {
+                        // supprime les relations avant de supprimer la personne
+                        boolean save_relations = this.deleteAssociatedRelations(ManagePersonsActivity.array_persons.get(index_person));
+
                         // supprime la personne de l'array
                         ManagePersonsActivity.array_persons.remove(index_person);
+
                         // sauvegarde le fichier
                         boolean save_persons = FileUtils.savePersonsToFile(this, ManagePersonsActivity.formatterJsonFile());
                         // quitte l'activité
-                        if (save_persons) {
+                        if (save_relations && save_persons) {
                             // maj de la listview de l'activité ManagePersonActivity
                             // TODO pas forcément necessaire car effectué dans le onResume() de l'activité ManagePersonActivity
                             ManagePersonsActivity.updateAdapter();
                             finish();
                         }
+                        SettingsActivity.displayToast(this, save_persons && save_relations ? getString(R.string.toast_delete_success) : getString(R.string.toast_delete_fail));
                     })
                     .setNegativeButton(R.string.button_relation_cancel_title, (a,b) -> {
                         // no op
@@ -96,5 +101,28 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
     protected void onResume () {
         super.onResume();
         adapter_details_person.notifyDataSetChanged();
+    }
+
+    public boolean deleteAssociatedRelations(Person p) {
+        ArrayList<Integer> index_relations = new ArrayList<Integer>();
+
+        // suppression dans les listes
+        for (int i=0; i<ManageRelationsActivity.array_relations.size(); i++) {
+            if (ManageRelationsActivity.array_relations.get(i).isPersonInRelation(p)) {
+                index_relations.add(i);
+            }
+        }
+
+        // pour chaque relation qui possède cette personne
+        int index = 0;
+        for (int i=0; i<index_relations.size(); i++) {
+            ManageRelationsActivity.array_relations.remove(index_relations.get(i) + (-1*index));
+            index++;
+        }
+
+        // sauvegarde le fichier
+        boolean save_relations = FileUtils.saveRelationsToFile(this, ManageRelationsActivity.formatterJsonFile());
+
+        return save_relations;
     }
 }
