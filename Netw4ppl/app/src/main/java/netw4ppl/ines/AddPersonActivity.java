@@ -62,14 +62,14 @@ public class AddPersonActivity extends AppCompatActivity {
 
                 // ajout du champ date indispensable pour la database
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
                 String date_creation = dateFormat.format(calendar.getTime());
                 person.putInfo("date", date_creation);
 
-                // TODO rajouter le champs application_id
+                // ajouter du champ d'application id
+                String application_id = MainActivity.mConfiguration.getApplicationId();
+                person.putInfo("application_id", application_id);
 
                 // ajout dans l'array de personnes
-                // TODO si ajout en première position, il faut notifier l'adapter etc
                 ManagePersonsActivity.array_persons.add(person);
             }
             /* Modification d'une personne existante */

@@ -19,6 +19,7 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.util.UUID;
 
 import netw4ppl.ines.R;
 
@@ -188,8 +189,8 @@ public class FileUtils {
     }
 
     public static String loadIdsFromFile(Context context) throws IOException {
-        String path_dir = context.getFilesDir()+"/config";
-        String filename_ids = "/ids.json";
+        String path_dir = context.getString(R.string.config_files);
+        String filename_ids = context.getString(R.string.filename_ids);
         File file = new File(path_dir+filename_ids);
 
         String file_content = "";
@@ -202,6 +203,26 @@ public class FileUtils {
         }
 
         return file_content;
+    }
+
+    public static String loadApplicationIDFromFile(Context context) throws IOException {
+        String data_path = context.getFilesDir().getPath();
+        String dir_path = context.getString(R.string.config_files);
+        String file_id = context.getString(R.string.unique_id_filename);
+
+        //Get the unique application ID
+        String android_id_file_path = data_path+dir_path+file_id;
+        String unique_app_id;
+
+        if (FileUtils.fileExists(android_id_file_path)){
+            unique_app_id = FileUtils.readFile(android_id_file_path);
+        }
+        else{
+            unique_app_id = UUID.randomUUID().toString();
+            FileUtils.writeFile(android_id_file_path, unique_app_id);
+        }
+
+        return unique_app_id;
     }
 
     public static boolean saveIdsToFile(Context context, String content) {
