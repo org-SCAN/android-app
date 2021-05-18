@@ -58,6 +58,16 @@ public class Field extends DataElement {
         }
     }
 
+    public int getRequired() {
+        int required = 0;
+        try {
+            required = this.getInt("required");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return required;
+    }
+
     /*
     Useful method when the field is of type CalendarView, that way we can initialise them with the right value
     using method setDate(long long_date)
