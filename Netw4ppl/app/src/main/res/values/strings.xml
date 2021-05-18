@@ -91,7 +91,8 @@
     <string name="config_files" translatable="false">/config</string>
     <string name="filename_ids" translatable="false">/ids.json</string>
     <string name="filename_fields" translatable="false">/fields.json</string>
-    
+    <string name="unique_id_filename" translatable="false">/android_id.txt</string>
+
     <string name="directory_files" translatable="false">/cases</string>
     <string name="filename_persons" translatable="false">/persons.json</string>
     <string name="filename_relations" translatable="false">/relations.json</string>
