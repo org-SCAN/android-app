@@ -46,6 +46,10 @@ public class SubmitData {
      */
     public static void manageSend(Context context, String filePath) throws IOException, InterruptedException, JSONException {
 
+        String dir_name = context.getString(R.string.directory_files);
+        String file_name_relations = context.getString(R.string.filename_relations);
+        String file_name_persons = context.getString(R.string.filename_persons);
+
         // récupère l'option d'envoi sélectionnée par l'utilisateurs dans les paramètres
         String sending_option = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_sending_option_key), null);
 
@@ -89,10 +93,10 @@ public class SubmitData {
 
             OkHttpClient client = new OkHttpClient();
 
-            boolean submit_persons = sendToServer(context, new File(context.getFilesDir(), filePath).getPath()+"/persons.json", ip_port, token_server, client, "manage_refugees");
-            boolean submit_relations = sendToServer(context, new File(context.getFilesDir(), filePath).getPath()+"/relations.json", ip_port, token_server, client, "links");
+            boolean submit_persons = sendToServer(context, context.getFilesDir().getPath()+dir_name+file_name_persons, ip_port, token_server, client, "manage_refugees");
+            boolean submit_relations = sendToServer(context, context.getFilesDir().getPath()+dir_name+file_name_relations, ip_port, token_server, client, "links");
             boolean submit_result = (submit_persons && submit_relations);
-            Log.d("Fichier", new File(context.getFilesDir(), filePath).getPath()+"HHH");
+            // Log.d("Fichier", new File(context.getFilesDir(), filePath).getPath()+"HHH");
             showSubmitResultDialog(context, submit_result);
         }
     }
@@ -150,39 +154,6 @@ public class SubmitData {
     public static boolean sendToServer(Context context, String filePath, String server_url, String token_server, OkHttpClient http_client, String target) throws InterruptedException, JSONException, IOException {
 
         String data_path = context.getFilesDir().getPath();
-
-        // Ecriture dans les fichiers Relations et Refugees pour des buts de Test!!
-        //Persons
-        FileUtils.writeFile(data_path+"/cases/persons.json","[\n" +
-                "    {\n" +
-                "    \"age\":12,\n" +
-                "    \"gender\":\"F\",\n" +
-                "    \"unique_id\" : \"BBB-000001\",\n" +
-                "    \"full_name\" : \"Lucas\",\n" +
-                "    \"nationality\" : \"FRA\",\n" +
-                "    \"date\" : \"2021-04-12\"\n" +
-                "    },\n" +
-                "    {\n" +
-                "    \"age\":12,\n" +
-                "    \"gender\":\"F\",\n" +
-                "    \"unique_id\" : \"BBB-000002\",\n" +
-                "    \"full_name\" : \"Luc\",\n" +
-                "    \"nationality\" : \"USA\",\n" +
-                "    \"date\" : \"2021-04-12\"\n" +
-                "    }\n" +
-                "]");
-
-        //Relations
-        FileUtils.writeFile(data_path+"/cases/relations.json","[\n" +
-                "    {\n" +
-                "    \"from_unique_id\" : \"BBB-000001\",\n" +
-                "    \"from_full_name\" : \"Lucas\",\n" +
-                "    \"to_unique_id\" : \"BBB-000002\",\n" +
-                "    \"to_full_name\" : \"Luc\",\n" +
-                "    \"relation\" : \"6e12f143-69fe-40d3-987f-1a7825e38247\",\n" +
-                "    \"detail\" : \"at the port\"\n" +
-                "    }\n" +
-                "]");
 
         //Get the unique application ID
         String android_id_file_path = data_path+"/config/android_id.txt";
