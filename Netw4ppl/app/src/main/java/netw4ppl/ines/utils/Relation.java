@@ -49,6 +49,14 @@ public class Relation extends JSONObject {
         return res_uid_from && res_uid_to;
     }
 
+    public boolean isPersonInRelation(Person p) {
+        String p_id = p.getInfoByKey("unique_id");
+        String p_full_name = p.getInfoByKey("full_name");
+        String person = p_id + " - " + p_full_name;
+
+        return this.getFrom().equals(person) || this.getTo().equals(person);
+    }
+
     public String getFrom() {
         return (this.getInfoByKey("from_unique_id") + " - " + this.getInfoByKey("from_full_name"));
     }
@@ -58,7 +66,6 @@ public class Relation extends JSONObject {
     }
 
     public String getDetails() {
-
         return (this.getInfoByKey("detail"));
     }
 
