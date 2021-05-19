@@ -100,11 +100,22 @@ public class AddRelationActivity extends AppCompatActivity {
                     if (new_relation) {
                         if (single_relation != null && testExistingRelation(single_relation)) {
                             Log.d(TAG, "onClick: ecriture de la relation");
+
+                            // ajout du champ application id
+                            single_relation.setApplicationID(MainActivity.mConfiguration.getApplicationId());
+
+                            // ajout du champ date
+                            single_relation.setCreationDate();
+
                             ManageRelationsActivity.array_relations.add(single_relation);
                             success_write = FileUtils.saveRelationsToFile(getApplicationContext(), ManageRelationsActivity.formatterJsonFile());
                         }
-                    } else {
+                    }
+                    else {
                         if (testExistingRelation(single_relation)) {
+                            // ajout du champ date_update
+                            single_relation.setUpdateDate();
+
                             int index_relation = DisplayDetailsRelationActivity.index_relation;
                             ManageRelationsActivity.array_relations.remove(index_relation);
                             ManageRelationsActivity.array_relations.add(index_relation, single_relation);
@@ -183,8 +194,12 @@ public class AddRelationActivity extends AppCompatActivity {
         boolean res_does_not_exists = false;
         if (result_generation){
             try {
-                single_relation = new Relation(from_person, relation_type, to_person, relation_details);
-                single_relation.setCreationDate();
+                if (new_relation)
+                    single_relation = new Relation(from_person, relation_type, to_person, relation_details);
+                else {
+                    single_relation.setRelationType(relation_type);
+                    single_relation.setDetails(relation_details);
+                }
                 res_does_not_exists = testExistingRelation(single_relation);
             } catch (JSONException e) {
                 e.printStackTrace();

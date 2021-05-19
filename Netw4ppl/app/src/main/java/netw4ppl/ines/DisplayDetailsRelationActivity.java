@@ -52,7 +52,11 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
         setViews(relation);
 
         mButtonEditRelation.setOnClickListener(v -> {
-            AddRelationActivity.single_relation = ManageRelationsActivity.array_relations.get(index_relation);
+            try {
+                AddRelationActivity.single_relation = new Relation(ManageRelationsActivity.array_relations.get(index_relation).toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             AddRelationActivity.new_relation = false;
             Intent intent = new Intent(DisplayDetailsRelationActivity.this, AddRelationActivity.class);
             startActivity(intent);

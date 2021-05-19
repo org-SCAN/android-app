@@ -1,10 +1,14 @@
 package netw4ppl.ines.utils;
 
+import android.annotation.SuppressLint;
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.TimeZone;
 
 public class Relation extends JSONObject {
 
@@ -25,6 +29,22 @@ public class Relation extends JSONObject {
 
     public Relation(String infos_relat) throws JSONException {
         super(infos_relat);
+    }
+
+    public void setRelationType(String key_relation) {
+        try {
+            this.put("relation", key_relation);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setDetails(String details) {
+        try {
+            this.put("detail", details);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getInfoByKey(String key) {
@@ -77,14 +97,39 @@ public class Relation extends JSONObject {
     }
 
     public void setCreationDate(){
-
         Calendar calendar = Calendar.getInstance();
-// ajout du champ date indispensable pour la database
+        // ajout du champ date indispensable pour la database
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date_creation = dateFormat.format(calendar.getTime());
 
         try {
             this.put("date", date_creation);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setUpdateDate() {
+        Calendar calendar = Calendar.getInstance();
+
+        // ajout de la date d'update
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        calendar.setTimeZone(tz);
+
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        dateFormat.setTimeZone(tz);
+        String date_update = dateFormat.format(calendar.getTime());
+
+        try {
+            this.put("date_update", date_update);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setApplicationID(String app_id) {
+        try {
+            this.put("application_id", app_id);
         } catch (JSONException e) {
             e.printStackTrace();
         }
