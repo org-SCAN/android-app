@@ -75,6 +75,8 @@ public class AddRelationActivity extends AppCompatActivity {
 
             from_person = ManagePersonsActivity.array_persons.get(index_from);
             to_person = ManagePersonsActivity.array_persons.get(index_to);
+            relation_type = single_relation.getRelationType();
+            relation_details = single_relation.getDetails();
         }
 
         //
@@ -102,17 +104,16 @@ public class AddRelationActivity extends AppCompatActivity {
                             success_write = FileUtils.saveRelationsToFile(getApplicationContext(), ManageRelationsActivity.formatterJsonFile());
                         }
                     } else {
-                        int index_relation = DisplayDetailsRelationActivity.index_relation;
-                        ManageRelationsActivity.array_relations.remove(index_relation);
-                        ManageRelationsActivity.array_relations.add(index_relation, single_relation);
-                        success_write = FileUtils.saveRelationsToFile(getApplicationContext(), ManageRelationsActivity.formatterJsonFile());
+                        if (testExistingRelation(single_relation)) {
+                            int index_relation = DisplayDetailsRelationActivity.index_relation;
+                            ManageRelationsActivity.array_relations.remove(index_relation);
+                            ManageRelationsActivity.array_relations.add(index_relation, single_relation);
+                            success_write = FileUtils.saveRelationsToFile(getApplicationContext(), ManageRelationsActivity.formatterJsonFile());
+                        }
                     }
 
-                    single_relation = null;
-                    new_relation = true;
-                    resetObjects();
-
                     if (success_write) {
+                        resetObjects();
                         finish();
                     }
                 }
@@ -121,10 +122,12 @@ public class AddRelationActivity extends AppCompatActivity {
     }
 
     public void resetObjects() {
-        from_person = null;
-        to_person = null;
-        relation_type = null;
-        relation_details = null;
+        from_person = new Person();
+        to_person = new Person();
+        relation_type = "NA";
+        relation_details = "";
+        single_relation = null;
+        new_relation = true;
     }
 
     public int associateInfosWithPerson(String string_p) {
@@ -154,18 +157,14 @@ public class AddRelationActivity extends AppCompatActivity {
         mAutoTextViewRelationFrom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (new_relation) {
-                    from_person = (Person) parent.getAdapter().getItem(position);
-                }
+                from_person = (Person) parent.getAdapter().getItem(position);
             }
         });
 
         mAutoTextViewRelationTo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (new_relation) {
-                    to_person = (Person) parent.getAdapter().getItem(position);
-                }
+                to_person = (Person) parent.getAdapter().getItem(position);
             }
         });
     }
@@ -181,18 +180,17 @@ public class AddRelationActivity extends AppCompatActivity {
 
     private boolean generateRelationFromInformations() {
         boolean result_generation = testValidRelation();
-        boolean result_creation = false;
+        boolean res_does_not_exists = false;
         if (result_generation){
             try {
                 single_relation = new Relation(from_person, relation_type, to_person, relation_details);
                 single_relation.setCreationDate();
-                result_creation = true;
+                res_does_not_exists = testExistingRelation(single_relation);
             } catch (JSONException e) {
                 e.printStackTrace();
-                result_creation = false;
             }
         }
-        return result_generation && result_creation;
+        return result_generation && res_does_not_exists;
     }
 
     /**
@@ -224,13 +222,11 @@ public class AddRelationActivity extends AppCompatActivity {
      */
     private boolean testExistingRelation(Relation relation){
         String toast_text = this.getString(R.string.toast_already_existing_relation);
-        if (new_relation){
-            for(int i=0 ; i<ManageRelationsActivity.array_relations.size();i++){
-                if (relation.isSameRelation(ManageRelationsActivity.array_relations.get(i))){
-                    Toast toast = Toast.makeText(this, toast_text, Toast.LENGTH_SHORT);
-                    toast.show();
-                    return false;
-                }
+        for(int i=0 ; i<ManageRelationsActivity.array_relations.size();i++){
+            if (relation.isSameRelation(ManageRelationsActivity.array_relations.get(i))){
+                Toast toast = Toast.makeText(this, toast_text, Toast.LENGTH_SHORT);
+                toast.show();
+                return false;
             }
         }
         return true;
@@ -295,7 +291,7 @@ public class AddRelationActivity extends AppCompatActivity {
      * @param key_val_pers
      * @return an int corresponding to the index of the key in the adapter
      */
-    public int getPositionInAdapter(Adapter adapter, String key_val_pers) {
+    public static int getPositionInAdapter(Adapter adapter, String key_val_pers) {
         DataElement data_element;
         for (int i=0; i<adapter.getCount(); i++) {
             data_element = (DataElement) adapter.getItem(i);
@@ -303,5 +299,11 @@ public class AddRelationActivity extends AppCompatActivity {
                 return i;
         }
         return 0;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        resetObjects();
     }
 }

@@ -40,13 +40,15 @@ public class Relation extends JSONObject {
     public boolean isSameRelation(Relation relat) {
         boolean res_uid_from = false;
         boolean res_uid_to = false;
+        boolean res_type_relation = false;
         try {
             res_uid_from = this.getString("from_unique_id").equals(relat.getString("from_unique_id"));
             res_uid_to = this.getString("to_unique_id").equals(relat.getString("to_unique_id"));
+            res_type_relation = this.getString("relation").equals(relat.getString("relation"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return res_uid_from && res_uid_to;
+        return res_uid_from && res_uid_to && res_type_relation;
     }
 
     public boolean isPersonInRelation(Person p) {
@@ -69,7 +71,7 @@ public class Relation extends JSONObject {
         return (this.getInfoByKey("detail"));
     }
 
-    public String getRelation_type() {
+    public String getRelationType() {
 
         return (this.getInfoByKey("relation"));
     }

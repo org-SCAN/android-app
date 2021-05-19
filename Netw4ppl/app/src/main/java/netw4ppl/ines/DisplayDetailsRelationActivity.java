@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONException;
 
+import netw4ppl.ines.utils.DataElement;
 import netw4ppl.ines.utils.FileUtils;
 import netw4ppl.ines.utils.Person;
 import netw4ppl.ines.utils.PersonDetailsListAdapter;
@@ -87,7 +89,14 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
     private void setViews(Relation relation){
         mTextViewFullnameTitle.setText(relation.getInfoByKey("from_full_name")+relation.getInfoByKey("to_full_name"));
         mTextViewFromFullname.setText(relation.getInfoByKey("from_full_name"));
-        mTextViewRelationType.setText(relation.getInfoByKey("relation"));
+
+        // associate the relation key with its string for a better visualisation
+        String relation_key = relation.getInfoByKey("relation");
+        ArrayAdapter<DataElement> relations_adapter = MainActivity.mConfiguration.getArrayAdapter("Relations");
+        int pos_in_adapter = AddRelationActivity.getPositionInAdapter(relations_adapter, relation_key);
+        String text_relation = relations_adapter.getItem(pos_in_adapter).toString();
+
+        mTextViewRelationType.setText(text_relation); // relation.getInfoByKey("relation")
         mTextViewToFullname.setText(relation.getInfoByKey("to_full_name"));
         mTextViewComments.setText(relation.getInfoByKey("detail"));
     }
