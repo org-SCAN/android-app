@@ -55,7 +55,10 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         mListDetailsPerson.setAdapter(adapter_details_person);
 
         mButtonAddRelationFrom.setOnClickListener(v -> {
-
+            AddRelationActivity.setToPerson(person);
+            AddRelationActivity.new_relation = true;
+            Intent intent = new Intent(DisplayDetailsPersonActivity.this, AddRelationActivity.class);
+            startActivity(intent);
         });
         mButtonEditPerson.setOnClickListener(v -> {
             AddPersonActivity.person = person;
@@ -93,7 +96,10 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
                     .show();
         });
         mButtonAddRelationTo.setOnClickListener(v -> {
-
+            AddRelationActivity.setFromPerson(person);
+            AddRelationActivity.new_relation = true;
+            Intent intent = new Intent(DisplayDetailsPersonActivity.this, AddRelationActivity.class);
+            startActivity(intent);
         });
     }
 
