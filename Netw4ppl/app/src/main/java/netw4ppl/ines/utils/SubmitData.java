@@ -96,11 +96,15 @@ public class SubmitData {
             boolean submit_persons = sendToServer(context, context.getFilesDir().getPath()+dir_name+file_name_persons, ip_port, token_server, client, "manage_refugees");
             boolean submit_relations = sendToServer(context, context.getFilesDir().getPath()+dir_name+file_name_relations, ip_port, token_server, client, "links");
             boolean submit_result = (submit_persons && submit_relations);
-            if (submit_result){
-                getFromServer(context,ip_port,token_server,client);
+
+            Boolean download_config = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getResources().getString(R.string.settings_server_maj_auto_key),false);
+            Boolean get_success = false;
+
+            if (submit_result && download_config){
+                get_success = getFromServer(context,ip_port,token_server,client);
             }
             // Log.d("Fichier", new File(context.getFilesDir(), filePath).getPath()+"HHH");
-            showSubmitResultDialog(context, submit_result);
+            showSubmitResultDialog(context, submit_result, get_success);
         }
     }
 
@@ -224,7 +228,6 @@ public class SubmitData {
      */
 
     public static boolean getFromServer(Context context, String server_url, String token_server, OkHttpClient http_client) throws IOException, InterruptedException {
-
         String data_path = context.getFilesDir().getPath();
         String dir_path = context.getString(R.string.config_files);
         String file_fields = context.getString(R.string.filename_fields);
@@ -272,6 +275,7 @@ public class SubmitData {
 
         thread.start();
         thread.join();
+
         return http_success[0];
     }
 
@@ -293,12 +297,14 @@ public class SubmitData {
      * was a success or a failure.
      *
      * @param context resources of the application
-     * @param result path to the file
+     * @param submit_result boolean of the submit status
+     * @param get_result boolean of the get status
      */
-    public static void showSubmitResultDialog(Context context, boolean result) {
+    public static void showSubmitResultDialog(Context context, boolean submit_result, boolean get_result) {
         new AlertDialog.Builder(context)
-                .setTitle(result ? R.string.main_submit_success_title : R.string.main_submit_fail_title)
-                .setMessage(result ? R.string.main_submit_success_msg : R.string.main_submit_fail_msg)
+                .setTitle(submit_result ? R.string.main_submit_success_title : R.string.main_submit_fail_title)
+                .setMessage(submit_result ? R.string.main_submit_success_msg : R.string.main_submit_fail_msg)
+                .setMessage(get_result ? R.string.main_get_success_msg : R.string.main_get_fail_msg)
                 .setCancelable(true)
                 .setPositiveButton(android.R.string.ok, null)
                 .create()

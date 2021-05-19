@@ -13,6 +13,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceGroup;
+import androidx.preference.SwitchPreference;
 
 import netw4ppl.ines.utils.FileUtils;
 
@@ -114,6 +115,12 @@ public class SettingsActivity extends AppCompatActivity {
                 String pattern_ip = "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}:[1-9][0-9]{0,4}$";
                 return Pattern.matches(pattern_ip, v.toString());
             });
+
+            SwitchPreference switch_auto_update = findPreference(res.getString(R.string.settings_server_maj_auto_key));
+            switch_auto_update.setOnPreferenceChangeListener((e,v) -> {
+                return true;
+            });
+
 
 //            // perform some magic with the password fields
 //            EditTextPreference password_email = findPreference(res.getString(R.string.settings_email_password_key));
