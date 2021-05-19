@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -37,12 +39,17 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
     ListView mListDetailsPerson;
     ListView mListRelationsTo;
 
-    public static int index_person = -1;
+    public int index_person;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_details_person);
+
+        Bundle extra_parameter = getIntent().getExtras();
+        index_person = -1;
+        if(extra_parameter != null)
+            index_person = extra_parameter.getInt("index_person");
 
         mTextViewFullnameTitle = (TextView) findViewById(R.id.details_title_full_name);
 
@@ -60,11 +67,69 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         mTextViewFullnameTitle.setText(person.getInfoByKey("full_name"));
 
         /* Adapters for the different list views */
-        adapter_details_person = new PersonDetailsListAdapter(this, R.layout.adapter_details_person_fields, MainActivity.mConfiguration.getArrayFields());
+        adapter_details_person = new PersonDetailsListAdapter(this, R.layout.adapter_details_person_fields, MainActivity.mConfiguration.getArrayFields(), index_person);
         mListDetailsPerson.setAdapter(adapter_details_person);
 
         updateAdapterFrom();
         updateAdapterTo();
+
+        mListRelationsFrom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // position correspond à la position de la personne dans l'adapter
+                boolean got_it = false;
+                int index_reel = 0;
+                int i=0;
+                Relation r = (Relation) adapter_relations_from.getItem(position);
+                String person_from_string = r.getFrom();
+
+                // associer cette position à la position réelle dans l'array de base
+                while (i < ManagePersonsActivity.array_persons.size() && !got_it) {
+                    if (ManagePersonsActivity.array_persons.get(i).toString().equals(person_from_string)) {
+                        index_reel = i;
+                        got_it = true;
+                    }
+                    i++;
+                }
+
+                // on a désormais la bonne relation, il faut cherche l'index de la personne
+
+                // DisplayDetailsPersonActivity.index_person = index_reel;
+                Intent intent = new Intent(DisplayDetailsPersonActivity.this, DisplayDetailsPersonActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("index_person", index_reel); //Your id
+                intent.putExtras(b); //Put your id to your next Intent
+                startActivity(intent);
+            }
+        });
+
+        mListRelationsTo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // position correspond à la position de la personne dans l'adapter
+                boolean got_it = false;
+                int index_reel = 0;
+                int i=0;
+                Relation r = (Relation) adapter_relations_to.getItem(position);
+                String person_from_string = r.getTo();
+
+                // associer cette position à la position réelle dans l'array de base
+                while (i < ManagePersonsActivity.array_persons.size() && !got_it) {
+                    if (ManagePersonsActivity.array_persons.get(i).toString().equals(person_from_string)) {
+                        index_reel = i;
+                        got_it = true;
+                    }
+                    i++;
+                }
+
+                // DisplayDetailsPersonActivity.index_person = index_reel;
+                Intent intent = new Intent(DisplayDetailsPersonActivity.this, DisplayDetailsPersonActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("index_person", index_reel); //Your id
+                intent.putExtras(b); //Put your id to your next Intent
+                startActivity(intent);
+            }
+        });
 
         mButtonAddRelationFrom.setOnClickListener(v -> {
             AddRelationActivity.setToPerson(person);
@@ -75,7 +140,13 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         mButtonEditPerson.setOnClickListener(v -> {
             AddPersonActivity.person = person;
             AddPersonActivity.new_person = false;
+
             Intent intent = new Intent(DisplayDetailsPersonActivity.this, AddPersonActivity.class);
+
+            Bundle b = new Bundle();
+            b.putInt("index_person", index_person); //Your id
+            intent.putExtras(b); //Put your id to your next Intent
+
             startActivity(intent);
         });
         mButtonDeletePerson.setOnClickListener(v-> {

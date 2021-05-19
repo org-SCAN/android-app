@@ -64,4 +64,10 @@ public class PersonDetailsRelationFromAdapter extends ArrayAdapter<Relation> {
 
         return convertView;
     }
+
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
+
+
 }

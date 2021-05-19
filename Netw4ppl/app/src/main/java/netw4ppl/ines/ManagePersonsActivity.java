@@ -95,8 +95,11 @@ public class ManagePersonsActivity extends AppCompatActivity {
                     i++;
                 }
 
-                DisplayDetailsPersonActivity.index_person = index_reel;
+                // DisplayDetailsPersonActivity.index_person = index_reel;
                 Intent intent = new Intent(ManagePersonsActivity.this, DisplayDetailsPersonActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("index_person", index_reel); //Your id
+                intent.putExtras(b); //Put your id to your next Intent
                 startActivity(intent);
             }
         });
