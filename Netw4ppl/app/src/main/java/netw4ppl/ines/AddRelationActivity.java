@@ -31,18 +31,15 @@ public class AddRelationActivity extends AppCompatActivity {
     public static Relation single_relation;
     public static boolean new_relation = true;
 
-    private static Person from_person;
-    private static Person to_person;
+    public static Person from_person;
+    public static Person to_person;
     private static String relation_type;
     private static String relation_details;
 
     AutoCompleteTextView mAutoTextViewRelationFrom;
     AutoCompleteTextView mAutoTextViewRelationTo;
-
     Spinner mSpinnerRelationType;
-
     EditText mEditTextRelationComments;
-
     Button mButtonRelationSave;
     Button mButtonRelationCancel;
 
@@ -53,10 +50,34 @@ public class AddRelationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_relation);
 
+        // get the button views from the layout
         mButtonRelationSave = findViewById(R.id.display_add_relation_save);
         mButtonRelationCancel = findViewById(R.id.display_add_relation_cancel);
+        mAutoTextViewRelationFrom = findViewById(R.id.add_relation_from);
+        mAutoTextViewRelationTo = findViewById(R.id.add_relation_to);
+        mSpinnerRelationType = findViewById(R.id.add_relation_type);
+        mEditTextRelationComments = findViewById(R.id.add_relation_comments);
 
-        generateViews();
+        // set the adapters for the different fields
+        setAdapters();
+
+        // complete the views with the edit relation informations
+        if (!new_relation){
+            setEditInformation();
+
+            // désactiver les champs de saisie des personnes
+            mAutoTextViewRelationFrom.setEnabled(false);
+            mAutoTextViewRelationTo.setEnabled(false);
+
+            // associate the ids and full_names with the Person objects and set the variables
+            int index_from = associateInfosWithPerson(single_relation.getFrom());
+            int index_to = associateInfosWithPerson(single_relation.getTo());
+
+            from_person = ManagePersonsActivity.array_persons.get(index_from);
+            to_person = ManagePersonsActivity.array_persons.get(index_to);
+        }
+
+        //
         setListeners();
 
         mButtonRelationSave.setOnClickListener(new View.OnClickListener() {
@@ -70,36 +91,58 @@ public class AddRelationActivity extends AppCompatActivity {
                 relation_type = data_element.getKey();
 
                 //Get the informations about the relation in the views
-                try {
-                    generateRelationFromInformations();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                boolean valid_relation = generateRelationFromInformations();
+                boolean success_write = false;
 
-                boolean success_write=false;
-
-                if (new_relation){
-                    if (single_relation!=null && testExistingRelation(single_relation)){
-                        Log.d(TAG, "onClick: ecriture de la relation");
-                        ManageRelationsActivity.array_relations.add(single_relation);
-                        success_write = FileUtils.saveRelationsToFile(getApplicationContext(),ManageRelationsActivity.formatterJsonFile());
+                if (valid_relation) {
+                    if (new_relation) {
+                        if (single_relation != null && testExistingRelation(single_relation)) {
+                            Log.d(TAG, "onClick: ecriture de la relation");
+                            ManageRelationsActivity.array_relations.add(single_relation);
+                            success_write = FileUtils.saveRelationsToFile(getApplicationContext(), ManageRelationsActivity.formatterJsonFile());
+                        }
+                    } else {
+                        int index_relation = DisplayDetailsRelationActivity.index_relation;
+                        ManageRelationsActivity.array_relations.remove(index_relation);
+                        ManageRelationsActivity.array_relations.add(index_relation, single_relation);
+                        success_write = FileUtils.saveRelationsToFile(getApplicationContext(), ManageRelationsActivity.formatterJsonFile());
                     }
-                }else {
-                    int index_relation = DisplayDetailsRelationActivity.index_relation;
-                    ManageRelationsActivity.array_relations.remove(index_relation);
-                    ManageRelationsActivity.array_relations.add(index_relation,single_relation);
-                    success_write = FileUtils.saveRelationsToFile(getApplicationContext() ,ManageRelationsActivity.formatterJsonFile());
 
-                }
+                    single_relation = null;
+                    new_relation = true;
+                    resetObjects();
 
-                single_relation=null;
-
-                new_relation=true;
-                if (success_write){
-                    finish();
+                    if (success_write) {
+                        finish();
+                    }
                 }
             }
         });
+    }
+
+    public void resetObjects() {
+        from_person = null;
+        to_person = null;
+        relation_type = null;
+        relation_details = null;
+    }
+
+    public int associateInfosWithPerson(String string_p) {
+        // aller chercher dans la liste ManagePersonActivity.array_persons la personne associée à ces deux éléments
+        boolean found = false;
+        int i= 0;
+        int index_p = -1;
+        while (i < ManagePersonsActivity.array_persons.size() && !found) {
+            Person p = ManagePersonsActivity.array_persons.get(i);
+
+            if (p.toString().equals(string_p)) {
+                index_p = i;
+                found = true;
+            }
+
+            i++;
+        }
+        return index_p;
     }
 
     /**
@@ -108,17 +151,11 @@ public class AddRelationActivity extends AppCompatActivity {
      * AutoCompletTextView dropdown
      */
     private void setListeners() {
-        String toast_text = getApplicationContext().getString(R.string.toast_edit_person_relation);
-
         mAutoTextViewRelationFrom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (new_relation) {
                     from_person = (Person) parent.getAdapter().getItem(position);
-                } else {
-                    mAutoTextViewRelationFrom.setText(single_relation.getInfoByKey("from_unique_id") + " - " + single_relation.getInfoByKey("from_full_name"), false);
-                    Toast toast = Toast.makeText(getApplicationContext(), toast_text, Toast.LENGTH_SHORT);
-                    toast.show();
                 }
             }
         });
@@ -128,41 +165,34 @@ public class AddRelationActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (new_relation) {
                     to_person = (Person) parent.getAdapter().getItem(position);
-                } else {
-                    mAutoTextViewRelationTo.setText(single_relation.getInfoByKey("to_unique_id") + " - " + single_relation.getInfoByKey("to_full_name"), false);
-                    Toast toast = Toast.makeText(getApplicationContext(), toast_text, Toast.LENGTH_SHORT);
-                    toast.show();
                 }
             }
         });
     }
 
-    private void generateViews() {
-        mAutoTextViewRelationFrom = findViewById(R.id.add_relation_from);
-        mAutoTextViewRelationTo = findViewById(R.id.add_relation_to);
-
+    private void setAdapters() {
         ArrayAdapter<Person> autocomplete_adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, ManagePersonsActivity.array_persons);
-
         mAutoTextViewRelationFrom.setAdapter(autocomplete_adapter);
         mAutoTextViewRelationTo.setAdapter(autocomplete_adapter);
 
-        mSpinnerRelationType = findViewById(R.id.add_relation_type);
         spinner_adapter = MainActivity.mConfiguration.getArrayAdapter("Relations");
         mSpinnerRelationType.setAdapter(spinner_adapter);
-
-
-        mEditTextRelationComments = findViewById(R.id.add_relation_comments);
-
-        if (new_relation==false){
-            setEditInformation();
-        }
     }
 
-    private void generateRelationFromInformations() throws JSONException {
-        if (testValidRelation()){
-            single_relation = new Relation(from_person,relation_type,to_person, relation_details);
-            single_relation.setCreationDate();
+    private boolean generateRelationFromInformations() {
+        boolean result_generation = testValidRelation();
+        boolean result_creation = false;
+        if (result_generation){
+            try {
+                single_relation = new Relation(from_person, relation_type, to_person, relation_details);
+                single_relation.setCreationDate();
+                result_creation = true;
+            } catch (JSONException e) {
+                e.printStackTrace();
+                result_creation = false;
+            }
         }
+        return result_generation && result_creation;
     }
 
     /**
@@ -178,7 +208,7 @@ public class AddRelationActivity extends AppCompatActivity {
     private boolean testSamePersonRelation(Person p1, Person p2){
         boolean test = (p1.equals(p2));
         String toast_text = this.getString(R.string.toast_same_person_relation);
-        if (test == true){
+        if (test){
             Toast toast = Toast.makeText(this, toast_text, Toast.LENGTH_SHORT);
             toast.show();
         }
@@ -249,8 +279,8 @@ public class AddRelationActivity extends AppCompatActivity {
      * Sets the Views of the activity so they contain the informations of the edited relation
      */
     private void setEditInformation(){
-        mAutoTextViewRelationFrom.setText(single_relation.getInfoByKey("from_unique_id") + " - " +single_relation.getInfoByKey("from_full_name"), false);
-        mAutoTextViewRelationTo.setText(single_relation.getInfoByKey("to_unique_id") + " - " +single_relation.getInfoByKey("to_full_name"), false);
+        mAutoTextViewRelationFrom.setText(single_relation.getFrom(), false);
+        mAutoTextViewRelationTo.setText(single_relation.getTo(), false);
 
         String relation_key = single_relation.getInfoByKey("relation");
         int pos_in_adapter = getPositionInAdapter(spinner_adapter, relation_key);

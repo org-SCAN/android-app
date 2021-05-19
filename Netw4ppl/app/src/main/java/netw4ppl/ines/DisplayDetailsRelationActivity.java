@@ -50,7 +50,7 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
         setViews(relation);
 
         mButtonEditRelation.setOnClickListener(v -> {
-            AddRelationActivity.single_relation = relation;
+            AddRelationActivity.single_relation = ManageRelationsActivity.array_relations.get(index_relation);
             AddRelationActivity.new_relation = false;
             Intent intent = new Intent(DisplayDetailsRelationActivity.this, AddRelationActivity.class);
             startActivity(intent);
@@ -85,14 +85,11 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
     }
 
     private void setViews(Relation relation){
-
         mTextViewFullnameTitle.setText(relation.getInfoByKey("from_full_name")+relation.getInfoByKey("to_full_name"));
         mTextViewFromFullname.setText(relation.getInfoByKey("from_full_name"));
         mTextViewRelationType.setText(relation.getInfoByKey("relation"));
         mTextViewToFullname.setText(relation.getInfoByKey("to_full_name"));
         mTextViewComments.setText(relation.getInfoByKey("detail"));
-
-
     }
 
     @Override
