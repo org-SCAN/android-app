@@ -241,6 +241,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             case 0:
                 /* Section EditText basique */
                 ((ViewHolderEditText) holder).mTitle.setText(field.getTitle());
+                ((ViewHolderEditText) holder).mText.setHint(field.getElementByKey("placeholder"));
                 ((ViewHolderEditText) holder).myCustomEditTextListener.updatePosition(holder.getAdapterPosition());
                 ((ViewHolderEditText) holder).myCustomEditTextListener.setKey(field.getKey());
                 ((ViewHolderEditText) holder).mText.setText(AddPersonActivity.person.getInfoByKey(field.getKey()));
