@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import netw4ppl.ines.utils.Configuration;
 import netw4ppl.ines.utils.DataElement;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity{
 
     public static String device_language;
 
-    public static boolean mLancementApplication = true;
+    public static boolean mApplicationLaunch = true;
 
     public static Configuration mConfiguration;
 
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity{
         });
 
         // si c'est le lancement de l'application, chargement en mémoire des json de configuration
-        if (mLancementApplication) {
+        if (mApplicationLaunch) {
             // lecture de tous les json
             try {
                 JSONObject config_content = FileUtils.loadConfigFromFile(this);
@@ -106,7 +107,18 @@ public class MainActivity extends AppCompatActivity{
                 e.printStackTrace();
             }
 
-            mLancementApplication = false;
+            boolean download_config = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(this.getResources().getString(R.string.settings_server_maj_auto_key),false);
+            if (download_config){
+                try {
+                    SubmitData.manageGet(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            mApplicationLaunch = false;
         }
     }
 

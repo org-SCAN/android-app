@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public class SubmitData {
 
@@ -97,14 +99,37 @@ public class SubmitData {
             boolean submit_relations = sendToServer(context, context.getFilesDir().getPath()+dir_name+file_name_relations, ip_port, token_server, client, "links");
             boolean submit_result = (submit_persons && submit_relations);
 
-            Boolean download_config = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getResources().getString(R.string.settings_server_maj_auto_key),false);
-            Boolean get_success = false;
+            boolean download_config = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getResources().getString(R.string.settings_server_maj_auto_key),false);
+            boolean get_success = false;
 
             if (submit_result && download_config){
                 get_success = getFromServer(context,ip_port,token_server,client);
             }
             // Log.d("Fichier", new File(context.getFilesDir(), filePath).getPath()+"HHH");
             showSubmitResultDialog(context, submit_result, get_success);
+        }
+    }
+
+    public static void manageGet(Context context) throws IOException, InterruptedException {
+        String token_server = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_server_token_key), "");
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(100, TimeUnit.MILLISECONDS)
+                .build();
+        String ip_port = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_server_ip_port_key), "");
+
+        String toast_text = "";
+
+        if (token_server==""){
+            toast_text += context.getString(R.string.main_submit_token_fail_msg) + "\n";
+        }else if (ip_port==""){
+            toast_text += context.getString(R.string.main_submit_ip_port_fail_msg);
+        }
+
+        if (toast_text==""){
+            boolean get_result = getFromServer(context,ip_port,token_server,client);
+            toast_text = get_result ? context.getString(R.string.main_get_success_msg) : context.getString(R.string.main_get_fail_msg);
+            Toast toast = Toast.makeText(context, toast_text, Toast.LENGTH_LONG);
+            toast.show();
         }
     }
 
@@ -301,10 +326,11 @@ public class SubmitData {
      * @param get_result boolean of the get status
      */
     public static void showSubmitResultDialog(Context context, boolean submit_result, boolean get_result) {
+        String message_get = get_result ? context.getString(R.string.main_get_success_msg) : context.getString(R.string.main_get_fail_msg);
+        String message_send =  submit_result ? context.getString(R.string.main_submit_success_msg) : context.getString(R.string.main_submit_fail_msg);
         new AlertDialog.Builder(context)
                 .setTitle(submit_result ? R.string.main_submit_success_title : R.string.main_submit_fail_title)
-                .setMessage(submit_result ? R.string.main_submit_success_msg : R.string.main_submit_fail_msg)
-                .setMessage(get_result ? R.string.main_get_success_msg : R.string.main_get_fail_msg)
+                .setMessage(message_send + "\n" + message_get)
                 .setCancelable(true)
                 .setPositiveButton(android.R.string.ok, null)
                 .create()
