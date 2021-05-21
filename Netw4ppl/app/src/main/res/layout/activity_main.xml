@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="60dp"
         android:text="@string/title_activity_settings"
-        app:backgroundTint="#EA5252"
+        app:backgroundTint="#a01217"
         app:icon="@android:drawable/ic_menu_preferences"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
