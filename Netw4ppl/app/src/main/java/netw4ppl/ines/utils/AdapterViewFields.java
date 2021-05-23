@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Build;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.Layout;
 import android.text.TextWatcher;
@@ -29,6 +30,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.regex.Pattern;
 
 import netw4ppl.ines.AddPersonActivity;
 import netw4ppl.ines.MainActivity;
@@ -53,6 +55,8 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             mTitleFigures = itemView.findViewById(R.id.unique_id_title_figures);
             mValueLetters = itemView.findViewById(R.id.unique_id_text_letters);
             mValueFigures = itemView.findViewById(R.id.unique_id_text_figures);
+
+            mValueLetters.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
         }
 
         public void setTextListener(CustomUniqueIDTextListener customUniqueIDTextListener) {
@@ -315,6 +319,8 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         private int position;
         ViewHolderUniqueID mView;
 
+        private final String regex_id = "([A-Z]{3})";
+
         public CustomUniqueIDTextListener(ViewHolderUniqueID v) {
             super();
             this.mView = v;
@@ -342,25 +348,31 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             // get the field key (even if for this case we know it's "unique_id")
             String field_key = mFields.get(position).getKey();
 
-            Log.d("general-settings", "Tricode after changes: " + actual_value);
-            String id_person = AddPersonActivity.person.getInfoByKey(field_key);
-            String[] ids = id_person.split("-");
-            String letters = ids[0];
+            if (Pattern.matches(regex_id, actual_value)) {
+                String id_person = AddPersonActivity.person.getInfoByKey(field_key);
+                String[] ids = id_person.split("-");
+                String letters = ids[0];
 
-            if (!actual_value.equals(letters)) {
-                // on va récupérer la valeur suivante de tricode
-                int id_figures_int = AddPersonActivity.getNextId(actual_value);
-                String id_figures = String.format("%06d", id_figures_int);
-                String new_value = actual_value+"-"+id_figures;
+                if (!actual_value.equals(letters)) {
+                    // on va récupérer la valeur suivante de tricode
+                    int id_figures_int = AddPersonActivity.getNextId(actual_value);
+                    String id_figures = String.format("%06d", id_figures_int);
+                    String new_value = actual_value+"-"+id_figures;
 
-                // on change le champs de texte pour les chiffres
-                mView.mValueFigures.setText(id_figures);
-                // on ajoute l'unique ID à la personne
-                try {
-                    AddPersonActivity.person.put(field_key, new_value);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    // on change le champs de texte pour les chiffres
+                    mView.mValueFigures.setText(id_figures);
+                    // on ajoute l'unique ID à la personne
+                    try {
+                        AddPersonActivity.person.put(field_key, new_value);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
+            }
+            else {
+                // supprimer le champ de personne pour forcer l'erreur
+                AddPersonActivity.person.remove("unique_id");
+                mView.mValueLetters.setError(mContext.getResources().getString(R.string.error_unique_id));
             }
         }
     }

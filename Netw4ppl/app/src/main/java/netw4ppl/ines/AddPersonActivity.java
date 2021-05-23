@@ -161,8 +161,6 @@ public class AddPersonActivity extends AppCompatActivity {
                 String f_key = f.getKey();
                 String info_p = person.getInfoByKey(f_key);
 
-                Log.d("general-display", f_key + " is required");
-
                 if (info_p.equals("")) {
                     fields_a_remplir += f.getTitle() + " - ";
                     all_good = false;

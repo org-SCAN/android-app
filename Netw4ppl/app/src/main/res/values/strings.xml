@@ -132,6 +132,8 @@
     <string name="delete_relation_title">Delete Relation</string>
     <string name="delete_relation_message">Do you really want to delete this relation from the application?</string>
 
+    <string name="error_unique_id">Unique format not valid, must be 3 letters</string>
+
     <string name="yes">Yes</string>
 
 </resources>
