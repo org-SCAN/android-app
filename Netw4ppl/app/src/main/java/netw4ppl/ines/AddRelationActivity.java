@@ -18,6 +18,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import org.json.JSONException;
 
 import netw4ppl.ines.utils.DataElement;
@@ -386,10 +388,32 @@ public class AddRelationActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+//        String info_person_from = (String) savedInstanceState.getSerializable("from_person");
+//        String info_person_to = (String) savedInstanceState.getSerializable("to_person");
+//
+//        int index_from = associateInfosWithPerson(info_person_from);
+//        from_person = ManagePersonsActivity.array_persons.get(index_from);
+//
+//        int index_to = associateInfosWithPerson(info_person_to);
+//        to_person = ManagePersonsActivity.array_persons.get()
+//
+//        relation_type = savedInstanceState.getString("relation_type");
+//        relation_details = savedInstanceState.getString("relation_details");
+//        person = new Gson().fromJson(info_person, Person.class);
+    }
+
+    @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
         // ajouter les objets à sauvegarder
-
+        Gson gson = new Gson();
+        outState.putSerializable("from_person", gson.toJson(from_person));
+        outState.putSerializable("to_person", gson.toJson(to_person));
+        outState.putString("relation_type", relation_type);
+        outState.putString("relation_details", relation_details);
     }
 }
