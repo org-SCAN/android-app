@@ -1,5 +1,6 @@
 package netw4ppl.ines;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +10,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -219,5 +222,21 @@ public class AddPersonActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         new_person = true;
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        // function used when the screen is rotated
+        super.onSaveInstanceState(outState);
+
+        outState.putSerializable("person", new Gson().toJson(person));
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        String info_person = (String) savedInstanceState.getSerializable("person");
+        person = new Gson().fromJson(info_person, Person.class);
     }
 }
