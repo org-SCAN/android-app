@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public class SubmitData {
 
@@ -97,25 +99,53 @@ public class SubmitData {
                 boolean submit_persons = sendToServer(context, context.getFilesDir().getPath() + dir_name + file_name_persons, ip_port, token_server, client, "manage_refugees");
                 boolean submit_relations = sendToServer(context, context.getFilesDir().getPath() + dir_name + file_name_relations, ip_port, token_server, client, "links");
                 boolean submit_result = (submit_persons && submit_relations);
-                if (submit_result) {
-                    getFromServer(context, ip_port, token_server, client);
+
+                boolean download_config = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getResources().getString(R.string.settings_server_maj_auto_key), false);
+                boolean get_success = false;
+
+                if (submit_result && download_config) {
+                    get_success = getFromServer(context, ip_port, token_server, client);
                 }
                 // Log.d("Fichier", new File(context.getFilesDir(), filePath).getPath()+"HHH");
-                showSubmitResultDialog(context, submit_result);
+                showSubmitResultDialog(context, submit_result, get_success);
+
             }
-        }
-        else {
+        }else{
             new AlertDialog.Builder(context)
                     .setTitle(R.string.no_submit_option_title)
                     .setMessage(R.string.no_submit_option_msg)
                     .setCancelable(true)
-                    .setPositiveButton(R.string.change_settings, (a,b) -> {
+                    .setPositiveButton(R.string.change_settings, (a, b) -> {
                         Intent intent = new Intent(context, SettingsActivity.class);
                         context.startActivity(intent);
                     })
                     .create()
                     .show();
             return;
+        }
+    }
+
+    
+  public static void manageGet(Context context) throws IOException, InterruptedException {
+        String token_server = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_server_token_key), "");
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(100, TimeUnit.MILLISECONDS)
+                .build();
+        String ip_port = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_server_ip_port_key), "");
+
+        String toast_text = "";
+
+        if (token_server.equals("")){
+            toast_text += context.getString(R.string.main_submit_token_fail_msg) + "\n";
+        }else if (ip_port.equals("")){
+            toast_text += context.getString(R.string.main_submit_ip_port_fail_msg);
+        }
+
+        if (toast_text.equals("")){
+            boolean get_result = getFromServer(context,ip_port,token_server,client);
+            toast_text = get_result ? context.getString(R.string.main_get_success_msg) : context.getString(R.string.main_get_fail_msg);
+            Toast toast = Toast.makeText(context, toast_text, Toast.LENGTH_LONG);
+            toast.show();
         }
     }
 
@@ -242,23 +272,11 @@ public class SubmitData {
      */
 
     public static boolean getFromServer(Context context, String server_url, String token_server, OkHttpClient http_client) throws IOException, InterruptedException {
-
         String data_path = context.getFilesDir().getPath();
         String dir_path = context.getString(R.string.config_files);
         String file_fields = context.getString(R.string.filename_fields);
-        String file_id = context.getString(R.string.unique_id_filename);
 
-        //Get the unique application ID
-        String android_id_file_path = data_path+dir_path+file_id;
-        String unique_app_id;
-
-        if (FileUtils.fileExists(android_id_file_path)){
-            unique_app_id = FileUtils.readFile(android_id_file_path);
-        }else{
-            unique_app_id = UUID.randomUUID().toString();
-            FileUtils.writeFile(android_id_file_path, unique_app_id);
-        }
-
+        String unique_app_id = MainActivity.mConfiguration.getApplicationId();
         final boolean[] http_success = {false};
         Thread thread = new Thread(new Runnable() {
 
@@ -290,6 +308,7 @@ public class SubmitData {
 
         thread.start();
         thread.join();
+
         return http_success[0];
     }
 
@@ -311,12 +330,15 @@ public class SubmitData {
      * was a success or a failure.
      *
      * @param context resources of the application
-     * @param result path to the file
+     * @param submit_result boolean of the submit status
+     * @param get_result boolean of the get status
      */
-    public static void showSubmitResultDialog(Context context, boolean result) {
+    public static void showSubmitResultDialog(Context context, boolean submit_result, boolean get_result) {
+        String message_get = get_result ? context.getString(R.string.main_get_success_msg) : context.getString(R.string.main_get_fail_msg);
+        String message_send =  submit_result ? context.getString(R.string.main_submit_success_msg) : context.getString(R.string.main_submit_fail_msg);
         new AlertDialog.Builder(context)
-                .setTitle(result ? R.string.main_submit_success_title : R.string.main_submit_fail_title)
-                .setMessage(result ? R.string.main_submit_success_msg : R.string.main_submit_fail_msg)
+                .setTitle(submit_result ? R.string.main_submit_success_title : R.string.main_submit_fail_title)
+                .setMessage(message_send + "\n" + message_get)
                 .setCancelable(true)
                 .setPositiveButton(android.R.string.ok, null)
                 .create()

@@ -50,6 +50,10 @@
     <string name="main_submit_success_msg">The submitting was a success. You can now delete the files</string>
     <string name="main_submit_fail_msg">We are sorry but an unknown error was encountered, please try again later</string>
 
+    <!-- Strings Get status -->
+    <string name="main_get_success_msg">New configuration files were downloaded</string>
+    <string name="main_get_fail_msg">Not able to download new configuration files</string>
+
     <!-- Strings Submit server settings error -->
     <string name="main_submit_ip_port_fail_title">Server address</string>
     <string name="main_submit_ip_port_fail_msg">Please enter the IP address and the port number values in the settings</string>
