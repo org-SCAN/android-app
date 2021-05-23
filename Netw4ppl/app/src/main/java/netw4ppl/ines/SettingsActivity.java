@@ -145,7 +145,7 @@ public class SettingsActivity extends AppCompatActivity {
                 displayToast(this.getContext(), res.getString(R.string.toast_delete_processing));
                 Log.d("general-display", "Efface les fichiers de l'appareil");
 
-                boolean result_deletion = FileUtils.clearDirectory(SettingsFragment.this.getContext().getFilesDir().getPath());
+                boolean result_deletion = FileUtils.clearDirectory(SettingsFragment.this.getContext().getFilesDir() + "/cases/");
                 //ManagePersonsActivity.array_persons = new JSONArray();
 
                 // create the new empty ones
