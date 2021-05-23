@@ -14,11 +14,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
 import netw4ppl.ines.utils.AdapterViewFields;
+import netw4ppl.ines.utils.Field;
 import netw4ppl.ines.utils.FileUtils;
 import netw4ppl.ines.utils.Person;
 
@@ -32,6 +34,8 @@ public class AddPersonActivity extends AppCompatActivity {
     Button mButtonSave;
     Button mButtonCancel;
 
+    private int index_person;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,11 @@ public class AddPersonActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recycler_view_add_person);
         mButtonSave = findViewById(R.id.button_add_person_save);
         mButtonCancel = findViewById(R.id.button_add_person_cancel);
+
+        Bundle extra_parameter = getIntent().getExtras();
+        index_person = -1;
+        if(extra_parameter != null)
+            index_person = extra_parameter.getInt("index_person");
 
         // on regarde si on vient de DetailsPersonActivity ou pas
         if (new_person) {
@@ -56,52 +65,56 @@ public class AddPersonActivity extends AppCompatActivity {
         });
 
         mButtonSave.setOnClickListener(v -> {
-            Calendar calendar = Calendar.getInstance();
-            /* Ajout d'une nouvelle personne */
-            if (new_person) {
 
-                // ajout du champ date indispensable pour la database
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            if (verificationInputPerson()) {
 
-                String date_creation = dateFormat.format(calendar.getTime());
-                person.putInfo("date", date_creation);
+                Calendar calendar = Calendar.getInstance();
+                /* Ajout d'une nouvelle personne */
+                if (new_person) {
 
-                // TODO rajouter le champs application_id
+                    // ajout du champ date indispensable pour la database
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    String date_creation = dateFormat.format(calendar.getTime());
+                    person.putInfo("date", date_creation);
 
-                // ajout dans l'array de personnes
-                // TODO si ajout en première position, il faut notifier l'adapter etc
-                ManagePersonsActivity.array_persons.add(person);
-            }
-            /* Modification d'une personne existante */
-            else {
-                // ajout de la date d'update
-                TimeZone tz = TimeZone.getTimeZone("UTC");
-                calendar.setTimeZone(tz);
+                    // ajouter du champ d'application id
+                    String application_id = MainActivity.mConfiguration.getApplicationId();
+                    person.putInfo("application_id", application_id);
 
-                @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                dateFormat.setTimeZone(tz);
-                String date_update = dateFormat.format(calendar.getTime());
+                    // ajout dans l'array de personnes
+                    ManagePersonsActivity.array_persons.add(person);
+                }
+                /* Modification d'une personne existante */
+                else {
+                    // ajout de la date d'update
+                    TimeZone tz = TimeZone.getTimeZone("UTC");
+                    calendar.setTimeZone(tz);
 
-                person.putInfo("date_update", date_update);
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    dateFormat.setTimeZone(tz);
+                    String date_update = dateFormat.format(calendar.getTime());
 
-                // on supprime l'ancienne version avant d'ajouter la nouvelle
-                int index = DisplayDetailsPersonActivity.index_person;
-                ManagePersonsActivity.array_persons.remove(index);
-                ManagePersonsActivity.array_persons.add(index, person);
-            }
+                    person.putInfo("date_update", date_update);
 
-            boolean save_ids = saveIds(this, person);
+                    // on supprime l'ancienne version avant d'ajouter la nouvelle
+                    int index = index_person;
+                    ManagePersonsActivity.array_persons.remove(index);
+                    ManagePersonsActivity.array_persons.add(index, person);
+                }
 
-            // enregistre les données dans le fichier associé
-            boolean save_persons = FileUtils.savePersonsToFile(this, ManagePersonsActivity.formatterJsonFile());
+                boolean save_ids = saveIds(this, person);
 
-            // reset some variables
-            new_person = true;
+                // enregistre les données dans le fichier associé
+                boolean save_persons = FileUtils.savePersonsToFile(this, ManagePersonsActivity.formatterJsonFile());
 
-            if (save_persons && save_ids)
-                finish();
-            else {
-                // TODO faire apparaitre un toast pour dire que la sauvegarde a échoué
+                // reset some variables
+                new_person = true;
+
+                if (save_persons && save_ids)
+                    finish();
+                else {
+                    // TODO faire apparaitre un toast pour dire que la sauvegarde a échoué
+                }
             }
         });
     }
@@ -131,6 +144,35 @@ public class AddPersonActivity extends AppCompatActivity {
                 last_id = 0;
             }
         return last_id+1;
+    }
+
+    public boolean verificationInputPerson() {
+        boolean all_good = true;
+
+        ArrayList<Field> array_fields = MainActivity.mConfiguration.getArrayFields();
+        String fields_a_remplir = "Those fields are required:\n";
+
+        for (int i=0; i<array_fields.size(); i++) {
+            Field f = array_fields.get(i);
+            if (f.getRequired() <= 1) {
+                String f_key = f.getKey();
+                String info_p = person.getInfoByKey(f_key);
+
+                Log.d("general-display", f_key + " is required");
+
+                if (info_p.equals("")) {
+                    fields_a_remplir += f.getTitle() + " - ";
+                    all_good = false;
+                }
+            }
+        }
+
+        if (!all_good) {
+            // mettre le toast
+            SettingsActivity.displayToast(this, fields_a_remplir);
+        }
+
+        return all_good;
     }
 
     /**

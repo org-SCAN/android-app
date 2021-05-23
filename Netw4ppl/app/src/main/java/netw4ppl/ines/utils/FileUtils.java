@@ -19,6 +19,7 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.util.UUID;
 
 import netw4ppl.ines.R;
 
@@ -187,23 +188,62 @@ public class FileUtils {
         return result;
     }
 
+    /**
+     * Load the file containing the IDs
+     *
+     * @param context the application context
+     * @return return a string containing all the ids and the last value for the tricode
+     */
     public static String loadIdsFromFile(Context context) throws IOException {
-        String path_dir = context.getFilesDir()+"/config";
-        String filename_ids = "/ids.json";
-        File file = new File(path_dir+filename_ids);
+        String path_dir = context.getString(R.string.config_files);
+        String filename_ids = context.getString(R.string.filename_ids);
+        String file_path = context.getFilesDir() + path_dir + filename_ids;
 
         String file_content = "";
-        if (file.exists()) {
-            file_content = readFile(path_dir+filename_ids);
+        if (FileUtils.fileExists(file_path)) {
+            file_content = readFile(file_path);
         }
         else {
             // create the file
-            boolean result_file = createFile(path_dir + filename_ids);
+            boolean result_file = createFile(file_path);
         }
 
         return file_content;
     }
 
+    /**
+     * Load the application ID from a file
+     *
+     * @param context the application context
+     * @return a string containing the application id
+     */
+    public static String loadApplicationIDFromFile(Context context) throws IOException {
+        String data_path = context.getFilesDir().getPath();
+        String dir_path = context.getString(R.string.config_files);
+        String file_id = context.getString(R.string.unique_id_filename);
+
+        //Get the unique application ID
+        String android_id_file_path = data_path+dir_path+file_id;
+        String unique_app_id;
+
+        if (FileUtils.fileExists(android_id_file_path)){
+            unique_app_id = FileUtils.readFile(android_id_file_path);
+        }
+        else{
+            unique_app_id = UUID.randomUUID().toString();
+            FileUtils.writeFile(android_id_file_path, unique_app_id);
+        }
+
+        return unique_app_id;
+    }
+
+    /**
+     * Save the ids (the tricodes and their highest value) in a file
+     *
+     * @param context the application context
+     * @param content a String of the content to write
+     * @return a boolean, true if the save was possible, else return false
+     */
     public static boolean saveIdsToFile(Context context, String content) {
         String dir_name = context.getString(R.string.config_files);
         String file_name = context.getString(R.string.filename_ids);
@@ -211,6 +251,13 @@ public class FileUtils {
         return writeFile(path_file, content);
     }
 
+    /**
+     * Save the Persons in a file
+     *
+     * @param context the application context
+     * @param content a String of the content to write
+     * @return a boolean, true if the save was possible, else return false
+     */
     public static boolean savePersonsToFile(Context context, String content) {
         String dir_name = context.getString(R.string.directory_files);
         String file_name = context.getString(R.string.filename_persons);
@@ -218,6 +265,13 @@ public class FileUtils {
         return writeFile(path_file, content);
     }
 
+    /**
+     * Save the Relations in a file
+     *
+     * @param context the application context
+     * @param content a String of the content to write
+     * @return a boolean, true if the save was possible, else return false
+     */
     public static boolean saveRelationsToFile(Context context, String content) {
         String dir_name = context.getString(R.string.directory_files);
         String file_name = context.getString(R.string.filename_relations);
@@ -225,6 +279,12 @@ public class FileUtils {
         return writeFile(path_file, content);
     }
 
+    /**
+     * Save the Persons in a file
+     *
+     * @param context the application context
+     * @return a JSONObject
+     */
     public static JSONObject loadConfigFromFile(Context context) throws IOException {
         // check if the file "fields.json" in "config/" directory exists
         String dir_name = context.getString(R.string.config_files);
@@ -259,5 +319,4 @@ public class FileUtils {
 
         return config_content;
     }
-
 }

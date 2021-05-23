@@ -55,62 +55,76 @@ public class SubmitData {
         // récupère l'option d'envoi sélectionnée par l'utilisateurs dans les paramètres
         String sending_option = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_sending_option_key), null);
 
-        if (sending_option.equals("send_by_email")) {
-            // REMARQUE : on ne peut pas certifier/vérifier que l'email a bien été envoyé malheureusement
-            sendByEmail(context, new File(context.getFilesDir(), filePath).getPath());
-        }
-        else {
-            // TODO si on supprime la valeur ça ne marche pas
-            // si pas les infos du serveur, rediriger vers les settings
-            String ip_port = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_server_ip_port_key), "");
-            if (ip_port == "") {
-                // Si aucune adresse renseignée => affiche une pop-up et propose de rediriger vers les settings
-                new AlertDialog.Builder(context)
-                        .setTitle(R.string.main_submit_ip_port_fail_title)
-                        .setMessage(R.string.main_submit_ip_port_fail_msg)
-                        .setCancelable(true)
-                        .setPositiveButton(R.string.change_settings, (a,b) -> {
-                            Intent intent = new Intent(context, SettingsActivity.class);
-                            context.startActivity(intent);
-                        })
-                        .create()
-                        .show();
-                return;
-            }
+        if (sending_option != null) {
 
-            String token_server = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_server_token_key), "");
-            if (token_server == "") {
-                new AlertDialog.Builder(context)
-                        .setTitle(R.string.main_submit_token_fail_title)
-                        .setMessage(R.string.main_submit_token_fail_msg)
-                        .setCancelable(true)
-                        .setPositiveButton(R.string.change_settings, (a,b) -> {
-                            Intent intent = new Intent(context, SettingsActivity.class);
-                            context.startActivity(intent);
-                        })
-                        .create()
-                        .show();
-                return;
-            }
+            if (sending_option.equals("send_by_email")) {
+                // REMARQUE : on ne peut pas certifier/vérifier que l'email a bien été envoyé malheureusement
+                sendByEmail(context, new File(context.getFilesDir(), filePath).getPath());
+            } else {
+                // TODO si on supprime la valeur ça ne marche pas
+                // si pas les infos du serveur, rediriger vers les settings
+                String ip_port = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_server_ip_port_key), "");
+                if (ip_port.equals("")) {
+                    // Si aucune adresse renseignée => affiche une pop-up et propose de rediriger vers les settings
+                    new AlertDialog.Builder(context)
+                            .setTitle(R.string.main_submit_ip_port_fail_title)
+                            .setMessage(R.string.main_submit_ip_port_fail_msg)
+                            .setCancelable(true)
+                            .setPositiveButton(R.string.change_settings, (a, b) -> {
+                                Intent intent = new Intent(context, SettingsActivity.class);
+                                context.startActivity(intent);
+                            })
+                            .create()
+                            .show();
+                    return;
+                }
 
-            OkHttpClient client = new OkHttpClient();
+                String token_server = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_server_token_key), "");
+                if (token_server.equals("")) {
+                    new AlertDialog.Builder(context)
+                            .setTitle(R.string.main_submit_token_fail_title)
+                            .setMessage(R.string.main_submit_token_fail_msg)
+                            .setCancelable(true)
+                            .setPositiveButton(R.string.change_settings, (a, b) -> {
+                                Intent intent = new Intent(context, SettingsActivity.class);
+                                context.startActivity(intent);
+                            })
+                            .create()
+                            .show();
+                    return;
+                }
 
-            boolean submit_persons = sendToServer(context, context.getFilesDir().getPath()+dir_name+file_name_persons, ip_port, token_server, client, "manage_refugees");
-            boolean submit_relations = sendToServer(context, context.getFilesDir().getPath()+dir_name+file_name_relations, ip_port, token_server, client, "links");
-            boolean submit_result = (submit_persons && submit_relations);
+                OkHttpClient client = new OkHttpClient();
 
-            boolean download_config = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getResources().getString(R.string.settings_server_maj_auto_key),false);
-            boolean get_success = false;
+                boolean submit_persons = sendToServer(context, context.getFilesDir().getPath()+dir_name+file_name_persons, ip_port, token_server, client, "manage_refugees");
+                boolean submit_relations = sendToServer(context, context.getFilesDir().getPath()+dir_name+file_name_relations, ip_port, token_server, client, "links");
+                boolean submit_result = (submit_persons && submit_relations);
 
-            if (submit_result && download_config){
-                get_success = getFromServer(context,ip_port,token_server,client);
-            }
-            // Log.d("Fichier", new File(context.getFilesDir(), filePath).getPath()+"HHH");
-            showSubmitResultDialog(context, submit_result, get_success);
+                boolean download_config = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getResources().getString(R.string.settings_server_maj_auto_key),false);
+                boolean get_success = false;
+
+                if (submit_result && download_config){
+                    get_success = getFromServer(context,ip_port,token_server,client);
+                }
+                // Log.d("Fichier", new File(context.getFilesDir(), filePath).getPath()+"HHH");
+                showSubmitResultDialog(context, submit_result, get_success);
+
+          }else {
+              new AlertDialog.Builder(context)
+                      .setTitle(R.string.no_submit_option_title)
+                      .setMessage(R.string.no_submit_option_msg)
+                      .setCancelable(true)
+                      .setPositiveButton(R.string.change_settings, (a,b) -> {
+                          Intent intent = new Intent(context, SettingsActivity.class);
+                          context.startActivity(intent);
+                      })
+                      .create()
+                      .show();
+              return;
         }
     }
-
-    public static void manageGet(Context context) throws IOException, InterruptedException {
+    
+  public static void manageGet(Context context) throws IOException, InterruptedException {
         String token_server = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_server_token_key), "");
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(100, TimeUnit.MILLISECONDS)
@@ -131,7 +145,7 @@ public class SubmitData {
             Toast toast = Toast.makeText(context, toast_text, Toast.LENGTH_LONG);
             toast.show();
         }
-    }
+}
 
     /**
      * Function that makes the sending to an email address via an email application
@@ -185,20 +199,23 @@ public class SubmitData {
      */
     public static boolean sendToServer(Context context, String filePath, String server_url, String token_server, OkHttpClient http_client, String target) throws InterruptedException, JSONException, IOException {
 
-        String data_path = context.getFilesDir().getPath();
-        String dir_path = context.getString(R.string.config_files);
-        String file_id = context.getString(R.string.unique_id_filename);
+//        String data_path = context.getFilesDir().getPath();
+//        String dir_path = context.getString(R.string.config_files);
+//        String file_id = context.getString(R.string.unique_id_filename);
+//
+//        //Get the unique application ID
+//        String android_id_file_path = data_path+dir_path+file_id;
+//        String unique_app_id;
+//
+//        if (FileUtils.fileExists(android_id_file_path)){
+//            unique_app_id = FileUtils.readFile(android_id_file_path);
+//        }else{
+//            unique_app_id = UUID.randomUUID().toString();
+//            FileUtils.writeFile(android_id_file_path, unique_app_id);
+//        }
 
-        //Get the unique application ID
-        String android_id_file_path = data_path+dir_path+file_id;
-        String unique_app_id;
-
-        if (FileUtils.fileExists(android_id_file_path)){
-            unique_app_id = FileUtils.readFile(android_id_file_path);
-        }else{
-            unique_app_id = UUID.randomUUID().toString();
-            FileUtils.writeFile(android_id_file_path, unique_app_id);
-        }
+        // la lecture et la création en cas de non existence est faite au moment du démarrage de l'application
+        String unique_app_id = MainActivity.mConfiguration.getApplicationId();
 
         String data_to_send = FileUtils.readFile(filePath);
 

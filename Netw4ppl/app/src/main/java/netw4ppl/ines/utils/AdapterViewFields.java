@@ -102,6 +102,9 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
                 AddPersonActivity.person.putInfo(this.key_field, data_element.getKey());
                 this.spinner_position = position;
             }
+            else {
+                AddPersonActivity.person.remove(this.key_field);
+            }
         }
 
         @Override
@@ -238,6 +241,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             case 0:
                 /* Section EditText basique */
                 ((ViewHolderEditText) holder).mTitle.setText(field.getTitle());
+                ((ViewHolderEditText) holder).mText.setHint(field.getElementByKey("placeholder"));
                 ((ViewHolderEditText) holder).myCustomEditTextListener.updatePosition(holder.getAdapterPosition());
                 ((ViewHolderEditText) holder).myCustomEditTextListener.setKey(field.getKey());
                 ((ViewHolderEditText) holder).mText.setText(AddPersonActivity.person.getInfoByKey(field.getKey()));
@@ -383,6 +387,9 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
 //                String field_key = mFields.get(position).getKey();
                 if (!charSequence.toString().equals(""))
                     AddPersonActivity.person.put(this.key_field, charSequence.toString());
+                else {
+                    AddPersonActivity.person.remove(this.key_field);
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }

@@ -43,6 +43,7 @@ public class Person extends JSONObject {
         return this.getInfoByKey("unique_id").equals(individu.getInfoByKey("unique_id"));
     }
 
+    @Override
     public String toString(){
         String res = null;
         res = this.getInfoByKey("unique_id") + " - " + this.getInfoByKey("full_name");

@@ -1,11 +1,13 @@
 package netw4ppl.ines.utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,9 +17,27 @@ public class Configuration {
     private ArrayList<Field> array_fields = new ArrayList<>();
     private HashMap<String, ArrayList<DataElement>> hashMap_database = new HashMap<>();
     private HashMap<String, ArrayAdapter> hashMap_adapters = new HashMap<>();
+    private final String application_id;
 
     public Configuration(Context context, JSONObject config_content) {
         createHashMaps(context, config_content);
+        this.application_id = readApplicationIDFile(context);
+
+        Log.d("general-settings", "Application id: " + this.getApplicationId());
+    }
+
+    public String getApplicationId() {
+        return this.application_id;
+    }
+
+    private String readApplicationIDFile(Context context) {
+        String file_content = "";
+        try {
+            file_content = FileUtils.loadApplicationIDFromFile(context);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file_content;
     }
 
     public void createHashMaps(Context context, JSONObject config_content) {
