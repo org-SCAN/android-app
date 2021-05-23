@@ -96,33 +96,35 @@ public class SubmitData {
 
                 OkHttpClient client = new OkHttpClient();
 
-                boolean submit_persons = sendToServer(context, context.getFilesDir().getPath()+dir_name+file_name_persons, ip_port, token_server, client, "manage_refugees");
-                boolean submit_relations = sendToServer(context, context.getFilesDir().getPath()+dir_name+file_name_relations, ip_port, token_server, client, "links");
+                boolean submit_persons = sendToServer(context, context.getFilesDir().getPath() + dir_name + file_name_persons, ip_port, token_server, client, "manage_refugees");
+                boolean submit_relations = sendToServer(context, context.getFilesDir().getPath() + dir_name + file_name_relations, ip_port, token_server, client, "links");
                 boolean submit_result = (submit_persons && submit_relations);
 
-                boolean download_config = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getResources().getString(R.string.settings_server_maj_auto_key),false);
+                boolean download_config = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getResources().getString(R.string.settings_server_maj_auto_key), false);
                 boolean get_success = false;
 
-                if (submit_result && download_config){
-                    get_success = getFromServer(context,ip_port,token_server,client);
+                if (submit_result && download_config) {
+                    get_success = getFromServer(context, ip_port, token_server, client);
                 }
                 // Log.d("Fichier", new File(context.getFilesDir(), filePath).getPath()+"HHH");
                 showSubmitResultDialog(context, submit_result, get_success);
 
-          }else {
-              new AlertDialog.Builder(context)
-                      .setTitle(R.string.no_submit_option_title)
-                      .setMessage(R.string.no_submit_option_msg)
-                      .setCancelable(true)
-                      .setPositiveButton(R.string.change_settings, (a,b) -> {
-                          Intent intent = new Intent(context, SettingsActivity.class);
-                          context.startActivity(intent);
-                      })
-                      .create()
-                      .show();
-              return;
+            }
+        }else{
+            new AlertDialog.Builder(context)
+                    .setTitle(R.string.no_submit_option_title)
+                    .setMessage(R.string.no_submit_option_msg)
+                    .setCancelable(true)
+                    .setPositiveButton(R.string.change_settings, (a, b) -> {
+                        Intent intent = new Intent(context, SettingsActivity.class);
+                        context.startActivity(intent);
+                    })
+                    .create()
+                    .show();
+            return;
         }
     }
+
     
   public static void manageGet(Context context) throws IOException, InterruptedException {
         String token_server = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_server_token_key), "");
@@ -133,19 +135,19 @@ public class SubmitData {
 
         String toast_text = "";
 
-        if (token_server==""){
+        if (token_server.equals("")){
             toast_text += context.getString(R.string.main_submit_token_fail_msg) + "\n";
-        }else if (ip_port==""){
+        }else if (ip_port.equals("")){
             toast_text += context.getString(R.string.main_submit_ip_port_fail_msg);
         }
 
-        if (toast_text==""){
+        if (toast_text.equals("")){
             boolean get_result = getFromServer(context,ip_port,token_server,client);
             toast_text = get_result ? context.getString(R.string.main_get_success_msg) : context.getString(R.string.main_get_fail_msg);
             Toast toast = Toast.makeText(context, toast_text, Toast.LENGTH_LONG);
             toast.show();
         }
-}
+    }
 
     /**
      * Function that makes the sending to an email address via an email application
@@ -273,19 +275,8 @@ public class SubmitData {
         String data_path = context.getFilesDir().getPath();
         String dir_path = context.getString(R.string.config_files);
         String file_fields = context.getString(R.string.filename_fields);
-        String file_id = context.getString(R.string.unique_id_filename);
 
-        //Get the unique application ID
-        String android_id_file_path = data_path+dir_path+file_id;
-        String unique_app_id;
-
-        if (FileUtils.fileExists(android_id_file_path)){
-            unique_app_id = FileUtils.readFile(android_id_file_path);
-        }else{
-            unique_app_id = UUID.randomUUID().toString();
-            FileUtils.writeFile(android_id_file_path, unique_app_id);
-        }
-
+        String unique_app_id = MainActivity.mConfiguration.getApplicationId();
         final boolean[] http_success = {false};
         Thread thread = new Thread(new Runnable() {
 
