@@ -1,5 +1,6 @@
 package netw4ppl.ines;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -105,8 +106,6 @@ public class AddRelationActivity extends AppCompatActivity {
                 if (valid_relation) {
                     if (new_relation) {
                         if (single_relation != null && testExistingRelation(single_relation)) {
-                            Log.d(TAG, "onClick: ecriture de la relation");
-
                             // ajout du champ application id
                             single_relation.setApplicationID(MainActivity.mConfiguration.getApplicationId());
 
@@ -142,6 +141,10 @@ public class AddRelationActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Reset the static objects present in the class.
+     * TODO change this function, having static object is a source of errors and unpredictable behaviours
+     */
     public void resetObjects() {
         from_person = null;
         to_person = null;
@@ -151,6 +154,13 @@ public class AddRelationActivity extends AppCompatActivity {
         new_relation = true;
     }
 
+    /**
+     * Function to associate specific information with a person saved in the application.
+     * Example of string_p: "AAA-000001 - John DOE"
+     *
+     * @param string_p a String containing some informations about a person
+     * @return int
+     */
     public int associateInfosWithPerson(String string_p) {
         // aller chercher dans la liste ManagePersonActivity.array_persons la personne associée à ces deux éléments
         boolean found = false;
@@ -190,14 +200,29 @@ public class AddRelationActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Set the person from with a defined person given in parameters
+     *
+     * @param from_person an object of type Person
+     */
     public static void setFromPerson(Person from_person) {
         AddRelationActivity.from_person = from_person;
     }
 
+    /**
+     * Set the person to with a defined person given in parameters
+     *
+     * @param to_person an object of type Person
+     */
     public static void setToPerson(Person to_person) {
         AddRelationActivity.to_person = to_person;
     }
 
+    /**
+     * A function to set the adapters for the different objects on the Add Relation Activity.
+     * We basically have to set the adapters for the two AutocompleteTextViews and one for the spinner.
+     * For the definition of Adapter, please check the Android Studio documentation.
+     */
     private void setAdapters() {
         ArrayAdapter<Person> autocomplete_adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, ManagePersonsActivity.array_persons);
         mAutoTextViewRelationFrom.setAdapter(autocomplete_adapter);
@@ -207,6 +232,15 @@ public class AddRelationActivity extends AppCompatActivity {
         mSpinnerRelationType.setAdapter(spinner_adapter);
     }
 
+    /**
+     * Function to generate the relation from the input. Get the different fields and create a Relation Object
+     * from it
+     *
+     * @return a boolean which is the result of the operations. The first one indicate if the relation
+     * was correctly generated from the data gave in input. The second one is there to determine if
+     * the relation already exists bases on criterias defined by us.
+     * Currently, a relation is considered already existent if the two person AND the relation type are the same.
+     */
     private boolean generateRelationFromInformations() {
         boolean result_generation = testValidRelation();
         boolean res_does_not_exists = false;
@@ -349,5 +383,13 @@ public class AddRelationActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         resetObjects();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // ajouter les objets à sauvegarder
+
     }
 }
