@@ -136,6 +136,10 @@ public class AddRelationActivity extends AppCompatActivity {
                 }
             }
         });
+
+        mButtonRelationCancel.setOnClickListener(v -> {
+            this.finish();
+        });
     }
 
     public void resetObjects() {
