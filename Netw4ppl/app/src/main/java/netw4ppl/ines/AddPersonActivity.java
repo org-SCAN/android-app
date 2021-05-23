@@ -34,6 +34,8 @@ public class AddPersonActivity extends AppCompatActivity {
     Button mButtonSave;
     Button mButtonCancel;
 
+    private int index_person;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,11 @@ public class AddPersonActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recycler_view_add_person);
         mButtonSave = findViewById(R.id.button_add_person_save);
         mButtonCancel = findViewById(R.id.button_add_person_cancel);
+
+        Bundle extra_parameter = getIntent().getExtras();
+        index_person = -1;
+        if(extra_parameter != null)
+            index_person = extra_parameter.getInt("index_person");
 
         // on regarde si on vient de DetailsPersonActivity ou pas
         if (new_person) {
@@ -90,7 +97,7 @@ public class AddPersonActivity extends AppCompatActivity {
                     person.putInfo("date_update", date_update);
 
                     // on supprime l'ancienne version avant d'ajouter la nouvelle
-                    int index = DisplayDetailsPersonActivity.index_person;
+                    int index = index_person;
                     ManagePersonsActivity.array_persons.remove(index);
                     ManagePersonsActivity.array_persons.add(index, person);
                 }

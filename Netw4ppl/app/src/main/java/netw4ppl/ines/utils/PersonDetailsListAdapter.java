@@ -24,6 +24,7 @@ public class PersonDetailsListAdapter extends ArrayAdapter<Field> {
 
     private final Context mContext;
     private final int mResource;
+    private int index_person;
 
     /**
      * A simple ViewHolder containing a title (of a field) and the text associated to it in the person data
@@ -34,10 +35,11 @@ public class PersonDetailsListAdapter extends ArrayAdapter<Field> {
         com.google.android.material.textfield.TextInputEditText mText;
     }
 
-    public PersonDetailsListAdapter(Context context, int resource, ArrayList<Field> fields) {
+    public PersonDetailsListAdapter(Context context, int resource, ArrayList<Field> fields, int index) {
         super(context, resource, fields);
         mContext = context;
         mResource = resource;
+        index_person = index;
     }
 
 
@@ -48,7 +50,7 @@ public class PersonDetailsListAdapter extends ArrayAdapter<Field> {
         Log.d("general-display", "Beginning getView");
         // get the person informations
         Field field = getItem(position);
-        Person mPerson = ManagePersonsActivity.array_persons.get(DisplayDetailsPersonActivity.index_person);
+        Person mPerson = ManagePersonsActivity.array_persons.get(index_person);
 
         final View result;
         PersonDetailsListAdapter.ViewHolder holder;

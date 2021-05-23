@@ -92,7 +92,6 @@ public class Relation extends JSONObject {
     }
 
     public String getRelationType() {
-
         return (this.getInfoByKey("relation"));
     }
 

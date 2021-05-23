@@ -78,6 +78,12 @@ public class AddRelationActivity extends AppCompatActivity {
             relation_type = single_relation.getRelationType();
             relation_details = single_relation.getDetails();
         }
+        else {
+            if (to_person != null)
+                setToPersonView();
+            if (from_person != null)
+                setFromPersonView();
+        }
 
         //
         setListeners();
@@ -133,8 +139,8 @@ public class AddRelationActivity extends AppCompatActivity {
     }
 
     public void resetObjects() {
-        from_person = new Person();
-        to_person = new Person();
+        from_person = null;
+        to_person = null;
         relation_type = "NA";
         relation_details = "";
         single_relation = null;
@@ -178,6 +184,14 @@ public class AddRelationActivity extends AppCompatActivity {
                 to_person = (Person) parent.getAdapter().getItem(position);
             }
         });
+    }
+
+    public static void setFromPerson(Person from_person) {
+        AddRelationActivity.from_person = from_person;
+    }
+
+    public static void setToPerson(Person to_person) {
+        AddRelationActivity.to_person = to_person;
     }
 
     private void setAdapters() {
@@ -283,6 +297,17 @@ public class AddRelationActivity extends AppCompatActivity {
      */
     private boolean testValidRelation(){
         return (testRelationType(relation_type) && testValidPerson(from_person) && testValidPerson(to_person) && testSamePersonRelation(from_person,to_person));
+    }
+
+    private void setToPersonView() {
+        // informations contenues dans to_person
+        mAutoTextViewRelationTo.setText(to_person.toString(), false);
+        mAutoTextViewRelationTo.setEnabled(false);
+    }
+
+    private void setFromPersonView() {
+        mAutoTextViewRelationFrom.setText(from_person.toString(), false);
+        mAutoTextViewRelationFrom.setEnabled(false);
     }
 
     /**
