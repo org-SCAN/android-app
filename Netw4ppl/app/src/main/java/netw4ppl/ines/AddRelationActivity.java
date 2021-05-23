@@ -391,18 +391,17 @@ public class AddRelationActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-//        String info_person_from = (String) savedInstanceState.getSerializable("from_person");
-//        String info_person_to = (String) savedInstanceState.getSerializable("to_person");
-//
-//        int index_from = associateInfosWithPerson(info_person_from);
-//        from_person = ManagePersonsActivity.array_persons.get(index_from);
-//
-//        int index_to = associateInfosWithPerson(info_person_to);
-//        to_person = ManagePersonsActivity.array_persons.get()
-//
-//        relation_type = savedInstanceState.getString("relation_type");
-//        relation_details = savedInstanceState.getString("relation_details");
-//        person = new Gson().fromJson(info_person, Person.class);
+        String info_person_from = (String) savedInstanceState.getSerializable("from_person");
+        String info_person_to = (String) savedInstanceState.getSerializable("to_person");
+        String info_single_relat = (String) savedInstanceState.getSerializable("single_relation");
+
+        from_person = new Gson().fromJson(info_person_from, Person.class);
+        to_person = new Gson().fromJson(info_person_to, Person.class);
+        single_relation = new Gson().fromJson(info_single_relat, Relation.class);
+
+        relation_type = savedInstanceState.getString("relation_type");
+        relation_details = savedInstanceState.getString("relation_details");
+        new_relation = savedInstanceState.getBoolean("new_relation");
     }
 
     @Override
@@ -415,5 +414,7 @@ public class AddRelationActivity extends AppCompatActivity {
         outState.putSerializable("to_person", gson.toJson(to_person));
         outState.putString("relation_type", relation_type);
         outState.putString("relation_details", relation_details);
+        outState.putSerializable("single_relation", gson.toJson(single_relation));
+        outState.putBoolean("new_relation", new_relation);
     }
 }
