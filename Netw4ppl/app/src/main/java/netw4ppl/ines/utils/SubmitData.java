@@ -94,7 +94,9 @@ public class SubmitData {
                     return;
                 }
 
-                OkHttpClient client = new OkHttpClient();
+                OkHttpClient client = new OkHttpClient.Builder()
+                        .connectTimeout(1, TimeUnit.SECONDS)
+                        .build();
 
                 boolean submit_persons = sendToServer(context, context.getFilesDir().getPath() + dir_name + file_name_persons, ip_port, token_server, client, "manage_refugees");
                 boolean submit_relations = sendToServer(context, context.getFilesDir().getPath() + dir_name + file_name_relations, ip_port, token_server, client, "links");
