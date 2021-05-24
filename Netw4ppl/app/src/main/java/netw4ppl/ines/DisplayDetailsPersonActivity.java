@@ -242,6 +242,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         adapter_details_person.notifyDataSetChanged();
         updateAdapterFrom();
         updateAdapterTo();
+        mTextViewFullnameTitle.setText(ManagePersonsActivity.array_persons.get(index_person).getInfoByKey("full_name"));
     }
 
     public boolean deleteAssociatedRelations(Person p) {
