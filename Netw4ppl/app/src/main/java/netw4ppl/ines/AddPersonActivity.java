@@ -30,7 +30,6 @@ import netw4ppl.ines.utils.Person;
 public class AddPersonActivity extends AppCompatActivity {
 
     public static JSONObject json_ids = new JSONObject();
-    public static
 
     RecyclerView mRecyclerView;
     Button mButtonSave;
@@ -44,6 +43,9 @@ public class AddPersonActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_person);
+
+        new_person = true;
+        person = new Person();
 
         mRecyclerView = findViewById(R.id.recycler_view_add_person);
         mButtonSave = findViewById(R.id.button_add_person_save);

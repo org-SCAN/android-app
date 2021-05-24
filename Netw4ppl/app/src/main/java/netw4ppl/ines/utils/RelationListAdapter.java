@@ -65,11 +65,11 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
 
         this.lastPosition = position;
 
-        holder.mFullName1.setText(relation.getInfoByKey("from_full_name"));
-        holder.mFullName2.setText(relation.getInfoByKey("to_full_name"));
-        holder.mUniqueID1.setText(relation.getInfoByKey("from_unique_id"));
-        holder.mUniqueID2.setText(relation.getInfoByKey("to_unique_id"));
-        holder.mRelationType.setText(relation.getInfoByKey("relation"));
+        holder.mFullName1.setText(relation.getFromFullname());
+        holder.mFullName2.setText(relation.getToFullname());
+        holder.mUniqueID1.setText(relation.getFromID());
+        holder.mUniqueID2.setText(relation.getToID());
+        holder.mRelationType.setText(relation.getRelationType());
 
         return convertView;
     }

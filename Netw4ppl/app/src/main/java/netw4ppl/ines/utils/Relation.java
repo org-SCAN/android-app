@@ -7,41 +7,58 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
 
 public class Relation extends JSONObject {
 
+    private String from_person_name;
+    private String to_person_name;
+
     public Relation(){
         super();
-    }
 
-    public Relation(Person from, String key_relation, Person to, String detail_input) throws JSONException {
-        super();
-
-        this.put("from_unique_id", from.getInfoByKey("unique_id"));
-        this.put("from_full_name", from.getInfoByKey("full_name"));
-        this.put("to_unique_id", to.getInfoByKey("unique_id"));
-        this.put("to_full_name", to.getInfoByKey("full_name"));
-        this.put("relation", key_relation);
-        this.put("detail", detail_input);
+        from_person_name = "";
+        to_person_name = "";
     }
 
     public Relation(String infos_relat) throws JSONException {
         super(infos_relat);
+
+        from_person_name = "";
+        to_person_name = "";
     }
 
     public void setRelationType(String key_relation) {
-        try {
-            this.put("relation", key_relation);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        this.putInfo("relation", key_relation);
+    }
+
+    public void setPersonTo(Person person) {
+        this.putInfo("to_unique_id", person.getInfoByKey("unique_id"));
+        to_person_name = person.getInfoByKey("full_name");
+    }
+
+    public void setPersonTo(String unique_id) {
+        this.putInfo("to_unique_id", unique_id);
+    }
+
+    public void setPersonFrom(Person person) {
+        this.putInfo("from_unique_id", person.getInfoByKey("unique_id"));
+        from_person_name = person.getInfoByKey("full_name");
+    }
+
+    public void setPersonFrom(String unique_id) {
+        this.putInfo("from_unique_id", unique_id);
     }
 
     public void setDetails(String details) {
+        this.putInfo("detail", details);
+    }
+
+    public void putInfo(String key, String info) {
         try {
-            this.put("detail", details);
+            this.put(key, info);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -52,7 +69,7 @@ public class Relation extends JSONObject {
         try {
             res = this.getString(key);
         } catch (JSONException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
         return res;
     }
@@ -61,13 +78,9 @@ public class Relation extends JSONObject {
         boolean res_uid_from = false;
         boolean res_uid_to = false;
         boolean res_type_relation = false;
-        try {
-            res_uid_from = this.getString("from_unique_id").equals(relat.getString("from_unique_id"));
-            res_uid_to = this.getString("to_unique_id").equals(relat.getString("to_unique_id"));
-            res_type_relation = this.getString("relation").equals(relat.getString("relation"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        res_uid_from = this.getInfoByKey("from_unique_id").equals(relat.getInfoByKey("from_unique_id"));
+        res_uid_to = this.getInfoByKey("to_unique_id").equals(relat.getInfoByKey("to_unique_id"));
+        res_type_relation = this.getInfoByKey("relation").equals(relat.getInfoByKey("relation"));
         return res_uid_from && res_uid_to && res_type_relation;
     }
 
@@ -79,12 +92,29 @@ public class Relation extends JSONObject {
         return this.getFrom().equals(person) || this.getTo().equals(person);
     }
 
+    public String getFromID() {
+        return this.getInfoByKey("from_unique_id");
+    }
+
+    public String getToID() {
+        return this.getInfoByKey("to_unique_id");
+    }
+
+    public String getFromFullname() {
+        return from_person_name;
+    }
+
+    public String getToFullname() {
+        return to_person_name;
+    }
+
     public String getFrom() {
-        return (this.getInfoByKey("from_unique_id") + " - " + this.getInfoByKey("from_full_name"));
+        // aller récupérer le nom de la personne dans la liste des personnes
+        return getFromID() + " - " + getFromFullname();
     }
 
     public String getTo() {
-        return (this.getInfoByKey("to_unique_id") + " - " + this.getInfoByKey("to_full_name"));
+        return getToID() + " - " + getToFullname();
     }
 
     public String getDetails() {
@@ -101,11 +131,7 @@ public class Relation extends JSONObject {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date_creation = dateFormat.format(calendar.getTime());
 
-        try {
-            this.put("date", date_creation);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        this.putInfo("date", date_creation);
     }
 
     public void setUpdateDate() {
@@ -119,18 +145,32 @@ public class Relation extends JSONObject {
         dateFormat.setTimeZone(tz);
         String date_update = dateFormat.format(calendar.getTime());
 
-        try {
-            this.put("date_update", date_update);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        this.putInfo("date_update", date_update);
     }
 
     public void setApplicationID(String app_id) {
-        try {
-            this.put("application_id", app_id);
-        } catch (JSONException e) {
-            e.printStackTrace();
+        this.putInfo("application_id", app_id);
+    }
+
+    public void associateIDWithNames(ArrayList<Person> array_persons) {
+        // on a les ids, on a besoin des noms maintenant
+        boolean from_found = false;
+        boolean to_found = false;
+
+        for (int i=0; i<array_persons.size(); i++) {
+            // si la personne a l'index i à cette ID
+            Person p = array_persons.get(i);
+            if (p.getInfoByKey("unique_id").equals(this.getInfoByKey("from_unique_id"))) {
+                from_person_name = p.getInfoByKey("full_name");
+                from_found = true;
+            }
+            if (p.getInfoByKey("unique_id").equals(this.getInfoByKey("to_unique_id"))) {
+                to_person_name = p.getInfoByKey("full_name");
+                to_found = true;
+            }
+
+            if (from_found && to_found)
+                break;
         }
     }
 }

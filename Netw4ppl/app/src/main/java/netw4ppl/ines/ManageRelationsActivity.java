@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,8 +60,12 @@ public class ManageRelationsActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-                DisplayDetailsRelationActivity.index_relation = position;
                 Intent intent = new Intent(ManageRelationsActivity.this, DisplayDetailsRelationActivity.class);
+
+                Bundle b = new Bundle();
+                b.putInt("index_relation", position); // your index relation
+                intent.putExtras(b); //Put your id to your next Intent
+
                 startActivity(intent);
             }
         });
@@ -85,7 +90,11 @@ public class ManageRelationsActivity extends AppCompatActivity {
             jsonArray_relations = new JSONArray(content_file);
             for (int i=0; i<jsonArray_relations.length(); i++) {
                 JSONObject json_relation = jsonArray_relations.getJSONObject(i);
-                array_relations.add(new Relation(json_relation.toString()));
+                Relation relat = new Relation(json_relation.toString());
+
+                relat.associateIDWithNames(ManagePersonsActivity.array_persons);
+
+                array_relations.add(relat);
             }
         }
         else if (FileUtils.directoryExists(path_dir)) {
