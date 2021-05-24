@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import org.json.JSONException;
 
 import java.lang.reflect.Array;
@@ -138,13 +140,12 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
             startActivity(intent);
         });
         mButtonEditPerson.setOnClickListener(v -> {
-            AddPersonActivity.person = person;
-            AddPersonActivity.new_person = false;
-
             Intent intent = new Intent(DisplayDetailsPersonActivity.this, AddPersonActivity.class);
 
             Bundle b = new Bundle();
             b.putInt("index_person", index_person); //Your id
+            b.putBoolean("new_person", false);
+            b.putSerializable("person", new Gson().toJson(person));
             intent.putExtras(b); //Put your id to your next Intent
 
             startActivity(intent);

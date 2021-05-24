@@ -130,6 +130,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         public ViewHolderCalendarView(@NonNull View itemView, MyCustomEditTextListener customEditTextListener) {
             super(itemView);
             this.myCustomEditTextListener = customEditTextListener;
+            this.myCustomEditTextListener.setView(this);
             mTitle = itemView.findViewById(R.id.date_picker_title);
             mDateText = itemView.findViewById(R.id.date_picker_edittext_object);
             mDateText.addTextChangedListener(this.myCustomEditTextListener);
@@ -137,7 +138,6 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             regex_date = "([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))";
             this.myCustomEditTextListener.setRegex(regex_date);
 
-            mDateText.setInputType(InputType.TYPE_NULL);
             mDateText.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -152,7 +152,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
                     else {
                         String[] date = mDateText.getText().toString().split("-");
                         year = Integer.parseInt(date[0]);
-                        month = Integer.parseInt(date[1]);
+                        month = Integer.parseInt(date[1]) - 1;
                         day = Integer.parseInt(date[2]);
                     }
 
@@ -394,7 +394,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     private class MyCustomEditTextListener implements TextWatcher {
         private int position;
         private String key_field;
-        private String regex;
+        private String regex = null;
         private ViewHolderCalendarView mView;
 
         public MyCustomEditTextListener() {
@@ -423,10 +423,13 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
                 if (Pattern.matches(getRegex(), charSequence.toString())) {
                     // enlever le message d'erreur
                     AddPersonActivity.person.putInfo(this.key_field, charSequence.toString());
+                    mView.mDateText.setError(null);
                 }
                 else {
+                    if (!charSequence.toString().equals(""))
+                        mView.mDateText.setError(mContext.getString(R.string.invalid_format));
                     // set error message
-                    // mView.mDateText.setError(AddPersonActivity.this.getString(R.string.invalid_format));
+                    AddPersonActivity.person.remove(this.key_field);
                 }
             } else {
                 if (!charSequence.toString().equals(""))
@@ -452,6 +455,10 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         public String getRegex() {
             return this.regex;
+        }
+
+        public void setView(ViewHolderCalendarView view) {
+            this.mView = view;
         }
     }
 }

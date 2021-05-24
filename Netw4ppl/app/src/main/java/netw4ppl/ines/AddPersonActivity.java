@@ -30,14 +30,15 @@ import netw4ppl.ines.utils.Person;
 public class AddPersonActivity extends AppCompatActivity {
 
     public static JSONObject json_ids = new JSONObject();
-    public static Person person = new Person();
-    public static boolean new_person = true;
+    public static
 
     RecyclerView mRecyclerView;
     Button mButtonSave;
     Button mButtonCancel;
 
     private int index_person;
+    public static Person person;
+    private boolean new_person = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +50,21 @@ public class AddPersonActivity extends AppCompatActivity {
         mButtonCancel = findViewById(R.id.button_add_person_cancel);
 
         Bundle extra_parameter = getIntent().getExtras();
-        index_person = -1;
-        if(extra_parameter != null)
-            index_person = extra_parameter.getInt("index_person");
+        index_person = 0;
+        new_person = true;
+        person = new Person();
 
-        // on regarde si on vient de DetailsPersonActivity ou pas
-        if (new_person) {
-            person = new Person();
+        if(extra_parameter != null) {
+            if (extra_parameter.containsKey("index_person")) {
+                index_person = extra_parameter.getInt("index_person");
+                try {
+                    person = new Person(ManagePersonsActivity.array_persons.get(index_person).toString(2));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (extra_parameter.containsKey("new_person"))
+                new_person = extra_parameter.getBoolean("new_person");
         }
 
         // set up the RecyclerView
