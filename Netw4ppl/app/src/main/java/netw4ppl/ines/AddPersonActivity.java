@@ -36,8 +36,8 @@ public class AddPersonActivity extends AppCompatActivity {
     Button mButtonCancel;
 
     private int index_person;
-    private boolean new_person;
     public static Person person;
+    private boolean new_person = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +51,26 @@ public class AddPersonActivity extends AppCompatActivity {
         mButtonSave = findViewById(R.id.button_add_person_save);
         mButtonCancel = findViewById(R.id.button_add_person_cancel);
 
-        Bundle extra_parameters = getIntent().getExtras();
-        index_person = -1;
-        if(extra_parameters != null) {
-            index_person = extra_parameters.getInt("index_person");
-            new_person = extra_parameters.getBoolean("new_person");
-            String infos_person = (String) extra_parameters.getSerializable("person");
-            person = new Gson().fromJson(infos_person, Person.class);
+        Bundle extra_parameter = getIntent().getExtras();
+        index_person = 0;
+        new_person = true;
+        person = new Person();
+
+        if(extra_parameter != null) {
+            if (extra_parameter.containsKey("index_person")) {
+                index_person = extra_parameter.getInt("index_person");
+                try {
+                    person = new Person(ManagePersonsActivity.array_persons.get(index_person).toString(2));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (extra_parameter.containsKey("new_person"))
+                new_person = extra_parameter.getBoolean("new_person");
         }
 
         // set up the RecyclerView
-        AdapterViewFields adapter = new AdapterViewFields(this, MainActivity.mConfiguration.getArrayFields());
+        AdapterViewFields adapter = new AdapterViewFields(this, MainActivity.mConfiguration.getArrayFields(), new_person);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
