@@ -213,9 +213,7 @@ public class AddRelationActivity extends AppCompatActivity {
             this.finish();
         });
     }
-
-
-
+    
     /**
      * Reset the static objects present in the class.
      * TODO change this function, having static object is a source of errors and unpredictable behaviours
