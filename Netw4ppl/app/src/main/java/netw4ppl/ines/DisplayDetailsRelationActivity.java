@@ -44,9 +44,10 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
         Bundle extra_parameters = getIntent().getExtras();
         if (extra_parameters != null) {
             index_relation = extra_parameters.getInt("index_relation");
+            Log.d("general-display", "Relation index: " + index_relation);
         }
         else {
-            index_relation = -1;
+            index_relation = 0;
         }
 
 
@@ -71,7 +72,6 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
             b.putInt("index_relation", index_relation); // your index relation
             b.putSerializable("relation", new Gson().toJson(ManageRelationsActivity.array_relations.get(index_relation)));
             b.putBoolean("new_relation", false);
-
             intent.putExtras(b); //Put your id to your next Intent
 
             startActivity(intent);
@@ -106,18 +106,18 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
     }
 
     private void setViews(Relation relation){
-        mTextViewFullnameTitle.setText(relation.getInfoByKey("from_full_name")+relation.getInfoByKey("to_full_name"));
-        mTextViewFromFullname.setText(relation.getInfoByKey("from_full_name"));
+        mTextViewFullnameTitle.setText(relation.getFromFullname() + " " + relation.getToFullname());
+        mTextViewFromFullname.setText(relation.getFromFullname());
 
         // associate the relation key with its string for a better visualisation
         String relation_key = relation.getInfoByKey("relation");
-        ArrayAdapter<DataElement> relations_adapter = MainActivity.mConfiguration.getArrayAdapter("Relations");
+        ArrayAdapter relations_adapter = MainActivity.mConfiguration.getArrayAdapter("Relations");
         int pos_in_adapter = AddRelationActivity.getPositionInAdapter(relations_adapter, relation_key);
         String text_relation = relations_adapter.getItem(pos_in_adapter).toString();
 
         mTextViewRelationType.setText(text_relation); // relation.getInfoByKey("relation")
-        mTextViewToFullname.setText(relation.getInfoByKey("to_full_name"));
-        mTextViewComments.setText(relation.getInfoByKey("detail"));
+        mTextViewToFullname.setText(relation.getToFullname());
+        mTextViewComments.setText(relation.getDetails());
     }
 
     @Override

@@ -34,12 +34,14 @@ public class AddRelationActivity extends AppCompatActivity {
 
     private static final String TAG = "AddRelationActivity";
 
-    public static Person from_person;
-    public static Person to_person;
+    private Person from_person;
+    private Person to_person;
 
     private Relation relation;
     private int index_relation;
     private boolean new_relation;
+    private boolean to_already_set;
+    private boolean from_already_set;
     private boolean rotation_screen;
 
     AutoCompleteTextView mAutoTextViewRelationFrom;
@@ -59,14 +61,64 @@ public class AddRelationActivity extends AppCompatActivity {
         new_relation = true;
         relation = new Relation();
         rotation_screen = false;
+        index_relation = 0;
+
+        from_person = new Person();
+        to_person = new Person();
+
+        from_already_set = false;
+        to_already_set = false;
 
         // get the parameters from the bundle (cas du lancement de l'activité pour la "1ere" fois
         Bundle extra_parameters = getIntent().getExtras();
         if (extra_parameters != null) {
-            String string_relation = (String) extra_parameters.getSerializable("relation");
-            relation = new Gson().fromJson(string_relation, Relation.class);
-            index_relation = extra_parameters.getInt("index_relation");
-            new_relation = extra_parameters.getBoolean("new_relation");
+            if (extra_parameters.containsKey("relation")){
+                String string_relation = (String) extra_parameters.getSerializable("relation");
+                relation = new Gson().fromJson(string_relation, Relation.class);
+            }
+            if (extra_parameters.containsKey("index_relation"))
+                index_relation = extra_parameters.getInt("index_relation");
+            if (extra_parameters.containsKey("new_relation"))
+                new_relation = extra_parameters.getBoolean("new_relation");
+            if (extra_parameters.containsKey("to_person")) {
+                String string_to_person = (String) extra_parameters.getSerializable("to_person");
+                to_person = new Gson().fromJson(string_to_person, Person.class);
+                relation.setPersonTo(to_person);
+            }
+            if (extra_parameters.containsKey("from_person")) {
+                String string_from_person = (String) extra_parameters.getSerializable("from_person");
+                from_person = new Gson().fromJson(string_from_person, Person.class);
+                relation.setPersonFrom(from_person);
+            }
+            if (extra_parameters.containsKey("from_already_set"))
+                from_already_set = extra_parameters.getBoolean("from_already_set");
+            if (extra_parameters.containsKey("to_already_set"))
+                to_already_set = extra_parameters.getBoolean("to_already_set");
+        }
+
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey("relation")){
+                String string_relation = (String) savedInstanceState.getSerializable("relation");
+                relation = new Gson().fromJson(string_relation, Relation.class);
+            }
+            if (savedInstanceState.containsKey("index_relation"))
+                index_relation = savedInstanceState.getInt("index_relation");
+            if (savedInstanceState.containsKey("new_relation"))
+                new_relation = savedInstanceState.getBoolean("new_relation");
+            if (savedInstanceState.containsKey("to_person")) {
+                String string_to_person = (String) savedInstanceState.getSerializable("to_person");
+                to_person = new Gson().fromJson(string_to_person, Person.class);
+                relation.setPersonTo(to_person);
+            }
+            if (savedInstanceState.containsKey("from_person")) {
+                String string_from_person = (String) savedInstanceState.getSerializable("from_person");
+                from_person = new Gson().fromJson(string_from_person, Person.class);
+                relation.setPersonFrom(from_person);
+            }
+            if (savedInstanceState.containsKey("from_already_set"))
+                from_already_set = savedInstanceState.getBoolean("from_already_set");
+            if (savedInstanceState.containsKey("to_already_set"))
+                to_already_set = savedInstanceState.getBoolean("to_already_set");
         }
 
         // get the button views from the layout
@@ -83,25 +135,16 @@ public class AddRelationActivity extends AppCompatActivity {
         * */
         setAdapters();
 
+        Log.d("general", "onCreate() -> set the views");
+
         // complete the views with the edit relation informations
         if (!new_relation){
-            setEditInformation();
-
-            // désactiver les champs de saisie des personnes
-            mAutoTextViewRelationFrom.setEnabled(false);
-            mAutoTextViewRelationTo.setEnabled(false);
-
-            // associate the ids and full_names with the Person objects and set the variables
-            int index_from = associateInfosWithPerson(relation.getFrom());
-            int index_to = associateInfosWithPerson(relation.getTo());
-
-            from_person = ManagePersonsActivity.array_persons.get(index_from);
-            to_person = ManagePersonsActivity.array_persons.get(index_to);
+            setEditInformation(relation);
         }
         else {
-            if (to_person != null)
+            if (to_already_set)
                 setToPersonView();
-            if (from_person != null)
+            if (from_already_set)
                 setFromPersonView();
         }
 
@@ -118,20 +161,39 @@ public class AddRelationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Get the informations about the relation in the views
                 boolean valid_relation = testValidRelation(relation);
+                boolean already_exists = testExistingRelation(relation);
                 boolean success_write = false;
 
+                try {
+                    Log.d("save-relation-button", relation.toString(2));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                // si la relation est valide on passe à l'étape suivante
                 if (valid_relation) {
                     if (new_relation) {
-                        // ajout du champ application id
-                        relation.setApplicationID(MainActivity.mConfiguration.getApplicationId());
+                        // dans le cas d'un ajout, si la relation existe, adios mec
+                        if (!already_exists) {
+                            // ajout du champ application id
+                            relation.setApplicationID(MainActivity.mConfiguration.getApplicationId());
 
-                        // ajout du champ date
-                        relation.setCreationDate();
+                            // ajout du champ date
+                            relation.setCreationDate();
 
-                        ManageRelationsActivity.array_relations.add(relation);
-                        success_write = FileUtils.saveRelationsToFile(getApplicationContext(), ManageRelationsActivity.formatterJsonFile());
+                            ManageRelationsActivity.array_relations.add(relation);
+                            success_write = FileUtils.saveRelationsToFile(getApplicationContext(), ManageRelationsActivity.formatterJsonFile());
+                        }
+                        else {
+                            // display du message d'erreur
+                            String toast_text = AddRelationActivity.this.getString(R.string.toast_already_existing_relation);
+                            Toast toast = Toast.makeText(AddRelationActivity.this, toast_text, Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
                     }
+                    // si c'est une edition, on remove puis on ajoute
                     else {
+
                         // ajout du champ date_update
                         relation.setUpdateDate();
                         ManageRelationsActivity.array_relations.remove(index_relation);
@@ -168,10 +230,10 @@ public class AddRelationActivity extends AppCompatActivity {
      * Function to associate specific information with a person saved in the application.
      * Example of string_p: "AAA-000001 - John DOE"
      *
-     * @param string_p a String containing some informations about a person
+     * @param unique_id a String containing a unique_id (ex: AAA-000001)
      * @return int
      */
-    public int associateInfosWithPerson(String string_p) {
+    public int associateInfosWithPerson(String unique_id) {
         // aller chercher dans la liste ManagePersonActivity.array_persons la personne associée à ces deux éléments
         boolean found = false;
         int i= 0;
@@ -179,7 +241,7 @@ public class AddRelationActivity extends AppCompatActivity {
         while (i < ManagePersonsActivity.array_persons.size() && !found) {
             Person p = ManagePersonsActivity.array_persons.get(i);
 
-            if (p.toString().equals(string_p)) {
+            if (p.getInfoByKey("unique_id").equals(unique_id)) {
                 index_p = i;
                 found = true;
             }
@@ -232,26 +294,6 @@ public class AddRelationActivity extends AppCompatActivity {
         mEditTextRelationComments.addTextChangedListener(new TextListenerDetailsRelation());
     }
 
-
-
-    /**
-     * Set the person from with a defined person given in parameters
-     *
-     * @param from_person an object of type Person
-     */
-    public static void setFromPerson(Person from_person) {
-        AddRelationActivity.from_person = from_person;
-    }
-
-    /**
-     * Set the person to with a defined person given in parameters
-     *
-     * @param to_person an object of type Person
-     */
-    public static void setToPerson(Person to_person) {
-        AddRelationActivity.to_person = to_person;
-    }
-
     /**
      * A function to set the adapters for the different objects on the Add Relation Activity.
      * We basically have to set the adapters for the two AutocompleteTextViews and one for the spinner.
@@ -294,11 +336,8 @@ public class AddRelationActivity extends AppCompatActivity {
      * @return Boolean true if the Relation does not exist, else false
      */
     private boolean testExistingRelation(Relation relation){
-        String toast_text = this.getString(R.string.toast_already_existing_relation);
         for(int i=0 ; i<ManageRelationsActivity.array_relations.size();i++){
             if (relation.isSameRelation(ManageRelationsActivity.array_relations.get(i))){
-                Toast toast = Toast.makeText(this, toast_text, Toast.LENGTH_SHORT);
-                toast.show();
                 return true;
             }
         }
@@ -324,16 +363,20 @@ public class AddRelationActivity extends AppCompatActivity {
 
     private boolean isPersonToValid(Relation relation) {
         boolean is_empty = relation.getInfoByKey("to_unique_id").equals("");
+        String toast_text = this.getString(R.string.toast_person_not_selected);
         if (is_empty) {
-            mAutoTextViewRelationFrom.setError(this.getString(R.string.toast_person_not_selected));
+            Toast toast = Toast.makeText(this, toast_text, Toast.LENGTH_SHORT);
+            toast.show();
         }
         return !is_empty;
     }
 
     private boolean isPersonFromValid(Relation relation) {
         boolean is_empty = relation.getInfoByKey("from_unique_id").equals("");
+        String toast_text = this.getString(R.string.toast_person_not_selected);
         if (is_empty) {
-            mAutoTextViewRelationFrom.setError(this.getString(R.string.toast_person_not_selected));
+            Toast toast = Toast.makeText(this, toast_text, Toast.LENGTH_SHORT);
+            toast.show();
         }
         return !is_empty;
     }
@@ -343,38 +386,52 @@ public class AddRelationActivity extends AppCompatActivity {
      * @return a boolean to know if the relation can be written
      */
     private boolean testValidRelation(Relation relation){
-        try {
-            Log.d("general-display", relation.toString(2));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return (testRelationType(relation) && isPersonFromValid(relation) && isPersonToValid(relation) && !samePersonRelation(relation) && !testExistingRelation(relation));
+        return (testRelationType(relation) && isPersonFromValid(relation) && isPersonToValid(relation) && !samePersonRelation(relation));
     }
 
     private void setToPersonView() {
         // informations contenues dans to_person
         mAutoTextViewRelationTo.setText(to_person.toString(), false);
         mAutoTextViewRelationTo.setEnabled(false);
+
+        // TODO à changer car c'est pas très propre
+        // empêcher le dropdown de pop
+        mAutoTextViewRelationTo.setAdapter((ArrayAdapter<Person>) null);
     }
 
     private void setFromPersonView() {
         mAutoTextViewRelationFrom.setText(from_person.toString(), false);
         mAutoTextViewRelationFrom.setEnabled(false);
+
+        // TODO à changer car c'est pas très propre
+        // empêcher le dropdown de pop
+        mAutoTextViewRelationFrom.setAdapter((ArrayAdapter<Person>) null);
+    }
+
+    private void setPersonsViews(Relation relation) {
+        // associate the ids and full_names with the Person objects and set the variables
+        int index_from = associateInfosWithPerson(relation.getFromID());
+        int index_to = associateInfosWithPerson(relation.getToID());
+
+        from_person = ManagePersonsActivity.array_persons.get(index_from);
+        to_person = ManagePersonsActivity.array_persons.get(index_to);
+
+        setFromPersonView();
+        setToPersonView();
     }
 
     /**
      * Gets the informations of the relation that is being edited
      * Sets the Views of the activity so they contain the informations of the edited relation
      */
-    private void setEditInformation(){
-        mAutoTextViewRelationFrom.setText(relation.getFrom(), false);
-        mAutoTextViewRelationTo.setText(relation.getTo(), false);
+    private void setEditInformation(Relation relation){
+        setPersonsViews(relation);
 
-        String relation_key = relation.getInfoByKey("relation");
+        String relation_key = relation.getRelationType();
         int pos_in_adapter = getPositionInAdapter(spinner_adapter, relation_key);
         mSpinnerRelationType.setSelection(pos_in_adapter);
 
-        mEditTextRelationComments.setText(relation.getInfoByKey("detail"));
+        mEditTextRelationComments.setText(relation.getDetails());
     }
 
     /**
@@ -399,21 +456,26 @@ public class AddRelationActivity extends AppCompatActivity {
         resetObjects();
     }
 
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        String info_person_from = (String) savedInstanceState.getSerializable("from_person");
-        String info_person_to = (String) savedInstanceState.getSerializable("to_person");
-        String info_single_relat = (String) savedInstanceState.getSerializable("relation");
-
-        from_person = new Gson().fromJson(info_person_from, Person.class);
-        to_person = new Gson().fromJson(info_person_to, Person.class);
-        relation = new Gson().fromJson(info_single_relat, Relation.class);
-
-        new_relation = savedInstanceState.getBoolean("new_relation");
-        rotation_screen = savedInstanceState.getBoolean("rotation_screen");
-    }
+//    @Override
+//    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+//        Log.d("general", "onRestoreInstanceState");
+//
+//        super.onRestoreInstanceState(savedInstanceState);
+//
+//        String info_person_from = (String) savedInstanceState.getSerializable("from_person");
+//        String info_person_to = (String) savedInstanceState.getSerializable("to_person");
+//        String info_single_relat = (String) savedInstanceState.getSerializable("relation");
+//
+//        from_person = new Gson().fromJson(info_person_from, Person.class);
+//        to_person = new Gson().fromJson(info_person_to, Person.class);
+//        relation = new Gson().fromJson(info_single_relat, Relation.class);
+//
+//        from_already_set = savedInstanceState.getBoolean("from_already_set");
+//        to_already_set = savedInstanceState.getBoolean("to_already_set");
+//
+//        new_relation = savedInstanceState.getBoolean("new_relation");
+//        rotation_screen = savedInstanceState.getBoolean("rotation_screen");
+//    }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
@@ -423,9 +485,12 @@ public class AddRelationActivity extends AppCompatActivity {
         Gson gson = new Gson();
         outState.putSerializable("from_person", gson.toJson(from_person));
         outState.putSerializable("to_person", gson.toJson(to_person));
+        outState.putSerializable("relation", gson.toJson(relation));
 
         outState.putBoolean("new_relation", new_relation);
         outState.putBoolean("rotation_screen", true);
+        outState.putBoolean("from_already_set", from_already_set);
+        outState.putBoolean("to_already_set", to_already_set);
     }
 
     // we make TextWatcher to be aware of the position it currently works with

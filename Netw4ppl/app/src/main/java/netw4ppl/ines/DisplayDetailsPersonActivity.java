@@ -49,7 +49,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_details_person);
 
         Bundle extra_parameter = getIntent().getExtras();
-        index_person = -1;
+        index_person = 0;
         if(extra_parameter != null)
             index_person = extra_parameter.getInt("index_person");
 
@@ -136,11 +136,11 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         mButtonAddRelationFrom.setOnClickListener(v -> {
 
             // TODO changer cette merde
-            AddRelationActivity.setFromPerson(person);
             Intent intent = new Intent(DisplayDetailsPersonActivity.this, AddRelationActivity.class);
             Bundle b = new Bundle();
             b.putBoolean("new_relation", true);
-            b.putSerializable("from_person", new Gson().toJson(person));
+            b.putSerializable("to_person", new Gson().toJson(person));
+            b.putBoolean("to_already_set", true);
             intent.putExtras(b);
             startActivity(intent);
         });
@@ -186,11 +186,11 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         });
         mButtonAddRelationTo.setOnClickListener(v -> {
             // TODO changer cette merde
-            AddRelationActivity.setFromPerson(person);
             Intent intent = new Intent(DisplayDetailsPersonActivity.this, AddRelationActivity.class);
             Bundle b = new Bundle();
             b.putBoolean("new_relation", true);
-            b.putSerializable("to_person", new Gson().toJson(person));
+            b.putSerializable("from_person", new Gson().toJson(person));
+            b.putBoolean("from_already_set", true);
             intent.putExtras(b);
             startActivity(intent);
         });

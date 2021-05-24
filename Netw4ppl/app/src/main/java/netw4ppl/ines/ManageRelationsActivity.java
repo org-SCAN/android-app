@@ -64,7 +64,6 @@ public class ManageRelationsActivity extends AppCompatActivity {
 
                 Bundle b = new Bundle();
                 b.putInt("index_relation", position); // your index relation
-
                 intent.putExtras(b); //Put your id to your next Intent
 
                 startActivity(intent);
