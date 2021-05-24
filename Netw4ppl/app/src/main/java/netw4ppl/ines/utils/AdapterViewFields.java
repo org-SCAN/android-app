@@ -260,6 +260,9 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
                 ((ViewHolderEditText) holder).myCustomEditTextListener.updatePosition(holder.getAdapterPosition());
                 ((ViewHolderEditText) holder).myCustomEditTextListener.setKey(field.getKey());
                 ((ViewHolderEditText) holder).mText.setText(AddPersonActivity.person.getInfoByKey(field.getKey()));
+
+                if (field.getElementByKey("database_type").equals("integer"))
+                    ((ViewHolderEditText) holder).mText.setInputType(InputType.TYPE_CLASS_NUMBER);
                 break;
             case 1:
                 ((ViewHolderSpinner) holder).mTitle.setText(field.getTitle());
