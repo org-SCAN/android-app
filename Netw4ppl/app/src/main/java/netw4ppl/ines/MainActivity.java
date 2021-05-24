@@ -85,27 +85,7 @@ public class MainActivity extends AppCompatActivity{
 
         // si c'est le lancement de l'application, chargement en mémoire des json de configuration
         if (mApplicationLaunch) {
-            // lecture de tous les json
-            try {
-                JSONObject config_content = FileUtils.loadConfigFromFile(this);
-
-                mConfiguration = new Configuration(MainActivity.this, config_content);
-
-                Log.d("general-display", "Hashmap database content: " + mConfiguration.getHashMapDatabase().toString());
-
-                String ids = FileUtils.loadIdsFromFile(this);
-                if (ids.equals(""))
-                    AddPersonActivity.json_ids = new JSONObject();
-                else
-                    AddPersonActivity.json_ids = new JSONObject(ids);
-                readPersonsFile(this);
-                readRelationsFile(this);
-
-                Log.d("test-read-ids", AddPersonActivity.json_ids.toString(2));
-
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
-            }
+            loadConfiguration(this);
 
             boolean download_config = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(this.getResources().getString(R.string.settings_server_maj_auto_key),false);
             if (download_config){
@@ -150,5 +130,29 @@ public class MainActivity extends AppCompatActivity{
     protected void onDestroy() {
         super.onDestroy();
         Log.d("life-cycle", "Main onDestroy()");
+    }
+
+    public static void loadConfiguration(Context context) {
+        // lecture de tous les json
+        try {
+            JSONObject config_content = FileUtils.loadConfigFromFile(context);
+
+            mConfiguration = new Configuration(context, config_content);
+
+            Log.d("general-display", "Hashmap database content: " + mConfiguration.getHashMapDatabase().toString());
+
+            String ids = FileUtils.loadIdsFromFile(context);
+            if (ids.equals(""))
+                AddPersonActivity.json_ids = new JSONObject();
+            else
+                AddPersonActivity.json_ids = new JSONObject(ids);
+            readPersonsFile(context);
+            readRelationsFile(context);
+
+            Log.d("test-read-ids", AddPersonActivity.json_ids.toString(2));
+
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

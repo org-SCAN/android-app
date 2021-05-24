@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import org.json.JSONException;
 
 import java.lang.reflect.Array;
@@ -47,7 +49,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_details_person);
 
         Bundle extra_parameter = getIntent().getExtras();
-        index_person = -1;
+        index_person = 0;
         if(extra_parameter != null)
             index_person = extra_parameter.getInt("index_person");
 
@@ -132,19 +134,23 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         });
 
         mButtonAddRelationFrom.setOnClickListener(v -> {
-            AddRelationActivity.setToPerson(person);
-            AddRelationActivity.new_relation = true;
+
+            // TODO changer cette merde
             Intent intent = new Intent(DisplayDetailsPersonActivity.this, AddRelationActivity.class);
+            Bundle b = new Bundle();
+            b.putBoolean("new_relation", true);
+            b.putSerializable("to_person", new Gson().toJson(person));
+            b.putBoolean("to_already_set", true);
+            intent.putExtras(b);
             startActivity(intent);
         });
         mButtonEditPerson.setOnClickListener(v -> {
-            AddPersonActivity.person = person;
-            AddPersonActivity.new_person = false;
-
             Intent intent = new Intent(DisplayDetailsPersonActivity.this, AddPersonActivity.class);
 
             Bundle b = new Bundle();
             b.putInt("index_person", index_person); //Your id
+            b.putBoolean("new_person", false);
+            b.putSerializable("person", new Gson().toJson(person));
             intent.putExtras(b); //Put your id to your next Intent
 
             startActivity(intent);
@@ -179,9 +185,13 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
                     .show();
         });
         mButtonAddRelationTo.setOnClickListener(v -> {
-            AddRelationActivity.setFromPerson(person);
-            AddRelationActivity.new_relation = true;
+            // TODO changer cette merde
             Intent intent = new Intent(DisplayDetailsPersonActivity.this, AddRelationActivity.class);
+            Bundle b = new Bundle();
+            b.putBoolean("new_relation", true);
+            b.putSerializable("from_person", new Gson().toJson(person));
+            b.putBoolean("from_already_set", true);
+            intent.putExtras(b);
             startActivity(intent);
         });
     }
