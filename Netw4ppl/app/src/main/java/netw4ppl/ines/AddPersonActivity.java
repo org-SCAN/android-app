@@ -228,6 +228,8 @@ public class AddPersonActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
 
         outState.putSerializable("person", new Gson().toJson(person));
+        outState.putBoolean("new_person", new_person);
+        outState.putInt("index_person", index_person);
     }
 
     @Override
@@ -236,5 +238,8 @@ public class AddPersonActivity extends AppCompatActivity {
 
         String info_person = (String) savedInstanceState.getSerializable("person");
         person = new Gson().fromJson(info_person, Person.class);
+
+        new_person = savedInstanceState.getBoolean("new_person");
+        index_person = savedInstanceState.getInt("index_person");
     }
 }
