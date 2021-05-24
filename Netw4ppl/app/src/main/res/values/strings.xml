@@ -135,6 +135,9 @@
     <string name="error_unique_id">Unique format not valid, must be 3 letters</string>
     <string name="invalid_format">Invalid format</string>
 
+    <string name="delete_files_title">Delete files</string>
+    <string name="delete_files_message">Do you really want to delete the files?</string>
+
     <string name="yes">Yes</string>
 
 </resources>
