@@ -1,5 +1,6 @@
 package netw4ppl.ines;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 
@@ -30,12 +33,22 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
     Button mButtonEditRelation;
     Button mButtonDeleteRelation;
 
-    public static int index_relation = -1;
+    private int index_relation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_details_relation);
+
+        /* Récupère ton bundle connard */
+        Bundle extra_parameters = getIntent().getExtras();
+        if (extra_parameters != null) {
+            index_relation = extra_parameters.getInt("index_relation");
+        }
+        else {
+            index_relation = -1;
+        }
+
 
         mTextViewFullnameTitle = (TextView) findViewById(R.id.details_title_full_name);
 
@@ -52,13 +65,15 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
         setViews(relation);
 
         mButtonEditRelation.setOnClickListener(v -> {
-            try {
-                AddRelationActivity.single_relation = new Relation(ManageRelationsActivity.array_relations.get(index_relation).toString());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            AddRelationActivity.new_relation = false;
             Intent intent = new Intent(DisplayDetailsRelationActivity.this, AddRelationActivity.class);
+
+            Bundle b = new Bundle();
+            b.putInt("index_relation", index_relation); // your index relation
+            b.putSerializable("relation", new Gson().toJson(ManageRelationsActivity.array_relations.get(index_relation)));
+            b.putBoolean("new_relation", false);
+
+            intent.putExtras(b); //Put your id to your next Intent
+
             startActivity(intent);
         });
 
@@ -109,5 +124,20 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         setViews(ManageRelationsActivity.array_relations.get(index_relation));
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        // function used when the screen is rotated
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("index_relation", index_relation);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        index_relation = savedInstanceState.getInt("index_relation");
     }
 }
