@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -33,6 +34,21 @@ public class ManageRelationsActivity extends AppCompatActivity {
     SearchView mSearchBar;
     public static ArrayList<Relation> array_relations = new ArrayList<Relation>();
     public static RelationListAdapter mAdapter;
+
+    public static void updateRelations(Person person) {
+        // parcourir toutes les relations
+        for (int i=0; i<ManageRelationsActivity.array_relations.size(); i++) {
+            // si le unique id de la personne correspond à un unique_id dans la relation (from ou to)
+            if (person.getInfoByKey("unique_id").equals(ManageRelationsActivity.array_relations.get(i).getFromID())) {
+                Log.d("display", "Je m'appelais " + ManageRelationsActivity.array_relations.get(i).getFromFullname() + "et maintenant je m'appelle " + person.getInfoByKey("full_name"));
+                ManageRelationsActivity.array_relations.get(i).setFromFullname(person.getInfoByKey("full_name"));
+            }
+            if (person.getInfoByKey("unique_id").equals(ManageRelationsActivity.array_relations.get(i).getToID())) {
+                Log.d("display", "Je m'appelais " + ManageRelationsActivity.array_relations.get(i).getToFullname() + "et maintenant je m'appelle " + person.getInfoByKey("full_name"));
+                ManageRelationsActivity.array_relations.get(i).setToFullname(person.getInfoByKey("full_name"));
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

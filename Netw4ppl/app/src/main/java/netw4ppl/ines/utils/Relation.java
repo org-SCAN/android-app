@@ -30,6 +30,14 @@ public class Relation extends JSONObject {
         to_person_name = "";
     }
 
+    public void setFromFullname(String full_name) {
+        from_person_name = full_name;
+    }
+
+    public void setToFullname(String full_name) {
+        to_person_name = full_name;
+    }
+
     public void setRelationType(String key_relation) {
         this.putInfo("relation", key_relation);
     }

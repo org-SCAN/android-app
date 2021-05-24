@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
@@ -108,13 +109,13 @@ public class SettingsActivity extends AppCompatActivity {
                 return true;
             });
 
-            EditTextPreference input_ip_port = findPreference(res.getString(R.string.settings_server_ip_port_key));
-            input_ip_port.setOnPreferenceChangeListener((e,v) -> {
-                if (v == null) return false;
-                // check the ip address
-                String pattern_ip = "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}:[1-9][0-9]{0,4}$";
-                return Pattern.matches(pattern_ip, v.toString());
-            });
+//            EditTextPreference input_ip_port = findPreference(res.getString(R.string.settings_server_ip_port_key));
+//            input_ip_port.setOnPreferenceChangeListener((e,v) -> {
+//                if (v == null) return false;
+//                // check the ip address
+//                String pattern_ip = "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}:[1-9][0-9]{0,4}$";
+//                return Pattern.matches(pattern_ip, v.toString());
+//            });
 
             SwitchPreference switch_auto_update = findPreference(res.getString(R.string.settings_server_maj_auto_key));
             switch_auto_update.setOnPreferenceChangeListener((e,v) -> {
@@ -141,20 +142,25 @@ public class SettingsActivity extends AppCompatActivity {
 
             // add a listener to the delete file
             findPreference(res.getString(R.string.settings_delete_button_key)).setOnPreferenceClickListener(e -> {
-                // delete the files
-                displayToast(this.getContext(), res.getString(R.string.toast_delete_processing));
-                Log.d("general-display", "Efface les fichiers de l'appareil");
-
-                boolean result_deletion = FileUtils.clearDirectory(SettingsFragment.this.getContext().getFilesDir() + "/cases/");
-                //ManagePersonsActivity.array_persons = new JSONArray();
-
-                // create the new empty ones
-                String[] filenames = {"persons.json", "relations.json"};
-                boolean result_creation = FileUtils.createFiles(SettingsFragment.this.getContext().getFilesDir().toString()+"/cases/", filenames);
-                Log.d("general-display", result_creation ? "Creation successfull" : "Creation failed");
-
-                displayToast(this.getContext(), result_deletion ? res.getString(R.string.toast_delete_success) : res.getString(R.string.toast_delete_fail));
-
+                new AlertDialog.Builder(SettingsFragment.this.getContext())
+                        .setTitle(R.string.delete_files_title)
+                        .setMessage(R.string.delete_files_message)
+                        .setCancelable(true)
+                        .setPositiveButton(R.string.yes, (a,b) -> {
+                            // delete the files
+                            displayToast(this.getContext(), res.getString(R.string.toast_delete_processing));
+                            // delete the files
+                            boolean result_deletion = FileUtils.clearDirectory(SettingsFragment.this.getContext().getFilesDir() + "/cases/");
+                            // create the new empty ones
+                            String[] filenames = {"persons.json", "relations.json"};
+                            boolean result_creation = FileUtils.createFiles(SettingsFragment.this.getContext().getFilesDir().toString()+"/cases/", filenames);
+                            displayToast(this.getContext(), result_deletion ? res.getString(R.string.toast_delete_success) : res.getString(R.string.toast_delete_fail));
+                        })
+                        .setNegativeButton(R.string.button_relation_cancel_title, (a,b) -> {
+                            // no op
+                        })
+                        .create()
+                        .show();
                 return true;
             });
         }
