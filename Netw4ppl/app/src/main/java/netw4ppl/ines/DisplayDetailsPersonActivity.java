@@ -201,7 +201,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
 
         for (int i=0; i<ManageRelationsActivity.array_relations.size(); i++) {
             Relation r = ManageRelationsActivity.array_relations.get(i);
-            if (r.getTo().equals(to_person.toString())) {
+            if (r.getToID().equals(to_person.getInfoByKey("unique_id"))) {
                 array_relations_from.add(r);
             }
         }
@@ -228,7 +228,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
 
         for (int i=0; i<ManageRelationsActivity.array_relations.size(); i++) {
             Relation r = ManageRelationsActivity.array_relations.get(i);
-            if (r.getFrom().equals(from_person.toString())) {
+            if (r.getFromID().equals(from_person.getInfoByKey("unique_id"))) {
                 array_relations_to.add(r);
             }
         }

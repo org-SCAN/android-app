@@ -124,8 +124,10 @@ public class AddPersonActivity extends AppCompatActivity {
                 // reset some variables
                 new_person = true;
 
-                if (save_persons && save_ids)
+                if (save_persons && save_ids){
+                    ManageRelationsActivity.updateRelations(person);
                     finish();
+                }
                 else {
                     // TODO faire apparaitre un toast pour dire que la sauvegarde a échoué
                 }
