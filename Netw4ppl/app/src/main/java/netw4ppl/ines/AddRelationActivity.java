@@ -456,27 +456,6 @@ public class AddRelationActivity extends AppCompatActivity {
         resetObjects();
     }
 
-//    @Override
-//    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-//        Log.d("general", "onRestoreInstanceState");
-//
-//        super.onRestoreInstanceState(savedInstanceState);
-//
-//        String info_person_from = (String) savedInstanceState.getSerializable("from_person");
-//        String info_person_to = (String) savedInstanceState.getSerializable("to_person");
-//        String info_single_relat = (String) savedInstanceState.getSerializable("relation");
-//
-//        from_person = new Gson().fromJson(info_person_from, Person.class);
-//        to_person = new Gson().fromJson(info_person_to, Person.class);
-//        relation = new Gson().fromJson(info_single_relat, Relation.class);
-//
-//        from_already_set = savedInstanceState.getBoolean("from_already_set");
-//        to_already_set = savedInstanceState.getBoolean("to_already_set");
-//
-//        new_relation = savedInstanceState.getBoolean("new_relation");
-//        rotation_screen = savedInstanceState.getBoolean("rotation_screen");
-//    }
-
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
