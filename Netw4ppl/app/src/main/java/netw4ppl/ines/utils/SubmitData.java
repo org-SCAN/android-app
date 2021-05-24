@@ -103,7 +103,7 @@ public class SubmitData {
                 boolean download_config = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getResources().getString(R.string.settings_server_maj_auto_key), false);
                 boolean get_success = false;
 
-                if (submit_result && download_config) {
+                if (download_config) {
                     get_success = getFromServer(context, ip_port, token_server, client);
                 }
                 // Log.d("Fichier", new File(context.getFilesDir(), filePath).getPath()+"HHH");
