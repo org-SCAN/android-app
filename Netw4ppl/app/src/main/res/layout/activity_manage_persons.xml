@@ -16,7 +16,7 @@
             android:id="@+id/searchViewPerson"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:queryHint="AAA-000001"
+            android:queryHint="AAA-000001, John DOE, FRA ..."
             android:iconifiedByDefault="true"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
