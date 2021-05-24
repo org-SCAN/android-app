@@ -59,7 +59,7 @@ public class AddPersonActivity extends AppCompatActivity {
         }
 
         // set up the RecyclerView
-        AdapterViewFields adapter = new AdapterViewFields(this, MainActivity.mConfiguration.getArrayFields());
+        AdapterViewFields adapter = new AdapterViewFields(this, MainActivity.mConfiguration.getArrayFields(), new_person);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 

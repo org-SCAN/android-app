@@ -41,6 +41,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     private ArrayList<Field> mFields;
     LayoutInflater mInflater;
     private final Context mContext;
+    private boolean new_person;
 
     class ViewHolderUniqueID extends RecyclerView.ViewHolder {
         TextView mTitleLetters;
@@ -124,12 +125,17 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         MyCustomEditTextListener myCustomEditTextListener;
         String mKey;
 
+        String regex_date;
+
         public ViewHolderCalendarView(@NonNull View itemView, MyCustomEditTextListener customEditTextListener) {
             super(itemView);
             this.myCustomEditTextListener = customEditTextListener;
             mTitle = itemView.findViewById(R.id.date_picker_title);
             mDateText = itemView.findViewById(R.id.date_picker_edittext_object);
             mDateText.addTextChangedListener(this.myCustomEditTextListener);
+
+            regex_date = "([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))";
+            this.myCustomEditTextListener.setRegex(regex_date);
 
             mDateText.setInputType(InputType.TYPE_NULL);
             mDateText.setOnClickListener(new View.OnClickListener() {
@@ -182,10 +188,11 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
-    public AdapterViewFields(Context context, ArrayList<Field> fields) {
+    public AdapterViewFields(Context context, ArrayList<Field> fields, boolean new_pers) {
         this.mContext = context;
         this.mFields = fields;
         this.mInflater = LayoutInflater.from(context);
+        this.new_person = new_pers;
     }
 
     @NonNull
@@ -241,6 +248,10 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
                     ((ViewHolderUniqueID) holder).mValueLetters.setText(default_key);
                     ((ViewHolderUniqueID) holder).mValueFigures.setText(String.format("%06d", AddPersonActivity.getNextId(default_key)));
                 }
+
+                // s'il s'agit de la modificaiton d'une personne, désactiver ce champs
+                ((ViewHolderUniqueID) holder).mValueLetters.setEnabled(this.new_person);
+
                 break;
             case 0:
                 /* Section EditText basique */
@@ -383,6 +394,17 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     private class MyCustomEditTextListener implements TextWatcher {
         private int position;
         private String key_field;
+        private String regex;
+        private ViewHolderCalendarView mView;
+
+        public MyCustomEditTextListener() {
+            super();
+        }
+
+        public MyCustomEditTextListener(ViewHolderCalendarView view) {
+            super();
+            mView = view;
+        }
 
         public void updatePosition(int position) {
             this.position = position;
@@ -395,15 +417,23 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-            try {
 //                String field_key = mFields.get(position).getKey();
+            // si mon champs respecte la regex, on l'ajoute, sinon on le supprime
+            if (getRegex() != null) {
+                if (Pattern.matches(getRegex(), charSequence.toString())) {
+                    // enlever le message d'erreur
+                    AddPersonActivity.person.putInfo(this.key_field, charSequence.toString());
+                }
+                else {
+                    // set error message
+                    // mView.mDateText.setError(AddPersonActivity.this.getString(R.string.invalid_format));
+                }
+            } else {
                 if (!charSequence.toString().equals(""))
-                    AddPersonActivity.person.put(this.key_field, charSequence.toString());
+                    AddPersonActivity.person.putInfo(this.key_field, charSequence.toString());
                 else {
                     AddPersonActivity.person.remove(this.key_field);
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
         }
 
@@ -414,6 +444,14 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         public void setKey(String key) {
             this.key_field = key;
+        }
+
+        public void setRegex(String reg) {
+            this.regex = reg;
+        }
+
+        public String getRegex() {
+            return this.regex;
         }
     }
 }
