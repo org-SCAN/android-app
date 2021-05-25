@@ -71,6 +71,21 @@ public class ManageRelationsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        mSearchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (query.length() > 0)
+                    mAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
         mAdapter = new RelationListAdapter(this, R.layout.adapter_nutshell_relation_layout, ManageRelationsActivity.array_relations);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

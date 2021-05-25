@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+import netw4ppl.ines.MainActivity;
+
 public class Relation extends JSONObject {
 
     private String from_person_name;
@@ -131,6 +133,10 @@ public class Relation extends JSONObject {
 
     public String getRelationType() {
         return (this.getInfoByKey("relation"));
+    }
+
+    public String getRelationTypeFull() {
+        return MainActivity.mConfiguration.getElementFromTable("Relations", getRelationType());
     }
 
     public void setCreationDate(){

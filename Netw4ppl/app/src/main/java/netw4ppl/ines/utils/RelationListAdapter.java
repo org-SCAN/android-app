@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import androidx.annotation.Nullable;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import netw4ppl.ines.R;
 
@@ -21,6 +23,8 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
     private Context mContext;
     private int mResource;
     private int lastPosition = -1;
+    private ArrayList<Relation> mObjects;
+    private ArrayList<Relation> mObjects_tmp;
 
     private static class ViewHolder {
         TextView mFullName1;
@@ -34,6 +38,77 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;
+        mObjects = objects;
+        mObjects_tmp = objects;
+    }
+
+    @NonNull
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults filterResults = new FilterResults();
+                ArrayList<Relation> tempList = new ArrayList<Relation>();
+
+                if (constraint != null && mObjects != null) {
+                    int length = mObjects.size();
+                    int i=0;
+                    boolean has_it;
+                    String key;
+                    String query = constraint.toString().toLowerCase();
+
+                    while (i<length) {
+                        Relation r = mObjects.get(i);
+                        has_it = false;
+
+                        // regarder unique id from
+                        if (r.getFromID().toLowerCase().contains(query))
+                            has_it = true;
+
+                        // regarder le full_name from
+                        if (r.getFromFullname().toLowerCase().contains(query))
+                            has_it = true;
+
+                        // regarder le full_name to
+                        if (r.getToID().toLowerCase().contains(query))
+                            has_it = true;
+
+                        // regarder unique_id to
+                        if (r.getToFullname().toLowerCase().contains(query))
+                            has_it = true;
+
+                        // regarder le type de relation
+                        String relation_fullname = r.getRelationTypeFull();
+                        if (r.getRelationType().toLowerCase().contains(query) || relation_fullname.toLowerCase().contains(query))
+                            has_it = true;
+
+                        if (has_it)
+                            tempList.add(r);
+                        i++;
+                    }
+
+                    filterResults.values = tempList;
+                    filterResults.count = tempList.size();
+                }
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                mObjects_tmp = (ArrayList<Relation>) results.values;
+
+                if (constraint.toString().equals("") || constraint == null) {
+                    mObjects_tmp = mObjects;
+                }
+                notifyDataSetChanged();
+            }
+        };
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
     }
 
     @NonNull
@@ -72,5 +147,20 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
         holder.mRelationType.setText(relation.getRelationType());
 
         return convertView;
+    }
+
+    @Override
+    public int getCount() {
+        return mObjects_tmp.size();
+    }
+
+    @Override
+    public Relation getItem(int position) {
+        return mObjects_tmp.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 }
