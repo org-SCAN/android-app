@@ -302,6 +302,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             case 3:
                 ((ViewHolderCalendarView) holder).mTitle.setHint(field.getTitle());
                 ((ViewHolderCalendarView) holder).myCustomEditTextListener.setKey(field.getKey());
+                ((ViewHolderCalendarView) holder).mDateText.setHint(field.getElementByKey("placeholder"));
                 ((ViewHolderCalendarView) holder).mDateText.setText(AddPersonActivity.person.getInfoByKey(field.getKey()));
                 break;
             default:
