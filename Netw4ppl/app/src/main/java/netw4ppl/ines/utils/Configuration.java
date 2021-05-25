@@ -15,6 +15,7 @@ import java.util.Iterator;
 
 public class Configuration {
     private ArrayList<Field> array_fields = new ArrayList<>();
+    private HashMap<String, Field> hashMap_fields = new HashMap<>();
     private HashMap<String, ArrayList<DataElement>> hashMap_database = new HashMap<>();
     private HashMap<String, ArrayAdapter> hashMap_adapters = new HashMap<>();
     private final HashMap<String, HashMap<String, DataElement>> hashMap_datatables = new HashMap<>();
@@ -51,8 +52,16 @@ public class Configuration {
             if (this.hashMap_datatables.get(key_table).containsKey(key_element))
                 has_it = true;
         }
-        Log.d("display", "Element: " + key_element + " in table " + key_table + " exists");
         return has_it;
+    }
+
+    public Field getFieldFromHashMap(String key_field) {
+        Log.d("display", "Get from hashmap ce field : " + key_field);
+        if (this.hashMap_fields.containsKey(key_field)) {
+            Log.d("display", "Hashmap a cet élément : " + key_field);
+            return this.hashMap_fields.get(key_field);
+        }
+        return null;
     }
 
     public String getElementFromTable(String key_table, String key_element) {
@@ -106,11 +115,14 @@ public class Configuration {
         while (iterator.hasNext()) {
             String key = iterator.next();
             try {
-                array_fields.add(new Field(key, fields.getJSONObject(key).toString()));
+                Field f = new Field(key, fields.getJSONObject(key).toString());
+                array_fields.add(f);
+                this.hashMap_fields.put(key, f);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+        Log.d("display", "Hashmap fields: " + this.hashMap_fields);
     }
 
     public ArrayList<Field> getArrayFields() {

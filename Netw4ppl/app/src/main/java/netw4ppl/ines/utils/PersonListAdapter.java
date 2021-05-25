@@ -21,6 +21,7 @@ import java.nio.channels.InterruptedByTimeoutException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import netw4ppl.ines.MainActivity;
 import netw4ppl.ines.ManagePersonsActivity;
 import netw4ppl.ines.R;
 
@@ -68,12 +69,26 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
                         Iterator<String> keys = p.keys();
                         boolean has_it = false;
                         String key_field;
+                        String key_table = "";
+                        String real_value;
                         while (keys.hasNext() && !has_it) {
                             // on regarde toutes les valeurs des clés
                             key_field = keys.next();
                             String value_field = String.valueOf(p.getInfoByKey(key_field));
-                            if (value_field.toLowerCase().contains(constraint.toString().toLowerCase()))
+                            real_value = String.valueOf(p.getInfoByKey(key_field));
+
+                            // si la linked_list associée au field est définie on va regarder dedans
+                            Field f = MainActivity.mConfiguration.getFieldFromHashMap(key_field);
+                            if (f!=null){
+                                if (!f.getLinkedList().equals("")) {
+                                    key_table = f.getLinkedList();
+                                    real_value = MainActivity.mConfiguration.getElementFromTable(key_table, value_field);
+                                }
+                            }
+
+                            if (real_value.toLowerCase().contains(constraint.toString().toLowerCase()))
                                 has_it = true;
+
                         }
 
                         if (has_it) {
