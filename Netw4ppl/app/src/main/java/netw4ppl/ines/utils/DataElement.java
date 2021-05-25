@@ -19,6 +19,18 @@ public class DataElement extends JSONObject {
         this.key = key;
     }
 
+    public String getLinkedList() {
+        String res = "";
+        if (this.has("linked_list")) {
+            try {
+                res = this.getString("linked_list");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return res;
+    }
+
     public String getKey() {
         return this.key;
     }
@@ -42,6 +54,6 @@ public class DataElement extends JSONObject {
 
     @Override
     public String toString() {
-        return getKey() + " - " + getTitle();
+        return getTitle();
     }
 }

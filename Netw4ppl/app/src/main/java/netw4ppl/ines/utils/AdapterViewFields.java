@@ -284,7 +284,10 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
                 ((ViewHolderAutoComplete) holder).mTitle.setHint(field.getTitle());
                 try {
                     ((ViewHolderAutoComplete) holder).mAutoComplete.setAdapter(MainActivity.mConfiguration.getArrayAdapter(field.getString("linked_list")));
-                    ((ViewHolderAutoComplete) holder).mAutoComplete.setText(AddPersonActivity.person.getInfoByKey(field.getKey()));
+                    String text_displayed = AddPersonActivity.person.getInfoByKey(field.getKey());
+                    text_displayed = MainActivity.mConfiguration.getElementFromTable(field.getLinkedList(), text_displayed);
+
+                    ((ViewHolderAutoComplete) holder).mAutoComplete.setText(text_displayed, false); // AddPersonActivity.person.getInfoByKey(field.getKey())
                     ((ViewHolderAutoComplete) holder).mAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

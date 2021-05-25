@@ -15,8 +15,10 @@ import java.util.Iterator;
 
 public class Configuration {
     private ArrayList<Field> array_fields = new ArrayList<>();
+    private HashMap<String, Field> hashMap_fields = new HashMap<>();
     private HashMap<String, ArrayList<DataElement>> hashMap_database = new HashMap<>();
     private HashMap<String, ArrayAdapter> hashMap_adapters = new HashMap<>();
+    private final HashMap<String, HashMap<String, DataElement>> hashMap_datatables = new HashMap<>();
     private final String application_id;
 
     public Configuration(Context context, JSONObject config_content) {
@@ -40,6 +42,35 @@ public class Configuration {
         return file_content;
     }
 
+    public HashMap<String, HashMap<String, DataElement>> getHashMap_datatables() {
+        return hashMap_datatables;
+    }
+
+    public boolean hasElementInTable(String key_table, String key_element) {
+        boolean has_it = false;
+        if (this.hashMap_datatables.containsKey(key_table)) {
+            if (this.hashMap_datatables.get(key_table).containsKey(key_element))
+                has_it = true;
+        }
+        return has_it;
+    }
+
+    public Field getFieldFromHashMap(String key_field) {
+        Log.d("display", "Get from hashmap ce field : " + key_field);
+        if (this.hashMap_fields.containsKey(key_field)) {
+            Log.d("display", "Hashmap a cet élément : " + key_field);
+            return this.hashMap_fields.get(key_field);
+        }
+        return null;
+    }
+
+    public String getElementFromTable(String key_table, String key_element) {
+        String res = "";
+        if (hasElementInTable(key_table, key_element))
+            res = this.hashMap_datatables.get(key_table).get(key_element).getTitle();
+        return res;
+    }
+
     public void createHashMaps(Context context, JSONObject config_content) {
         // récupère toutes les clés de l'objet json config_content
         Iterator<String> iterator_table = config_content.keys();
@@ -53,14 +84,18 @@ public class Configuration {
                 if (!key_table.equals("fields")) {
                     // create the ArrayList
                     ArrayList<DataElement> data_array = new ArrayList<DataElement>();
+                    HashMap<String, DataElement> data_table = new HashMap<>();
                     data_array.add(new DataElement());
                     while (iterator_elements.hasNext()) {
                         String key_element = iterator_elements.next();
                         JSONObject element = table.getJSONObject(key_element);
-                        data_array.add(new DataElement(key_element, element.toString()));
+                        DataElement data_elem = new DataElement(key_element, element.toString());
+                        data_array.add(data_elem);
+                        data_table.put(key_element, data_elem);
                     }
                     // then add everything to the HashMap
                     hashMap_database.put(key_table, data_array);
+                    hashMap_datatables.put(key_table, data_table);
 
                     ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_item, data_array);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -80,11 +115,14 @@ public class Configuration {
         while (iterator.hasNext()) {
             String key = iterator.next();
             try {
-                array_fields.add(new Field(key, fields.getJSONObject(key).toString()));
+                Field f = new Field(key, fields.getJSONObject(key).toString());
+                array_fields.add(f);
+                this.hashMap_fields.put(key, f);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+        Log.d("display", "Hashmap fields: " + this.hashMap_fields);
     }
 
     public ArrayList<Field> getArrayFields() {

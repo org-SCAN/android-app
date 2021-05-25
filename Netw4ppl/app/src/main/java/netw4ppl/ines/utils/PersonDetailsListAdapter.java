@@ -17,6 +17,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 
 import netw4ppl.ines.DisplayDetailsPersonActivity;
+import netw4ppl.ines.MainActivity;
 import netw4ppl.ines.ManagePersonsActivity;
 import netw4ppl.ines.R;
 
@@ -74,7 +75,20 @@ public class PersonDetailsListAdapter extends ArrayAdapter<Field> {
         }
 
         holder.mTitle.setHint(field.getTitle());
-        holder.mText.setText(mPerson.getInfoByKey(field.getKey()));
+
+        // associer la clé à la bonne valeur
+        String key_table;
+        String key_elem;
+        String text = mPerson.getInfoByKey(field.getKey());
+
+        if (!field.getLinkedList().equals("")) {
+            key_table = field.getLinkedList();
+            key_elem = mPerson.getInfoByKey(field.getKey());
+            if (MainActivity.mConfiguration.hasElementInTable(key_table, key_elem))
+                text = MainActivity.mConfiguration.getElementFromTable(key_table, key_elem);
+        }
+
+        holder.mText.setText(text);
 
         return convertView;
     }

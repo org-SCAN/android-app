@@ -71,15 +71,43 @@ public class ManageRelationsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        mSearchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (query.length() > 0)
+                    mAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
         mAdapter = new RelationListAdapter(this, R.layout.adapter_nutshell_relation_layout, ManageRelationsActivity.array_relations);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+                boolean got_it = false;
+                int index_reel = position;
+                int i = 0;
+                Relation r = (Relation) adapter.getItemAtPosition(position);
+
+                while (i < array_relations.size() && !got_it) {
+                    if (array_relations.get(i).equals(r)) {
+                        index_reel = i;
+                        got_it = true;
+                    }
+                    i++;
+                }
+
                 Intent intent = new Intent(ManageRelationsActivity.this, DisplayDetailsRelationActivity.class);
 
                 Bundle b = new Bundle();
-                b.putInt("index_relation", position); // your index relation
+                b.putInt("index_relation", index_reel); // your index relation
                 intent.putExtras(b); //Put your id to your next Intent
 
                 startActivity(intent);
