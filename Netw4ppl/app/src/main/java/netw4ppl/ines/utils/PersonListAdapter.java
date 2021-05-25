@@ -71,8 +71,11 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
                         String key_field;
                         String key_table = "";
                         String real_value;
+
+                        // on regarde toutes les valeurs des clés en s'arrêtant seulement si :
+                        // plus de clé à regarder ou si on a trouvé ce qu'on cherchait
                         while (keys.hasNext() && !has_it) {
-                            // on regarde toutes les valeurs des clés
+
                             key_field = keys.next();
                             String value_field = String.valueOf(p.getInfoByKey(key_field));
                             real_value = String.valueOf(p.getInfoByKey(key_field));
