@@ -43,6 +43,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     private final Context mContext;
     private boolean new_person;
 
+
     class ViewHolderUniqueID extends RecyclerView.ViewHolder {
         TextView mTitleLetters;
         TextView mTitleFigures;

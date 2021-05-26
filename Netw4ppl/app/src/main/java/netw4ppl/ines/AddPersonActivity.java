@@ -44,29 +44,30 @@ public class AddPersonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_person);
 
-        new_person = true;
-        person = new Person();
-
-        mRecyclerView = findViewById(R.id.recycler_view_add_person);
-        mButtonSave = findViewById(R.id.button_add_person_save);
-        mButtonCancel = findViewById(R.id.button_add_person_cancel);
-
-        Bundle extra_parameter = getIntent().getExtras();
+        // initialize some variables
         index_person = 0;
         new_person = true;
         person = new Person();
 
-        if(extra_parameter != null) {
-            if (extra_parameter.containsKey("index_person")) {
-                index_person = extra_parameter.getInt("index_person");
+        // get the objects from the view
+        mRecyclerView = findViewById(R.id.recycler_view_add_person);
+        mButtonSave = findViewById(R.id.button_add_person_save);
+        mButtonCancel = findViewById(R.id.button_add_person_cancel);
+
+        // get the extra parameters we might have given to the activity
+        Bundle extra_parameters = getIntent().getExtras();
+
+        if(extra_parameters != null) {
+            if (extra_parameters.containsKey("index_person")) {
+                index_person = extra_parameters.getInt("index_person");
                 try {
                     person = new Person(ManagePersonsActivity.array_persons.get(index_person).toString(2));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-            if (extra_parameter.containsKey("new_person"))
-                new_person = extra_parameter.getBoolean("new_person");
+            if (extra_parameters.containsKey("new_person"))
+                new_person = extra_parameters.getBoolean("new_person");
         }
 
         // set up the RecyclerView
@@ -141,7 +142,27 @@ public class AddPersonActivity extends AppCompatActivity {
      * @return a String which gives the 3-letters code by default
      */
     public static String getDefaultKey() {
-        return "AAA";
+        String default_val = "AAA";
+        // si on déjà un default de défini, on le lit, sinon on l'ajoute
+        if (json_ids.has("default")) {
+            try {
+                default_val = json_ids.getString("default");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            setDefaultKey(default_val);
+        }
+        return default_val;
+    }
+
+    public static void setDefaultKey(String tricode) {
+        try {
+            json_ids.put("default", tricode);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -162,10 +183,18 @@ public class AddPersonActivity extends AppCompatActivity {
         return last_id+1;
     }
 
+    /**
+     * Used to determine if the required fields for a person were completed or not.
+     * A toast is displayed if some required fields are not completed, and the user is notified of the different
+     * fields to complete.
+     *
+     * @return a boolean. True if all the required fields are correctly completed or false if not.
+     */
     public boolean verificationInputPerson() {
         boolean all_good = true;
 
         ArrayList<Field> array_fields = MainActivity.mConfiguration.getArrayFields();
+        // TODO passer ça dans le fichier string.xml
         String fields_a_remplir = "Those fields are required:\n";
 
         for (int i=0; i<array_fields.size(); i++) {
@@ -203,6 +232,9 @@ public class AddPersonActivity extends AppCompatActivity {
         String letters_id = id[0];
         int figures_id = Integer.parseInt(id[1]);
         boolean save_ids = true;
+
+        // considérer l'identifiant saisi comme étant l'ID par défaut.
+        setDefaultKey(letters_id);
 
         // regarder si la figures_id est > à celle contenu à la même clé dans le dict
         try {
