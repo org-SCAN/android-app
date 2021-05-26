@@ -111,6 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/display_person_show_relations"
+                    android:visibility="gone"
                     android:text="@string/button_show_relations_title"
                     android:backgroundTint="@color/purple_500"
                     android:layout_margin="5dp"/>
