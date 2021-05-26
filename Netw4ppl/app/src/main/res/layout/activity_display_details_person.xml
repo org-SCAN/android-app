@@ -86,45 +86,87 @@
             android:orientation="vertical">
 
             <!-- Layout Buttons Modify and Delete -->
-            <LinearLayout
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <ImageButton-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:padding="15dp"-->
+<!--                    android:id="@+id/display_person_edit"-->
+<!--                    android:backgroundTint="@color/blue_doge"-->
+<!--                    android:layout_margin="5dp"-->
+<!--                    android:tint="@color/white"-->
+<!--                    android:background="@drawable/customborder"-->
+<!--                    android:src="@drawable/baseline_edit_24"/>-->
+
+<!--                <ImageButton-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:id="@+id/display_person_delete"-->
+<!--                    android:padding="15dp"-->
+<!--                    android:backgroundTint="@color/red"-->
+<!--                    android:tint="@color/white"-->
+<!--                    android:layout_margin="5dp"-->
+<!--                    android:background="@drawable/customborder"-->
+<!--                    android:src="@drawable/baseline_delete_24"/>-->
+
+<!--                <ImageButton-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:id="@+id/display_person_show_relations"-->
+<!--                    android:padding="15dp"-->
+<!--                    android:tint="@color/white"-->
+<!--                    android:background="@drawable/customborder"-->
+<!--                    android:src="@drawable/baseline_visibility_off_24"-->
+<!--                    android:backgroundTint="@color/purple_500"-->
+<!--                    android:layout_margin="5dp"/>-->
+
+<!--            </LinearLayout>-->
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
 
                 <ImageButton
+                    android:id="@+id/display_person_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="15dp"
-                    android:id="@+id/display_person_edit"
-                    android:backgroundTint="@color/blue_doge"
                     android:layout_margin="5dp"
+                    android:padding="15dp"
+                    android:backgroundTint="@color/blue_doge"
                     android:tint="@color/white"
+                    android:layout_alignParentStart="true"
                     android:background="@drawable/customborder"
                     android:src="@drawable/baseline_edit_24"/>
 
                 <ImageButton
+                    android:id="@+id/display_person_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/display_person_delete"
+                    android:layout_margin="5dp"
                     android:padding="15dp"
                     android:backgroundTint="@color/red"
                     android:tint="@color/white"
-                    android:layout_margin="5dp"
+                    android:layout_toEndOf="@+id/display_person_edit"
                     android:background="@drawable/customborder"
                     android:src="@drawable/baseline_delete_24"/>
 
                 <ImageButton
+                    android:id="@+id/display_person_show_relations"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/display_person_show_relations"
+                    android:layout_margin="5dp"
                     android:padding="15dp"
                     android:tint="@color/white"
+                    android:layout_alignParentEnd="true"
                     android:background="@drawable/customborder"
                     android:src="@drawable/baseline_visibility_off_24"
-                    android:backgroundTint="@color/purple_500"
-                    android:layout_margin="5dp"/>
+                    android:backgroundTint="@color/purple_500" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
