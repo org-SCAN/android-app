@@ -44,29 +44,30 @@ public class AddPersonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_person);
 
-        new_person = true;
-        person = new Person();
-
-        mRecyclerView = findViewById(R.id.recycler_view_add_person);
-        mButtonSave = findViewById(R.id.button_add_person_save);
-        mButtonCancel = findViewById(R.id.button_add_person_cancel);
-
-        Bundle extra_parameter = getIntent().getExtras();
+        // initialize some variables
         index_person = 0;
         new_person = true;
         person = new Person();
 
-        if(extra_parameter != null) {
-            if (extra_parameter.containsKey("index_person")) {
-                index_person = extra_parameter.getInt("index_person");
+        // get the objects from the view
+        mRecyclerView = findViewById(R.id.recycler_view_add_person);
+        mButtonSave = findViewById(R.id.button_add_person_save);
+        mButtonCancel = findViewById(R.id.button_add_person_cancel);
+
+        // get the extra parameters we might have given to the activity
+        Bundle extra_parameters = getIntent().getExtras();
+
+        if(extra_parameters != null) {
+            if (extra_parameters.containsKey("index_person")) {
+                index_person = extra_parameters.getInt("index_person");
                 try {
                     person = new Person(ManagePersonsActivity.array_persons.get(index_person).toString(2));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-            if (extra_parameter.containsKey("new_person"))
-                new_person = extra_parameter.getBoolean("new_person");
+            if (extra_parameters.containsKey("new_person"))
+                new_person = extra_parameters.getBoolean("new_person");
         }
 
         // set up the RecyclerView
@@ -182,10 +183,18 @@ public class AddPersonActivity extends AppCompatActivity {
         return last_id+1;
     }
 
+    /**
+     * Used to determine if the required fields for a person were completed or not.
+     * A toast is displayed if some required fields are not completed, and the user is notified of the different
+     * fields to complete.
+     *
+     * @return a boolean. True if all the required fields are correctly completed or false if not.
+     */
     public boolean verificationInputPerson() {
         boolean all_good = true;
 
         ArrayList<Field> array_fields = MainActivity.mConfiguration.getArrayFields();
+        // TODO passer ça dans le fichier string.xml
         String fields_a_remplir = "Those fields are required:\n";
 
         for (int i=0; i<array_fields.size(); i++) {
