@@ -141,7 +141,27 @@ public class AddPersonActivity extends AppCompatActivity {
      * @return a String which gives the 3-letters code by default
      */
     public static String getDefaultKey() {
-        return "AAA";
+        String default_val = "AAA";
+        // si on déjà un default de défini, on le lit, sinon on l'ajoute
+        if (json_ids.has("default")) {
+            try {
+                default_val = json_ids.getString("default");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            setDefaultKey(default_val);
+        }
+        return default_val;
+    }
+
+    public static void setDefaultKey(String tricode) {
+        try {
+            json_ids.put("default", tricode);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -203,6 +223,9 @@ public class AddPersonActivity extends AppCompatActivity {
         String letters_id = id[0];
         int figures_id = Integer.parseInt(id[1]);
         boolean save_ids = true;
+
+        // considérer l'identifiant saisi comme étant l'ID par défaut.
+        setDefaultKey(letters_id);
 
         // regarder si la figures_id est > à celle contenu à la même clé dans le dict
         try {
