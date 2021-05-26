@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -40,8 +41,8 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:background="@drawable/customborder"
-            android:visibility="gone"
             android:id="@+id/linearlayout_relations_from"
+            android:visibility="gone"
             android:orientation="vertical">
 
 
@@ -86,87 +87,75 @@
             android:orientation="vertical">
 
             <!-- Layout Buttons Modify and Delete -->
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal">-->
 
-<!--                <ImageButton-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:padding="15dp"-->
-<!--                    android:id="@+id/display_person_edit"-->
-<!--                    android:backgroundTint="@color/blue_doge"-->
-<!--                    android:layout_margin="5dp"-->
-<!--                    android:tint="@color/white"-->
-<!--                    android:background="@drawable/customborder"-->
-<!--                    android:src="@drawable/baseline_edit_24"/>-->
-
-<!--                <ImageButton-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:id="@+id/display_person_delete"-->
-<!--                    android:padding="15dp"-->
-<!--                    android:backgroundTint="@color/red"-->
-<!--                    android:tint="@color/white"-->
-<!--                    android:layout_margin="5dp"-->
-<!--                    android:background="@drawable/customborder"-->
-<!--                    android:src="@drawable/baseline_delete_24"/>-->
-
-<!--                <ImageButton-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:id="@+id/display_person_show_relations"-->
-<!--                    android:padding="15dp"-->
-<!--                    android:tint="@color/white"-->
-<!--                    android:background="@drawable/customborder"-->
-<!--                    android:src="@drawable/baseline_visibility_off_24"-->
-<!--                    android:backgroundTint="@color/purple_500"-->
-<!--                    android:layout_margin="5dp"/>-->
-
-<!--            </LinearLayout>-->
-
-            <RelativeLayout
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/flexboxLayout1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:flexWrap="wrap"
+                app:alignContent="flex_start">
 
-                <ImageButton
+                <Button
                     android:id="@+id/display_person_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:padding="15dp"
                     android:backgroundTint="@color/blue_doge"
-                    android:tint="@color/white"
-                    android:layout_alignParentStart="true"
-                    android:background="@drawable/customborder"
-                    android:src="@drawable/baseline_edit_24"/>
+                    android:text="@string/button_edit_title"
+                    android:scaleType="centerCrop"
+                    android:layout_margin="5dp" />
 
-                <ImageButton
+                <Button
                     android:id="@+id/display_person_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:padding="15dp"
                     android:backgroundTint="@color/red"
-                    android:tint="@color/white"
-                    android:layout_toEndOf="@+id/display_person_edit"
-                    android:background="@drawable/customborder"
-                    android:src="@drawable/baseline_delete_24"/>
+                    android:text="@string/button_delete_title"
+                    android:scaleType="centerCrop"
+                    android:layout_margin="5dp"/>
 
-                <ImageButton
+                <Button
                     android:id="@+id/display_person_show_relations"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:padding="15dp"
-                    android:tint="@color/white"
-                    android:layout_alignParentEnd="true"
-                    android:background="@drawable/customborder"
-                    android:src="@drawable/baseline_visibility_off_24"
-                    android:backgroundTint="@color/purple_500" />
+                    android:backgroundTint="@color/purple_500"
+                    android:text="@string/button_show_relations_title"
+                    android:scaleType="centerCrop"
+                    android:layout_margin="5dp"/>
 
-            </RelativeLayout>
+            </com.google.android.flexbox.FlexboxLayout>
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/display_person_edit"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:backgroundTint="@color/blue_doge"-->
+<!--                    android:text="@string/button_edit_title"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_margin="5dp"/>-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/display_person_delete"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:backgroundTint="@color/red"-->
+<!--                    android:text="@string/button_delete_title"-->
+<!--                    android:layout_toEndOf="@+id/display_person_edit"-->
+<!--                    android:layout_margin="5dp"/>-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/display_person_show_relations"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:backgroundTint="@color/purple_500"-->
+<!--                    android:text="@string/button_show_relations_title"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_margin="5dp"/>-->
+
+<!--            </RelativeLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"

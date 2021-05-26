@@ -77,5 +77,6 @@
     <string name="delete_files_title">Eliminar los ficheros</string>
     <string name="delete_files_message">¿Realmente desea eliminar los ficheros?</string>
     <string name="yes">Si</string>
-    <string name="button_show_relations_title">Relaciones</string>
+    <string name="button_show_relations_title">Mostrar relaciones</string>
+    <string name="button_hide_relations_title">Ocultar relaciones</string>
 </resources>

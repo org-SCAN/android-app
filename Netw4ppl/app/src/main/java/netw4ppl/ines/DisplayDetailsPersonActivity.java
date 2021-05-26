@@ -33,10 +33,10 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
 
     TextView mTextViewFullnameTitle;
     Button mButtonAddRelationFrom;
-    ImageButton mButtonEditPerson;
-    ImageButton mButtonDeletePerson;
+    Button mButtonEditPerson;
+    Button mButtonDeletePerson;
     Button mButtonAddRelationTo;
-    ImageButton mButtonShowRelations;
+    Button mButtonShowRelations;
 
     LinearLayout mLayoutFrom;
     LinearLayout mLayoutTo;
@@ -60,6 +60,11 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
 
         show_relations = false;
 
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey("show_relations"))
+                show_relations = savedInstanceState.getBoolean("show_relations");
+        }
+
         Bundle extra_parameter = getIntent().getExtras();
         index_person = 0;
         if(extra_parameter != null)
@@ -69,9 +74,9 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
 
         mButtonAddRelationFrom = (Button) findViewById(R.id.display_person_add_relation_from);
         mButtonAddRelationTo = (Button) findViewById(R.id.display_person_add_relation_to);
-        mButtonEditPerson = (ImageButton) findViewById(R.id.display_person_edit);
-        mButtonDeletePerson = (ImageButton) findViewById(R.id.display_person_delete);
-        mButtonShowRelations = (ImageButton) findViewById(R.id.display_person_show_relations);
+        mButtonEditPerson = (Button) findViewById(R.id.display_person_edit);
+        mButtonDeletePerson = (Button) findViewById(R.id.display_person_delete);
+        mButtonShowRelations = (Button) findViewById(R.id.display_person_show_relations);
 
         mLayoutFrom = (LinearLayout) findViewById(R.id.linearlayout_relations_from);
         mLayoutTo = (LinearLayout) findViewById(R.id.linearlayout_relations_to);
@@ -176,12 +181,14 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
             if (show_relations) {
                 mLayoutTo.setVisibility(View.VISIBLE);
                 mLayoutFrom.setVisibility(View.VISIBLE);
-                mButtonShowRelations.setImageDrawable(this.getDrawable(R.drawable.baseline_visibility_24));
+                mButtonShowRelations.setText(DisplayDetailsPersonActivity.this.getString(R.string.button_hide_relations_title));
+//                mButtonShowRelations.setImageDrawable(this.getDrawable(R.drawable.baseline_visibility_24));
             }
             else {
                 mLayoutFrom.setVisibility(View.GONE);
                 mLayoutTo.setVisibility(View.GONE);
-                mButtonShowRelations.setImageDrawable(this.getDrawable(R.drawable.baseline_visibility_off_24));
+                mButtonShowRelations.setText(DisplayDetailsPersonActivity.this.getString(R.string.button_show_relations_title));
+//                mButtonShowRelations.setImageDrawable(this.getDrawable(R.drawable.baseline_visibility_off_24));
             }
         });
         mButtonDeletePerson.setOnClickListener(v-> {
