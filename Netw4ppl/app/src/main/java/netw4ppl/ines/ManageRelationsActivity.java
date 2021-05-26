@@ -131,7 +131,11 @@ public class ManageRelationsActivity extends AppCompatActivity {
         array_relations = new ArrayList<Relation>();
         if (FileUtils.directoryExists(path_dir) && FileUtils.fileExists(path_file)) {
             content_file = FileUtils.readFile(path_file);
-            jsonArray_relations = new JSONArray(content_file);
+
+            if (content_file.equals(""))
+                jsonArray_relations = new JSONArray();
+            else
+                jsonArray_relations = new JSONArray(content_file);
             for (int i=0; i<jsonArray_relations.length(); i++) {
                 JSONObject json_relation = jsonArray_relations.getJSONObject(i);
                 Relation relat = new Relation(json_relation.toString());
