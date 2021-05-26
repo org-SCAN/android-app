@@ -23,7 +23,7 @@
     <string name="main_submit_success_title">Envoi réussi</string>
     <string name="main_submit_fail_title">Envoi échoué</string>
     <string name="main_submit_success_msg">L\'envoi a fonctionné, vous pouvez maintenant supprimer les fichiers</string>
-    <string name="main_submit_fail_msg">Une erreur est parvenue, veuillez réessayez plus tard</string>
+    <string name="main_submit_fail_msg">Une erreur est survenue, veuillez réessayez plus tard</string>
     <string name="main_get_success_msg">De nouveaux fichiers de configuration ont été téléchargés</string>
     <string name="main_get_fail_msg">Aucun nouveau fichier de configuration n\'a été téléchargé</string>
     <string name="main_submit_ip_port_fail_title">Adresse du serveur</string>
@@ -46,7 +46,7 @@
     <string name="toast_same_person_relation">Les personnes d\'une relation doivent être différentes</string>
     <string name="toast_relation_type_non_selected">Vous devez sélectionner une type de relation valide</string>
     <string name="toast_person_not_selected">Vous devez sélectionner des personnes en cliquant dans le menu déroulant</string>
-    <string name="toast_edit_person_relation">Les personnes d\'une relation ne peuvent pas être modifiées lors d\'une édition de relation</string>
+    <string name="toast_edit_person_relation">Les personnes d\'une relation ne peuvent pas être modifiées lors d\'une modification de relation</string>
     <string name="add_person_activity_title">Ajouter une personne</string>
     <string name="add_relation_activity_title">Ajouter une relation</string>
     <string name="display_details_relation_activity_title">Details de la relation</string>
@@ -57,7 +57,7 @@
     <string name="bottom_menu_page_2">Page 2</string>
     <string name="age_title">Age:</string>
     <string name="sex_title">Sexe:</string>
-    <string name="button_edit_title">Editer</string>
+    <string name="button_edit_title">Modifier</string>
     <string name="button_delete_title">Supprimer</string>
     <string name="button_add_relation_to">Ajouter une relation vers</string>
     <string name="button_add_relation_from">Ajouter une relation depuis</string>
