@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,6 +33,10 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
     Button mButtonEditPerson;
     Button mButtonDeletePerson;
     Button mButtonAddRelationTo;
+    Button mButtonShowRelations;
+
+    LinearLayout mLayoutFrom;
+    LinearLayout mLayoutTo;
 
     PersonDetailsListAdapter adapter_details_person;
     PersonDetailsRelationFromAdapter adapter_relations_from;
@@ -42,11 +47,14 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
     ListView mListRelationsTo;
 
     public int index_person;
+    private boolean show_relations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_details_person);
+
+        show_relations = false;
 
         Bundle extra_parameter = getIntent().getExtras();
         index_person = 0;
@@ -59,6 +67,10 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         mButtonAddRelationTo = (Button) findViewById(R.id.display_person_add_relation_to);
         mButtonEditPerson = (Button) findViewById(R.id.display_person_edit);
         mButtonDeletePerson = (Button) findViewById(R.id.display_person_delete);
+        mButtonShowRelations = (Button) findViewById(R.id.display_person_show_relations);
+
+        mLayoutFrom = (LinearLayout) findViewById(R.id.linearlayout_relations_from);
+        mLayoutTo = (LinearLayout) findViewById(R.id.linearlayout_relations_to);
         
         mListDetailsPerson = (ListView) findViewById(R.id.list_details_person);
         mListRelationsFrom = (ListView) findViewById(R.id.list_relations_from);
@@ -154,6 +166,17 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
             intent.putExtras(b); //Put your id to your next Intent
 
             startActivity(intent);
+        });
+        mButtonShowRelations.setOnClickListener(v -> {
+            show_relations = !show_relations;
+            if (show_relations) {
+                mLayoutTo.setVisibility(View.VISIBLE);
+                mLayoutFrom.setVisibility(View.VISIBLE);
+            }
+            else {
+                mLayoutFrom.setVisibility(View.GONE);
+                mLayoutTo.setVisibility(View.GONE);
+            }
         });
         mButtonDeletePerson.setOnClickListener(v-> {
             new AlertDialog.Builder(this)

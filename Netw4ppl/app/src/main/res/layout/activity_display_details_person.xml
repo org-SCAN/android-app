@@ -40,6 +40,8 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:background="@drawable/customborder"
+            android:visibility="gone"
+            android:id="@+id/linearlayout_relations_from"
             android:orientation="vertical">
 
 
@@ -105,6 +107,14 @@
                     android:backgroundTint="@color/red"
                     android:layout_margin="5dp"/>
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/display_person_show_relations"
+                    android:text="@string/button_show_relations_title"
+                    android:backgroundTint="@color/purple_500"
+                    android:layout_margin="5dp"/>
+
             </LinearLayout>
 
             <LinearLayout
@@ -119,8 +129,6 @@
 
             </LinearLayout>
 
-
-
         </LinearLayout>
 
         <!-- Layout To Relations -->
@@ -129,6 +137,8 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:background="@drawable/customborder"
+            android:visibility="gone"
+            android:id="@+id/linearlayout_relations_to"
             android:orientation="vertical">
 
             <!-- Layout Add Relation button -->
