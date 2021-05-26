@@ -94,26 +94,33 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
+                    android:padding="15dp"
                     android:id="@+id/display_person_edit"
                     android:backgroundTint="@color/blue_doge"
                     android:layout_margin="5dp"
+                    android:tint="@color/white"
+                    android:background="@drawable/customborder"
                     android:src="@drawable/baseline_edit_24"/>
 
-                <Button
+                <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/display_person_delete"
-                    android:text="@string/button_delete_title"
+                    android:padding="15dp"
                     android:backgroundTint="@color/red"
-                    android:layout_margin="5dp"/>
+                    android:tint="@color/white"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/customborder"
+                    android:src="@drawable/baseline_delete_24"/>
 
-                <Button
+                <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/display_person_show_relations"
-                    android:visibility="gone"
-                    android:text="@string/button_show_relations_title"
+                    android:padding="15dp"
+                    android:tint="@color/white"
+                    android:background="@drawable/customborder"
+                    android:src="@drawable/baseline_visibility_off_24"
                     android:backgroundTint="@color/purple_500"
                     android:layout_margin="5dp"/>
 

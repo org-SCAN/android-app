@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,10 +33,10 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
 
     TextView mTextViewFullnameTitle;
     Button mButtonAddRelationFrom;
-    Button mButtonEditPerson;
-    Button mButtonDeletePerson;
+    ImageButton mButtonEditPerson;
+    ImageButton mButtonDeletePerson;
     Button mButtonAddRelationTo;
-    Button mButtonShowRelations;
+    ImageButton mButtonShowRelations;
 
     LinearLayout mLayoutFrom;
     LinearLayout mLayoutTo;
@@ -50,6 +52,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
     public int index_person;
     private boolean show_relations;
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,9 +69,9 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
 
         mButtonAddRelationFrom = (Button) findViewById(R.id.display_person_add_relation_from);
         mButtonAddRelationTo = (Button) findViewById(R.id.display_person_add_relation_to);
-        mButtonEditPerson = (Button) findViewById(R.id.display_person_edit);
-        mButtonDeletePerson = (Button) findViewById(R.id.display_person_delete);
-        mButtonShowRelations = (Button) findViewById(R.id.display_person_show_relations);
+        mButtonEditPerson = (ImageButton) findViewById(R.id.display_person_edit);
+        mButtonDeletePerson = (ImageButton) findViewById(R.id.display_person_delete);
+        mButtonShowRelations = (ImageButton) findViewById(R.id.display_person_show_relations);
 
         mLayoutFrom = (LinearLayout) findViewById(R.id.linearlayout_relations_from);
         mLayoutTo = (LinearLayout) findViewById(R.id.linearlayout_relations_to);
@@ -173,10 +176,12 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
             if (show_relations) {
                 mLayoutTo.setVisibility(View.VISIBLE);
                 mLayoutFrom.setVisibility(View.VISIBLE);
+                mButtonShowRelations.setImageDrawable(this.getDrawable(R.drawable.baseline_visibility_24));
             }
             else {
                 mLayoutFrom.setVisibility(View.GONE);
                 mLayoutTo.setVisibility(View.GONE);
+                mButtonShowRelations.setImageDrawable(this.getDrawable(R.drawable.baseline_visibility_off_24));
             }
         });
         mButtonDeletePerson.setOnClickListener(v-> {
