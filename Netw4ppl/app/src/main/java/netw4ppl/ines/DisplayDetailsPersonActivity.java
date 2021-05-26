@@ -1,5 +1,6 @@
 package netw4ppl.ines;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -289,5 +290,21 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         boolean save_relations = FileUtils.saveRelationsToFile(this, ManageRelationsActivity.formatterJsonFile());
 
         return save_relations;
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // sauvegarder le boolean qui décide de l'affichage ou non des ailettes du triptyque.
+        outState.putBoolean("show_relations", show_relations);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        if (savedInstanceState.containsKey("show_relations"))
+            show_relations = savedInstanceState.getBoolean("show_relations");
     }
 }
