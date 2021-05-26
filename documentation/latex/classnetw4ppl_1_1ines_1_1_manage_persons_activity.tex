@@ -1,0 +1,65 @@
+\hypertarget{classnetw4ppl_1_1ines_1_1_manage_persons_activity}{}\doxysection{netw4ppl.\+ines.\+Manage\+Persons\+Activity Class Reference}
+\label{classnetw4ppl_1_1ines_1_1_manage_persons_activity}\index{netw4ppl.ines.ManagePersonsActivity@{netw4ppl.ines.ManagePersonsActivity}}
+Inheritance diagram for netw4ppl.\+ines.\+Manage\+Persons\+Activity\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classnetw4ppl_1_1ines_1_1_manage_persons_activity}
+\end{center}
+\end{figure}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_persons_activity_a560ffa95150faf5412ddf5705ece9892}\label{classnetw4ppl_1_1ines_1_1_manage_persons_activity_a560ffa95150faf5412ddf5705ece9892}} 
+static void {\bfseries update\+Adapter} ()
+\item 
+static void \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_manage_persons_activity_a8ed32055e37c87d4d2b7fee0a4036b72}{read\+Persons\+File}} (Context context)  throws IOException, JSONException 
+\item 
+static String \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_manage_persons_activity_aaaf2d41cba9fb73f33c2bc629d19cf87}{formatter\+Json\+File}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_persons_activity_a4c7fdfaa807c82b7d3d679403472a66e}\label{classnetw4ppl_1_1ines_1_1_manage_persons_activity_a4c7fdfaa807c82b7d3d679403472a66e}} 
+static Array\+List$<$ Person $>$ {\bfseries array\+\_\+persons} = new Array\+List$<$Person$>$()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_persons_activity_ab9b0e9484f6a47a57f6e1379a93c5a54}\label{classnetw4ppl_1_1ines_1_1_manage_persons_activity_ab9b0e9484f6a47a57f6e1379a93c5a54}} 
+void {\bfseries on\+Create} (Bundle saved\+Instance\+State)
+\item 
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_persons_activity_a50553e27408736a8f8d44ed2d8ba5cc4}\label{classnetw4ppl_1_1ines_1_1_manage_persons_activity_a50553e27408736a8f8d44ed2d8ba5cc4}} 
+void {\bfseries on\+Resume} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_persons_activity_aaaf2d41cba9fb73f33c2bc629d19cf87}\label{classnetw4ppl_1_1ines_1_1_manage_persons_activity_aaaf2d41cba9fb73f33c2bc629d19cf87}} 
+\index{netw4ppl.ines.ManagePersonsActivity@{netw4ppl.ines.ManagePersonsActivity}!formatterJsonFile@{formatterJsonFile}}
+\index{formatterJsonFile@{formatterJsonFile}!netw4ppl.ines.ManagePersonsActivity@{netw4ppl.ines.ManagePersonsActivity}}
+\doxysubsubsection{\texorpdfstring{formatterJsonFile()}{formatterJsonFile()}}
+{\footnotesize\ttfamily static String netw4ppl.\+ines.\+Manage\+Persons\+Activity.\+formatter\+Json\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Convert the Array\+List of Persons in JSONArray to then convert it in a String because the server is expecting such format.
+
+\begin{DoxyReturn}{Returns}
+a String containing the Persons contained in person, on a JSONArray format 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_persons_activity_a8ed32055e37c87d4d2b7fee0a4036b72}\label{classnetw4ppl_1_1ines_1_1_manage_persons_activity_a8ed32055e37c87d4d2b7fee0a4036b72}} 
+\index{netw4ppl.ines.ManagePersonsActivity@{netw4ppl.ines.ManagePersonsActivity}!readPersonsFile@{readPersonsFile}}
+\index{readPersonsFile@{readPersonsFile}!netw4ppl.ines.ManagePersonsActivity@{netw4ppl.ines.ManagePersonsActivity}}
+\doxysubsubsection{\texorpdfstring{readPersonsFile()}{readPersonsFile()}}
+{\footnotesize\ttfamily static void netw4ppl.\+ines.\+Manage\+Persons\+Activity.\+read\+Persons\+File (\begin{DoxyParamCaption}\item[{Context}]{context }\end{DoxyParamCaption}) throws IOException, JSONException\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Read the Persons File associated with this application. The path is determined based on strings in the strings.\+xml file
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & the context of the current activity \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Netw4ppl/app/src/main/java/netw4ppl/ines/Manage\+Persons\+Activity.\+java\end{DoxyCompactItemize}
