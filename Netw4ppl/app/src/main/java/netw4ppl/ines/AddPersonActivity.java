@@ -195,7 +195,7 @@ public class AddPersonActivity extends AppCompatActivity {
 
         ArrayList<Field> array_fields = MainActivity.mConfiguration.getArrayFields();
         // TODO passer ça dans le fichier string.xml
-        String fields_a_remplir = "Those fields are required:\n";
+        String fields_a_remplir = this.getString(R.string.toast_fields_required)+"\n";
 
         for (int i=0; i<array_fields.size(); i++) {
             Field f = array_fields.get(i);

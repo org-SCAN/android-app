@@ -77,4 +77,6 @@
     <string name="delete_files_title">Supprimer les fichiers</string>
     <string name="delete_files_message">Souhaitez-vous vraiment supprimer les fichiers?</string>
     <string name="yes">Oui</string>
+    <string name="toast_fields_required">Ces champs sont requis :</string>
+    <string name="button_show_relations_title">Relations</string>
 </resources>

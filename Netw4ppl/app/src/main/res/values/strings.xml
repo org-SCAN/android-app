@@ -93,6 +93,7 @@
     <string name="display_details_person_activity_title">Details Person</string>
     <string name="manage_persons_activity_title">Manage Persons</string>
     <string name="manage_relations_activity_title">Manage Relations</string>
+    <string name="toast_fields_required">Those fields are required:</string>
 
     <string name="config_files" translatable="false">/config</string>
     <string name="filename_ids" translatable="false">/ids.json</string>
