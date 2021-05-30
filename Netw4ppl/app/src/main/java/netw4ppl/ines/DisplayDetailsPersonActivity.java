@@ -3,14 +3,21 @@ package netw4ppl.ines;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
+import androidx.preference.SwitchPreference;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -18,6 +25,7 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 
 import java.lang.reflect.Array;
+import java.security.interfaces.RSAKey;
 import java.util.ArrayList;
 
 import netw4ppl.ines.utils.FileUtils;
@@ -50,12 +58,14 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
     public int index_person;
     private boolean show_relations;
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_details_person);
 
-        show_relations = false;
+        SharedPreferences prefs = getSharedPreferences(getString(R.string.show_relations_boolean_key), MODE_PRIVATE);
+        show_relations = prefs.getBoolean(getString(R.string.show_relations_boolean_key), false);
 
         Bundle extra_parameter = getIntent().getExtras();
         index_person = 0;
@@ -87,6 +97,15 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
 
         updateAdapterFrom();
         updateAdapterTo();
+
+        if (!show_relations) {
+            mButtonShowRelations.setText(getString(R.string.button_show_relations_title));
+            mLayoutFrom.setVisibility(View.GONE);
+            mLayoutTo.setVisibility(View.GONE);
+        }
+        else {
+            mButtonShowRelations.setText(getString(R.string.button_hide_relations_title));
+        }
 
         mListRelationsFrom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -173,11 +192,19 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
             if (show_relations) {
                 mLayoutTo.setVisibility(View.VISIBLE);
                 mLayoutFrom.setVisibility(View.VISIBLE);
+                mButtonShowRelations.setText(DisplayDetailsPersonActivity.this.getString(R.string.button_hide_relations_title));
+//                mButtonShowRelations.setImageDrawable(this.getDrawable(R.drawable.baseline_visibility_24));
             }
             else {
                 mLayoutFrom.setVisibility(View.GONE);
                 mLayoutTo.setVisibility(View.GONE);
+                mButtonShowRelations.setText(DisplayDetailsPersonActivity.this.getString(R.string.button_show_relations_title));
+//                mButtonShowRelations.setImageDrawable(this.getDrawable(R.drawable.baseline_visibility_off_24));
             }
+            SharedPreferences shared = getSharedPreferences(getString(R.string.show_relations_boolean_key),MODE_PRIVATE);
+            SharedPreferences.Editor editor = shared.edit();
+            editor.putBoolean(getString(R.string.show_relations_boolean_key),show_relations);
+            editor.commit();
         });
         mButtonDeletePerson.setOnClickListener(v-> {
             new AlertDialog.Builder(this)

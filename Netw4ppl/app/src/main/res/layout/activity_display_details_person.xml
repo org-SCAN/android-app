@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -40,7 +41,6 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:background="@drawable/customborder"
-            android:visibility="gone"
             android:id="@+id/linearlayout_relations_from"
             android:orientation="vertical">
 
@@ -86,37 +86,74 @@
             android:orientation="vertical">
 
             <!-- Layout Buttons Modify and Delete -->
-            <LinearLayout
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/flexboxLayout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                app:flexWrap="wrap"
+                app:alignContent="flex_start">
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/display_person_edit"
-                    android:text="@string/button_edit_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:backgroundTint="@color/blue_doge"
-                    android:layout_margin="5dp"/>
+                    android:text="@string/button_edit_title"
+                    android:scaleType="centerCrop"
+                    android:layout_margin="5dp" />
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/display_person_delete"
-                    android:text="@string/button_delete_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:backgroundTint="@color/red"
+                    android:text="@string/button_delete_title"
+                    android:scaleType="centerCrop"
                     android:layout_margin="5dp"/>
 
                 <Button
+                    android:id="@+id/display_person_show_relations"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/display_person_show_relations"
-                    android:visibility="gone"
-                    android:text="@string/button_show_relations_title"
                     android:backgroundTint="@color/purple_500"
+                    android:scaleType="centerCrop"
                     android:layout_margin="5dp"/>
 
-            </LinearLayout>
+            </com.google.android.flexbox.FlexboxLayout>
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/display_person_edit"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:backgroundTint="@color/blue_doge"-->
+<!--                    android:text="@string/button_edit_title"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_margin="5dp"/>-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/display_person_delete"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:backgroundTint="@color/red"-->
+<!--                    android:text="@string/button_delete_title"-->
+<!--                    android:layout_toEndOf="@+id/display_person_edit"-->
+<!--                    android:layout_margin="5dp"/>-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/display_person_show_relations"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:backgroundTint="@color/purple_500"-->
+<!--                    android:text="@string/button_show_relations_title"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_margin="5dp"/>-->
+
+<!--            </RelativeLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -138,7 +175,6 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:background="@drawable/customborder"
-            android:visibility="gone"
             android:id="@+id/linearlayout_relations_to"
             android:orientation="vertical">
 
