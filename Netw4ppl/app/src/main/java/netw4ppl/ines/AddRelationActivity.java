@@ -181,6 +181,9 @@ public class AddRelationActivity extends AppCompatActivity {
                             // ajout du champ date
                             relation.setCreationDate();
 
+                            // ajout de l'id de relation
+                            relation.setUUIDRelation();
+
                             ManageRelationsActivity.array_relations.add(relation);
                             success_write = FileUtils.saveRelationsToFile(getApplicationContext(), ManageRelationsActivity.formatterJsonFile());
                         }
