@@ -106,7 +106,6 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
     }
 
     private void setViews(Relation relation){
-        mTextViewFullnameTitle.setText(relation.getFromFullname() + " " + relation.getToFullname());
         mTextViewFromFullname.setText(relation.getFromFullname());
 
         // associate the relation key with its string for a better visualisation
