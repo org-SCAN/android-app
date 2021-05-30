@@ -1,0 +1,2411 @@
+{
+    "fields": {
+        "unique_id": {
+            "placeholder": "AAA-000001",
+            "database_type": "string",
+            "android_type": "EditText",
+            "linked_list": "",
+            "required": 0,
+            "displayed_value": {
+                "eng": "Unique ID",
+                "fra": "ID Unique",
+                "spa": "Unico ID"
+            }
+        },
+        "gender": {
+            "placeholder": "F",
+            "database_type": "string",
+            "android_type": "Spinner",
+            "linked_list": "Gender",
+            "required": 1,
+            "displayed_value": {
+                "eng": "Sex",
+                "fra": "Sexe",
+                "spa": "Sexo"
+            }
+        },
+        "full_name": {
+            "placeholder": "John Doe",
+            "database_type": "string",
+            "android_type": "EditText",
+            "linked_list": "",
+            "required": 1,
+            "displayed_value": {
+                "eng": "Full Name",
+                "fra": "Nom complet",
+                "spa": "Nombre completo"
+            }
+        },
+        "age": {
+            "placeholder": "34",
+            "database_type": "integer",
+            "android_type": "EditText",
+            "linked_list": "",
+            "required": 1,
+            "displayed_value": {
+                "eng": "Age (years)",
+                "fra": "Age (ann\u00e9es)",
+                "spa": "Edad (a\u00f1os)"
+            }
+        },
+        "nationality": {
+            "placeholder": "Switzerland",
+            "database_type": "string",
+            "android_type": "AutoCompleteTextView",
+            "linked_list": "Country",
+            "required": 2,
+            "displayed_value": {
+                "eng": "Nationality",
+                "fra": "Nationalit\u00e9",
+                "spa": "Nacionalidad"
+            }
+        },
+        "role": {
+            "placeholder": "",
+            "database_type": "string",
+            "android_type": "Spinner",
+            "linked_list": "Role",
+            "required": 2,
+            "displayed_value": {
+                "eng": "Role",
+                "fra": "Role",
+                "spa": "Papel"
+            }
+        },
+        "birth_date": {
+            "placeholder": "YYYY-mm-dd",
+            "database_type": "date",
+            "android_type": "CalendarView",
+            "linked_list": "",
+            "required": 2,
+            "displayed_value": {
+                "eng": "Date of birth",
+                "fra": "Date de naissance",
+                "spa": "Fecha de nacimiento"
+            }
+        },
+        "birth_place": {
+            "placeholder": "Paris",
+            "database_type": "string",
+            "android_type": "EditText",
+            "linked_list": "",
+            "required": 2,
+            "displayed_value": {
+                "eng": "Place of birth",
+                "fra": "Lieu de naissance",
+                "spa": "Lugar de nacimiento"
+            }
+        },
+        "passport_number": {
+            "placeholder": "",
+            "database_type": "string",
+            "android_type": "EditText",
+            "linked_list": "",
+            "required": 2,
+            "displayed_value": {
+                "eng": "Passport number",
+                "fra": "Num\u00e9ro de passeport",
+                "spa": "N\u00famero de pasaporte"
+            }
+        },
+        "destination": {
+            "placeholder": "",
+            "database_type": "string",
+            "android_type": "EditText",
+            "linked_list": "",
+            "required": 2,
+            "displayed_value": {
+                "eng": "Travel to",
+                "fra": "Destination",
+                "spa": "Viajar a"
+            }
+        },
+        "route": {
+            "placeholder": "",
+            "database_type": "string",
+            "android_type": "Spinner",
+            "linked_list": "Route",
+            "required": 2,
+            "displayed_value": {
+                "eng": "Route",
+                "fra": "Route",
+                "spa": "Camino"
+            }
+        },
+        "residence": {
+            "placeholder": "Syria",
+            "database_type": "string",
+            "android_type": "AutoCompleteTextView",
+            "linked_list": "Country",
+            "required": 2,
+            "displayed_value": {
+                "eng": "Country of residence",
+                "fra": "Pays de residence",
+                "spa": "Pa\u00eds de residencia"
+            }
+        },
+        "alias": {
+            "placeholder": "Big Joe",
+            "database_type": "string",
+            "android_type": "EditText",
+            "linked_list": "",
+            "required": 3,
+            "displayed_value": {
+                "eng": "Alias",
+                "fra": "Alias",
+                "spa": "Alias"
+            }
+        },
+        "embarkation_date": {
+            "placeholder": "YYYY-mm-dd",
+            "database_type": "date",
+            "android_type": "CalendarView",
+            "linked_list": "",
+            "required": 3,
+            "displayed_value": {
+                "eng": "Embarkation date",
+                "fra": "Data d'embarcation",
+                "spa": "Fecha de embarque"
+            }
+        },
+        "embarkation_place": {
+            "placeholder": "Roubaix",
+            "database_type": "string",
+            "android_type": "EditText",
+            "linked_list": "",
+            "required": 3,
+            "displayed_value": {
+                "eng": "Place of embarkation",
+                "fra": "Lieu d'embarcation",
+                "spa": "Lugar de embarque"
+            }
+        },
+        "detention_place": {
+            "placeholder": "Aleppo",
+            "database_type": "string",
+            "android_type": "EditText",
+            "linked_list": "",
+            "required": 3,
+            "displayed_value": {
+                "eng": "Place of Detention",
+                "fra": "Lieu de d\u00e9tention",
+                "spa": "Lugar de detenci\u00f3n"
+            }
+        },
+        "date_last_seen": {
+            "placeholder": "YYYY-mm-dd",
+            "database_type": "date",
+            "android_type": "CalendarView",
+            "linked_list": "",
+            "required": 3,
+            "displayed_value": {
+                "eng": "Date when last seen well",
+                "fra": "Date de la derni\u00e8re fois vu en forme",
+                "spa": "Fecha de la \u00faltima vez que fue bueno"
+            }
+        },
+        "fathers_names": {
+            "placeholder": "",
+            "database_type": "string",
+            "android_type": "EditText",
+            "linked_list": "",
+            "required": 3,
+            "displayed_value": {
+                "eng": "Father's full names",
+                "fra": "Nom du p\u00e8re",
+                "spa": "Nombres completos del padre"
+            }
+        },
+        "mothers_names": {
+            "placeholder": "",
+            "database_type": "string",
+            "android_type": "EditText",
+            "linked_list": "",
+            "required": 3,
+            "displayed_value": {
+                "eng": "Mother's full names",
+                "fra": "Nom de la m\u00e8re",
+                "spa": "Nombres completos de la madre"
+            }
+        },
+        "detail": {
+            "placeholder": "Phone number",
+            "database_type": "text",
+            "android_type": "EditText",
+            "linked_list": "",
+            "required": 4,
+            "displayed_value": {
+                "eng": "Details",
+                "fra": "Informations suppl\u00e9mentaires",
+                "spa": "Informaciones suplementarias"
+            }
+        }
+    },
+    "Relations": {
+        "SA": {
+            "color": "734d39",
+            "importance": 1,
+            "displayed_value": {
+                "eng": "Saw",
+                "fra": "A vu",
+                "spa": "Ha visto"
+            }
+        },
+        "NBR": {
+            "color": "cbaf1d",
+            "importance": 1,
+            "displayed_value": {
+                "eng": "Non-biological relationship",
+                "fra": "Relation non biologique",
+                "spa": "Relaci\u00f3n no biol\u00f3gica"
+            }
+        },
+        "TW": {
+            "color": "00ff2a",
+            "importance": 1,
+            "displayed_value": {
+                "eng": "Travelled with",
+                "fra": "A voyag\u00e9 avec",
+                "spa": "Viajado con"
+            }
+        },
+        "BR": {
+            "color": "0099ff",
+            "importance": 1,
+            "displayed_value": {
+                "eng": "Biological relationship",
+                "fra": "Relation biologique",
+                "spa": "Relaci\u00f3n biol\u00f3gica"
+            }
+        },
+        "SE": {
+            "color": "7e00ff",
+            "importance": 1,
+            "displayed_value": {
+                "eng": "Service",
+                "fra": "Service",
+                "spa": "Servicio"
+            }
+        }
+    },
+    "Route": {
+        "EM": {
+            "displayed_value": {
+                "eng": "Eastern Mediterranean",
+                "fra": "M\u00e9diterran\u00e9e orientale",
+                "spa": "Mediterr\u00e1neo oriental"
+            }
+        },
+        "WM": {
+            "displayed_value": {
+                "eng": "Western Mediterranean",
+                "fra": "M\u00e9diterran\u00e9e occidentale",
+                "spa": "Mediterr\u00e1neo occidental"
+            }
+        },
+        "CM": {
+            "displayed_value": {
+                "eng": "Central Mediterranean",
+                "fra": "M\u00e9diterran\u00e9e centrale",
+                "spa": "Mediterr\u00e1neo central"
+            }
+        }
+    },
+    "Country": {
+        "MDV": {
+            "ISO2": "MV",
+            "full": "REPUBLIC OF MALDIVES",
+            "displayed_value": {
+                "eng": "MALDIVES",
+                "fra": "MALDIVES",
+                "ita": "MALDIVE",
+                "spa": "MALDIVAS"
+            }
+        },
+        "HTI": {
+            "ISO2": "HT",
+            "full": "REPUBLIC OF HAITI",
+            "displayed_value": {
+                "eng": "HAITI",
+                "fra": "HA\u00efTI",
+                "ita": "HAITI",
+                "spa": "HAIT\u00ed"
+            }
+        },
+        "RUS": {
+            "ISO2": "RU",
+            "full": "RUSSIAN FEDERATION",
+            "displayed_value": {
+                "eng": "RUSSIAN FEDERATION (THE)",
+                "fra": "RUSSIE",
+                "ita": "RUSSIA",
+                "spa": "RUSIA"
+            }
+        },
+        "ARG": {
+            "ISO2": "AR",
+            "full": "ARGENTINE REPUBLIC",
+            "displayed_value": {
+                "eng": "ARGENTINA",
+                "fra": "ARGENTINE",
+                "ita": "ARGENTINA",
+                "spa": "ARGENTINA"
+            }
+        },
+        "SWZ": {
+            "ISO2": "SZ",
+            "full": "KINGDOM OF SWAZILAND",
+            "displayed_value": {
+                "eng": "SWAZILAND",
+                "fra": "ESWATINI",
+                "ita": "SWAZILAND",
+                "spa": "SUAZILANDIA"
+            }
+        },
+        "ZMB": {
+            "ISO2": "ZM",
+            "full": "REPUBLIC OF ZAMBIA",
+            "displayed_value": {
+                "eng": "ZAMBIA",
+                "fra": "ZAMBIE",
+                "ita": "ZAMBIA",
+                "spa": "ZAMBIA"
+            }
+        },
+        "MRT": {
+            "ISO2": "MR",
+            "full": "ISLAMIC REPUBLIC OF MAURITANIA",
+            "displayed_value": {
+                "eng": "MAURITANIA",
+                "fra": "MAURITANIE",
+                "ita": "MAURITANIA",
+                "spa": "MAURITANIA"
+            }
+        },
+        "TZA": {
+            "ISO2": "TZ",
+            "full": "UNITED REPUBLIC OF TANZANIA",
+            "displayed_value": {
+                "eng": "UNITED REPUBLIC OF TANZANIA (THE)",
+                "fra": "TANZANIE",
+                "ita": "TANZANIA",
+                "spa": "TANZANIA"
+            }
+        },
+        "NAM": {
+            "ISO2": "NA",
+            "full": "REPUBLIC OF NAMIBIA",
+            "displayed_value": {
+                "eng": "NAMIBIA",
+                "fra": "NAMIBIE",
+                "ita": "NAMIBIA",
+                "spa": "NAMIBIA"
+            }
+        },
+        "AFG": {
+            "ISO2": "AF",
+            "full": "ISLAMIC REPUBLIC OF AFGHANISTAN",
+            "displayed_value": {
+                "eng": "AFGHANISTAN",
+                "fra": "AFGHANISTAN",
+                "ita": "AFGHANISTAN",
+                "spa": "AFGANIST\u00e1N"
+            }
+        },
+        "TWN": {
+            "ISO2": "TW",
+            "full": "REPUBLIC OF CHINA",
+            "displayed_value": {
+                "eng": "REPUBLIC OF CHINA"
+            }
+        },
+        "FIN": {
+            "ISO2": "FI",
+            "full": "REPUBLIC OF FINLAND",
+            "displayed_value": {
+                "eng": "FINLAND",
+                "fra": "FINLANDE",
+                "ita": "FINLANDIA",
+                "spa": "FINLANDIA"
+            }
+        },
+        "TCD": {
+            "ISO2": "TD",
+            "full": "REPUBLIC OF CHAD",
+            "displayed_value": {
+                "eng": "CHAD",
+                "fra": "TCHAD",
+                "ita": "CIAD",
+                "spa": "CHAD"
+            }
+        },
+        "TKM": {
+            "ISO2": "TM",
+            "full": "TURKMENISTAN",
+            "displayed_value": {
+                "eng": "TURKMENISTAN",
+                "fra": "TURKM\u00e9NISTAN",
+                "ita": "TURKMENISTAN",
+                "spa": "TURKMENIST\u00e1N"
+            }
+        },
+        "ARM": {
+            "ISO2": "AM",
+            "full": "REPUBLIC OF ARMENIA",
+            "displayed_value": {
+                "eng": "ARMENIA",
+                "fra": "ARM\u00e9NIE",
+                "ita": "ARMENIA",
+                "spa": "ARMENIA"
+            }
+        },
+        "ZWE": {
+            "ISO2": "ZW",
+            "full": "REPUBLIC OF ZIMBABWE",
+            "displayed_value": {
+                "eng": "ZIMBABWE",
+                "fra": "ZIMBABWE",
+                "ita": "ZIMBABWE",
+                "spa": "ZIMBABUE"
+            }
+        },
+        "GRC": {
+            "ISO2": "GR",
+            "full": "HELLENIC REPUBLIC",
+            "displayed_value": {
+                "eng": "GREECE",
+                "fra": "GR\u00e8CE",
+                "ita": "GRECIA",
+                "spa": "GRECIA"
+            }
+        },
+        "BGD": {
+            "ISO2": "BD",
+            "full": "PEOPLE'S REPUBLIC OF BANGLADESH",
+            "displayed_value": {
+                "eng": "BANGLADESH",
+                "fra": "BANGLADESH",
+                "ita": "BANGLADESH",
+                "spa": "BANGLAD\u00e9S"
+            }
+        },
+        "AUS": {
+            "ISO2": "AU",
+            "full": "AUSTRALIA",
+            "displayed_value": {
+                "eng": "AUSTRALIA",
+                "fra": "AUSTRALIE",
+                "ita": "AUSTRALIA",
+                "spa": "AUSTRALIA"
+            }
+        },
+        "COK": {
+            "ISO2": "CK",
+            "full": "COOK ISLANDS",
+            "displayed_value": {
+                "eng": "COOK ISLANDS"
+            }
+        },
+        "ISR": {
+            "ISO2": "IL",
+            "full": "STATE OF ISRAEL",
+            "displayed_value": {
+                "eng": "ISRAEL",
+                "fra": "ISRA\u00ebL",
+                "ita": "ISRAELE",
+                "spa": "ISRAEL"
+            }
+        },
+        "TUN": {
+            "ISO2": "TN",
+            "full": "REPUBLIC OF TUNISIA",
+            "displayed_value": {
+                "eng": "TUNISIA",
+                "fra": "TUNISIE",
+                "ita": "TUNISIA",
+                "spa": "T\u00faNEZ"
+            }
+        },
+        "SOM": {
+            "ISO2": "SO",
+            "full": "SOMALI DEMOCRATIC REPUBLIC",
+            "displayed_value": {
+                "eng": "SOMALIA",
+                "fra": "SOMALIE",
+                "ita": "SOMALIA",
+                "spa": "SOMALIA"
+            }
+        },
+        "MLT": {
+            "ISO2": "MT",
+            "full": "REPUBLIC OF MALTA",
+            "displayed_value": {
+                "eng": "MALTA",
+                "fra": "MALTE",
+                "ita": "MALTA",
+                "spa": "MALTA"
+            }
+        },
+        "LCA": {
+            "ISO2": "LC",
+            "full": "SAINT LUCIA",
+            "displayed_value": {
+                "eng": "SAINT LUCIA",
+                "fra": "SAINTE-LUCIE",
+                "ita": "SAINT LUCIA",
+                "spa": "SANTA LUC\u00edA"
+            }
+        },
+        "SSD": {
+            "ISO2": "SS",
+            "full": "REPUBLIC OF SOUTH SUDAN",
+            "displayed_value": {
+                "eng": "SOUTH SUDAN",
+                "fra": "SOUDAN DU SUD",
+                "ita": "SUDAN DEL SUD",
+                "spa": "SUD\u00e1N DEL SUR"
+            }
+        },
+        "LBR": {
+            "ISO2": "LR",
+            "full": "REPUBLIC OF LIBERIA",
+            "displayed_value": {
+                "eng": "LIBERIA",
+                "fra": "LIBERIA",
+                "ita": "LIBERIA",
+                "spa": "LIBERIA"
+            }
+        },
+        "CMR": {
+            "ISO2": "CM",
+            "full": "REPUBLIC OF CAMEROON",
+            "displayed_value": {
+                "eng": "CAMEROON",
+                "fra": "CAMEROUN",
+                "ita": "CAMERUN",
+                "spa": "CAMER\u00faN"
+            }
+        },
+        "GMB": {
+            "ISO2": "GM",
+            "full": "REPUBLIC OF THE GAMBIA",
+            "displayed_value": {
+                "eng": "GAMBIA",
+                "fra": "GAMBIE",
+                "ita": "GAMBIA",
+                "spa": "GAMBIA"
+            }
+        },
+        "DEU": {
+            "ISO2": "DE",
+            "full": "FEDERAL REPUBLIC OF GERMANY",
+            "displayed_value": {
+                "eng": "GERMANY",
+                "fra": "ALLEMAGNE",
+                "ita": "GERMANIA",
+                "spa": "ALEMANIA"
+            }
+        },
+        "NGA": {
+            "ISO2": "NG",
+            "full": "FEDERAL REPUBLIC OF NIGERIA",
+            "displayed_value": {
+                "eng": "NIGERIA",
+                "fra": "NIGERIA",
+                "ita": "NIGERIA",
+                "spa": "NIGERIA"
+            }
+        },
+        "PER": {
+            "ISO2": "PE",
+            "full": "REPUBLIC OF PERU",
+            "displayed_value": {
+                "eng": "PERU",
+                "fra": "P\u00e9ROU",
+                "ita": "PER\u00f9",
+                "spa": "PER\u00fa"
+            }
+        },
+        "PRK": {
+            "ISO2": "KP",
+            "full": "DEMOCRATIC PEOPLE'S REPUBLIC OF KOREA",
+            "displayed_value": {
+                "eng": "DEMOCRATIC PEOPLE'S REPUBLIC OF KOREA (THE)",
+                "fra": "COR\u00e9E DU NORD",
+                "ita": "COREA DEL NORD",
+                "spa": "COREA DEL NORTE"
+            }
+        },
+        "TUR": {
+            "ISO2": "TR",
+            "full": "REPUBLIC OF TURKEY",
+            "displayed_value": {
+                "eng": "TURKEY",
+                "fra": "TURQUIE",
+                "ita": "TURCHIA",
+                "spa": "TURQU\u00edA"
+            }
+        },
+        "BHR": {
+            "ISO2": "BH",
+            "full": "KINGDOM OF BAHRAIN",
+            "displayed_value": {
+                "eng": "BAHRAIN",
+                "fra": "BAHRE\u00efN",
+                "ita": "BAHREIN",
+                "spa": "BAR\u00e9IN"
+            }
+        },
+        "DMA": {
+            "ISO2": "DM",
+            "full": "COMMONWEALTH OF DOMINICA",
+            "displayed_value": {
+                "eng": "DOMINICA",
+                "fra": "DOMINIQUE",
+                "ita": "DOMINICA",
+                "spa": "DOMINICA"
+            }
+        },
+        "USA": {
+            "ISO2": "US",
+            "full": "UNITED STATES OF AMERICA",
+            "displayed_value": {
+                "eng": "UNITED STATES OF AMERICA (THE)",
+                "fra": "\u00c9TATS-UNIS",
+                "ita": "STATI UNITI",
+                "spa": "ESTADOS UNIDOS"
+            }
+        },
+        "DJI": {
+            "ISO2": "DJ",
+            "full": "REPUBLIC OF DJIBOUTI",
+            "displayed_value": {
+                "eng": "DJIBOUTI",
+                "fra": "DJIBOUTI",
+                "ita": "GIBUTI",
+                "spa": "YIBUTI"
+            }
+        },
+        "ITA": {
+            "ISO2": "IT",
+            "full": "ITALIAN REPUBLIC",
+            "displayed_value": {
+                "eng": "ITALY",
+                "fra": "ITALIE",
+                "ita": "ITALIA",
+                "spa": "ITALIA"
+            }
+        },
+        "FLK": {
+            "ISO2": "FK",
+            "full": "FALKLAND ISLANDS (MALVINAS)",
+            "displayed_value": {
+                "eng": "FALKLAND ISLANDS (MALVINAS)"
+            }
+        },
+        "ERI": {
+            "ISO2": "ER",
+            "full": "ERITREA",
+            "displayed_value": {
+                "eng": "ERITREA",
+                "fra": "\u00c9RYTHR\u00e9E",
+                "ita": "ERITREA",
+                "spa": "ERITREA"
+            }
+        },
+        "LVA": {
+            "ISO2": "LV",
+            "full": "REPUBLIC OF LATVIA",
+            "displayed_value": {
+                "eng": "LATVIA",
+                "fra": "LETTONIE",
+                "ita": "LETTONIA",
+                "spa": "LETONIA"
+            }
+        },
+        "UKR": {
+            "ISO2": "UA",
+            "full": "UKRAINE",
+            "displayed_value": {
+                "eng": "UKRAINE",
+                "fra": "UKRAINE",
+                "ita": "UCRAINA",
+                "spa": "UCRANIA"
+            }
+        },
+        "VUT": {
+            "ISO2": "VU",
+            "full": "REPUBLIC OF VANUATU",
+            "displayed_value": {
+                "eng": "VANUATU",
+                "fra": "VANUATU",
+                "ita": "VANUATU",
+                "spa": "VANUATU"
+            }
+        },
+        "NCL": {
+            "ISO2": "NC",
+            "full": "NEW CALEDONIA",
+            "displayed_value": {
+                "eng": "FRANCE - NEW CALEDONIA"
+            }
+        },
+        "CHL": {
+            "ISO2": "CL",
+            "full": "REPUBLIC OF CHILE",
+            "displayed_value": {
+                "eng": "CHILE",
+                "fra": "CHILI",
+                "ita": "CILE",
+                "spa": "CHILE"
+            }
+        },
+        "MNP": {
+            "ISO2": "MP",
+            "full": "COMMONWEALTH OF THE NORTHERN MARIANA ISLANDS",
+            "displayed_value": {
+                "eng": "UNITED STATES - NORTHERN MARIANA ISLANDS"
+            }
+        },
+        "LUX": {
+            "ISO2": "LU",
+            "full": "GRAND DUCHY OF LUXEMBOURG",
+            "displayed_value": {
+                "eng": "LUXEMBOURG",
+                "fra": "LUXEMBOURG (PAYS)",
+                "ita": "LUSSEMBURGO",
+                "spa": "LUXEMBURGO"
+            }
+        },
+        "JOR": {
+            "ISO2": "JO",
+            "full": "HASHEMITE KINGDOM OF JORDAN",
+            "displayed_value": {
+                "eng": "JORDAN",
+                "fra": "JORDANIE",
+                "ita": "GIORDANIA",
+                "spa": "JORDANIA"
+            }
+        },
+        "RWA": {
+            "ISO2": "RW",
+            "full": "REPUBLIC OF RWANDA",
+            "displayed_value": {
+                "eng": "RWANDA",
+                "fra": "RWANDA",
+                "ita": "RUANDA",
+                "spa": "RUANDA"
+            }
+        },
+        "PRT": {
+            "ISO2": "PT",
+            "full": "PORTUGUESE REPUBLIC",
+            "displayed_value": {
+                "eng": "PORTUGAL",
+                "fra": "PORTUGAL",
+                "ita": "PORTOGALLO",
+                "spa": "PORTUGAL"
+            }
+        },
+        "PRY": {
+            "ISO2": "PY",
+            "full": "REPUBLIC OF PARAGUAY",
+            "displayed_value": {
+                "eng": "PARAGUAY",
+                "fra": "PARAGUAY",
+                "ita": "PARAGUAY",
+                "spa": "PARAGUAY"
+            }
+        },
+        "KWT": {
+            "ISO2": "KW",
+            "full": "STATE OF KUWAIT",
+            "displayed_value": {
+                "eng": "KUWAIT",
+                "fra": "KOWE\u00efT",
+                "ita": "KUWAIT",
+                "spa": "KUWAIT"
+            }
+        },
+        "BRN": {
+            "ISO2": "BN",
+            "full": "BRUNEI DARUSSALAM",
+            "displayed_value": {
+                "eng": "BRUNEI DARUSSALAM",
+                "fra": "BRUNEI",
+                "ita": "BRUNEI",
+                "spa": "BRUN\u00e9I"
+            }
+        },
+        "KEN": {
+            "ISO2": "KE",
+            "full": "REPUBLIC OF KENYA",
+            "displayed_value": {
+                "eng": "KENYA",
+                "fra": "KENYA",
+                "ita": "KENYA",
+                "spa": "KENIA"
+            }
+        },
+        "FSM": {
+            "ISO2": "FM",
+            "full": "FEDERATED STATES OF MICRONESIA",
+            "displayed_value": {
+                "eng": "MICRONESIA (FEDERATED STATES OF)",
+                "fra": "\u00c9TATS F\u00e9D\u00e9R\u00e9S DE MICRON\u00e9SIE (PAYS)",
+                "ita": "MICRONESIA",
+                "spa": "MICRONESIA"
+            }
+        },
+        "AUT": {
+            "ISO2": "AT",
+            "full": "REPUBLIC OF AUSTRIA",
+            "displayed_value": {
+                "eng": "AUSTRIA",
+                "fra": "AUTRICHE",
+                "ita": "AUSTRIA",
+                "spa": "AUSTRIA"
+            }
+        },
+        "CUB": {
+            "ISO2": "CU",
+            "full": "REPUBLIC OF CUBA",
+            "displayed_value": {
+                "eng": "CUBA",
+                "fra": "CUBA",
+                "ita": "CUBA",
+                "spa": "CUBA"
+            }
+        },
+        "QAT": {
+            "ISO2": "QA",
+            "full": "STATE OF QATAR",
+            "displayed_value": {
+                "eng": "QATAR",
+                "fra": "QATAR",
+                "ita": "QATAR",
+                "spa": "CATAR"
+            }
+        },
+        "KOR": {
+            "ISO2": "KR",
+            "full": "REPUBLIC OF KOREA",
+            "displayed_value": {
+                "eng": "REPUBLIC OF KOREA (THE)",
+                "fra": "COR\u00e9E DU SUD",
+                "ita": "COREA DEL SUD",
+                "spa": "COREA DEL SUR"
+            }
+        },
+        "BLZ": {
+            "ISO2": "BZ",
+            "full": "BELIZE",
+            "displayed_value": {
+                "eng": "BELIZE",
+                "fra": "BELIZE",
+                "ita": "BELIZE",
+                "spa": "BELICE"
+            }
+        },
+        "GRD": {
+            "ISO2": "GD",
+            "full": "GRENADA",
+            "displayed_value": {
+                "eng": "GRENADA",
+                "fra": "GRENADE (PAYS)",
+                "ita": "GRENADA",
+                "spa": "GRANADA"
+            }
+        },
+        "ESP": {
+            "ISO2": "ES",
+            "full": "KINGDOM OF SPAIN",
+            "displayed_value": {
+                "eng": "SPAIN",
+                "fra": "ESPAGNE",
+                "ita": "SPAGNA",
+                "spa": "ESPA\u00f1A"
+            }
+        },
+        "GNQ": {
+            "ISO2": "GQ",
+            "full": "REPUBLIC OF EQUATORIAL GUINEA",
+            "displayed_value": {
+                "eng": "EQUATORIAL GUINEA",
+                "fra": "GUIN\u00e9E \u00e9QUATORIALE",
+                "ita": "GUINEA EQUATORIALE",
+                "spa": "GUINEA ECUATORIAL"
+            }
+        },
+        "CAN": {
+            "ISO2": "CA",
+            "full": "CANADA",
+            "displayed_value": {
+                "eng": "CANADA",
+                "fra": "CANADA",
+                "ita": "CANADA",
+                "spa": "CANAD\u00e1"
+            }
+        },
+        "MWI": {
+            "ISO2": "MW",
+            "full": "REPUBLIC OF MALAWI",
+            "displayed_value": {
+                "eng": "MALAWI",
+                "fra": "MALAWI",
+                "ita": "MALAWI",
+                "spa": "MALAUI"
+            }
+        },
+        "PSE": {
+            "ISO2": "PS",
+            "full": "AREA UNDER PALESTINIAN AUTHORITY",
+            "displayed_value": {
+                "eng": "AREA UNDER PALESTINIAN AUTHORITY"
+            }
+        },
+        "SLB": {
+            "ISO2": "SB",
+            "full": "SOLOMON ISLANDS",
+            "displayed_value": {
+                "eng": "SOLOMON ISLANDS",
+                "fra": "SALOMON",
+                "ita": "ISOLE SALOMONE",
+                "spa": "ISLAS SALOM\u00f3N"
+            }
+        },
+        "SVN": {
+            "ISO2": "SI",
+            "full": "REPUBLIC OF SLOVENIA",
+            "displayed_value": {
+                "eng": "SLOVENIA",
+                "fra": "SLOV\u00e9NIE",
+                "ita": "SLOVENIA",
+                "spa": "ESLOVENIA"
+            }
+        },
+        "BEL": {
+            "ISO2": "BE",
+            "full": "KINGDOM OF BELGIUM",
+            "displayed_value": {
+                "eng": "BELGIUM",
+                "fra": "BELGIQUE",
+                "ita": "BELGIO",
+                "spa": "B\u00e9LGICA"
+            }
+        },
+        "BEN": {
+            "ISO2": "BJ",
+            "full": "REPUBLIC OF BENIN",
+            "displayed_value": {
+                "eng": "BENIN",
+                "fra": "B\u00e9NIN",
+                "ita": "BENIN",
+                "spa": "BEN\u00edN"
+            }
+        },
+        "FRA": {
+            "ISO2": "FR",
+            "full": "FRENCH REPUBLIC",
+            "displayed_value": {
+                "eng": "FRANCE",
+                "fra": "FRANCE",
+                "ita": "FRANCIA",
+                "spa": "FRANCIA"
+            }
+        },
+        "GAB": {
+            "ISO2": "GA",
+            "full": "GABONESE REPUBLIC",
+            "displayed_value": {
+                "eng": "GABON",
+                "fra": "GABON",
+                "ita": "GABON",
+                "spa": "GAB\u00f3N"
+            }
+        },
+        "CHN": {
+            "ISO2": "CN",
+            "full": "PEOPLE'S REPUBLIC OF CHINA",
+            "displayed_value": {
+                "eng": "CHINA",
+                "fra": "CHINE",
+                "ita": "CINA",
+                "spa": "CHINA"
+            }
+        },
+        "MKD": {
+            "ISO2": "MK",
+            "full": "THE FORMER YUGOSLAV REPUBLIC OF MACEDONIA",
+            "displayed_value": {
+                "eng": "MACEDONIA (THE FORMER YUGOSLAV REPUBLIC OF)",
+                "fra": "MAC\u00e9DOINE DU NORD",
+                "ita": "MACEDONIA DEL NORD",
+                "spa": "MACEDONIA DEL NORTE"
+            }
+        },
+        "MHL": {
+            "ISO2": "MH",
+            "full": "REPUBLIC OF THE MARSHALL ISLANDS",
+            "displayed_value": {
+                "eng": "MARSHALL ISLANDS (THE)",
+                "fra": "\u00ceLES MARSHALL (PAYS)",
+                "ita": "ISOLE MARSHALL",
+                "spa": "ISLAS MARSHALL"
+            }
+        },
+        "SYR": {
+            "ISO2": "SY",
+            "full": "SYRIAN ARAB REPUBLIC",
+            "displayed_value": {
+                "eng": "SYRIAN ARAB REPUBLIC (THE)",
+                "fra": "SYRIE",
+                "ita": "SIRIA",
+                "spa": "SIRIA"
+            }
+        },
+        "LSO": {
+            "ISO2": "LS",
+            "full": "KINGDOM OF LESOTHO",
+            "displayed_value": {
+                "eng": "LESOTHO",
+                "fra": "LESOTHO",
+                "ita": "LESOTHO",
+                "spa": "LESOTO"
+            }
+        },
+        "ALB": {
+            "ISO2": "AL",
+            "full": "REPUBLIC OF ALBANIA",
+            "displayed_value": {
+                "eng": "ALBANIA",
+                "fra": "ALBANIE",
+                "ita": "ALBANIA",
+                "spa": "ALBANIA"
+            }
+        },
+        "ISL": {
+            "ISO2": "IS",
+            "full": "REPUBLIC OF ICELAND",
+            "displayed_value": {
+                "eng": "ICELAND",
+                "fra": "ISLANDE",
+                "ita": "ISLANDA",
+                "spa": "ISLANDIA"
+            }
+        },
+        "GNB": {
+            "ISO2": "GW",
+            "full": "REPUBLIC OF GUINEA-BISSAU",
+            "displayed_value": {
+                "eng": "GUINEA-BISSAU",
+                "fra": "GUIN\u00e9E-BISSAU",
+                "ita": "GUINEA-BISSAU",
+                "spa": "GUINEA-BIS\u00e1U"
+            }
+        },
+        "CAF": {
+            "ISO2": "CF",
+            "full": "CENTRAL AFRICAN REPUBLIC",
+            "displayed_value": {
+                "eng": "CENTRAL AFRICAN REPUBLIC (THE)",
+                "fra": "R\u00e9PUBLIQUE CENTRAFRICAINE",
+                "ita": "REP. CENTRAFRICANA",
+                "spa": "REP\u00faBLICA CENTROAFRICANA"
+            }
+        },
+        "HND": {
+            "ISO2": "HN",
+            "full": "REPUBLIC OF HONDURAS",
+            "displayed_value": {
+                "eng": "HONDURAS",
+                "fra": "HONDURAS",
+                "ita": "HONDURAS",
+                "spa": "HONDURAS"
+            }
+        },
+        "NIC": {
+            "ISO2": "NI",
+            "full": "REPUBLIC OF NICARAGUA",
+            "displayed_value": {
+                "eng": "NICARAGUA",
+                "fra": "NICARAGUA",
+                "ita": "NICARAGUA",
+                "spa": "NICARAGUA"
+            }
+        },
+        "FJI": {
+            "ISO2": "FJ",
+            "full": "REPUBLIC OF THE FIJI ISLANDS",
+            "displayed_value": {
+                "eng": "FIJI",
+                "fra": "FIDJI",
+                "ita": "FIGI",
+                "spa": "FIYI"
+            }
+        },
+        "ARE": {
+            "ISO2": "AE",
+            "full": "UNITED ARAB EMIRATES",
+            "displayed_value": {
+                "eng": "UNITED ARAB EMIRATES (THE)",
+                "fra": "\u00c9MIRATS ARABES UNIS",
+                "ita": "EMIRATI ARABI UNITI",
+                "spa": "EMIRATOS \u00c1RABES UNIDOS"
+            }
+        },
+        "KHM": {
+            "ISO2": "KH",
+            "full": "KINGDOM OF CAMBODIA",
+            "displayed_value": {
+                "eng": "CAMBODIA",
+                "fra": "CAMBODGE",
+                "ita": "CAMBOGIA",
+                "spa": "CAMBOYA"
+            }
+        },
+        "KIR": {
+            "ISO2": "KI",
+            "full": "REPUBLIC OF KIRIBATI",
+            "displayed_value": {
+                "eng": "KIRIBATI",
+                "fra": "KIRIBATI",
+                "ita": "KIRIBATI",
+                "spa": "KIRIBATI"
+            }
+        },
+        "LIE": {
+            "ISO2": "LI",
+            "full": "PRINCIPALITY OF LIECHTENSTEIN",
+            "displayed_value": {
+                "eng": "LIECHTENSTEIN",
+                "fra": "LIECHTENSTEIN",
+                "ita": "LIECHTENSTEIN",
+                "spa": "LIECHTENSTEIN"
+            }
+        },
+        "VNM": {
+            "ISO2": "VN",
+            "full": "SOCIALIST REPUBLIC OF VIET NAM",
+            "displayed_value": {
+                "eng": "VIET NAM",
+                "fra": "VI\u00eaT NAM",
+                "ita": "VIETNAM",
+                "spa": "VIETNAM"
+            }
+        },
+        "CIV": {
+            "ISO2": "CI",
+            "full": "REPUBLIC OF C\u00d4TE D'IVOIRE",
+            "displayed_value": {
+                "eng": "C\u00d4TE D'IVOIRE",
+                "fra": "C\u00f4TE D'IVOIRE",
+                "ita": "COSTA D'AVORIO",
+                "spa": "COSTA DE MARFIL"
+            }
+        },
+        "AZE": {
+            "ISO2": "AZ",
+            "full": "REPUBLIC OF AZERBAIJAN",
+            "displayed_value": {
+                "eng": "AZERBAIJAN",
+                "fra": "AZERBA\u00efDJAN",
+                "ita": "AZERBAIGIAN",
+                "spa": "AZERBAIY\u00e1N"
+            }
+        },
+        "SDN": {
+            "ISO2": "SD",
+            "full": "REPUBLIC OF THE SUDAN",
+            "displayed_value": {
+                "eng": "SUDAN",
+                "fra": "SOUDAN",
+                "ita": "SUDAN",
+                "spa": "SUD\u00e1N"
+            }
+        },
+        "PAK": {
+            "ISO2": "PK",
+            "full": "ISLAMIC REPUBLIC OF PAKISTAN",
+            "displayed_value": {
+                "eng": "PAKISTAN",
+                "fra": "PAKISTAN",
+                "ita": "PAKISTAN",
+                "spa": "PAKIST\u00e1N"
+            }
+        },
+        "DZA": {
+            "ISO2": "DZ",
+            "full": "PEOPLE'S DEMOCRATIC REPUBLIC OF ALGERIA",
+            "displayed_value": {
+                "eng": "ALGERIA",
+                "fra": "ALG\u00e9RIE",
+                "ita": "ALGERIA",
+                "spa": "ARGELIA"
+            }
+        },
+        "IND": {
+            "ISO2": "IN",
+            "full": "REPUBLIC OF INDIA",
+            "displayed_value": {
+                "eng": "INDIA",
+                "fra": "INDE",
+                "ita": "INDIA",
+                "spa": "INDIA"
+            }
+        },
+        "CEC": {
+            "ISO2": "EU",
+            "full": "EUROPEAN UNION",
+            "displayed_value": {
+                "eng": "EUROPEAN UNION"
+            }
+        },
+        "OMN": {
+            "ISO2": "OM",
+            "full": "SULTANATE OF OMAN",
+            "displayed_value": {
+                "eng": "OMAN",
+                "fra": "OMAN",
+                "ita": "OMAN",
+                "spa": "OM\u00e1N"
+            }
+        },
+        "YEM": {
+            "ISO2": "YE",
+            "full": "REPUBLIC OF YEMEN",
+            "displayed_value": {
+                "eng": "YEMEN",
+                "fra": "Y\u00e9MEN",
+                "ita": "YEMEN",
+                "spa": "YEMEN"
+            }
+        },
+        "LKA": {
+            "ISO2": "LK",
+            "full": "DEMOCRATIC SOCIALIST REPUBLIC OF SRI LANKA",
+            "displayed_value": {
+                "eng": "SRI LANKA",
+                "fra": "SRI LANKA",
+                "ita": "SRI LANKA",
+                "spa": "SRI LANKA"
+            }
+        },
+        "IRQ": {
+            "ISO2": "IQ",
+            "full": "REPUBLIC OF IRAQ",
+            "displayed_value": {
+                "eng": "IRAQ",
+                "fra": "IRAK",
+                "ita": "IRAQ",
+                "spa": "IRAK"
+            }
+        },
+        "NZL": {
+            "ISO2": "NZ",
+            "full": "NEW ZEALAND",
+            "displayed_value": {
+                "eng": "NEW ZEALAND",
+                "fra": "NOUVELLE-Z\u00e9LANDE",
+                "ita": "NUOVA ZELANDA",
+                "spa": "NUEVA ZELANDA"
+            }
+        },
+        "EGY": {
+            "ISO2": "EG",
+            "full": "ARAB REPUBLIC OF EGYPT",
+            "displayed_value": {
+                "eng": "EGYPT",
+                "fra": "\u00c9GYPTE",
+                "ita": "EGITTO",
+                "spa": "EGIPTO"
+            }
+        },
+        "TGO": {
+            "ISO2": "TG",
+            "full": "TOGOLESE REPUBLIC",
+            "displayed_value": {
+                "eng": "TOGO",
+                "fra": "TOGO",
+                "ita": "TOGO",
+                "spa": "TOGO"
+            }
+        },
+        "COD": {
+            "ISO2": "CD",
+            "full": "DEMOCRATIC REPUBLIC OF THE CONGO",
+            "displayed_value": {
+                "eng": "DEMOCRATIC REPUBLIC OF THE CONGO",
+                "fra": "R\u00e9PUBLIQUE D\u00e9MOCRATIQUE DU CONGO",
+                "ita": "RD DEL CONGO",
+                "spa": "REP\u00faBLICA DEMOCR\u00e1TICA DEL CONGO"
+            }
+        },
+        "MCO": {
+            "ISO2": "MC",
+            "full": "PRINCIPALITY OF MONACO",
+            "displayed_value": {
+                "eng": "MONACO",
+                "fra": "MONACO",
+                "ita": "MONACO",
+                "spa": "M\u00f3NACO"
+            }
+        },
+        "COL": {
+            "ISO2": "CO",
+            "full": "REPUBLIC OF COLOMBIA",
+            "displayed_value": {
+                "eng": "COLOMBIA",
+                "fra": "COLOMBIE",
+                "ita": "COLOMBIA",
+                "spa": "COLOMBIA"
+            }
+        },
+        "BWA": {
+            "ISO2": "BW",
+            "full": "REPUBLIC OF BOTSWANA",
+            "displayed_value": {
+                "eng": "BOTSWANA",
+                "fra": "BOTSWANA",
+                "ita": "BOTSWANA",
+                "spa": "BOTSUANA"
+            }
+        },
+        "THA": {
+            "ISO2": "TH",
+            "full": "KINGDOM OF THAILAND",
+            "displayed_value": {
+                "eng": "THAILAND",
+                "fra": "THA\u00efLANDE",
+                "ita": "THAILANDIA",
+                "spa": "TAILANDIA"
+            }
+        },
+        "LAO": {
+            "ISO2": "LA",
+            "full": "LAO PEOPLE'S DEMOCRATIC REPUBLIC",
+            "displayed_value": {
+                "eng": "LAO PEOPLE'S DEMOCRATIC REPUBLIC (THE)",
+                "fra": "LAOS",
+                "ita": "LAOS",
+                "spa": "LAOS"
+            }
+        },
+        "MNE": {
+            "ISO2": "ME",
+            "full": "MONTENEGRO",
+            "displayed_value": {
+                "eng": "MONTENEGRO",
+                "fra": "MONT\u00e9N\u00e9GRO",
+                "ita": "MONTENEGRO",
+                "spa": "MONTENEGRO"
+            }
+        },
+        "NOR": {
+            "ISO2": "NO",
+            "full": "KINGDOM OF NORWAY",
+            "displayed_value": {
+                "eng": "NORWAY",
+                "fra": "NORV\u00e8GE",
+                "ita": "NORVEGIA",
+                "spa": "NORUEGA"
+            }
+        },
+        "XXK": {
+            "ISO2": "XK",
+            "full": "REPUBLIC OF KOSOVO*",
+            "displayed_value": {
+                "eng": "KOSOVO"
+            }
+        },
+        "NER": {
+            "ISO2": "NE",
+            "full": "REPUBLIC OF THE NIGER",
+            "displayed_value": {
+                "eng": "NIGER",
+                "fra": "NIGER",
+                "ita": "NIGER",
+                "spa": "N\u00edGER"
+            }
+        },
+        "BGR": {
+            "ISO2": "BG",
+            "full": "REPUBLIC OF BULGARIA",
+            "displayed_value": {
+                "eng": "BULGARIA",
+                "fra": "BULGARIE",
+                "ita": "BULGARIA",
+                "spa": "BULGARIA"
+            }
+        },
+        "BDI": {
+            "ISO2": "BI",
+            "full": "REPUBLIC OF BURUNDI",
+            "displayed_value": {
+                "eng": "BURUNDI",
+                "fra": "BURUNDI",
+                "ita": "BURUNDI",
+                "spa": "BURUNDI"
+            }
+        },
+        "CZE": {
+            "ISO2": "CZ",
+            "full": "CZECH REPUBLIC",
+            "displayed_value": {
+                "eng": "CZECH REPUBLIC (THE)",
+                "fra": "TCH\u00e9QUIE",
+                "ita": "REP. CECA",
+                "spa": "REP\u00faBLICA CHECA"
+            }
+        },
+        "GIN": {
+            "ISO2": "GN",
+            "full": "REPUBLIC OF GUINEA",
+            "displayed_value": {
+                "eng": "GUINEA",
+                "fra": "GUIN\u00e9E",
+                "ita": "GUINEA",
+                "spa": "GUINEA"
+            }
+        },
+        "WSM": {
+            "ISO2": "WS",
+            "full": "INDEPENDENT STATE OF SAMOA",
+            "displayed_value": {
+                "eng": "SAMOA",
+                "fra": "SAMOA",
+                "ita": "SAMOA",
+                "spa": "SAMOA"
+            }
+        },
+        "MOZ": {
+            "ISO2": "MZ",
+            "full": "REPUBLIC OF MOZAMBIQUE",
+            "displayed_value": {
+                "eng": "MOZAMBIQUE",
+                "fra": "MOZAMBIQUE",
+                "ita": "MOZAMBICO",
+                "spa": "MOZAMBIQUE"
+            }
+        },
+        "GBR": {
+            "ISO2": "GB",
+            "full": "UNITED KINGDOM OF GREAT BRITAIN AND NORTHERN IRELAND",
+            "displayed_value": {
+                "eng": "UNITED KINGDOM OF GREAT BRITAIN AND NORTHERN IRELAND (THE)",
+                "fra": "ROYAUME-UNI",
+                "ita": "REGNO UNITO",
+                "spa": "REINO UNIDO"
+            }
+        },
+        "BFA": {
+            "ISO2": "BF",
+            "full": "BURKINA FASO",
+            "displayed_value": {
+                "eng": "BURKINA FASO",
+                "fra": "BURKINA FASO",
+                "ita": "BURKINA FASO",
+                "spa": "BURKINA FASO"
+            }
+        },
+        "BHS": {
+            "ISO2": "BS",
+            "full": "COMMONWEALTH OF THE BAHAMAS",
+            "displayed_value": {
+                "eng": "BAHAMAS (THE)",
+                "fra": "BAHAMAS",
+                "ita": "BAHAMAS",
+                "spa": "BAHAMAS"
+            }
+        },
+        "ROU": {
+            "ISO2": "RO",
+            "full": "ROMANIA",
+            "displayed_value": {
+                "eng": "ROMANIA",
+                "fra": "ROUMANIE",
+                "ita": "ROMANIA",
+                "spa": "RUMANIA"
+            }
+        },
+        "NPL": {
+            "ISO2": "NP",
+            "full": "FEDERAL DEMOCRATIC REPUBLIC OF NEPAL",
+            "displayed_value": {
+                "eng": "NEPAL",
+                "fra": "N\u00e9PAL",
+                "ita": "NEPAL",
+                "spa": "NEPAL"
+            }
+        },
+        "PLW": {
+            "ISO2": "PW",
+            "full": "REPUBLIC OF PALAU",
+            "displayed_value": {
+                "eng": "PALAU",
+                "fra": "PALAOS",
+                "ita": "PALAU",
+                "spa": "PALAOS"
+            }
+        },
+        "DNK": {
+            "ISO2": "DK",
+            "full": "KINGDOM OF DENMARK",
+            "displayed_value": {
+                "eng": "DENMARK",
+                "fra": "DANEMARK",
+                "ita": "DANIMARCA",
+                "spa": "DINAMARCA"
+            }
+        },
+        "TLS": {
+            "ISO2": "TL",
+            "full": "DEMOCRATIC REPUBLIC OF TIMOR-LESTE",
+            "displayed_value": {
+                "eng": "TIMOR-LESTE",
+                "fra": "TIMOR ORIENTAL",
+                "ita": "TIMOR EST",
+                "spa": "TIMOR ORIENTAL"
+            }
+        },
+        "TJK": {
+            "ISO2": "TJ",
+            "full": "REPUBLIC OF TAJIKISTAN",
+            "displayed_value": {
+                "eng": "TAJIKISTAN",
+                "fra": "TADJIKISTAN",
+                "ita": "TAGIKISTAN",
+                "spa": "TAYIKIST\u00e1N"
+            }
+        },
+        "STP": {
+            "ISO2": "ST",
+            "full": "DEMOCRATIC REPUBLIC OF SAO TOME AND PRINCIPE",
+            "displayed_value": {
+                "eng": "SAO TOME AND PRINCIPE",
+                "fra": "SAO TOM\u00e9-ET-PRINCIPE",
+                "ita": "S\u00e3O TOM\u00e9 E PR\u00edNCIPE",
+                "spa": "SANTO TOM\u00e9 Y PR\u00edNCIPE"
+            }
+        },
+        "BRB": {
+            "ISO2": "BB",
+            "full": "BARBADOS",
+            "displayed_value": {
+                "eng": "BARBADOS",
+                "fra": "BARBADE",
+                "ita": "BARBADOS",
+                "spa": "BARBADOS"
+            }
+        },
+        "PAN": {
+            "ISO2": "PA",
+            "full": "REPUBLIC OF PANAMA",
+            "displayed_value": {
+                "eng": "PANAMA",
+                "fra": "PANAMA",
+                "ita": "PANAMA",
+                "spa": "PANAM\u00e1"
+            }
+        },
+        "ZAF": {
+            "ISO2": "ZA",
+            "full": "REPUBLIC OF SOUTH AFRICA",
+            "displayed_value": {
+                "eng": "SOUTH AFRICA",
+                "fra": "AFRIQUE DU SUD",
+                "ita": "SUDAFRICA",
+                "spa": "SUD\u00e1FRICA"
+            }
+        },
+        "ATG": {
+            "ISO2": "AG",
+            "full": "ANTIGUA AND BARBUDA",
+            "displayed_value": {
+                "eng": "ANTIGUA AND BARBUDA",
+                "fra": "ANTIGUA-ET-BARBUDA",
+                "ita": "ANTIGUA E BARBUDA",
+                "spa": "ANTIGUA Y BARBUDA"
+            }
+        },
+        "GTM": {
+            "ISO2": "GT",
+            "full": "REPUBLIC OF GUATEMALA",
+            "displayed_value": {
+                "eng": "GUATEMALA",
+                "fra": "GUATEMALA",
+                "ita": "GUATEMALA",
+                "spa": "GUATEMALA"
+            }
+        },
+        "MYS": {
+            "ISO2": "MY",
+            "full": "MALAYSIA",
+            "displayed_value": {
+                "eng": "MALAYSIA",
+                "fra": "MALAISIE",
+                "ita": "MALAYSIA",
+                "spa": "MALASIA"
+            }
+        },
+        "VAT": {
+            "ISO2": "VA",
+            "full": "HOLY SEE",
+            "displayed_value": {
+                "eng": "HOLY SEE (THE)"
+            }
+        },
+        "MDA": {
+            "ISO2": "MD",
+            "full": "REPUBLIC OF MOLDOVA",
+            "displayed_value": {
+                "eng": "REPUBLIC OF MOLDOVA (THE)",
+                "fra": "MOLDAVIE",
+                "ita": "MOLDAVIA",
+                "spa": "MOLDAVIA"
+            }
+        },
+        "IDN": {
+            "ISO2": "ID",
+            "full": "REPUBLIC OF INDONESIA",
+            "displayed_value": {
+                "eng": "INDONESIA",
+                "fra": "INDON\u00e9SIE",
+                "ita": "INDONESIA",
+                "spa": "INDONESIA"
+            }
+        },
+        "VEN": {
+            "ISO2": "VE",
+            "full": "BOLIVARIAN REPUBLIC OF VENEZUELA",
+            "displayed_value": {
+                "eng": "VENEZUELA",
+                "fra": "VENEZUELA",
+                "ita": "VENEZUELA",
+                "spa": "VENEZUELA"
+            }
+        },
+        "BOL": {
+            "ISO2": "BO",
+            "full": "REPUBLIC OF BOLIVIA",
+            "displayed_value": {
+                "eng": "BOLIVIA",
+                "fra": "BOLIVIE",
+                "ita": "BOLIVIA",
+                "spa": "BOLIVIA"
+            }
+        },
+        "NRU": {
+            "ISO2": "NR",
+            "full": "REPUBLIC OF NAURU",
+            "displayed_value": {
+                "eng": "NAURU",
+                "fra": "NAURU",
+                "ita": "NAURU",
+                "spa": "NAURU"
+            }
+        },
+        "TUV": {
+            "ISO2": "TV",
+            "full": "TUVALU",
+            "displayed_value": {
+                "eng": "TUVALU",
+                "fra": "TUVALU",
+                "ita": "TUVALU",
+                "spa": "TUVALU"
+            }
+        },
+        "SGP": {
+            "ISO2": "SG",
+            "full": "REPUBLIC OF SINGAPORE",
+            "displayed_value": {
+                "eng": "SINGAPORE",
+                "fra": "SINGAPOUR",
+                "ita": "SINGAPORE",
+                "spa": "SINGAPUR"
+            }
+        },
+        "KGZ": {
+            "ISO2": "KG",
+            "full": "KYRGYZ REPUBLIC",
+            "displayed_value": {
+                "eng": "KYRGYZSTAN",
+                "fra": "KIRGHIZISTAN",
+                "ita": "KIRGHIZISTAN",
+                "spa": "KIRGUIST\u00e1N"
+            }
+        },
+        "GUY": {
+            "ISO2": "GY",
+            "full": "REPUBLIC OF GUYANA",
+            "displayed_value": {
+                "eng": "GUYANA",
+                "fra": "GUYANA",
+                "ita": "GUYANA",
+                "spa": "GUYANA"
+            }
+        },
+        "HRV": {
+            "ISO2": "HR",
+            "full": "REPUBLIC OF CROATIA",
+            "displayed_value": {
+                "eng": "CROATIA",
+                "fra": "CROATIE",
+                "ita": "CROAZIA",
+                "spa": "CROACIA"
+            }
+        },
+        "POL": {
+            "ISO2": "PL",
+            "full": "REPUBLIC OF POLAND",
+            "displayed_value": {
+                "eng": "POLAND",
+                "fra": "POLOGNE",
+                "ita": "POLONIA",
+                "spa": "POLONIA"
+            }
+        },
+        "GEO": {
+            "ISO2": "GE",
+            "full": "GEORGIA",
+            "displayed_value": {
+                "eng": "GEORGIA",
+                "fra": "G\u00e9ORGIE (PAYS)",
+                "ita": "GEORGIA",
+                "spa": "GEORGIA"
+            }
+        },
+        "COG": {
+            "ISO2": "CG",
+            "full": "REPUBLIC OF THE CONGO",
+            "displayed_value": {
+                "eng": "CONGO (THE)",
+                "fra": "R\u00e9PUBLIQUE DU CONGO",
+                "ita": "REP. DEL CONGO",
+                "spa": "REP\u00faBLICA DEL CONGO"
+            }
+        },
+        "JAM": {
+            "ISO2": "JM",
+            "full": "JAMAICA",
+            "displayed_value": {
+                "eng": "JAMAICA",
+                "fra": "JAMA\u00efQUE",
+                "ita": "GIAMAICA",
+                "spa": "JAMAICA"
+            }
+        },
+        "SRB": {
+            "ISO2": "RS",
+            "full": "REPUBLIC OF SERBIA",
+            "displayed_value": {
+                "eng": "SERBIA",
+                "fra": "SERBIE",
+                "ita": "SERBIA",
+                "spa": "SERBIA"
+            }
+        },
+        "BLR": {
+            "ISO2": "BY",
+            "full": "REPUBLIC OF BELARUS",
+            "displayed_value": {
+                "eng": "BELARUS",
+                "fra": "BI\u00e9LORUSSIE",
+                "ita": "BIELORUSSIA",
+                "spa": "BIELORRUSIA"
+            }
+        },
+        "MUS": {
+            "ISO2": "MU",
+            "full": "REPUBLIC OF MAURITIUS",
+            "displayed_value": {
+                "eng": "MAURITIUS",
+                "fra": "MAURICE (PAYS)",
+                "ita": "MAURITIUS",
+                "spa": "MAURICIO"
+            }
+        },
+        "CPV": {
+            "ISO2": "CV",
+            "full": "REPUBLIC OF CAPE VERDE",
+            "displayed_value": {
+                "eng": "CAPE VERDE",
+                "fra": "CAP-VERT",
+                "ita": "CAPO VERDE",
+                "spa": "CABO VERDE"
+            }
+        },
+        "IRN": {
+            "ISO2": "IR",
+            "full": "ISLAMIC REPUBLIC OF IRAN",
+            "displayed_value": {
+                "eng": "IRAN (ISLAMIC REPUBLIC OF)",
+                "fra": "IRAN",
+                "ita": "IRAN",
+                "spa": "IR\u00e1N"
+            }
+        },
+        "VCT": {
+            "ISO2": "VC",
+            "full": "SAINT VINCENT AND THE GRENADINES",
+            "displayed_value": {
+                "eng": "SAINT VINCENT AND THE GRENADINES",
+                "fra": "SAINT-VINCENT-ET-LES-GRENADINES",
+                "ita": "SAINT VINCENT E GRENADINE",
+                "spa": "SAN VICENTE Y LAS GRANADINAS"
+            }
+        },
+        "TTO": {
+            "ISO2": "TT",
+            "full": "REPUBLIC OF TRINIDAD AND TOBAGO",
+            "displayed_value": {
+                "eng": "TRINIDAD AND TOBAGO",
+                "fra": "TRINIT\u00e9-ET-TOBAGO",
+                "ita": "TRINIDAD E TOBAGO",
+                "spa": "TRINIDAD Y TOBAGO"
+            }
+        },
+        "NIU": {
+            "ISO2": "NU",
+            "full": "REPUBLIC OF NIUE",
+            "displayed_value": {
+                "eng": "NIUE"
+            }
+        },
+        "MAR": {
+            "ISO2": "MA",
+            "full": "KINGDOM OF MOROCCO",
+            "displayed_value": {
+                "eng": "MOROCCO",
+                "fra": "MAROC",
+                "ita": "MAROCCO",
+                "spa": "MARRUECOS"
+            }
+        },
+        "DOM": {
+            "ISO2": "DO",
+            "full": "DOMINICAN REPUBLIC",
+            "displayed_value": {
+                "eng": "DOMINICAN REPUBLIC (THE)",
+                "fra": "R\u00e9PUBLIQUE DOMINICAINE",
+                "ita": "REP. DOMINICANA",
+                "spa": "REP\u00faBLICA DOMINICANA"
+            }
+        },
+        "MLI": {
+            "ISO2": "ML",
+            "full": "REPUBLIC OF MALI",
+            "displayed_value": {
+                "eng": "MALI",
+                "fra": "MALI",
+                "ita": "MALI",
+                "spa": "MAL\u00ed"
+            }
+        },
+        "SUR": {
+            "ISO2": "SR",
+            "full": "REPUBLIC OF SURINAME",
+            "displayed_value": {
+                "eng": "SURINAME",
+                "fra": "SURINAME",
+                "ita": "SURINAME",
+                "spa": "SURINAM"
+            }
+        },
+        "SWE": {
+            "ISO2": "SE",
+            "full": "KINGDOM OF SWEDEN",
+            "displayed_value": {
+                "eng": "SWEDEN",
+                "fra": "SU\u00e8DE",
+                "ita": "SVEZIA",
+                "spa": "SUECIA"
+            }
+        },
+        "KNA": {
+            "ISO2": "KN",
+            "full": "SAINT KITTS AND NEVIS",
+            "displayed_value": {
+                "eng": "SAINT KITTS AND NEVIS",
+                "fra": "SAINT-CHRISTOPHE-ET-NI\u00e9V\u00e8S",
+                "ita": "SAINT KITTS E NEVIS",
+                "spa": "SAN CRIST\u00f3BAL Y NIEVES"
+            }
+        },
+        "LBY": {
+            "ISO2": "LY",
+            "full": "SOCIALIST PEOPLE'S LIBYAN ARAB JAMAHIRIYA",
+            "displayed_value": {
+                "eng": "LIBYAN ARAB JAMAHIRIYA (THE)",
+                "fra": "LIBYE",
+                "ita": "LIBIA",
+                "spa": "LIBIA"
+            }
+        },
+        "PNG": {
+            "ISO2": "PG",
+            "full": "PAPUA NEW GUINEA",
+            "displayed_value": {
+                "eng": "PAPUA NEW GUINEA",
+                "fra": "PAPOUASIE-NOUVELLE-GUIN\u00e9E",
+                "ita": "PAPUA NUOVA GUINEA",
+                "spa": "PAP\u00faA NUEVA GUINEA"
+            }
+        },
+        "NLD": {
+            "ISO2": "NL",
+            "full": "KINGDOM OF THE NETHERLANDS",
+            "displayed_value": {
+                "eng": "NETHERLANDS (THE)",
+                "fra": "PAYS-BAS",
+                "ita": "PAESI BASSI",
+                "spa": "PA\u00edSES BAJOS"
+            }
+        },
+        "LBN": {
+            "ISO2": "LB",
+            "full": "LEBANESE REPUBLIC",
+            "displayed_value": {
+                "eng": "LEBANON",
+                "fra": "LIBAN",
+                "ita": "LIBANO",
+                "spa": "L\u00edBANO"
+            }
+        },
+        "PYF": {
+            "ISO2": "PF",
+            "full": "TAHITI",
+            "displayed_value": {
+                "eng": "FRANCE - TAHITI"
+            }
+        },
+        "IRL": {
+            "ISO2": "IE",
+            "full": "IRELAND",
+            "displayed_value": {
+                "eng": "IRELAND",
+                "fra": "IRLANDE (PAYS)",
+                "ita": "IRLANDA",
+                "spa": "IRLANDA"
+            }
+        },
+        "COM": {
+            "ISO2": "KM",
+            "full": "ISLAMIC FEDERAL REPUBLIC OF THE COMOROS",
+            "displayed_value": {
+                "eng": "COMOROS (THE)",
+                "fra": "COMORES (PAYS)",
+                "ita": "COMORE",
+                "spa": "COMORAS"
+            }
+        },
+        "UGA": {
+            "ISO2": "UG",
+            "full": "REPUBLIC OF UGANDA",
+            "displayed_value": {
+                "eng": "UGANDA",
+                "fra": "OUGANDA",
+                "ita": "UGANDA",
+                "spa": "UGANDA"
+            }
+        },
+        "KAZ": {
+            "ISO2": "KZ",
+            "full": "REPUBLIC OF KAZAKHSTAN",
+            "displayed_value": {
+                "eng": "KAZAKHSTAN",
+                "fra": "KAZAKHSTAN",
+                "ita": "KAZAKISTAN",
+                "spa": "KAZAJIST\u00e1N"
+            }
+        },
+        "SVK": {
+            "ISO2": "SK",
+            "full": "SLOVAK REPUBLIC",
+            "displayed_value": {
+                "eng": "SLOVAKIA",
+                "fra": "SLOVAQUIE",
+                "ita": "SLOVACCHIA",
+                "spa": "ESLOVAQUIA"
+            }
+        },
+        "SYC": {
+            "ISO2": "SC",
+            "full": "REPUBLIC OF SEYCHELLES",
+            "displayed_value": {
+                "eng": "SEYCHELLES",
+                "fra": "SEYCHELLES",
+                "ita": "SEYCHELLES",
+                "spa": "SEYCHELLES"
+            }
+        },
+        "CYP": {
+            "ISO2": "CY",
+            "full": "REPUBLIC OF CYPRUS",
+            "displayed_value": {
+                "eng": "CYPRUS",
+                "fra": "CHYPRE (PAYS)",
+                "ita": "CIPRO",
+                "spa": "CHIPRE"
+            }
+        },
+        "BRA": {
+            "ISO2": "BR",
+            "full": "FEDERATIVE REPUBLIC OF BRAZIL",
+            "displayed_value": {
+                "eng": "BRAZIL",
+                "fra": "BR\u00e9SIL",
+                "ita": "BRASILE",
+                "spa": "BRASIL"
+            }
+        },
+        "MMR": {
+            "ISO2": "MM",
+            "full": "UNION OF MYANMAR",
+            "displayed_value": {
+                "eng": "MYANMAR",
+                "fra": "BIRMANIE",
+                "ita": "BIRMANIA",
+                "spa": "BIRMANIA"
+            }
+        },
+        "MEX": {
+            "ISO2": "MX",
+            "full": "UNITED MEXICAN STATES",
+            "displayed_value": {
+                "eng": "MEXICO",
+                "fra": "MEXIQUE",
+                "ita": "MESSICO",
+                "spa": "M\u00e9XICO"
+            }
+        },
+        "TON": {
+            "ISO2": "TO",
+            "full": "KINGDOM OF TONGA",
+            "displayed_value": {
+                "eng": "TONGA",
+                "fra": "TONGA",
+                "ita": "TONGA",
+                "spa": "TONGA"
+            }
+        },
+        "SEN": {
+            "ISO2": "SN",
+            "full": "REPUBLIC OF SENEGAL",
+            "displayed_value": {
+                "eng": "SENEGAL",
+                "fra": "S\u00e9N\u00e9GAL",
+                "ita": "SENEGAL",
+                "spa": "SENEGAL"
+            }
+        },
+        "GHA": {
+            "ISO2": "GH",
+            "full": "REPUBLIC OF GHANA",
+            "displayed_value": {
+                "eng": "GHANA",
+                "fra": "GHANA",
+                "ita": "GHANA",
+                "spa": "GHANA"
+            }
+        },
+        "BTN": {
+            "ISO2": "BT",
+            "full": "KINGDOM OF BHUTAN",
+            "displayed_value": {
+                "eng": "BHUTAN",
+                "fra": "BHOUTAN",
+                "ita": "BHUTAN",
+                "spa": "BUT\u00e1N"
+            }
+        },
+        "URY": {
+            "ISO2": "UY",
+            "full": "EASTERN REPUBLIC OF URUGUAY",
+            "displayed_value": {
+                "eng": "URUGUAY",
+                "fra": "URUGUAY",
+                "ita": "URUGUAY",
+                "spa": "URUGUAY"
+            }
+        },
+        "PHL": {
+            "ISO2": "PH",
+            "full": "REPUBLIC OF THE PHILIPPINES",
+            "displayed_value": {
+                "eng": "PHILIPPINES (THE)",
+                "fra": "PHILIPPINES",
+                "ita": "FILIPPINE",
+                "spa": "FILIPINAS"
+            }
+        },
+        "BIH": {
+            "ISO2": "BA",
+            "full": "REPUBLIC OF BOSNIA AND HERZEGOVINA (1)",
+            "displayed_value": {
+                "eng": "BOSNIA AND HERZEGOVINA",
+                "fra": "BOSNIE-HERZ\u00e9GOVINE",
+                "ita": "BOSNIA ED ERZEGOVINA",
+                "spa": "BOSNIA Y HERZEGOVINA"
+            }
+        },
+        "LTU": {
+            "ISO2": "LT",
+            "full": "REPUBLIC OF LITHUANIA",
+            "displayed_value": {
+                "eng": "LITHUANIA",
+                "fra": "LITUANIE",
+                "ita": "LITUANIA",
+                "spa": "LITUANIA"
+            }
+        },
+        "ETH": {
+            "ISO2": "ET",
+            "full": "FEDERAL DEMOCRATIC REPUBLIC OF ETHIOPIA",
+            "displayed_value": {
+                "eng": "ETHIOPIA",
+                "fra": "\u00c9THIOPIE",
+                "ita": "ETIOPIA",
+                "spa": "ETIOP\u00edA"
+            }
+        },
+        "SLV": {
+            "ISO2": "SV",
+            "full": "REPUBLIC OF EL SALVADOR",
+            "displayed_value": {
+                "eng": "EL SALVADOR",
+                "fra": "SALVADOR",
+                "ita": "EL SALVADOR",
+                "spa": "EL SALVADOR"
+            }
+        },
+        "SAU": {
+            "ISO2": "SA",
+            "full": "KINGDOM OF SAUDI ARABIA",
+            "displayed_value": {
+                "eng": "SAUDI ARABIA",
+                "fra": "ARABIE SAOUDITE",
+                "ita": "ARABIA SAUDITA",
+                "spa": "ARABIA SAUDITA"
+            }
+        },
+        "EST": {
+            "ISO2": "EE",
+            "full": "REPUBLIC OF ESTONIA",
+            "displayed_value": {
+                "eng": "ESTONIA",
+                "fra": "ESTONIE",
+                "ita": "ESTONIA",
+                "spa": "ESTONIA"
+            }
+        },
+        "UZB": {
+            "ISO2": "UZ",
+            "full": "REPUBLIC OF UZBEKISTAN",
+            "displayed_value": {
+                "eng": "UZBEKISTAN",
+                "fra": "OUZB\u00e9KISTAN",
+                "ita": "UZBEKISTAN",
+                "spa": "UZBEKIST\u00e1N"
+            }
+        },
+        "CRI": {
+            "ISO2": "CR",
+            "full": "REPUBLIC OF COSTA RICA",
+            "displayed_value": {
+                "eng": "COSTA RICA",
+                "fra": "COSTA RICA",
+                "ita": "COSTA RICA",
+                "spa": "COSTA RICA"
+            }
+        },
+        "ECU": {
+            "ISO2": "EC",
+            "full": "REPUBLIC OF ECUADOR",
+            "displayed_value": {
+                "eng": "ECUADOR",
+                "fra": "\u00c9QUATEUR (PAYS)",
+                "ita": "ECUADOR",
+                "spa": "ECUADOR"
+            }
+        },
+        "HUN": {
+            "ISO2": "HU",
+            "full": "REPUBLIC OF HUNGARY",
+            "displayed_value": {
+                "eng": "HUNGARY",
+                "fra": "HONGRIE",
+                "ita": "UNGHERIA",
+                "spa": "HUNGR\u00edA"
+            }
+        },
+        "SMR": {
+            "ISO2": "SM",
+            "full": "REPUBLIC OF SAN MARINO",
+            "displayed_value": {
+                "eng": "SAN MARINO",
+                "fra": "SAINT-MARIN",
+                "ita": "SAN MARINO",
+                "spa": "SAN MARINO"
+            }
+        },
+        "MDG": {
+            "ISO2": "MG",
+            "full": "REPUBLIC OF MADAGASCAR",
+            "displayed_value": {
+                "eng": "MADAGASCAR",
+                "fra": "MADAGASCAR",
+                "ita": "MADAGASCAR",
+                "spa": "MADAGASCAR"
+            }
+        },
+        "CHE": {
+            "ISO2": "CH",
+            "full": "SWISS CONFEDERATION",
+            "displayed_value": {
+                "eng": "SWITZERLAND",
+                "fra": "SUISSE",
+                "ita": "SVIZZERA",
+                "spa": "SUIZA"
+            }
+        },
+        "JPN": {
+            "ISO2": "JP",
+            "full": "JAPAN",
+            "displayed_value": {
+                "eng": "JAPAN",
+                "fra": "JAPON",
+                "ita": "GIAPPONE",
+                "spa": "JAP\u00f3N"
+            }
+        },
+        "AND": {
+            "ISO2": "AD",
+            "full": "PRINCIPALITY OF ANDORRA",
+            "displayed_value": {
+                "eng": "ANDORRA",
+                "fra": "ANDORRE",
+                "ita": "ANDORRA",
+                "spa": "ANDORRA"
+            }
+        },
+        "MNG": {
+            "ISO2": "MN",
+            "full": "MONGOLIA",
+            "displayed_value": {
+                "eng": "MONGOLIA",
+                "fra": "MONGOLIE",
+                "ita": "MONGOLIA",
+                "spa": "MONGOLIA"
+            }
+        },
+        "ESH": {
+            "ISO2": "EH",
+            "full": "WESTERN SAHARA",
+            "displayed_value": {
+                "eng": "WESTERN SAHARA"
+            }
+        },
+        "SLE": {
+            "ISO2": "SL",
+            "full": "REPUBLIC OF SIERRA LEONE",
+            "displayed_value": {
+                "eng": "SIERRA LEONE",
+                "fra": "SIERRA LEONE",
+                "ita": "SIERRA LEONE",
+                "spa": "SIERRA LEONA"
+            }
+        },
+        "AGO": {
+            "ISO2": "AO",
+            "full": "REPUBLIC OF ANGOLA",
+            "displayed_value": {
+                "eng": "ANGOLA",
+                "fra": "ANGOLA",
+                "ita": "ANGOLA",
+                "spa": "ANGOLA"
+            }
+        }
+    },
+    "Gender": {
+        "M": {
+            "displayed_value": {
+                "eng": "Male",
+                "fra": "Homme",
+                "spa": "Se\u00f1or"
+            }
+        },
+        "F": {
+            "displayed_value": {
+                "eng": "Female",
+                "fra": "Femme",
+                "spa": "Se\u00f1ora"
+            }
+        },
+        "O": {
+            "displayed_value": {
+                "eng": "Other",
+                "fra": "Autre",
+                "spa": "Otro"
+            }
+        }
+    },
+    "Role": {
+        "relative": {
+            "descr": "",
+            "displayed_value": {
+                "eng": "relative",
+                "fra": "proche",
+                "spa": "familiar"
+            }
+        },
+        "witness": {
+            "descr": "",
+            "displayed_value": {
+                "eng": "witness",
+                "fra": "t\u00e9moin",
+                "spa": "testigo"
+            }
+        },
+        "sought": {
+            "descr": "the police is looking for this person",
+            "displayed_value": {
+                "eng": "sought",
+                "fra": "recherch\u00e9",
+                "spa": "buscado"
+            }
+        },
+        "survivor": {
+            "descr": "",
+            "displayed_value": {
+                "eng": "survivor",
+                "fra": "survivant",
+                "spa": "sobreviviente"
+            }
+        },
+        "informant": {
+            "descr": "",
+            "displayed_value": {
+                "eng": "informant",
+                "fra": "informateur",
+                "spa": "informante"
+            }
+        },
+        "possibly_sought": {
+            "descr": "the police might be looking for this person",
+            "displayed_value": {
+                "eng": "possibly sought",
+                "fra": "possiblement recherch\u00e9",
+                "spa": "posiblemente buscado"
+            }
+        },
+        "deceased": {
+            "descr": "",
+            "displayed_value": {
+                "eng": "deceased",
+                "fra": "d\u00e9c\u00e9d\u00e9",
+                "spa": "fallecido"
+            }
+        }
+    }
+}
