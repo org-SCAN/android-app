@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
+import java.util.UUID;
 
 import netw4ppl.ines.MainActivity;
 
@@ -64,6 +65,11 @@ public class Relation extends JSONObject {
 
     public void setDetails(String details) {
         this.putInfo("detail", details);
+    }
+
+    public void setUUIDRelation() {
+        String uuid = UUID.randomUUID().toString();
+        this.putInfo("relation_application_id", uuid);
     }
 
     public void putInfo(String key, String info) {

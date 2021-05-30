@@ -212,7 +212,7 @@ public class FileUtils {
     }
 
     /**
-     * Load the application ID from a file
+     * Load the application ID from a file anc create if it doesn't already exists.
      *
      * @param context the application context
      * @return a string containing the application id
