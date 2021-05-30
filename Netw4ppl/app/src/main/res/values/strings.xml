@@ -15,7 +15,7 @@
 
     <!-- Sending Option Preferences -->
     <string name="settings_sending_option_title">Sending option</string>
-
+    <string name="show_relations_boolean_key" translatable="false">show_relations_boolean_key</string>
     <string name="settings_sending_option_key" translatable="false">default_sending_option</string>
 
     <!-- Server Preferences -->
