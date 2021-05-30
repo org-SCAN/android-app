@@ -164,7 +164,7 @@
             "required": 3,
             "displayed_value": {
                 "eng": "Embarkation date",
-                "fra": "Data d'embarcation",
+                "fra": "Date d'embarcation",
                 "spa": "Fecha de embarque"
             }
         },
