@@ -15,6 +15,7 @@ import androidx.preference.PreferenceManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import netw4ppl.ines.MainActivity;
 import netw4ppl.ines.ManagePersonsActivity;
@@ -279,7 +280,7 @@ public class SubmitData {
         String file_fields = context.getString(R.string.filename_fields);
 
         String unique_app_id = MainActivity.mConfiguration.getApplicationId();
-        final boolean[] http_success = {false};
+        final boolean[] http_success = {false, false};
         Thread thread = new Thread(new Runnable() {
 
             @Override
@@ -300,7 +301,13 @@ public class SubmitData {
 
                     if (response.code()==200) {
                         http_success[0] = true;
-                        FileUtils.writeFile(data_path+dir_path+file_fields, response_string);
+
+                        // write the new configuration file
+                        http_success[1] = FileUtils.writeFile(data_path+dir_path+file_fields, response_string);
+
+                        // read the new configuration file and set all the objects
+                        JSONObject config_content = FileUtils.loadConfigFromFile(context);
+                        MainActivity.mConfiguration = new Configuration(context, config_content);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -311,7 +318,7 @@ public class SubmitData {
         thread.start();
         thread.join();
 
-        return http_success[0];
+        return http_success[0] && http_success[1];
     }
 
     /**
