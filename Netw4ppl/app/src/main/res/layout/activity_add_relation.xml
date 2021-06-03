@@ -32,12 +32,13 @@
                 android:text="@string/relation_from_indication">
             </TextView>
 
-            <AutoCompleteTextView
+            <netw4ppl.ines.utils.InstantAutoComplete
                 android:id="@+id/add_relation_from"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:completionThreshold="1"
                 android:hint="Phil">
-            </AutoCompleteTextView>
+            </netw4ppl.ines.utils.InstantAutoComplete>
         </LinearLayout>
 
         <!-- Type de relation -->
@@ -78,12 +79,13 @@
                 android:text="@string/relation_to_indication">
             </TextView>
 
-            <AutoCompleteTextView
+            <netw4ppl.ines.utils.InstantAutoComplete
                 android:id="@+id/add_relation_to"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:completionThreshold="1"
                 android:hint="Maryse">
-            </AutoCompleteTextView>
+            </netw4ppl.ines.utils.InstantAutoComplete>
         </LinearLayout>
     </LinearLayout>
 

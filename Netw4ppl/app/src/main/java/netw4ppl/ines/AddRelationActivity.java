@@ -129,6 +129,17 @@ public class AddRelationActivity extends AppCompatActivity {
         mSpinnerRelationType = findViewById(R.id.add_relation_type);
         mEditTextRelationComments = findViewById(R.id.add_relation_comments);
 
+        /* To have the dropdown everytime we click on the objects */
+        mAutoTextViewRelationFrom.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus)
+                mAutoTextViewRelationFrom.showDropDown();
+        });
+
+        mAutoTextViewRelationTo.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus)
+                mAutoTextViewRelationTo.showDropDown();
+        });
+
         /*
         * Associer au spinner de type de relations les objets de types de relations
         * Associer aux AutoCompleteTextView la liste des personnes présentent dans l'application
