@@ -33,8 +33,14 @@ public class ManageRelationsActivity extends AppCompatActivity {
     ListView mListView;
     SearchView mSearchBar;
     public static ArrayList<Relation> array_relations = new ArrayList<Relation>();
-    public static RelationListAdapter mAdapter;
+    public static RelationListAdapter mAdapter; // TODO changer le static ici car c'est une memory leak
 
+    /**
+     * Function to update the name of a person in all the relations where this person is present in. Currently called after the
+     * edition of a person.
+     *
+     * @param person a Person object
+     */
     public static void updateRelations(Person person) {
         // parcourir toutes les relations
         for (int i=0; i<ManageRelationsActivity.array_relations.size(); i++) {
@@ -181,6 +187,10 @@ public class ManageRelationsActivity extends AppCompatActivity {
         updateAdapter();
     }
 
+    /**
+     * Function to update the adapter. During an onResume of the activity, this method will be called in
+     * case there have been any changes in the adapter (add, modification or deletion of a relation)
+     */
     public static void updateAdapter(){
         mAdapter.notifyDataSetChanged();
     }
