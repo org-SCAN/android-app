@@ -44,16 +44,16 @@ public class Relation extends JSONObject {
     }
 
     /**
-     * Sets the fullname of the from person
-     * @param full_name String of the from person's fullname
+     * Sets the fullname of the From person
+     * @param full_name String of the From person's fullname
      */
     public void setFromFullname(String full_name) {
         from_person_name = full_name;
     }
 
     /**
-     * Sets the fullname of the to person
-     * @param full_name String of the to person's fullname
+     * Sets the fullname of the To person
+     * @param full_name String of the To person's fullname
      */
     public void setToFullname(String full_name) {
         to_person_name = full_name;
@@ -68,8 +68,8 @@ public class Relation extends JSONObject {
     }
 
     /**
-     * Sets the to informations of a relation using a Person
-     * @param person to Person used to set the relation
+     * Sets the To informations of a relation using a Person
+     * @param person To Person used to set the relation
      */
     public void setPersonTo(Person person) {
         this.putInfo("to_unique_id", person.getInfoByKey("unique_id"));
@@ -77,16 +77,16 @@ public class Relation extends JSONObject {
     }
 
     /**
-     * Sets the to informations of a relation using a String
-     * @param unique_id String containing the unique_id of the to Person
+     * Sets the To informations of a relation using a String
+     * @param unique_id String containing the unique_id of the To Person
      */
     public void setPersonTo(String unique_id) {
         this.putInfo("to_unique_id", unique_id);
     }
 
     /**
-     * Sets the from informations of a relation using a Person
-     * @param person from Person used to set the relation
+     * Sets the From informations of a relation using a Person
+     * @param person From Person used to set the relation
      */
     public void setPersonFrom(Person person) {
         this.putInfo("from_unique_id", person.getInfoByKey("unique_id"));
@@ -94,8 +94,8 @@ public class Relation extends JSONObject {
     }
 
     /**
-     * Sets the from informations of a relation using a String
-     * @param unique_id String containing the unique_id of the from Person
+     * Sets the From informations of a relation using a String
+     * @param unique_id String containing the unique_id of the From Person
      */
     public void setPersonFrom(String unique_id) {
         this.putInfo("from_unique_id", unique_id);
@@ -162,7 +162,7 @@ public class Relation extends JSONObject {
     }
 
     /**
-     * Tests if a Person is already from or to of the Relation we use
+     * Tests if a Person is already From or To of the Relation we use
      * @param p Person to be tested
      * @return a boolean telling if the Person is already contained in the Relation, true if yes, false if not
      */
@@ -174,43 +174,83 @@ public class Relation extends JSONObject {
         return this.getFrom().equals(person) || this.getTo().equals(person);
     }
 
+    /**
+     *Returns the unique_id of the From person of the Relation
+     * @return a String corresponding to the unique_id of the From Person of the Relation
+     */
     public String getFromID() {
         return this.getInfoByKey("from_unique_id");
     }
 
+    /**
+     *Returns the unique_id of the To person of the Relation
+     * @return a String corresponding to the unique_id of the To Person of the Relation
+     */
     public String getToID() {
         return this.getInfoByKey("to_unique_id");
     }
 
+    /**
+     * Returns the fullname of the From Person of the Relation
+     * @return a String corresponding to the fullname of the From Person of the Relation
+     */
     public String getFromFullname() {
         return from_person_name;
     }
 
+    /**
+     * Returns the fullname of the To Person of the Relation
+     * @return a String corresponding to the fullname of the To Person of the Relation
+     */
     public String getToFullname() {
         return to_person_name;
     }
 
+    /**
+     * Returns the unique_id and the fullname of the From Person of the Relation
+     * @return a String with the format "unique_id - fullname" corresponding to the From Person of the Relation
+     */
     public String getFrom() {
-        // aller récupérer le nom de la personne dans la liste des personnes
         return getFromID() + " - " + getFromFullname();
     }
 
+    /**
+     * Returns the unique_id and the fullname of the To Person of the Relation
+     * @return a String with the format "unique_id - fullname" corresponding to the TO Person of the Relation
+     */
     public String getTo() {
         return getToID() + " - " + getToFullname();
     }
 
+    /**
+     * Returns the details of the Relation
+     * @return a String corresponding to the details of a Relation
+     */
     public String getDetails() {
         return (this.getInfoByKey("detail"));
     }
 
+    /**
+     * Returns the RelationType of the Relation
+     * @return a String corresponding to the RelationType of a Relation
+     * Warning : it only returns the code of the RelationType
+     */
     public String getRelationType() {
         return (this.getInfoByKey("relation"));
     }
 
+    /**
+     * Returns the RelationType of the Relation
+     * @return a String corresponding to the RelationType of a Relation
+     * This method returns the full name of the RelationType
+     */
     public String getRelationTypeFull() {
         return MainActivity.mConfiguration.getElementFromTable("Relations", getRelationType());
     }
 
+    /**
+     * Sets the date at which the Relation was created and adds it to the Relation informations
+     */
     public void setCreationDate(){
         Calendar calendar = Calendar.getInstance();
         // ajout du champ date indispensable pour la database
@@ -220,6 +260,10 @@ public class Relation extends JSONObject {
         this.putInfo("date", date_creation);
     }
 
+    /**
+     * Sets the date at which the Relation was modified and adds it to the Relation informations
+     * This date is different from the creation date
+     */
     public void setUpdateDate() {
         Calendar calendar = Calendar.getInstance();
 
@@ -234,10 +278,20 @@ public class Relation extends JSONObject {
         this.putInfo("date_update", date_update);
     }
 
+    /**
+     * Adds the application_id to the informations of a Relation for information tracking purposes
+     * @param app_id String corresponding to the unique application ID of the device
+     */
     public void setApplicationID(String app_id) {
         this.putInfo("application_id", app_id);
     }
 
+    /**
+     * Associates the unique_ids of the Persons of a Relation to the corresponding names
+     * Sets from_person_name and to_person_name if the unique_ids correspond
+     * @param array_persons ArrayList<Person> containing the list of the existing Persons
+     *                      These persons are compared to the ones of the Relation in order to match names and unique_ids
+     */
     public void associateIDWithNames(ArrayList<Person> array_persons) {
         // on a les ids, on a besoin des noms maintenant
         boolean from_found = false;
