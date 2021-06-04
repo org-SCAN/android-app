@@ -21,6 +21,9 @@ import netw4ppl.ines.MainActivity;
 import netw4ppl.ines.ManagePersonsActivity;
 import netw4ppl.ines.R;
 
+/**
+ * Class to create a ListAdapter adapted to display the details of a person.
+ */
 public class PersonDetailsListAdapter extends ArrayAdapter<Field> {
 
     private final Context mContext;
@@ -29,13 +32,19 @@ public class PersonDetailsListAdapter extends ArrayAdapter<Field> {
 
     /**
      * A simple ViewHolder containing a title (of a field) and the text associated to it in the person data
-     *
      */
     private static class ViewHolder {
         com.google.android.material.textfield.TextInputLayout mTitle;
         com.google.android.material.textfield.TextInputEditText mText;
     }
 
+    /**
+     * Constructor of the class
+     * @param context the application context
+     * @param resource
+     * @param fields an ArrayList of Field objects
+     * @param index an int corresponding to the index of the person in the ManagePersonsActivity.array_persons object
+     */
     public PersonDetailsListAdapter(Context context, int resource, ArrayList<Field> fields, int index) {
         super(context, resource, fields);
         mContext = context;
@@ -44,6 +53,14 @@ public class PersonDetailsListAdapter extends ArrayAdapter<Field> {
     }
 
 
+    /**
+     * Get the views to display the details of a person and set this values of the Labels.
+     *
+     * @param position the field index
+     * @param convertView a View
+     * @param parent a ViewGroup
+     * @return
+     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
