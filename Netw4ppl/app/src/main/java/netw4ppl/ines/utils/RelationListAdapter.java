@@ -18,6 +18,9 @@ import java.util.Iterator;
 
 import netw4ppl.ines.R;
 
+/**
+ * A class to display the important informations about a relation.
+ */
 public class RelationListAdapter extends ArrayAdapter<Relation> {
 
     private Context mContext;
@@ -26,6 +29,9 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
     private ArrayList<Relation> mObjects;
     private ArrayList<Relation> mObjects_tmp;
 
+    /**
+     * A basic ViewHolder to put informations like the two fullnames and Unique IDs and the relation type
+     */
     private static class ViewHolder {
         TextView mFullName1;
         TextView mFullName2;
@@ -34,6 +40,13 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
         TextView mRelationType;
     }
 
+    /**
+     * The class constructor.
+     *
+     * @param context the application context
+     * @param resource the layout id
+     * @param objects a ArrayList of Relation objects
+     */
     public RelationListAdapter(Context context, int resource, ArrayList<Relation> objects) {
         super(context, resource, objects);
         mContext = context;
@@ -42,6 +55,13 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
         mObjects_tmp = objects;
     }
 
+    /**
+     * Function to perform the filtering of the relations when the search bar is used. If you want to change
+     * the search criterias, you should modify the code of the <b>performFiltering(CharSequence constraint)</b>
+     * function.
+     *
+     * @return a Filter object
+     */
     @NonNull
     @Override
     public Filter getFilter() {
@@ -55,7 +75,6 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
                     int length = mObjects.size();
                     int i=0;
                     boolean has_it;
-                    String key;
                     String query = constraint.toString().toLowerCase();
 
                     while (i<length) {
@@ -106,6 +125,9 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
         };
     }
 
+    /**
+     * Notify the adapter if the content of the adapter changed. It is the case during the filtering.
+     */
     @Override
     public void notifyDataSetChanged() {
         super.notifyDataSetChanged();
@@ -149,16 +171,33 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
         return convertView;
     }
 
+    /**
+     * Get the number of elements in the adapter.
+     *
+     * @return an int
+     */
     @Override
     public int getCount() {
         return mObjects_tmp.size();
     }
 
+    /**
+     * Get the item in the dapter at the position given
+     *
+     * @param position an int
+     * @return a Person
+     */
     @Override
     public Relation getItem(int position) {
         return mObjects_tmp.get(position);
     }
 
+    /**
+     * Get the item id (aka its position in the array)
+     *
+     * @param position an int
+     * @return a long
+     */
     @Override
     public long getItemId(int position) {
         return position;
