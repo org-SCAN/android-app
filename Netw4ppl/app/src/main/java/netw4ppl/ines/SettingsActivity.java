@@ -52,7 +52,6 @@ public class SettingsActivity extends AppCompatActivity {
         Log.d("life-cycle", "Settings onStart()");
     }
 
-
     @Override
     protected void onStop() {
         super.onStop();
@@ -166,6 +165,12 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Recursive function to set all the inputs on a single line.
+     *
+     * @param screen a PreferenceGroup object
+     * @param noMultilineAllowed
+     */
     public static void recursiveSetSingleLine(PreferenceGroup screen, EditTextPreference.OnBindEditTextListener noMultilineAllowed) {
         // for every Preference in the PreferenceGroup
         for (int i = 0; i < screen.getPreferenceCount(); i++) {
@@ -180,6 +185,12 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Function to display a toast based on a context and a text
+     *
+     * @param contextA the application context
+     * @param textToast the text to be displayed in the toast
+     */
     public static void displayToast(Context contextA, CharSequence textToast) {
         Context context = contextA;
         CharSequence text = textToast;
