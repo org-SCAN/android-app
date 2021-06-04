@@ -35,6 +35,11 @@ import netw4ppl.ines.utils.PersonDetailsRelationFromAdapter;
 import netw4ppl.ines.utils.PersonDetailsRelationToAdapter;
 import netw4ppl.ines.utils.Relation;
 
+/**
+ * Class used to display the details about a Person. For the moment it is displaying the relations where this
+ * person if the "From" (on the right of the screen) and the relations where this person if the "To" (on the left of the screen).
+ * n the middle of the screen are displayed the details like the name, nationality etc.
+ */
 public class DisplayDetailsPersonActivity extends AppCompatActivity {
 
     TextView mTextViewFullnameTitle;
