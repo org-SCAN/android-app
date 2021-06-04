@@ -40,7 +40,7 @@ import java.util.concurrent.TimeUnit;
 public class SubmitData {
 
     /**
-     * Manage the sending of the files. Read the settings options and determine whether
+     * Manages the sending of the files. Reads the settings options and determine whether
      * the selected option is by email or to the server.
      * Verify the validity of the settings
      *
@@ -53,20 +53,20 @@ public class SubmitData {
         String file_name_relations = context.getString(R.string.filename_relations);
         String file_name_persons = context.getString(R.string.filename_persons);
 
-        // récupère l'option d'envoi sélectionnée par l'utilisateurs dans les paramètres
+        // gets the sending option selected by the user in the parameters
         String sending_option = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_sending_option_key), null);
 
         if (sending_option != null) {
 
             if (sending_option.equals("send_by_email")) {
-                // REMARQUE : on ne peut pas certifier/vérifier que l'email a bien été envoyé malheureusement
+                // REMARK : it is impossible to know whether the mail was successfully sent or not as it depends of the used mailing application
                 sendByEmail(context, new File(context.getFilesDir(), filePath).getPath());
             } else {
                 // TODO si on supprime la valeur ça ne marche pas
-                // si pas les infos du serveur, rediriger vers les settings
+                // if the server informations are empty, redirect to the settings activity
                 String ip_port = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_server_ip_port_key), "");
                 if (ip_port.equals("")) {
-                    // Si aucune adresse renseignée => affiche une pop-up et propose de rediriger vers les settings
+                    // If no address was given => displays a pop-up and proposes to go to the settings activity
                     new AlertDialog.Builder(context)
                             .setTitle(R.string.main_submit_ip_port_fail_title)
                             .setMessage(R.string.main_submit_ip_port_fail_msg)
@@ -95,14 +95,17 @@ public class SubmitData {
                     return;
                 }
 
+                //Creation of an http client
                 OkHttpClient client = new OkHttpClient.Builder()
                         .connectTimeout(1, TimeUnit.SECONDS)
                         .build();
 
+                //Submissions
                 boolean submit_persons = sendToServer(context, context.getFilesDir().getPath() + dir_name + file_name_persons, ip_port, token_server, client, "manage_refugees");
                 boolean submit_relations = sendToServer(context, context.getFilesDir().getPath() + dir_name + file_name_relations, ip_port, token_server, client, "links");
                 boolean submit_result = (submit_persons && submit_relations);
 
+                //Downloads
                 boolean download_config = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getResources().getString(R.string.settings_server_maj_auto_key), false);
                 boolean get_success = false;
 
@@ -128,8 +131,15 @@ public class SubmitData {
         }
     }
 
-    
+    /**
+     * Manages the downloading of files.
+     *
+     * @param context context of the activity
+     * @throws IOException
+     * @throws InterruptedException
+     */
   public static void manageGet(Context context) throws IOException, InterruptedException {
+      //gets and creates all the http objects needed
         String token_server = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_server_token_key), "");
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(100, TimeUnit.MILLISECONDS)
@@ -204,22 +214,6 @@ public class SubmitData {
      */
     public static boolean sendToServer(Context context, String filePath, String server_url, String token_server, OkHttpClient http_client, String target) throws InterruptedException, JSONException, IOException {
 
-//        String data_path = context.getFilesDir().getPath();
-//        String dir_path = context.getString(R.string.config_files);
-//        String file_id = context.getString(R.string.unique_id_filename);
-//
-//        //Get the unique application ID
-//        String android_id_file_path = data_path+dir_path+file_id;
-//        String unique_app_id;
-//
-//        if (FileUtils.fileExists(android_id_file_path)){
-//            unique_app_id = FileUtils.readFile(android_id_file_path);
-//        }else{
-//            unique_app_id = UUID.randomUUID().toString();
-//            FileUtils.writeFile(android_id_file_path, unique_app_id);
-//        }
-
-        // la lecture et la création en cas de non existence est faite au moment du démarrage de l'application
         String unique_app_id = MainActivity.mConfiguration.getApplicationId();
 
         String data_to_send = FileUtils.readFile(filePath);
@@ -270,8 +264,6 @@ public class SubmitData {
      * @param token_server individual token of the user
      * @param http_client http client of OkHttp
      * @return boolean which tells us if the reception was a success or not
-     *
-     * Appel de la fonction : boolean get_info = getFromServer(context, ip_port, token_server, client);
      */
 
     public static boolean getFromServer(Context context, String server_url, String token_server, OkHttpClient http_client) throws IOException, InterruptedException {
