@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['saveids_15',['saveIds',['../classnetw4ppl_1_1ines_1_1_add_person_activity.html#ae565a7e4087176eaf482f6ededed0302',1,'netw4ppl::ines::AddPersonActivity']]],
-  ['settingsactivity_16',['SettingsActivity',['../classnetw4ppl_1_1ines_1_1_settings_activity.html',1,'netw4ppl::ines']]]
+  ['haselementintable_46',['hasElementInTable',['../classnetw4ppl_1_1ines_1_1utils_1_1_configuration.html#a33cd53086ed70e6c684b046b894d8a54',1,'netw4ppl::ines::utils::Configuration']]]
 ];

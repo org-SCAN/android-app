@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Netw4ppl
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">1.0.3</span>
    </div>
    <div id="projectbrief">Application to allow the International Comitee of the Red Cross and its collaborators to collect informations from persons.</div>
   </td>
@@ -85,24 +85,22 @@ Inheritance diagram for netw4ppl.ines.ManageRelationsActivity:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a4c98f3c2eacc5fef22984f23a08cdb96"><td class="memItemLeft" align="right" valign="top"><a id="a4c98f3c2eacc5fef22984f23a08cdb96"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>updateRelations</b> (Person person)</td></tr>
+<tr class="memitem:a4c98f3c2eacc5fef22984f23a08cdb96"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetw4ppl_1_1ines_1_1_manage_relations_activity.html#a4c98f3c2eacc5fef22984f23a08cdb96">updateRelations</a> (<a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_person.html">Person</a> person)</td></tr>
 <tr class="separator:a4c98f3c2eacc5fef22984f23a08cdb96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2135740f65821e1fd759a3aa436a4f02"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetw4ppl_1_1ines_1_1_manage_relations_activity.html#a2135740f65821e1fd759a3aa436a4f02">readRelationsFile</a> (Context context)  throws IOException, JSONException </td></tr>
 <tr class="separator:a2135740f65821e1fd759a3aa436a4f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45e12c67cfdbc87058f64e3e0b19a1dc"><td class="memItemLeft" align="right" valign="top">static String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetw4ppl_1_1ines_1_1_manage_relations_activity.html#a45e12c67cfdbc87058f64e3e0b19a1dc">formatterJsonFile</a> ()</td></tr>
 <tr class="separator:a45e12c67cfdbc87058f64e3e0b19a1dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0daee7008caa443d93b40d8340ef4a5f"><td class="memItemLeft" align="right" valign="top"><a id="a0daee7008caa443d93b40d8340ef4a5f"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>updateAdapter</b> ()</td></tr>
+<tr class="memitem:a0daee7008caa443d93b40d8340ef4a5f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetw4ppl_1_1ines_1_1_manage_relations_activity.html#a0daee7008caa443d93b40d8340ef4a5f">updateAdapter</a> ()</td></tr>
 <tr class="separator:a0daee7008caa443d93b40d8340ef4a5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a44c5078fd0ef089e9e40d78504813739"><td class="memItemLeft" align="right" valign="top"><a id="a44c5078fd0ef089e9e40d78504813739"></a>
-static ArrayList&lt; Relation &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>array_relations</b> = new ArrayList&lt;Relation&gt;()</td></tr>
+static ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_relation.html">Relation</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>array_relations</b> = new ArrayList&lt;<a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_relation.html">Relation</a>&gt;()</td></tr>
 <tr class="separator:a44c5078fd0ef089e9e40d78504813739"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bc619ca4ebeddf7e2c7614644180588"><td class="memItemLeft" align="right" valign="top"><a id="a2bc619ca4ebeddf7e2c7614644180588"></a>
-static RelationListAdapter&#160;</td><td class="memItemRight" valign="bottom"><b>mAdapter</b></td></tr>
+static <a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_relation_list_adapter.html">RelationListAdapter</a>&#160;</td><td class="memItemRight" valign="bottom"><b>mAdapter</b></td></tr>
 <tr class="separator:a2bc619ca4ebeddf7e2c7614644180588"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
@@ -169,6 +167,65 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>onResume</b> ()</td><
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">context</td><td>the context of the current activity </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0daee7008caa443d93b40d8340ef4a5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0daee7008caa443d93b40d8340ef4a5f">&#9670;&nbsp;</a></span>updateAdapter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void netw4ppl.ines.ManageRelationsActivity.updateAdapter </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Function to update the adapter. During an onResume of the activity, this method will be called in case there have been any changes in the adapter (add, modification or deletion of a relation) </p>
+
+</div>
+</div>
+<a id="a4c98f3c2eacc5fef22984f23a08cdb96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c98f3c2eacc5fef22984f23a08cdb96">&#9670;&nbsp;</a></span>updateRelations()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void netw4ppl.ines.ManageRelationsActivity.updateRelations </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_person.html">Person</a>&#160;</td>
+          <td class="paramname"><em>person</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Function to update the name of a person in all the relations where this person is present in. Currently called after the edition of a person.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">person</td><td>a Person object </td></tr>
   </table>
   </dd>
 </dl>

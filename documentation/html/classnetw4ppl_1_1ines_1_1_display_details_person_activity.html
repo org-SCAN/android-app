@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Netw4ppl
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">1.0.3</span>
    </div>
    <div id="projectbrief">Application to allow the International Comitee of the Red Cross and its collaborators to collect informations from persons.</div>
   </td>
@@ -85,8 +85,7 @@ Inheritance diagram for netw4ppl.ines.DisplayDetailsPersonActivity:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3a374da481fe38e1560ccd967d9da3eb"><td class="memItemLeft" align="right" valign="top"><a id="a3a374da481fe38e1560ccd967d9da3eb"></a>
-boolean&#160;</td><td class="memItemRight" valign="bottom"><b>deleteAssociatedRelations</b> (Person p)</td></tr>
+<tr class="memitem:a3a374da481fe38e1560ccd967d9da3eb"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetw4ppl_1_1ines_1_1_display_details_person_activity.html#a3a374da481fe38e1560ccd967d9da3eb">deleteAssociatedRelations</a> (<a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_person.html">Person</a> p)</td></tr>
 <tr class="separator:a3a374da481fe38e1560ccd967d9da3eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -110,6 +109,43 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>onSaveInstanceState</
 void&#160;</td><td class="memItemRight" valign="bottom"><b>onRestoreInstanceState</b> (@NonNull Bundle savedInstanceState)</td></tr>
 <tr class="separator:a39d725c4c7788bd4b3f2818cd13bca58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class used to display the details about a Person. For the moment it is displaying the relations where this person if the "From" (on the right of the screen) and the relations where this person if the "To" (on the left of the screen). n the middle of the screen are displayed the details like the name, nationality etc. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a3a374da481fe38e1560ccd967d9da3eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a374da481fe38e1560ccd967d9da3eb">&#9670;&nbsp;</a></span>deleteAssociatedRelations()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean netw4ppl.ines.DisplayDetailsPersonActivity.deleteAssociatedRelations </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_person.html">Person</a>&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Function used to delete the relations where the person was present in. Used only when we delete a person.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>a Person object </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a boolean. true if the relations were successfully deleted and saved </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Netw4ppl/app/src/main/java/netw4ppl/ines/DisplayDetailsPersonActivity.java</li>
 </ul>

@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Netw4ppl
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">1.0.3</span>
    </div>
    <div id="projectbrief">Application to allow the International Comitee of the Red Cross and its collaborators to collect informations from persons.</div>
   </td>
@@ -88,15 +88,14 @@ Inheritance diagram for netw4ppl.ines.AddPersonActivity:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a3a748a4973cb20db28e03d8c14f6412c"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetw4ppl_1_1ines_1_1_add_person_activity.html#a3a748a4973cb20db28e03d8c14f6412c">verificationInputPerson</a> ()</td></tr>
 <tr class="separator:a3a748a4973cb20db28e03d8c14f6412c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae565a7e4087176eaf482f6ededed0302"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetw4ppl_1_1ines_1_1_add_person_activity.html#ae565a7e4087176eaf482f6ededed0302">saveIds</a> (Context context, Person person)</td></tr>
+<tr class="memitem:ae565a7e4087176eaf482f6ededed0302"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetw4ppl_1_1ines_1_1_add_person_activity.html#ae565a7e4087176eaf482f6ededed0302">saveIds</a> (Context context, <a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_person.html">Person</a> person)</td></tr>
 <tr class="separator:ae565a7e4087176eaf482f6ededed0302"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:acec4f2f1a4de80fb5c7997192acbc4f8"><td class="memItemLeft" align="right" valign="top">static String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetw4ppl_1_1ines_1_1_add_person_activity.html#acec4f2f1a4de80fb5c7997192acbc4f8">getDefaultKey</a> ()</td></tr>
 <tr class="separator:acec4f2f1a4de80fb5c7997192acbc4f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af032d5e5d1ea5e8ea9db70e8a3fe1136"><td class="memItemLeft" align="right" valign="top"><a id="af032d5e5d1ea5e8ea9db70e8a3fe1136"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>setDefaultKey</b> (String tricode)</td></tr>
+<tr class="memitem:af032d5e5d1ea5e8ea9db70e8a3fe1136"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetw4ppl_1_1ines_1_1_add_person_activity.html#af032d5e5d1ea5e8ea9db70e8a3fe1136">setDefaultKey</a> (String tricode)</td></tr>
 <tr class="separator:af032d5e5d1ea5e8ea9db70e8a3fe1136"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28e172448478944448044c8910560168"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetw4ppl_1_1ines_1_1_add_person_activity.html#a28e172448478944448044c8910560168">getNextId</a> (String key)</td></tr>
 <tr class="separator:a28e172448478944448044c8910560168"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -107,7 +106,7 @@ Static Public Attributes</h2></td></tr>
 static JSONObject&#160;</td><td class="memItemRight" valign="bottom"><b>json_ids</b> = new JSONObject()</td></tr>
 <tr class="separator:aa221205cb3fd8d27e874764dc6193cd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a680cc2a8167bb12c845b6f0defb1d810"><td class="memItemLeft" align="right" valign="top"><a id="a680cc2a8167bb12c845b6f0defb1d810"></a>
-static Person&#160;</td><td class="memItemRight" valign="bottom"><b>person</b></td></tr>
+static <a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_person.html">Person</a>&#160;</td><td class="memItemRight" valign="bottom"><b>person</b></td></tr>
 <tr class="separator:a680cc2a8167bb12c845b6f0defb1d810"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
@@ -205,7 +204,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>onRestoreInstanceStat
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Person&#160;</td>
+          <td class="paramtype"><a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_person.html">Person</a>&#160;</td>
           <td class="paramname"><em>person</em>&#160;</td>
         </tr>
         <tr>
@@ -229,6 +228,39 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>onRestoreInstanceStat
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a boolean to determine whether the file was successfully saved or not </dd></dl>
+
+</div>
+</div>
+<a id="af032d5e5d1ea5e8ea9db70e8a3fe1136"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af032d5e5d1ea5e8ea9db70e8a3fe1136">&#9670;&nbsp;</a></span>setDefaultKey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void netw4ppl.ines.AddPersonActivity.setDefaultKey </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>tricode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Function to set the default key for the "unique ids".</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tricode</td><td>a String composed of three letters </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

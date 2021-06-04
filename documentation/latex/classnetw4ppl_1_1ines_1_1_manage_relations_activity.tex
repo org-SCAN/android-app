@@ -9,24 +9,22 @@ Inheritance diagram for netw4ppl.\+ines.\+Manage\+Relations\+Activity\+:\begin{f
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a4c98f3c2eacc5fef22984f23a08cdb96}\label{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a4c98f3c2eacc5fef22984f23a08cdb96}} 
-static void {\bfseries update\+Relations} (Person person)
+static void \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a4c98f3c2eacc5fef22984f23a08cdb96}{update\+Relations}} (\mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_person}{Person}} person)
 \item 
 static void \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a2135740f65821e1fd759a3aa436a4f02}{read\+Relations\+File}} (Context context)  throws IOException, JSONException 
 \item 
 static String \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a45e12c67cfdbc87058f64e3e0b19a1dc}{formatter\+Json\+File}} ()
 \item 
-\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a0daee7008caa443d93b40d8340ef4a5f}\label{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a0daee7008caa443d93b40d8340ef4a5f}} 
-static void {\bfseries update\+Adapter} ()
+static void \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a0daee7008caa443d93b40d8340ef4a5f}{update\+Adapter}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a44c5078fd0ef089e9e40d78504813739}\label{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a44c5078fd0ef089e9e40d78504813739}} 
-static Array\+List$<$ Relation $>$ {\bfseries array\+\_\+relations} = new Array\+List$<$Relation$>$()
+static Array\+List$<$ \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_relation}{Relation}} $>$ {\bfseries array\+\_\+relations} = new Array\+List$<$\mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_relation}{Relation}}$>$()
 \item 
 \mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a2bc619ca4ebeddf7e2c7614644180588}\label{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a2bc619ca4ebeddf7e2c7614644180588}} 
-static Relation\+List\+Adapter {\bfseries m\+Adapter}
+static \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_relation_list_adapter}{Relation\+List\+Adapter}} {\bfseries m\+Adapter}
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -62,6 +60,25 @@ Read the Relations File associated with this application. The path is determined
 
 \begin{DoxyParams}{Parameters}
 {\em context} & the context of the current activity \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a0daee7008caa443d93b40d8340ef4a5f}\label{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a0daee7008caa443d93b40d8340ef4a5f}} 
+\index{netw4ppl.ines.ManageRelationsActivity@{netw4ppl.ines.ManageRelationsActivity}!updateAdapter@{updateAdapter}}
+\index{updateAdapter@{updateAdapter}!netw4ppl.ines.ManageRelationsActivity@{netw4ppl.ines.ManageRelationsActivity}}
+\doxysubsubsection{\texorpdfstring{updateAdapter()}{updateAdapter()}}
+{\footnotesize\ttfamily static void netw4ppl.\+ines.\+Manage\+Relations\+Activity.\+update\+Adapter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Function to update the adapter. During an on\+Resume of the activity, this method will be called in case there have been any changes in the adapter (add, modification or deletion of a relation) \mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a4c98f3c2eacc5fef22984f23a08cdb96}\label{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a4c98f3c2eacc5fef22984f23a08cdb96}} 
+\index{netw4ppl.ines.ManageRelationsActivity@{netw4ppl.ines.ManageRelationsActivity}!updateRelations@{updateRelations}}
+\index{updateRelations@{updateRelations}!netw4ppl.ines.ManageRelationsActivity@{netw4ppl.ines.ManageRelationsActivity}}
+\doxysubsubsection{\texorpdfstring{updateRelations()}{updateRelations()}}
+{\footnotesize\ttfamily static void netw4ppl.\+ines.\+Manage\+Relations\+Activity.\+update\+Relations (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_person}{Person}}}]{person }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Function to update the name of a person in all the relations where this person is present in. Currently called after the edition of a person.
+
+
+\begin{DoxyParams}{Parameters}
+{\em person} & a Person object \\
 \hline
 \end{DoxyParams}
 

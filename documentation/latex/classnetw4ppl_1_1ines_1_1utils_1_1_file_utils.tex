@@ -1,0 +1,306 @@
+\hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils}{}\doxysection{netw4ppl.\+ines.\+utils.\+File\+Utils Class Reference}
+\label{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils}\index{netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static boolean \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a36128a95a9be40ce5ca3be03d9125a17}{create\+File}} (String path)
+\item 
+static boolean \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_adf2e3d07722da67e934a522aa8da7070}{create\+Files}} (String path, String\mbox{[}$\,$\mbox{]} filenames)
+\item 
+static boolean \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a6dacfea9755bcfe03b4dff7651d6bcda}{create\+Directory}} (String path)
+\item 
+static boolean \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a5f0f9fba13bb30496aa51ea47fc08c86}{directory\+Exists}} (String path)
+\item 
+static boolean \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a262f1abc93a4091cd104b4d953973ed0}{file\+Exists}} (String path)
+\item 
+static boolean \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a1f0aa37b0535d343b6591851cf1c0a56}{write\+File}} (String path, String content)
+\item 
+static String \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a93166925da21ebeca0d21c662d9941a6}{read\+File}} (String path)  throws IOException 
+\item 
+static String \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_add9253223ad6b9a10af3709933569740}{read\+File\+Input\+Stream}} (Input\+Stream is)  throws IOException 
+\item 
+static boolean \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a3e6d70748c5c8661b0f8fa6e5a48d02a}{delete\+File}} (String path)
+\item 
+static boolean \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_affc2f584bd632cd4816c1348ce1ca7d8}{clear\+Directory}} (String directory\+\_\+path)
+\item 
+static String \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_af27fc617e72353264982b550834193fd}{load\+Ids\+From\+File}} (Context context)  throws IOException 
+\item 
+static String \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a35f67202148822992b697974c57f3fab}{load\+Application\+IDFrom\+File}} (Context context)  throws IOException 
+\item 
+static boolean \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a69d1ff33a8f80c5134f585554518c965}{save\+Ids\+To\+File}} (Context context, String content)
+\item 
+static boolean \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a836e16f232f122d5db8657828c371416}{save\+Persons\+To\+File}} (Context context, String content)
+\item 
+static boolean \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a6e73527680c499f7454c624e382f7e2f}{save\+Relations\+To\+File}} (Context context, String content)
+\item 
+static JSONObject \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_aaf3424c78ffa9395748e9d2e2152884b}{load\+Config\+From\+File}} (Context context)  throws IOException 
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_affc2f584bd632cd4816c1348ce1ca7d8}\label{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_affc2f584bd632cd4816c1348ce1ca7d8}} 
+\index{netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}!clearDirectory@{clearDirectory}}
+\index{clearDirectory@{clearDirectory}!netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}}
+\doxysubsubsection{\texorpdfstring{clearDirectory()}{clearDirectory()}}
+{\footnotesize\ttfamily static boolean netw4ppl.\+ines.\+utils.\+File\+Utils.\+clear\+Directory (\begin{DoxyParamCaption}\item[{String}]{directory\+\_\+path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Deletes a directory content
+
+
+\begin{DoxyParams}{Parameters}
+{\em directory\+\_\+path} & path to the directory \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the directory content was completely deleted 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a6dacfea9755bcfe03b4dff7651d6bcda}\label{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a6dacfea9755bcfe03b4dff7651d6bcda}} 
+\index{netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}!createDirectory@{createDirectory}}
+\index{createDirectory@{createDirectory}!netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}}
+\doxysubsubsection{\texorpdfstring{createDirectory()}{createDirectory()}}
+{\footnotesize\ttfamily static boolean netw4ppl.\+ines.\+utils.\+File\+Utils.\+create\+Directory (\begin{DoxyParamCaption}\item[{String}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Create an empty directory 
+\begin{DoxyParams}{Parameters}
+{\em path} & path of the directory to be created \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a boolean to determine whether the directory was successfully created or not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a36128a95a9be40ce5ca3be03d9125a17}\label{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a36128a95a9be40ce5ca3be03d9125a17}} 
+\index{netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}!createFile@{createFile}}
+\index{createFile@{createFile}!netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}}
+\doxysubsubsection{\texorpdfstring{createFile()}{createFile()}}
+{\footnotesize\ttfamily static boolean netw4ppl.\+ines.\+utils.\+File\+Utils.\+create\+File (\begin{DoxyParamCaption}\item[{String}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Create an empty file
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & path for the two files \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a boolean to determine whether the file was created successfully or not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_adf2e3d07722da67e934a522aa8da7070}\label{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_adf2e3d07722da67e934a522aa8da7070}} 
+\index{netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}!createFiles@{createFiles}}
+\index{createFiles@{createFiles}!netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}}
+\doxysubsubsection{\texorpdfstring{createFiles()}{createFiles()}}
+{\footnotesize\ttfamily static boolean netw4ppl.\+ines.\+utils.\+File\+Utils.\+create\+Files (\begin{DoxyParamCaption}\item[{String}]{path,  }\item[{String\mbox{[}$\,$\mbox{]}}]{filenames }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Create the two .json empty files \+: persons.\+json and links.\+json
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & path of the directory for the two files \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a boolean to determine whether the files were created successfully or not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a3e6d70748c5c8661b0f8fa6e5a48d02a}\label{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a3e6d70748c5c8661b0f8fa6e5a48d02a}} 
+\index{netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}!deleteFile@{deleteFile}}
+\index{deleteFile@{deleteFile}!netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}}
+\doxysubsubsection{\texorpdfstring{deleteFile()}{deleteFile()}}
+{\footnotesize\ttfamily static boolean netw4ppl.\+ines.\+utils.\+File\+Utils.\+delete\+File (\begin{DoxyParamCaption}\item[{String}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Deletes a file
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & path to file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if file was deleted 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a5f0f9fba13bb30496aa51ea47fc08c86}\label{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a5f0f9fba13bb30496aa51ea47fc08c86}} 
+\index{netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}!directoryExists@{directoryExists}}
+\index{directoryExists@{directoryExists}!netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}}
+\doxysubsubsection{\texorpdfstring{directoryExists()}{directoryExists()}}
+{\footnotesize\ttfamily static boolean netw4ppl.\+ines.\+utils.\+File\+Utils.\+directory\+Exists (\begin{DoxyParamCaption}\item[{String}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Returns a boolean telling if a directory already exists or not 
+\begin{DoxyParams}{Parameters}
+{\em path} & path of the directory to be looked for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a boolean telling if the directory already exists or not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a262f1abc93a4091cd104b4d953973ed0}\label{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a262f1abc93a4091cd104b4d953973ed0}} 
+\index{netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}!fileExists@{fileExists}}
+\index{fileExists@{fileExists}!netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}}
+\doxysubsubsection{\texorpdfstring{fileExists()}{fileExists()}}
+{\footnotesize\ttfamily static boolean netw4ppl.\+ines.\+utils.\+File\+Utils.\+file\+Exists (\begin{DoxyParamCaption}\item[{String}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Returns a boolean telling if a file already exists or not 
+\begin{DoxyParams}{Parameters}
+{\em path} & path of the file to be looked for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a boolean telling if the file already exists or not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a35f67202148822992b697974c57f3fab}\label{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a35f67202148822992b697974c57f3fab}} 
+\index{netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}!loadApplicationIDFromFile@{loadApplicationIDFromFile}}
+\index{loadApplicationIDFromFile@{loadApplicationIDFromFile}!netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}}
+\doxysubsubsection{\texorpdfstring{loadApplicationIDFromFile()}{loadApplicationIDFromFile()}}
+{\footnotesize\ttfamily static String netw4ppl.\+ines.\+utils.\+File\+Utils.\+load\+Application\+IDFrom\+File (\begin{DoxyParamCaption}\item[{Context}]{context }\end{DoxyParamCaption}) throws IOException\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Load the application ID from a file, creates it if it doesn\textquotesingle{}t already exists.
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & the application context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a string containing the application id 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_aaf3424c78ffa9395748e9d2e2152884b}\label{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_aaf3424c78ffa9395748e9d2e2152884b}} 
+\index{netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}!loadConfigFromFile@{loadConfigFromFile}}
+\index{loadConfigFromFile@{loadConfigFromFile}!netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}}
+\doxysubsubsection{\texorpdfstring{loadConfigFromFile()}{loadConfigFromFile()}}
+{\footnotesize\ttfamily static JSONObject netw4ppl.\+ines.\+utils.\+File\+Utils.\+load\+Config\+From\+File (\begin{DoxyParamCaption}\item[{Context}]{context }\end{DoxyParamCaption}) throws IOException\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Loads the fields configuration file to store it in a Json\+Object 
+\begin{DoxyParams}{Parameters}
+{\em context} & the context of the application \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a JSon\+Object of the configuration file 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em IOException} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_af27fc617e72353264982b550834193fd}\label{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_af27fc617e72353264982b550834193fd}} 
+\index{netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}!loadIdsFromFile@{loadIdsFromFile}}
+\index{loadIdsFromFile@{loadIdsFromFile}!netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}}
+\doxysubsubsection{\texorpdfstring{loadIdsFromFile()}{loadIdsFromFile()}}
+{\footnotesize\ttfamily static String netw4ppl.\+ines.\+utils.\+File\+Utils.\+load\+Ids\+From\+File (\begin{DoxyParamCaption}\item[{Context}]{context }\end{DoxyParamCaption}) throws IOException\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Load the file containing the IDs
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & the application context \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+return a string containing all the ids and the last value for the tricode 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a93166925da21ebeca0d21c662d9941a6}\label{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a93166925da21ebeca0d21c662d9941a6}} 
+\index{netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}!readFile@{readFile}}
+\index{readFile@{readFile}!netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}}
+\doxysubsubsection{\texorpdfstring{readFile()}{readFile()}}
+{\footnotesize\ttfamily static String netw4ppl.\+ines.\+utils.\+File\+Utils.\+read\+File (\begin{DoxyParamCaption}\item[{String}]{path }\end{DoxyParamCaption}) throws IOException\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Read content of file
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & path to file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+return a String of the content of the file 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_add9253223ad6b9a10af3709933569740}\label{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_add9253223ad6b9a10af3709933569740}} 
+\index{netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}!readFileInputStream@{readFileInputStream}}
+\index{readFileInputStream@{readFileInputStream}!netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}}
+\doxysubsubsection{\texorpdfstring{readFileInputStream()}{readFileInputStream()}}
+{\footnotesize\ttfamily static String netw4ppl.\+ines.\+utils.\+File\+Utils.\+read\+File\+Input\+Stream (\begin{DoxyParamCaption}\item[{Input\+Stream}]{is }\end{DoxyParamCaption}) throws IOException\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Read content of file
+
+
+\begin{DoxyParams}{Parameters}
+{\em is} & inputstream of the file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+return a String of the content of the file 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a69d1ff33a8f80c5134f585554518c965}\label{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a69d1ff33a8f80c5134f585554518c965}} 
+\index{netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}!saveIdsToFile@{saveIdsToFile}}
+\index{saveIdsToFile@{saveIdsToFile}!netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}}
+\doxysubsubsection{\texorpdfstring{saveIdsToFile()}{saveIdsToFile()}}
+{\footnotesize\ttfamily static boolean netw4ppl.\+ines.\+utils.\+File\+Utils.\+save\+Ids\+To\+File (\begin{DoxyParamCaption}\item[{Context}]{context,  }\item[{String}]{content }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Save the ids (the tricodes and their highest value) in a file
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & the application context \\
+\hline
+{\em content} & a String of the content to write \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a boolean, true if the save was possible, else return false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a836e16f232f122d5db8657828c371416}\label{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a836e16f232f122d5db8657828c371416}} 
+\index{netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}!savePersonsToFile@{savePersonsToFile}}
+\index{savePersonsToFile@{savePersonsToFile}!netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}}
+\doxysubsubsection{\texorpdfstring{savePersonsToFile()}{savePersonsToFile()}}
+{\footnotesize\ttfamily static boolean netw4ppl.\+ines.\+utils.\+File\+Utils.\+save\+Persons\+To\+File (\begin{DoxyParamCaption}\item[{Context}]{context,  }\item[{String}]{content }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Save the Persons in a file
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & the application context \\
+\hline
+{\em content} & a String of the content to write \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a boolean, true if the save was possible, else return false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a6e73527680c499f7454c624e382f7e2f}\label{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a6e73527680c499f7454c624e382f7e2f}} 
+\index{netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}!saveRelationsToFile@{saveRelationsToFile}}
+\index{saveRelationsToFile@{saveRelationsToFile}!netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}}
+\doxysubsubsection{\texorpdfstring{saveRelationsToFile()}{saveRelationsToFile()}}
+{\footnotesize\ttfamily static boolean netw4ppl.\+ines.\+utils.\+File\+Utils.\+save\+Relations\+To\+File (\begin{DoxyParamCaption}\item[{Context}]{context,  }\item[{String}]{content }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Save the Relations in a file
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & the application context \\
+\hline
+{\em content} & a String of the content to write \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a boolean, true if the save was possible, else return false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a1f0aa37b0535d343b6591851cf1c0a56}\label{classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a1f0aa37b0535d343b6591851cf1c0a56}} 
+\index{netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}!writeFile@{writeFile}}
+\index{writeFile@{writeFile}!netw4ppl.ines.utils.FileUtils@{netw4ppl.ines.utils.FileUtils}}
+\doxysubsubsection{\texorpdfstring{writeFile()}{writeFile()}}
+{\footnotesize\ttfamily static boolean netw4ppl.\+ines.\+utils.\+File\+Utils.\+write\+File (\begin{DoxyParamCaption}\item[{String}]{path,  }\item[{String}]{content }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Write content in file
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & path to file \\
+\hline
+{\em content} & the content to be written in the file, must be of type String \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+return a boolean true if the writing was a success, false if not 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Netw4ppl/app/src/main/java/netw4ppl/ines/utils/File\+Utils.\+java\end{DoxyCompactItemize}

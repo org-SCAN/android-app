@@ -1,0 +1,166 @@
+\hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_configuration}{}\doxysection{netw4ppl.\+ines.\+utils.\+Configuration Class Reference}
+\label{classnetw4ppl_1_1ines_1_1utils_1_1_configuration}\index{netw4ppl.ines.utils.Configuration@{netw4ppl.ines.utils.Configuration}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a5c2bb012b0300fd13f171d56a9c4abaa}\label{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a5c2bb012b0300fd13f171d56a9c4abaa}} 
+{\bfseries Configuration} (Context context, JSONObject config\+\_\+content)
+\item 
+String \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a424f19c056f1de2ab994a1c525dd65d8}{get\+Application\+Id}} ()
+\item 
+Hash\+Map$<$ String, Hash\+Map$<$ String, \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_data_element}{Data\+Element}} $>$ $>$ \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_aaae59eb34e71e5630f7360e79ee772cc}{get\+Hash\+Map\+\_\+datatables}} ()
+\item 
+boolean \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a33cd53086ed70e6c684b046b894d8a54}{has\+Element\+In\+Table}} (String key\+\_\+table, String key\+\_\+element)
+\item 
+\mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_field}{Field}} \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a33ba0136e9ef5cd8acb48b8e49113a46}{get\+Field\+From\+Hash\+Map}} (String key\+\_\+field)
+\item 
+String \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a4c09b0d33a51f144d36fa7147c166f3b}{get\+Element\+From\+Table}} (String key\+\_\+table, String key\+\_\+element)
+\item 
+void \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a27fc9931cdb1d4cb0e4a31914d651196}{create\+Hash\+Maps}} (Context context, JSONObject config\+\_\+content)
+\item 
+void \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a54e0fff2205c1f70b54ea881f5e251e6}{create\+Array\+Fields}} (JSONObject fields)
+\item 
+Array\+List$<$ \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_field}{Field}} $>$ \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_ae2dfd739ef5c9e1f6f64d0349f3b7f5c}{get\+Array\+Fields}} ()
+\item 
+Array\+Adapter \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a477175cd4a1d45cd0153f34e58cb11b3}{get\+Array\+Adapter}} (String key)
+\item 
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a3183975c3d84152e2fd246ebc5a622e6}\label{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a3183975c3d84152e2fd246ebc5a622e6}} 
+Hash\+Map$<$ String, Array\+List$<$ \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_data_element}{Data\+Element}} $>$ $>$ {\bfseries get\+Hash\+Map\+Database} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a54e0fff2205c1f70b54ea881f5e251e6}\label{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a54e0fff2205c1f70b54ea881f5e251e6}} 
+\index{netw4ppl.ines.utils.Configuration@{netw4ppl.ines.utils.Configuration}!createArrayFields@{createArrayFields}}
+\index{createArrayFields@{createArrayFields}!netw4ppl.ines.utils.Configuration@{netw4ppl.ines.utils.Configuration}}
+\doxysubsubsection{\texorpdfstring{createArrayFields()}{createArrayFields()}}
+{\footnotesize\ttfamily void netw4ppl.\+ines.\+utils.\+Configuration.\+create\+Array\+Fields (\begin{DoxyParamCaption}\item[{JSONObject}]{fields }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function used to create the Array\+List of the fields present in the \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_add_person_activity}{Add\+Person\+Activity}}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em fields} & a JSONObject of the fields. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a27fc9931cdb1d4cb0e4a31914d651196}\label{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a27fc9931cdb1d4cb0e4a31914d651196}} 
+\index{netw4ppl.ines.utils.Configuration@{netw4ppl.ines.utils.Configuration}!createHashMaps@{createHashMaps}}
+\index{createHashMaps@{createHashMaps}!netw4ppl.ines.utils.Configuration@{netw4ppl.ines.utils.Configuration}}
+\doxysubsubsection{\texorpdfstring{createHashMaps()}{createHashMaps()}}
+{\footnotesize\ttfamily void netw4ppl.\+ines.\+utils.\+Configuration.\+create\+Hash\+Maps (\begin{DoxyParamCaption}\item[{Context}]{context,  }\item[{JSONObject}]{config\+\_\+content }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function used to create not only hashmaps actually but also different objects. It used to create the different Array\+List of \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_data_element}{Data\+Element}}, the associated Hash\+Maps and the asociated Adapters.
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & an object of type Context representing the context of the application \\
+\hline
+{\em config\+\_\+content} & a JSONObject containing the configuraiton for the application. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a424f19c056f1de2ab994a1c525dd65d8}\label{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a424f19c056f1de2ab994a1c525dd65d8}} 
+\index{netw4ppl.ines.utils.Configuration@{netw4ppl.ines.utils.Configuration}!getApplicationId@{getApplicationId}}
+\index{getApplicationId@{getApplicationId}!netw4ppl.ines.utils.Configuration@{netw4ppl.ines.utils.Configuration}}
+\doxysubsubsection{\texorpdfstring{getApplicationId()}{getApplicationId()}}
+{\footnotesize\ttfamily String netw4ppl.\+ines.\+utils.\+Configuration.\+get\+Application\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function to get the application ID from a \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_configuration}{Configuration}} object.
+
+\begin{DoxyReturn}{Returns}
+a String 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a477175cd4a1d45cd0153f34e58cb11b3}\label{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a477175cd4a1d45cd0153f34e58cb11b3}} 
+\index{netw4ppl.ines.utils.Configuration@{netw4ppl.ines.utils.Configuration}!getArrayAdapter@{getArrayAdapter}}
+\index{getArrayAdapter@{getArrayAdapter}!netw4ppl.ines.utils.Configuration@{netw4ppl.ines.utils.Configuration}}
+\doxysubsubsection{\texorpdfstring{getArrayAdapter()}{getArrayAdapter()}}
+{\footnotesize\ttfamily Array\+Adapter netw4ppl.\+ines.\+utils.\+Configuration.\+get\+Array\+Adapter (\begin{DoxyParamCaption}\item[{String}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function to get an Array\+Adapter identified by a specific key.
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & a String representing the identifier for the Array\+Adapter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an Array\+Adapter object if the Hash\+Map contains the key or return null. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_ae2dfd739ef5c9e1f6f64d0349f3b7f5c}\label{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_ae2dfd739ef5c9e1f6f64d0349f3b7f5c}} 
+\index{netw4ppl.ines.utils.Configuration@{netw4ppl.ines.utils.Configuration}!getArrayFields@{getArrayFields}}
+\index{getArrayFields@{getArrayFields}!netw4ppl.ines.utils.Configuration@{netw4ppl.ines.utils.Configuration}}
+\doxysubsubsection{\texorpdfstring{getArrayFields()}{getArrayFields()}}
+{\footnotesize\ttfamily Array\+List$<$\mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_field}{Field}}$>$ netw4ppl.\+ines.\+utils.\+Configuration.\+get\+Array\+Fields (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function to get the Array\+List containing all the fields.
+
+\begin{DoxyReturn}{Returns}
+an Array\+List of \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_field}{Field}} objects. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a4c09b0d33a51f144d36fa7147c166f3b}\label{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a4c09b0d33a51f144d36fa7147c166f3b}} 
+\index{netw4ppl.ines.utils.Configuration@{netw4ppl.ines.utils.Configuration}!getElementFromTable@{getElementFromTable}}
+\index{getElementFromTable@{getElementFromTable}!netw4ppl.ines.utils.Configuration@{netw4ppl.ines.utils.Configuration}}
+\doxysubsubsection{\texorpdfstring{getElementFromTable()}{getElementFromTable()}}
+{\footnotesize\ttfamily String netw4ppl.\+ines.\+utils.\+Configuration.\+get\+Element\+From\+Table (\begin{DoxyParamCaption}\item[{String}]{key\+\_\+table,  }\item[{String}]{key\+\_\+element }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Get an element from our \char`\"{}internal database\char`\"{}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em key\+\_\+table} & a String representing the key value of the Hash\+Map in the more global Hash\+Map (ex\+: \char`\"{}country\char`\"{}) \\
+\hline
+{\em key\+\_\+element} & a String representing the key value of a \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_data_element}{Data\+Element}} object in the hasmap (ex\+: \char`\"{}\+FRA\char`\"{})\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a String containing the name of the element in the displayed language or an empty string if the element was not found. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a33ba0136e9ef5cd8acb48b8e49113a46}\label{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a33ba0136e9ef5cd8acb48b8e49113a46}} 
+\index{netw4ppl.ines.utils.Configuration@{netw4ppl.ines.utils.Configuration}!getFieldFromHashMap@{getFieldFromHashMap}}
+\index{getFieldFromHashMap@{getFieldFromHashMap}!netw4ppl.ines.utils.Configuration@{netw4ppl.ines.utils.Configuration}}
+\doxysubsubsection{\texorpdfstring{getFieldFromHashMap()}{getFieldFromHashMap()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_field}{Field}} netw4ppl.\+ines.\+utils.\+Configuration.\+get\+Field\+From\+Hash\+Map (\begin{DoxyParamCaption}\item[{String}]{key\+\_\+field }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Get a \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_field}{Field}} object from the Hash\+Map of fields if the field identified by the parameter given exists.
+
+
+\begin{DoxyParams}{Parameters}
+{\em key\+\_\+field} & a String representing \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an object of type \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_field}{Field}} if it exists or null. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_aaae59eb34e71e5630f7360e79ee772cc}\label{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_aaae59eb34e71e5630f7360e79ee772cc}} 
+\index{netw4ppl.ines.utils.Configuration@{netw4ppl.ines.utils.Configuration}!getHashMap\_datatables@{getHashMap\_datatables}}
+\index{getHashMap\_datatables@{getHashMap\_datatables}!netw4ppl.ines.utils.Configuration@{netw4ppl.ines.utils.Configuration}}
+\doxysubsubsection{\texorpdfstring{getHashMap\_datatables()}{getHashMap\_datatables()}}
+{\footnotesize\ttfamily Hash\+Map$<$String, Hash\+Map$<$String, \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_data_element}{Data\+Element}}$>$ $>$ netw4ppl.\+ines.\+utils.\+Configuration.\+get\+Hash\+Map\+\_\+datatables (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Get the hashmaps identified by a String and containing \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_data_element}{Data\+Element}} objects. It is similar to a database. For example, we can get the tables like \char`\"{}\+Relations\char`\"{}, \char`\"{}country\char`\"{}, \char`\"{}role\char`\"{} etc.
+
+\begin{DoxyReturn}{Returns}
+a Hash\+Map containing Hash\+Maps identified by Strings. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a33cd53086ed70e6c684b046b894d8a54}\label{classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a33cd53086ed70e6c684b046b894d8a54}} 
+\index{netw4ppl.ines.utils.Configuration@{netw4ppl.ines.utils.Configuration}!hasElementInTable@{hasElementInTable}}
+\index{hasElementInTable@{hasElementInTable}!netw4ppl.ines.utils.Configuration@{netw4ppl.ines.utils.Configuration}}
+\doxysubsubsection{\texorpdfstring{hasElementInTable()}{hasElementInTable()}}
+{\footnotesize\ttfamily boolean netw4ppl.\+ines.\+utils.\+Configuration.\+has\+Element\+In\+Table (\begin{DoxyParamCaption}\item[{String}]{key\+\_\+table,  }\item[{String}]{key\+\_\+element }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function to determine if given a specific table key (string) the given string for the key element is in the Hash\+Map or not.
+
+
+\begin{DoxyParams}{Parameters}
+{\em key\+\_\+table} & a String identifying a \char`\"{}table\char`\"{}. Example \+: \char`\"{}country\char`\"{}. \\
+\hline
+{\em key\+\_\+element} & a String identifyin an element. Example \+: \char`\"{}\+FRA\char`\"{} standing for \char`\"{}\+France\char`\"{}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean. True if the element identified by key\+\_\+element is in Hash\+Map identified by key\+\_\+table. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Netw4ppl/app/src/main/java/netw4ppl/ines/utils/Configuration.\+java\end{DoxyCompactItemize}

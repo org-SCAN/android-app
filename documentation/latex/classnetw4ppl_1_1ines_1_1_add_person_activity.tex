@@ -11,15 +11,14 @@ Inheritance diagram for netw4ppl.\+ines.\+Add\+Person\+Activity\+:\begin{figure}
 \item 
 boolean \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_add_person_activity_a3a748a4973cb20db28e03d8c14f6412c}{verification\+Input\+Person}} ()
 \item 
-boolean \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_add_person_activity_ae565a7e4087176eaf482f6ededed0302}{save\+Ids}} (Context context, Person person)
+boolean \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_add_person_activity_ae565a7e4087176eaf482f6ededed0302}{save\+Ids}} (Context context, \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_person}{Person}} person)
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 static String \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_add_person_activity_acec4f2f1a4de80fb5c7997192acbc4f8}{get\+Default\+Key}} ()
 \item 
-\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_add_person_activity_af032d5e5d1ea5e8ea9db70e8a3fe1136}\label{classnetw4ppl_1_1ines_1_1_add_person_activity_af032d5e5d1ea5e8ea9db70e8a3fe1136}} 
-static void {\bfseries set\+Default\+Key} (String tricode)
+static void \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_add_person_activity_af032d5e5d1ea5e8ea9db70e8a3fe1136}{set\+Default\+Key}} (String tricode)
 \item 
 static int \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_add_person_activity_a28e172448478944448044c8910560168}{get\+Next\+Id}} (String key)
 \end{DoxyCompactItemize}
@@ -30,7 +29,7 @@ static int \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_add_person_activity_a28e17
 static JSONObject {\bfseries json\+\_\+ids} = new JSONObject()
 \item 
 \mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_add_person_activity_a680cc2a8167bb12c845b6f0defb1d810}\label{classnetw4ppl_1_1ines_1_1_add_person_activity_a680cc2a8167bb12c845b6f0defb1d810}} 
-static Person {\bfseries person}
+static \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_person}{Person}} {\bfseries person}
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -81,7 +80,7 @@ an int of the first value available for this 3-\/letters code
 \index{netw4ppl.ines.AddPersonActivity@{netw4ppl.ines.AddPersonActivity}!saveIds@{saveIds}}
 \index{saveIds@{saveIds}!netw4ppl.ines.AddPersonActivity@{netw4ppl.ines.AddPersonActivity}}
 \doxysubsubsection{\texorpdfstring{saveIds()}{saveIds()}}
-{\footnotesize\ttfamily boolean netw4ppl.\+ines.\+Add\+Person\+Activity.\+save\+Ids (\begin{DoxyParamCaption}\item[{Context}]{context,  }\item[{Person}]{person }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily boolean netw4ppl.\+ines.\+Add\+Person\+Activity.\+save\+Ids (\begin{DoxyParamCaption}\item[{Context}]{context,  }\item[{\mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_person}{Person}}}]{person }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Save the file containing the ids (3-\/letters code + the value associated) Check before saving if for the 3-\/letters code, the value associated is the biggest one or not.
 
@@ -95,6 +94,19 @@ Save the file containing the ids (3-\/letters code + the value associated) Check
 \begin{DoxyReturn}{Returns}
 a boolean to determine whether the file was successfully saved or not 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_add_person_activity_af032d5e5d1ea5e8ea9db70e8a3fe1136}\label{classnetw4ppl_1_1ines_1_1_add_person_activity_af032d5e5d1ea5e8ea9db70e8a3fe1136}} 
+\index{netw4ppl.ines.AddPersonActivity@{netw4ppl.ines.AddPersonActivity}!setDefaultKey@{setDefaultKey}}
+\index{setDefaultKey@{setDefaultKey}!netw4ppl.ines.AddPersonActivity@{netw4ppl.ines.AddPersonActivity}}
+\doxysubsubsection{\texorpdfstring{setDefaultKey()}{setDefaultKey()}}
+{\footnotesize\ttfamily static void netw4ppl.\+ines.\+Add\+Person\+Activity.\+set\+Default\+Key (\begin{DoxyParamCaption}\item[{String}]{tricode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Function to set the default key for the \char`\"{}unique ids\char`\"{}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tricode} & a String composed of three letters \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_add_person_activity_a3a748a4973cb20db28e03d8c14f6412c}\label{classnetw4ppl_1_1ines_1_1_add_person_activity_a3a748a4973cb20db28e03d8c14f6412c}} 
 \index{netw4ppl.ines.AddPersonActivity@{netw4ppl.ines.AddPersonActivity}!verificationInputPerson@{verificationInputPerson}}
 \index{verificationInputPerson@{verificationInputPerson}!netw4ppl.ines.AddPersonActivity@{netw4ppl.ines.AddPersonActivity}}

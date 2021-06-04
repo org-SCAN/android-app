@@ -1,0 +1,120 @@
+\hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_adapter_view_fields}{}\doxysection{netw4ppl.\+ines.\+utils.\+Adapter\+View\+Fields Class Reference}
+\label{classnetw4ppl_1_1ines_1_1utils_1_1_adapter_view_fields}\index{netw4ppl.ines.utils.AdapterViewFields@{netw4ppl.ines.utils.AdapterViewFields}}
+Inheritance diagram for netw4ppl.\+ines.\+utils.\+Adapter\+View\+Fields\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classnetw4ppl_1_1ines_1_1utils_1_1_adapter_view_fields}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries View\+Holder\+Auto\+Complete}
+\item 
+class {\bfseries View\+Holder\+Calendar\+View}
+\item 
+class {\bfseries View\+Holder\+Edit\+Text}
+\item 
+class {\bfseries View\+Holder\+Spinner}
+\item 
+class {\bfseries View\+Holder\+Unique\+ID}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_adapter_view_fields_abe717650dac1c4007b3c787e34eac220}{Adapter\+View\+Fields}} (Context context, Array\+List$<$ \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_field}{Field}} $>$ fields, boolean new\+\_\+pers)
+\item 
+Recycler\+View.\+View\+Holder \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_adapter_view_fields_a82149595164fa4745047bb1658016db7}{on\+Create\+View\+Holder}} (@Non\+Null View\+Group parent, int view\+Type)
+\item 
+void \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_adapter_view_fields_a2277bac08a9325a10632089b9b127d87}{on\+Bind\+View\+Holder}} (@Non\+Null Recycler\+View.\+View\+Holder holder, int position)
+\item 
+int \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_adapter_view_fields_a17ea3d002c516626cc467bc81a13154b}{get\+Position\+In\+Adapter}} (Adapter adapter, String key\+\_\+val\+\_\+pers)
+\item 
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_adapter_view_fields_a38340746a722c9b07cdd5973a5690617}\label{classnetw4ppl_1_1ines_1_1utils_1_1_adapter_view_fields_a38340746a722c9b07cdd5973a5690617}} 
+int {\bfseries get\+Item\+View\+Type} (int position)
+\item 
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_adapter_view_fields_ac1f8c40e9a79d21e355d756c071e9c0d}\label{classnetw4ppl_1_1ines_1_1utils_1_1_adapter_view_fields_ac1f8c40e9a79d21e355d756c071e9c0d}} 
+int {\bfseries get\+Item\+Count} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_adapter_view_fields}{Adapter\+View\+Fields}} is the class used to display the \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_add_person_activity}{Add\+Person\+Activity}} form. It extends the object Adapter from the Recycler\+View class. The adapter created will contain View\+Holders of different types. That way we can enter more than one type of data (ex\+: dates, numbers, strings ...) 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_adapter_view_fields_abe717650dac1c4007b3c787e34eac220}\label{classnetw4ppl_1_1ines_1_1utils_1_1_adapter_view_fields_abe717650dac1c4007b3c787e34eac220}} 
+\index{netw4ppl.ines.utils.AdapterViewFields@{netw4ppl.ines.utils.AdapterViewFields}!AdapterViewFields@{AdapterViewFields}}
+\index{AdapterViewFields@{AdapterViewFields}!netw4ppl.ines.utils.AdapterViewFields@{netw4ppl.ines.utils.AdapterViewFields}}
+\doxysubsubsection{\texorpdfstring{AdapterViewFields()}{AdapterViewFields()}}
+{\footnotesize\ttfamily netw4ppl.\+ines.\+utils.\+Adapter\+View\+Fields.\+Adapter\+View\+Fields (\begin{DoxyParamCaption}\item[{Context}]{context,  }\item[{Array\+List$<$ \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_field}{Field}} $>$}]{fields,  }\item[{boolean}]{new\+\_\+pers }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Class constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & the context of the application \\
+\hline
+{\em fields} & an Array\+List of \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_field}{Field}} objects \\
+\hline
+{\em new\+\_\+pers} & a boolean telling if it\textquotesingle{}s a new person the user is adding or not \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_adapter_view_fields_a17ea3d002c516626cc467bc81a13154b}\label{classnetw4ppl_1_1ines_1_1utils_1_1_adapter_view_fields_a17ea3d002c516626cc467bc81a13154b}} 
+\index{netw4ppl.ines.utils.AdapterViewFields@{netw4ppl.ines.utils.AdapterViewFields}!getPositionInAdapter@{getPositionInAdapter}}
+\index{getPositionInAdapter@{getPositionInAdapter}!netw4ppl.ines.utils.AdapterViewFields@{netw4ppl.ines.utils.AdapterViewFields}}
+\doxysubsubsection{\texorpdfstring{getPositionInAdapter()}{getPositionInAdapter()}}
+{\footnotesize\ttfamily int netw4ppl.\+ines.\+utils.\+Adapter\+View\+Fields.\+get\+Position\+In\+Adapter (\begin{DoxyParamCaption}\item[{Adapter}]{adapter,  }\item[{String}]{key\+\_\+val\+\_\+pers }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function to get the position of a specified key in an adapter of \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_data_element}{Data\+Element}} objects.
+
+
+\begin{DoxyParams}{Parameters}
+{\em adapter} & an Adapter object \\
+\hline
+{\em key\+\_\+val\+\_\+pers} & a String \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an int giving the position of the key\+\_\+val\+\_\+person parameter in the adapter 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_adapter_view_fields_a2277bac08a9325a10632089b9b127d87}\label{classnetw4ppl_1_1ines_1_1utils_1_1_adapter_view_fields_a2277bac08a9325a10632089b9b127d87}} 
+\index{netw4ppl.ines.utils.AdapterViewFields@{netw4ppl.ines.utils.AdapterViewFields}!onBindViewHolder@{onBindViewHolder}}
+\index{onBindViewHolder@{onBindViewHolder}!netw4ppl.ines.utils.AdapterViewFields@{netw4ppl.ines.utils.AdapterViewFields}}
+\doxysubsubsection{\texorpdfstring{onBindViewHolder()}{onBindViewHolder()}}
+{\footnotesize\ttfamily void netw4ppl.\+ines.\+utils.\+Adapter\+View\+Fields.\+on\+Bind\+View\+Holder (\begin{DoxyParamCaption}\item[{@Non\+Null Recycler\+View.\+View\+Holder}]{holder,  }\item[{int}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Override of the on\+Bind\+View\+Holder function. Set the View\+Holder content based on what they are representing.
+
+
+\begin{DoxyParams}{Parameters}
+{\em holder} & a Recycler\+View.\+View\+Holder object \\
+\hline
+{\em position} & an int \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_adapter_view_fields_a82149595164fa4745047bb1658016db7}\label{classnetw4ppl_1_1ines_1_1utils_1_1_adapter_view_fields_a82149595164fa4745047bb1658016db7}} 
+\index{netw4ppl.ines.utils.AdapterViewFields@{netw4ppl.ines.utils.AdapterViewFields}!onCreateViewHolder@{onCreateViewHolder}}
+\index{onCreateViewHolder@{onCreateViewHolder}!netw4ppl.ines.utils.AdapterViewFields@{netw4ppl.ines.utils.AdapterViewFields}}
+\doxysubsubsection{\texorpdfstring{onCreateViewHolder()}{onCreateViewHolder()}}
+{\footnotesize\ttfamily Recycler\+View.\+View\+Holder netw4ppl.\+ines.\+utils.\+Adapter\+View\+Fields.\+on\+Create\+View\+Holder (\begin{DoxyParamCaption}\item[{@Non\+Null View\+Group}]{parent,  }\item[{int}]{view\+Type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Override of the on\+Create\+View\+Holder function. Create View\+Holders based on the view\+Type specified in parameters.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & a View\+Group object \\
+\hline
+{\em view\+Type} & an int representing the view type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a Recycler\+View.\+View\+Holder object. The type of the object depends of the input type specified. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Netw4ppl/app/src/main/java/netw4ppl/ines/utils/Adapter\+View\+Fields.\+java\end{DoxyCompactItemize}
