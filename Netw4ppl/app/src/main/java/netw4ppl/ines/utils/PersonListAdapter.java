@@ -25,6 +25,9 @@ import netw4ppl.ines.MainActivity;
 import netw4ppl.ines.ManagePersonsActivity;
 import netw4ppl.ines.R;
 
+/**
+ * A class to display the important informations about the persons
+ */
 public class PersonListAdapter extends ArrayAdapter<Person> implements Filterable {
 
     private Context mContext;
@@ -33,6 +36,9 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
     public ArrayList<Person> mObjects;
     public ArrayList<Person> mObjects_tmp;
 
+    /**
+     * A basic ViewHolder to put informations like the fullname, the unique ID, the sex and the age of a person.
+     */
     private static class ViewHolder {
         TextView mFullName;
         TextView mUniqueID;
@@ -40,6 +46,12 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
         TextView mAge;
     }
 
+    /**
+     * The class constructor
+     * @param context the application context
+     * @param resource the id of the layout to use to pt the informations
+     * @param objects an ArrayList of Person objects
+     */
     public PersonListAdapter(Context context, int resource, ArrayList<Person> objects) {
         super(context, resource, objects);
         mContext = context;
@@ -48,6 +60,13 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
         mObjects_tmp = objects;
     }
 
+    /**
+     * Function to perform the filtering of the persons when the search bar is used. If you want to change
+     * the search criterias, you should modify the code of the <b>performFiltering(CharSequence constraint)</b>
+     * function.
+     *
+     * @return a Filter object
+     */
     @NonNull
     @Override
     public Filter getFilter() {
@@ -117,6 +136,9 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
         };
     }
 
+    /**
+     * Notify the adapter if the content of the adapter changed. It is the case during the filtering.
+     */
     public void notifyDataSetChanged() {
         super.notifyDataSetChanged();
     }
@@ -157,16 +179,33 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
         return convertView;
     }
 
+    /**
+     * Get the number of elements in the adapter.
+     *
+     * @return an int
+     */
     @Override
     public int getCount() {
         return mObjects_tmp.size();
     }
 
+    /**
+     * Get the item in the dapter at the position given
+     *
+     * @param position an int
+     * @return a Person
+     */
     @Override
     public Person getItem(int position) {
         return mObjects_tmp.get(position);
     }
 
+    /**
+     * Get the item id (aka its position in the array)
+     *
+     * @param position an int
+     * @return a long
+     */
     @Override
     public long getItemId(int position) {
         return position;
