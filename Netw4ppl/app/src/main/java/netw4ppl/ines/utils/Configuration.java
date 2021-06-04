@@ -210,23 +210,8 @@ public class Configuration {
     /**
      *
      */
-    public ArrayList<DataElement> getTableDataElements(String key) {
-        if (this.hashMap_database.containsKey(key))
-            return this.hashMap_database.get(key);
-        return null;
-    }
-
-    /**
-     *
-     */
     public HashMap<String, ArrayList<DataElement>> getHashMapDatabase() {
         return this.hashMap_database;
     }
 
-    /**
-     *
-     */
-    public HashMap<String, ArrayAdapter> getHashMapAdapters() {
-        return this.hashMap_adapters;
-    }
 }

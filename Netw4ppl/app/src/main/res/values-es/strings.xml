@@ -5,7 +5,6 @@
     <string name="title_activity_manage_relations">Gestionar las relaciones</string>
     <string name="title_activity_manage_persons">Gestionar las personas</string>
     <string name="title_send_data">Envío de datos</string>
-    <string name="action_settings">Parámetros</string>
     <string name="settings_server_header">Servidor</string>
     <string name="settings_email_header">Email</string>
     <string name="settings_sending_option_header">Opción de envío</string>
@@ -17,7 +16,6 @@
     <string name="settings_server_maj_off">Desactivada</string>
     <string name="settings_server_maj_on">Activada</string>
     <string name="settings_email_default_title">Dirección de envío</string>
-    <string name="settings_delete_option_title">Eliminación de datos</string>
     <string name="settings_delete_button_title">Eliminar</string>
     <string name="settings_delete_button_summary">"Eliminar los ficheros de este aparato  "</string>
     <string name="main_submit_success_title">Envío conseguido</string>
@@ -32,12 +30,6 @@
     <string name="main_submit_token_fail_msg">Indica la clave del servidor en los parámetros por favor</string>
     <string name="no_submit_option_title">Opción de envío</string>
     <string name="no_submit_option_msg">Selecciona una opción de envío en los parámetros por favor</string>
-    <string name="settings_default_pwd_hashing_pending_title">Protección de su contraseña</string>
-    <string name="settings_default_pwd_hashing_pending_message">Protección y salvaguardia de su contraseña, espera por favor...</string>
-    <string name="settings_default_pwd_hashing_error_title">Error de hashing</string>
-    <string name="settings_default_pwd_hashing_error_message">Se ha producido un error durante la protección y salvaguardia de su contraseña</string>
-    <string name="settings_default_pwd_hashing_success_title">Contraseña guardado</string>
-    <string name="settings_default_pwd_hashing_success_message">Su contraseña fue segurido y guardado con éxito</string>
     <string name="change_settings">IR A LOS PARAMETROS</string>
     <string name="toast_delete_success">Eliminación exitosa</string>
     <string name="toast_delete_fail">Fracaso de la eliminación</string>
@@ -46,15 +38,12 @@
     <string name="toast_same_person_relation">Las personas de una relación tienen que ser distintos</string>
     <string name="toast_relation_type_non_selected">"Tiene que seleccionar un tipo de relación válido "</string>
     <string name="toast_person_not_selected">Tiene que seleccionar personas haciendo clic en el menú desplegable</string>
-    <string name="toast_edit_person_relation">No se puede cambiar las personas cuando se edite una relación</string>
     <string name="add_person_activity_title">Añadir una persona</string>
     <string name="add_relation_activity_title">Añadir una relación</string>
     <string name="display_details_relation_activity_title">Detalles de la relación</string>
     <string name="display_details_person_activity_title">Detalles de la persona</string>
     <string name="manage_persons_activity_title">Gestionar las personas</string>
     <string name="manage_relations_activity_title">Gestionar las relaciones</string>
-    <string name="bottom_menu_page_1">Página 1</string>
-    <string name="bottom_menu_page_2">Página 1</string>
     <string name="age_title">Edad:</string>
     <string name="sex_title">Sexo:</string>
     <string name="button_edit_title">Modificar</string>
