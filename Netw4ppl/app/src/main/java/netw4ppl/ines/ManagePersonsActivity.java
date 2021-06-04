@@ -26,6 +26,7 @@ import netw4ppl.ines.utils.PersonListAdapter;
 
 public class ManagePersonsActivity extends AppCompatActivity {
 
+    // TODO changer le static ici car c'est une memory leak
     private static PersonListAdapter mAdapter;
     FloatingActionButton mButtonAdd;
     ListView mListView;
@@ -106,6 +107,10 @@ public class ManagePersonsActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Function to update the adapter. During an onResume of the activity, this method will be called in
+     * case there have been any changes in the adapter (add, modification or deletion of a person)
+     */
     public static void updateAdapter() {
         mAdapter.notifyDataSetChanged();
     }
