@@ -14,17 +14,30 @@ import java.util.ArrayList;
 
 import netw4ppl.ines.R;
 
+/**
+ * Class to create an ArrayAdapter of Relation objects. This class is currently used in the DisplayDetailsPersonActivity
+ * to show the "relations to".
+ */
 public class PersonDetailsRelationToAdapter  extends ArrayAdapter<Relation> {
     private final Context mContext;
     private final int mResource;
 
+    /**
+     * A basic viewholder to put a person's name and a relation type
+     */
     private static class ViewHolder {
         TextView name_person;
         TextView relation_type;
     }
 
-    public PersonDetailsRelationToAdapter(Context context, int resource, ArrayList<Relation> fields) {
-        super(context, resource, fields);
+    /**
+     * The class constructor
+     * @param context the application context
+     * @param resource an int representing the id of the layout to put the elements inside
+     * @param relations an ArrayList of Relation objects
+     */
+    public PersonDetailsRelationToAdapter(Context context, int resource, ArrayList<Relation> relations) {
+        super(context, resource, relations);
         mContext = context;
         mResource = resource;
     }
@@ -59,5 +72,12 @@ public class PersonDetailsRelationToAdapter  extends ArrayAdapter<Relation> {
         holder.relation_type.setText(relation_key);
 
         return convertView;
+    }
+
+    /**
+     * Function to notify the adapter if elements were added, deleted or modified.
+     */
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
     }
 }
