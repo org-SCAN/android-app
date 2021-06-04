@@ -660,7 +660,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
 
         /**
-         * Function to set a view. 
+         * Function to set a view.
          *
          * @param view a ViewHolderCalendarView object
          */
