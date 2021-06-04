@@ -7,7 +7,6 @@
     <string name="title_send_data">Send Data</string>
 
     <!-- Preference Titles -->
-    <string name="action_settings">Settings</string>
     <string name="settings_server_header">Server</string>
     <string name="settings_email_header">Email</string>
     <string name="settings_sending_option_header">Sending option</string>
@@ -37,7 +36,6 @@
 
     <!-- Delete Preferences -->
     <string name="settings_delete_option_key" translatable="false">settings_delete</string>
-    <string name="settings_delete_option_title">Clear data</string>
 
     <string name="settings_delete_button_key" translatable="false">delete_button</string>
     <string name="settings_delete_button_title">Clear</string>
@@ -63,12 +61,6 @@
     <string name="no_submit_option_msg">Please select a submit option</string>
 
     <!-- Strings Passwords hashing messages -->
-    <string name="settings_default_pwd_hashing_pending_title">Securing your password…</string>
-    <string name="settings_default_pwd_hashing_pending_message">Your password is being secured and saved, please wait…</string>
-    <string name="settings_default_pwd_hashing_error_title">Hashing Error</string>
-    <string name="settings_default_pwd_hashing_error_message">An error occurred while trying to secure and save your password.</string>
-    <string name="settings_default_pwd_hashing_success_title">Password remembered</string>
-    <string name="settings_default_pwd_hashing_success_message">Your password has been successfully secured and saved.</string>
 
     <!-- Strings Alert Dialog Button Messages -->
     <string name="change_settings">GO TO SETTINGS</string>
@@ -83,7 +75,6 @@
     <string name="toast_same_person_relation">The persons of a relation must be different</string>
     <string name="toast_relation_type_non_selected">You must select a valid relation type</string>
     <string name="toast_person_not_selected">You must select persons by clicking on the dropdown menu</string>
-    <string name="toast_edit_person_relation">Persons can not be modified while editing a relation</string>
 
 
     <!-- Activity names -->
@@ -104,9 +95,6 @@
     <string name="filename_persons" translatable="false">/persons.json</string>
     <string name="filename_relations" translatable="false">/relations.json</string>
 
-    <string name="bottom_menu_page_1">Page 1</string>
-    <string name="bottom_menu_page_2">Page 2</string>
-
     <string name="age_title">Age: </string>
     <string name="sex_title">Sex: </string>
 
@@ -125,9 +113,6 @@
 
     <string name="button_relation_save_title">Save</string>
     <string name="button_relation_cancel_title">Cancel</string>
-
-    <string name="hint_unique_id_key" translatable="false">AAA</string>
-    <string name="hint_unique_id_value" translatable="false">000000</string>
 
     <string name="delete_person_title">Delete Person</string>
     <string name="delete_person_message">Do you really want to delete this person from the application?</string>
