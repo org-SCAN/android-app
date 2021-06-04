@@ -1,0 +1,71 @@
+\hypertarget{classnetw4ppl_1_1ines_1_1_manage_relations_activity}{}\doxysection{netw4ppl.\+ines.\+Manage\+Relations\+Activity Class Reference}
+\label{classnetw4ppl_1_1ines_1_1_manage_relations_activity}\index{netw4ppl.ines.ManageRelationsActivity@{netw4ppl.ines.ManageRelationsActivity}}
+Inheritance diagram for netw4ppl.\+ines.\+Manage\+Relations\+Activity\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classnetw4ppl_1_1ines_1_1_manage_relations_activity}
+\end{center}
+\end{figure}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a4c98f3c2eacc5fef22984f23a08cdb96}\label{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a4c98f3c2eacc5fef22984f23a08cdb96}} 
+static void {\bfseries update\+Relations} (Person person)
+\item 
+static void \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a2135740f65821e1fd759a3aa436a4f02}{read\+Relations\+File}} (Context context)  throws IOException, JSONException 
+\item 
+static String \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a45e12c67cfdbc87058f64e3e0b19a1dc}{formatter\+Json\+File}} ()
+\item 
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a0daee7008caa443d93b40d8340ef4a5f}\label{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a0daee7008caa443d93b40d8340ef4a5f}} 
+static void {\bfseries update\+Adapter} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a44c5078fd0ef089e9e40d78504813739}\label{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a44c5078fd0ef089e9e40d78504813739}} 
+static Array\+List$<$ Relation $>$ {\bfseries array\+\_\+relations} = new Array\+List$<$Relation$>$()
+\item 
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a2bc619ca4ebeddf7e2c7614644180588}\label{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a2bc619ca4ebeddf7e2c7614644180588}} 
+static Relation\+List\+Adapter {\bfseries m\+Adapter}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a27b34a780ef04edbb7d19662ecb9e862}\label{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a27b34a780ef04edbb7d19662ecb9e862}} 
+void {\bfseries on\+Create} (Bundle saved\+Instance\+State)
+\item 
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_relations_activity_ac0c47e0b33d801b691f4346179f5c3e0}\label{classnetw4ppl_1_1ines_1_1_manage_relations_activity_ac0c47e0b33d801b691f4346179f5c3e0}} 
+void {\bfseries on\+Resume} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a45e12c67cfdbc87058f64e3e0b19a1dc}\label{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a45e12c67cfdbc87058f64e3e0b19a1dc}} 
+\index{netw4ppl.ines.ManageRelationsActivity@{netw4ppl.ines.ManageRelationsActivity}!formatterJsonFile@{formatterJsonFile}}
+\index{formatterJsonFile@{formatterJsonFile}!netw4ppl.ines.ManageRelationsActivity@{netw4ppl.ines.ManageRelationsActivity}}
+\doxysubsubsection{\texorpdfstring{formatterJsonFile()}{formatterJsonFile()}}
+{\footnotesize\ttfamily static String netw4ppl.\+ines.\+Manage\+Relations\+Activity.\+formatter\+Json\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Convert the Array\+List of Relations in JSONArray to then convert it in a String because the server is expecting such format.
+
+\begin{DoxyReturn}{Returns}
+a String containing the Relations contained in relation, on a JSONArray format 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a2135740f65821e1fd759a3aa436a4f02}\label{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a2135740f65821e1fd759a3aa436a4f02}} 
+\index{netw4ppl.ines.ManageRelationsActivity@{netw4ppl.ines.ManageRelationsActivity}!readRelationsFile@{readRelationsFile}}
+\index{readRelationsFile@{readRelationsFile}!netw4ppl.ines.ManageRelationsActivity@{netw4ppl.ines.ManageRelationsActivity}}
+\doxysubsubsection{\texorpdfstring{readRelationsFile()}{readRelationsFile()}}
+{\footnotesize\ttfamily static void netw4ppl.\+ines.\+Manage\+Relations\+Activity.\+read\+Relations\+File (\begin{DoxyParamCaption}\item[{Context}]{context }\end{DoxyParamCaption}) throws IOException, JSONException\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Read the Relations File associated with this application. The path is determined based on strings in the strings.\+xml file
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & the context of the current activity \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Netw4ppl/app/src/main/java/netw4ppl/ines/Manage\+Relations\+Activity.\+java\end{DoxyCompactItemize}
