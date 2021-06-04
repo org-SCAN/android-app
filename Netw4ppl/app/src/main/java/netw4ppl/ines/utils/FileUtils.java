@@ -43,7 +43,7 @@ public class FileUtils {
     }
 
     /**
-     * Create the two .json empty files : refugees.json and links.json
+     * Create the two .json empty files : persons.json and links.json
      *
      * @param path path of the directory for the two files
      * @return a boolean to determine whether the files were created successfully or not
@@ -63,6 +63,11 @@ public class FileUtils {
         return result_creation;
     }
 
+    /**
+     * Create an empty directory
+     * @param path path of the directory to be created
+     * @return a boolean to determine whether the directory was successfully created or not
+     */
     public static boolean createDirectory(String path) {
         boolean result = true;
         File dir = new File(path);
@@ -72,12 +77,21 @@ public class FileUtils {
         return result;
     }
 
+    /**
+     * Returns a boolean telling if a directory already exists or not
+     * @param path path of the directory to be looked for
+     * @return a boolean telling if the directory already exists or not
+     */
     public static boolean directoryExists(String path) {
-        boolean res = true;
         File dir = new File(path);
         return dir.exists() && dir.isDirectory();
     }
 
+    /**
+     * Returns a boolean telling if a file already exists or not
+     * @param path path of the file to be looked for
+     * @return a boolean telling if the file already exists or not
+     */
     public static boolean fileExists(String path) {
         File file = new File(path);
         return file.exists();
@@ -212,7 +226,7 @@ public class FileUtils {
     }
 
     /**
-     * Load the application ID from a file anc create if it doesn't already exists.
+     * Load the application ID from a file, creates it if it doesn't already exists.
      *
      * @param context the application context
      * @return a string containing the application id
@@ -280,10 +294,10 @@ public class FileUtils {
     }
 
     /**
-     * Save the Persons in a file
-     *
-     * @param context the application context
-     * @return a JSONObject
+     *Loads the fields configuration file to store it in a JsonObject
+     * @param context the context of the application
+     * @return a JSonObject of the configuration file
+     * @throws IOException
      */
     public static JSONObject loadConfigFromFile(Context context) throws IOException {
         // check if the file "fields.json" in "config/" directory exists
