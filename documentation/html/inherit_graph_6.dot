@@ -1,0 +1,20 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node17 [label="ArrayAdapter",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node17 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node0 [label="netw4ppl.ines.utils.Person\lDetailsListAdapter",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_person_details_list_adapter.html",tooltip=" "];
+  Node17 -> Node19 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 [label="netw4ppl.ines.utils.Person\lDetailsRelationFromAdapter",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_person_details_relation_from_adapter.html",tooltip=" "];
+  Node17 -> Node20 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node20 [label="netw4ppl.ines.utils.Person\lDetailsRelationToAdapter",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_person_details_relation_to_adapter.html",tooltip=" "];
+  Node17 -> Node21 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 [label="netw4ppl.ines.utils.Person\lListAdapter",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_person_list_adapter.html",tooltip=" "];
+  Node17 -> Node22 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node22 [label="netw4ppl.ines.utils.Relation\lListAdapter",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_relation_list_adapter.html",tooltip=" "];
+  Node23 [label="Filterable",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node23 -> Node21 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

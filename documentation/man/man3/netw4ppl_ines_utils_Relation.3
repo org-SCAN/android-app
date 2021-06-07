@@ -1,0 +1,411 @@
+.TH "netw4ppl.ines.utils.Relation" 3 "Mon Jun 7 2021" "Version 1.0.3" "Netw4ppl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+netw4ppl.ines.utils.Relation
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits JSONObject\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBRelation\fP ()"
+.br
+.ti -1c
+.RI "\fBRelation\fP (String infos_relat)  throws JSONException "
+.br
+.ti -1c
+.RI "void \fBsetFromFullname\fP (String full_name)"
+.br
+.ti -1c
+.RI "void \fBsetToFullname\fP (String full_name)"
+.br
+.ti -1c
+.RI "void \fBsetRelationType\fP (String key_relation)"
+.br
+.ti -1c
+.RI "void \fBsetPersonTo\fP (\fBPerson\fP person)"
+.br
+.ti -1c
+.RI "void \fBsetPersonTo\fP (String unique_id)"
+.br
+.ti -1c
+.RI "void \fBsetPersonFrom\fP (\fBPerson\fP person)"
+.br
+.ti -1c
+.RI "void \fBsetPersonFrom\fP (String unique_id)"
+.br
+.ti -1c
+.RI "void \fBsetDetails\fP (String details)"
+.br
+.ti -1c
+.RI "void \fBsetUUIDRelation\fP ()"
+.br
+.ti -1c
+.RI "void \fBputInfo\fP (String key, String info)"
+.br
+.ti -1c
+.RI "String \fBgetInfoByKey\fP (String key)"
+.br
+.ti -1c
+.RI "boolean \fBisSameRelation\fP (\fBRelation\fP relat)"
+.br
+.ti -1c
+.RI "boolean \fBisPersonInRelation\fP (\fBPerson\fP p)"
+.br
+.ti -1c
+.RI "String \fBgetFromID\fP ()"
+.br
+.ti -1c
+.RI "String \fBgetToID\fP ()"
+.br
+.ti -1c
+.RI "String \fBgetFromFullname\fP ()"
+.br
+.ti -1c
+.RI "String \fBgetToFullname\fP ()"
+.br
+.ti -1c
+.RI "String \fBgetFrom\fP ()"
+.br
+.ti -1c
+.RI "String \fBgetTo\fP ()"
+.br
+.ti -1c
+.RI "String \fBgetDetails\fP ()"
+.br
+.ti -1c
+.RI "String \fBgetRelationType\fP ()"
+.br
+.ti -1c
+.RI "String \fBgetRelationTypeFull\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetCreationDate\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetUpdateDate\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetApplicationID\fP (String app_id)"
+.br
+.ti -1c
+.RI "void \fBassociateIDWithNames\fP (ArrayList< \fBPerson\fP > array_persons)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 17 of file Relation\&.java\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "netw4ppl\&.ines\&.utils\&.Relation\&.Relation ()"
+Default constructor of \fBRelation\fP Sets from_person_name_ and to_person_name to empty Strings 
+.PP
+Definition at line 26 of file Relation\&.java\&.
+.SS "netw4ppl\&.ines\&.utils\&.Relation\&.Relation (String infos_relat) throws JSONException"
+Constructor of \fBRelation\fP Sets the informations of a \fBRelation\fP 
+.PP
+\fBParameters\fP
+.RS 4
+\fIinfos_relat\fP String containing the informations of a relation in a JSON syntax 
+.RE
+.PP
+\fBExceptions\fP
+.RS 4
+\fIJSONException\fP 
+.RE
+.PP
+
+.PP
+Definition at line 39 of file Relation\&.java\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "void netw4ppl\&.ines\&.utils\&.Relation\&.associateIDWithNames (ArrayList< \fBPerson\fP > array_persons)"
+Associates the unique_ids of the Persons of a \fBRelation\fP to the corresponding names Sets from_person_name and to_person_name if the unique_ids correspond 
+.PP
+\fBParameters\fP
+.RS 4
+\fIarray_persons\fP ArrayList<Person> containing the list of the existing Persons These persons are compared to the ones of the \fBRelation\fP in order to match names and unique_ids 
+.RE
+.PP
+
+.PP
+Definition at line 295 of file Relation\&.java\&.
+.SS "String netw4ppl\&.ines\&.utils\&.Relation\&.getDetails ()"
+Returns the details of the \fBRelation\fP 
+.PP
+\fBReturns\fP
+.RS 4
+a String corresponding to the details of a \fBRelation\fP 
+.RE
+.PP
+
+.PP
+Definition at line 229 of file Relation\&.java\&.
+.SS "String netw4ppl\&.ines\&.utils\&.Relation\&.getFrom ()"
+Returns the unique_id and the fullname of the From \fBPerson\fP of the \fBRelation\fP 
+.PP
+\fBReturns\fP
+.RS 4
+a String with the format 'unique_id - fullname' corresponding to the From \fBPerson\fP of the \fBRelation\fP 
+.RE
+.PP
+
+.PP
+Definition at line 213 of file Relation\&.java\&.
+.SS "String netw4ppl\&.ines\&.utils\&.Relation\&.getFromFullname ()"
+Returns the fullname of the From \fBPerson\fP of the \fBRelation\fP 
+.PP
+\fBReturns\fP
+.RS 4
+a String corresponding to the fullname of the From \fBPerson\fP of the \fBRelation\fP 
+.RE
+.PP
+
+.PP
+Definition at line 197 of file Relation\&.java\&.
+.SS "String netw4ppl\&.ines\&.utils\&.Relation\&.getFromID ()"
+Returns the unique_id of the From person of the \fBRelation\fP 
+.PP
+\fBReturns\fP
+.RS 4
+a String corresponding to the unique_id of the From \fBPerson\fP of the \fBRelation\fP 
+.RE
+.PP
+
+.PP
+Definition at line 181 of file Relation\&.java\&.
+.SS "String netw4ppl\&.ines\&.utils\&.Relation\&.getInfoByKey (String key)"
+Returns a String corresponding to an information's value associated to a key 
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP String of the key of the information we look for 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+String containing the value associated to the key or an empty String if there was no associated value 
+.RE
+.PP
+
+.PP
+Definition at line 139 of file Relation\&.java\&.
+.SS "String netw4ppl\&.ines\&.utils\&.Relation\&.getRelationType ()"
+Returns the RelationType of the \fBRelation\fP 
+.PP
+\fBReturns\fP
+.RS 4
+a String corresponding to the RelationType of a \fBRelation\fP Warning : it only returns the code of the RelationType 
+.RE
+.PP
+
+.PP
+Definition at line 238 of file Relation\&.java\&.
+.SS "String netw4ppl\&.ines\&.utils\&.Relation\&.getRelationTypeFull ()"
+Returns the RelationType of the \fBRelation\fP 
+.PP
+\fBReturns\fP
+.RS 4
+a String corresponding to the RelationType of a \fBRelation\fP This method returns the full name of the RelationType 
+.RE
+.PP
+
+.PP
+Definition at line 247 of file Relation\&.java\&.
+.SS "String netw4ppl\&.ines\&.utils\&.Relation\&.getTo ()"
+Returns the unique_id and the fullname of the To \fBPerson\fP of the \fBRelation\fP 
+.PP
+\fBReturns\fP
+.RS 4
+a String with the format 'unique_id - fullname' corresponding to the TO \fBPerson\fP of the \fBRelation\fP 
+.RE
+.PP
+
+.PP
+Definition at line 221 of file Relation\&.java\&.
+.SS "String netw4ppl\&.ines\&.utils\&.Relation\&.getToFullname ()"
+Returns the fullname of the To \fBPerson\fP of the \fBRelation\fP 
+.PP
+\fBReturns\fP
+.RS 4
+a String corresponding to the fullname of the To \fBPerson\fP of the \fBRelation\fP 
+.RE
+.PP
+
+.PP
+Definition at line 205 of file Relation\&.java\&.
+.SS "String netw4ppl\&.ines\&.utils\&.Relation\&.getToID ()"
+Returns the unique_id of the To person of the \fBRelation\fP 
+.PP
+\fBReturns\fP
+.RS 4
+a String corresponding to the unique_id of the To \fBPerson\fP of the \fBRelation\fP 
+.RE
+.PP
+
+.PP
+Definition at line 189 of file Relation\&.java\&.
+.SS "boolean netw4ppl\&.ines\&.utils\&.Relation\&.isPersonInRelation (\fBPerson\fP p)"
+Tests if a \fBPerson\fP is already From or To of the \fBRelation\fP we use 
+.PP
+\fBParameters\fP
+.RS 4
+\fIp\fP \fBPerson\fP to be tested 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a boolean telling if the \fBPerson\fP is already contained in the \fBRelation\fP, true if yes, false if not 
+.RE
+.PP
+
+.PP
+Definition at line 169 of file Relation\&.java\&.
+.SS "boolean netw4ppl\&.ines\&.utils\&.Relation\&.isSameRelation (\fBRelation\fP relat)"
+Tests the equality of the \fBRelation\fP we use with another one 
+.PP
+\fBParameters\fP
+.RS 4
+\fIrelat\fP \fBRelation\fP to be tested for equality 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a boolean, true if the relations are equal, false if they are different 
+.RE
+.PP
+
+.PP
+Definition at line 154 of file Relation\&.java\&.
+.SS "void netw4ppl\&.ines\&.utils\&.Relation\&.putInfo (String key, String info)"
+Adds an information to the \fBRelation\fP with the format 'key:value'
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP String containing the key of the information to be added 
+.br
+\fIinfo\fP String containing the value of the information to be added 
+.RE
+.PP
+
+.PP
+Definition at line 126 of file Relation\&.java\&.
+.SS "void netw4ppl\&.ines\&.utils\&.Relation\&.setApplicationID (String app_id)"
+Adds the application_id to the informations of a \fBRelation\fP for information tracking purposes 
+.PP
+\fBParameters\fP
+.RS 4
+\fIapp_id\fP String corresponding to the unique application ID of the device 
+.RE
+.PP
+
+.PP
+Definition at line 285 of file Relation\&.java\&.
+.SS "void netw4ppl\&.ines\&.utils\&.Relation\&.setCreationDate ()"
+Sets the date at which the \fBRelation\fP was created and adds it to the \fBRelation\fP informations 
+.PP
+Definition at line 254 of file Relation\&.java\&.
+.SS "void netw4ppl\&.ines\&.utils\&.Relation\&.setDetails (String details)"
+Sets the details of a Relations using a String 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdetails\fP details to be added to the \fBRelation\fP 
+.RE
+.PP
+
+.PP
+Definition at line 108 of file Relation\&.java\&.
+.SS "void netw4ppl\&.ines\&.utils\&.Relation\&.setFromFullname (String full_name)"
+Sets the fullname of the From person 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfull_name\fP String of the From person's fullname 
+.RE
+.PP
+
+.PP
+Definition at line 50 of file Relation\&.java\&.
+.SS "void netw4ppl\&.ines\&.utils\&.Relation\&.setPersonFrom (\fBPerson\fP person)"
+Sets the From informations of a relation using a \fBPerson\fP 
+.PP
+\fBParameters\fP
+.RS 4
+\fIperson\fP From \fBPerson\fP used to set the relation 
+.RE
+.PP
+
+.PP
+Definition at line 91 of file Relation\&.java\&.
+.SS "void netw4ppl\&.ines\&.utils\&.Relation\&.setPersonFrom (String unique_id)"
+Sets the From informations of a relation using a String 
+.PP
+\fBParameters\fP
+.RS 4
+\fIunique_id\fP String containing the unique_id of the From \fBPerson\fP 
+.RE
+.PP
+
+.PP
+Definition at line 100 of file Relation\&.java\&.
+.SS "void netw4ppl\&.ines\&.utils\&.Relation\&.setPersonTo (\fBPerson\fP person)"
+Sets the To informations of a relation using a \fBPerson\fP 
+.PP
+\fBParameters\fP
+.RS 4
+\fIperson\fP To \fBPerson\fP used to set the relation 
+.RE
+.PP
+
+.PP
+Definition at line 74 of file Relation\&.java\&.
+.SS "void netw4ppl\&.ines\&.utils\&.Relation\&.setPersonTo (String unique_id)"
+Sets the To informations of a relation using a String 
+.PP
+\fBParameters\fP
+.RS 4
+\fIunique_id\fP String containing the unique_id of the To \fBPerson\fP 
+.RE
+.PP
+
+.PP
+Definition at line 83 of file Relation\&.java\&.
+.SS "void netw4ppl\&.ines\&.utils\&.Relation\&.setRelationType (String key_relation)"
+Sets the relation type using the key of a relation type (e\&.g SE for service) 
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey_relation\fP String of the key of a relation type 
+.RE
+.PP
+
+.PP
+Definition at line 66 of file Relation\&.java\&.
+.SS "void netw4ppl\&.ines\&.utils\&.Relation\&.setToFullname (String full_name)"
+Sets the fullname of the To person 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfull_name\fP String of the To person's fullname 
+.RE
+.PP
+
+.PP
+Definition at line 58 of file Relation\&.java\&.
+.SS "void netw4ppl\&.ines\&.utils\&.Relation\&.setUpdateDate ()"
+Sets the date at which the \fBRelation\fP was modified and adds it to the \fBRelation\fP informations This date is different from the creation date 
+.PP
+Definition at line 267 of file Relation\&.java\&.
+.SS "void netw4ppl\&.ines\&.utils\&.Relation\&.setUUIDRelation ()"
+Sets the Unique ID of a \fBRelation\fP 
+.PP
+Definition at line 115 of file Relation\&.java\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Netw4ppl from the source code\&.

@@ -1,0 +1,135 @@
+.TH "netw4ppl.ines.AddPersonActivity" 3 "Mon Jun 7 2021" "Version 1.0.3" "Netw4ppl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+netw4ppl.ines.AddPersonActivity
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits AppCompatActivity\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "boolean \fBverificationInputPerson\fP ()"
+.br
+.ti -1c
+.RI "boolean \fBsaveIds\fP (Context context, \fBPerson\fP person)"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static String \fBgetDefaultKey\fP ()"
+.br
+.ti -1c
+.RI "static void \fBsetDefaultKey\fP (String tricode)"
+.br
+.ti -1c
+.RI "static int \fBgetNextId\fP (String key)"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static JSONObject \fBjson_ids\fP = new JSONObject()"
+.br
+.ti -1c
+.RI "static \fBPerson\fP \fBperson\fP"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBonCreate\fP (Bundle savedInstanceState)"
+.br
+.ti -1c
+.RI "void \fBonDestroy\fP ()"
+.br
+.ti -1c
+.RI "void \fBonSaveInstanceState\fP (@NonNull Bundle outState)"
+.br
+.ti -1c
+.RI "void \fBonRestoreInstanceState\fP (@NonNull Bundle savedInstanceState)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 30 of file AddPersonActivity\&.java\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "static String netw4ppl\&.ines\&.AddPersonActivity\&.getDefaultKey ()\fC [static]\fP"
+Get the 3-letters code by default\&. Set by default at 'AAA'
+.PP
+\fBReturns\fP
+.RS 4
+a String which gives the 3-letters code by default 
+.RE
+.PP
+
+.PP
+Definition at line 144 of file AddPersonActivity\&.java\&.
+.SS "static int netw4ppl\&.ines\&.AddPersonActivity\&.getNextId (String key)\fC [static]\fP"
+Return the next id available for a specific key given
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP a String of letters, usually a 3-letters code 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+an int of the first value available for this 3-letters code 
+.RE
+.PP
+
+.PP
+Definition at line 179 of file AddPersonActivity\&.java\&.
+.SS "boolean netw4ppl\&.ines\&.AddPersonActivity\&.saveIds (Context context, \fBPerson\fP person)"
+Save the file containing the ids (3-letters code + the value associated) Check before saving if for the 3-letters code, the value associated is the biggest one or not\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP context of the activity/application 
+.br
+\fIperson\fP the person currently being added/edited 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a boolean to determine whether the file was successfully saved or not 
+.RE
+.PP
+
+.PP
+Definition at line 234 of file AddPersonActivity\&.java\&.
+.SS "static void netw4ppl\&.ines\&.AddPersonActivity\&.setDefaultKey (String tricode)\fC [static]\fP"
+Function to set the default key for the 'unique ids'\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fItricode\fP a String composed of three letters 
+.RE
+.PP
+
+.PP
+Definition at line 165 of file AddPersonActivity\&.java\&.
+.SS "boolean netw4ppl\&.ines\&.AddPersonActivity\&.verificationInputPerson ()"
+Used to determine if the required fields for a person were completed or not\&. A toast is displayed if some required fields are not completed, and the user is notified of the different fields to complete\&.
+.PP
+\fBReturns\fP
+.RS 4
+a boolean\&. True if all the required fields are correctly completed or false if not\&. 
+.RE
+.PP
+
+.PP
+Definition at line 198 of file AddPersonActivity\&.java\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Netw4ppl from the source code\&.

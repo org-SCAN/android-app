@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -20,6 +24,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo_netw4ppl_png.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Netw4ppl
    &#160;<span id="projectnumber">1.0.3</span>
@@ -47,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classnetw4ppl_1_1ines_1_1utils_1_1_file_utils.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -61,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><b>netw4ppl</b></li><li class="navelem"><b>ines</b></li><li class="navelem"><b>utils</b></li><li class="navelem"><a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_file_utils.html">FileUtils</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
@@ -110,7 +127,10 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:aaf3424c78ffa9395748e9d2e2152884b"><td class="memItemLeft" align="right" valign="top">static JSONObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_file_utils.html#aaf3424c78ffa9395748e9d2e2152884b">loadConfigFromFile</a> (Context context)  throws IOException </td></tr>
 <tr class="separator:aaf3424c78ffa9395748e9d2e2152884b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="_file_utils_8java_source.html#l00026">26</a> of file <a class="el" href="_file_utils_8java_source.html">FileUtils.java</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="affc2f584bd632cd4816c1348ce1ca7d8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#affc2f584bd632cd4816c1348ce1ca7d8">&#9670;&nbsp;</a></span>clearDirectory()</h2>
 
@@ -130,7 +150,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -142,6 +162,13 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if the directory content was completely deleted </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_file_utils_8java_source.html#l00173">173</a> of file <a class="el" href="_file_utils_8java_source.html">FileUtils.java</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_affc2f584bd632cd4816c1348ce1ca7d8_cgraph.png" border="0" usemap="#aclassnetw4ppl_1_1ines_1_1utils_1_1_file_utils_affc2f584bd632cd4816c1348ce1ca7d8_cgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -164,7 +191,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -175,6 +202,8 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a boolean to determine whether the directory was successfully created or not </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_file_utils_8java_source.html#l00071">71</a> of file <a class="el" href="_file_utils_8java_source.html">FileUtils.java</a>.</p>
 
 </div>
 </div>
@@ -197,7 +226,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -209,6 +238,8 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a boolean to determine whether the file was created successfully or not </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_file_utils_8java_source.html#l00034">34</a> of file <a class="el" href="_file_utils_8java_source.html">FileUtils.java</a>.</p>
 
 </div>
 </div>
@@ -241,7 +272,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -253,6 +284,13 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a boolean to determine whether the files were created successfully or not </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_file_utils_8java_source.html#l00051">51</a> of file <a class="el" href="_file_utils_8java_source.html">FileUtils.java</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_adf2e3d07722da67e934a522aa8da7070_cgraph.png" border="0" usemap="#aclassnetw4ppl_1_1ines_1_1utils_1_1_file_utils_adf2e3d07722da67e934a522aa8da7070_cgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -275,7 +313,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -287,6 +325,8 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if file was deleted </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_file_utils_8java_source.html#l00162">162</a> of file <a class="el" href="_file_utils_8java_source.html">FileUtils.java</a>.</p>
 
 </div>
 </div>
@@ -309,7 +349,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -320,6 +360,8 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a boolean telling if the directory already exists or not </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_file_utils_8java_source.html#l00085">85</a> of file <a class="el" href="_file_utils_8java_source.html">FileUtils.java</a>.</p>
 
 </div>
 </div>
@@ -342,7 +384,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -353,6 +395,8 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a boolean telling if the file already exists or not </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_file_utils_8java_source.html#l00095">95</a> of file <a class="el" href="_file_utils_8java_source.html">FileUtils.java</a>.</p>
 
 </div>
 </div>
@@ -375,7 +419,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -387,6 +431,13 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a string containing the application id </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_file_utils_8java_source.html#l00234">234</a> of file <a class="el" href="_file_utils_8java_source.html">FileUtils.java</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a35f67202148822992b697974c57f3fab_cgraph.png" border="0" usemap="#aclassnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a35f67202148822992b697974c57f3fab_cgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -409,7 +460,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -426,6 +477,13 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="_file_utils_8java_source.html#l00302">302</a> of file <a class="el" href="_file_utils_8java_source.html">FileUtils.java</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_aaf3424c78ffa9395748e9d2e2152884b_cgraph.png" border="0" usemap="#aclassnetw4ppl_1_1ines_1_1utils_1_1_file_utils_aaf3424c78ffa9395748e9d2e2152884b_cgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -448,7 +506,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -460,6 +518,13 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>return a string containing all the ids and the last value for the tricode </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_file_utils_8java_source.html#l00211">211</a> of file <a class="el" href="_file_utils_8java_source.html">FileUtils.java</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_af27fc617e72353264982b550834193fd_cgraph.png" border="0" usemap="#aclassnetw4ppl_1_1ines_1_1utils_1_1_file_utils_af27fc617e72353264982b550834193fd_cgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -482,7 +547,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -494,6 +559,13 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>return a String of the content of the file </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_file_utils_8java_source.html#l00126">126</a> of file <a class="el" href="_file_utils_8java_source.html">FileUtils.java</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a93166925da21ebeca0d21c662d9941a6_cgraph.png" border="0" usemap="#aclassnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a93166925da21ebeca0d21c662d9941a6_cgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -516,7 +588,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -528,6 +600,8 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>return a String of the content of the file </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_file_utils_8java_source.html#l00137">137</a> of file <a class="el" href="_file_utils_8java_source.html">FileUtils.java</a>.</p>
 
 </div>
 </div>
@@ -560,7 +634,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -573,6 +647,13 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a boolean, true if the save was possible, else return false </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_file_utils_8java_source.html#l00261">261</a> of file <a class="el" href="_file_utils_8java_source.html">FileUtils.java</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a69d1ff33a8f80c5134f585554518c965_cgraph.png" border="0" usemap="#aclassnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a69d1ff33a8f80c5134f585554518c965_cgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -605,7 +686,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -618,6 +699,13 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a boolean, true if the save was possible, else return false </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_file_utils_8java_source.html#l00275">275</a> of file <a class="el" href="_file_utils_8java_source.html">FileUtils.java</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a836e16f232f122d5db8657828c371416_cgraph.png" border="0" usemap="#aclassnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a836e16f232f122d5db8657828c371416_cgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -650,7 +738,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -663,6 +751,13 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a boolean, true if the save was possible, else return false </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_file_utils_8java_source.html#l00289">289</a> of file <a class="el" href="_file_utils_8java_source.html">FileUtils.java</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a6e73527680c499f7454c624e382f7e2f_cgraph.png" border="0" usemap="#aclassnetw4ppl_1_1ines_1_1utils_1_1_file_utils_a6e73527680c499f7454c624e382f7e2f_cgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -695,7 +790,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -709,15 +804,21 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>return a boolean true if the writing was a success, false if not </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_file_utils_8java_source.html#l00107">107</a> of file <a class="el" href="_file_utils_8java_source.html">FileUtils.java</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Netw4ppl/app/src/main/java/netw4ppl/ines/utils/FileUtils.java</li>
+<li>app/src/main/java/netw4ppl/ines/utils/<a class="el" href="_file_utils_8java_source.html">FileUtils.java</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>netw4ppl</b></li><li class="navelem"><b>ines</b></li><li class="navelem"><b>utils</b></li><li class="navelem"><a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_file_utils.html">FileUtils</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

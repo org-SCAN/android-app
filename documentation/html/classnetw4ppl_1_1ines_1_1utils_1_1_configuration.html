@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -20,6 +24,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo_netw4ppl_png.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Netw4ppl
    &#160;<span id="projectnumber">1.0.3</span>
@@ -47,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classnetw4ppl_1_1ines_1_1utils_1_1_configuration.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -61,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><b>netw4ppl</b></li><li class="navelem"><b>ines</b></li><li class="navelem"><b>utils</b></li><li class="navelem"><a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_configuration.html">Configuration</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -102,15 +119,15 @@ Public Member Functions</h2></td></tr>
 HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_data_element.html">DataElement</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getHashMapDatabase</b> ()</td></tr>
 <tr class="separator:a3183975c3d84152e2fd246ebc5a622e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="_configuration_8java_source.html#l00016">16</a> of file <a class="el" href="_configuration_8java_source.html">Configuration.java</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a54e0fff2205c1f70b54ea881f5e251e6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a54e0fff2205c1f70b54ea881f5e251e6">&#9670;&nbsp;</a></span>createArrayFields()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void netw4ppl.ines.utils.Configuration.createArrayFields </td>
@@ -120,11 +137,6 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>Function used to create the ArrayList of the fields present in the <a class="el" href="classnetw4ppl_1_1ines_1_1_add_person_activity.html">AddPersonActivity</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -134,6 +146,8 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="_configuration_8java_source.html#l00172">172</a> of file <a class="el" href="_configuration_8java_source.html">Configuration.java</a>.</p>
+
 </div>
 </div>
 <a id="a27fc9931cdb1d4cb0e4a31914d651196"></a>
@@ -141,9 +155,6 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void netw4ppl.ines.utils.Configuration.createHashMaps </td>
@@ -163,11 +174,6 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>Function used to create not only hashmaps actually but also different objects. It used to create the different ArrayList of <a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_data_element.html">DataElement</a>, the associated HashMaps and the asociated Adapters.</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -178,6 +184,13 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="_configuration_8java_source.html#l00122">122</a> of file <a class="el" href="_configuration_8java_source.html">Configuration.java</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a27fc9931cdb1d4cb0e4a31914d651196_cgraph.png" border="0" usemap="#aclassnetw4ppl_1_1ines_1_1utils_1_1_configuration_a27fc9931cdb1d4cb0e4a31914d651196_cgraph" alt=""/></div>
+</div>
+
 </div>
 </div>
 <a id="a424f19c056f1de2ab994a1c525dd65d8"></a>
@@ -185,9 +198,6 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">String netw4ppl.ines.utils.Configuration.getApplicationId </td>
@@ -196,14 +206,11 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>Function to get the application ID from a <a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_configuration.html">Configuration</a> object.</p>
 <dl class="section return"><dt>Returns</dt><dd>a String </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_configuration_8java_source.html#l00036">36</a> of file <a class="el" href="_configuration_8java_source.html">Configuration.java</a>.</p>
 
 </div>
 </div>
@@ -212,9 +219,6 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">ArrayAdapter netw4ppl.ines.utils.Configuration.getArrayAdapter </td>
@@ -224,11 +228,6 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>Function to get an ArrayAdapter identified by a specific key.</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -239,6 +238,8 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>an ArrayAdapter object if the HashMap contains the key or return null. </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_configuration_8java_source.html#l00204">204</a> of file <a class="el" href="_configuration_8java_source.html">Configuration.java</a>.</p>
+
 </div>
 </div>
 <a id="ae2dfd739ef5c9e1f6f64d0349f3b7f5c"></a>
@@ -246,9 +247,6 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">ArrayList&lt;<a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_field.html">Field</a>&gt; netw4ppl.ines.utils.Configuration.getArrayFields </td>
@@ -257,14 +255,11 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>Function to get the ArrayList containing all the fields.</p>
 <dl class="section return"><dt>Returns</dt><dd>an ArrayList of <a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_field.html">Field</a> objects. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_configuration_8java_source.html#l00194">194</a> of file <a class="el" href="_configuration_8java_source.html">Configuration.java</a>.</p>
 
 </div>
 </div>
@@ -273,9 +268,6 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">String netw4ppl.ines.utils.Configuration.getElementFromTable </td>
@@ -295,11 +287,6 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>Get an element from our "internal database".</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -311,6 +298,13 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a String containing the name of the element in the displayed language or an empty string if the element was not found. </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_configuration_8java_source.html#l00108">108</a> of file <a class="el" href="_configuration_8java_source.html">Configuration.java</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnetw4ppl_1_1ines_1_1utils_1_1_configuration_a4c09b0d33a51f144d36fa7147c166f3b_cgraph.png" border="0" usemap="#aclassnetw4ppl_1_1ines_1_1utils_1_1_configuration_a4c09b0d33a51f144d36fa7147c166f3b_cgraph" alt=""/></div>
+</div>
+
 </div>
 </div>
 <a id="a33ba0136e9ef5cd8acb48b8e49113a46"></a>
@@ -318,9 +312,6 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_field.html">Field</a> netw4ppl.ines.utils.Configuration.getFieldFromHashMap </td>
@@ -330,11 +321,6 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>Get a <a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_field.html">Field</a> object from the HashMap of fields if the field identified by the parameter given exists.</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -345,6 +331,8 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>an object of type <a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_field.html">Field</a> if it exists or null. </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_configuration_8java_source.html#l00093">93</a> of file <a class="el" href="_configuration_8java_source.html">Configuration.java</a>.</p>
+
 </div>
 </div>
 <a id="aaae59eb34e71e5630f7360e79ee772cc"></a>
@@ -352,9 +340,6 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">HashMap&lt;String, HashMap&lt;String, <a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_data_element.html">DataElement</a>&gt; &gt; netw4ppl.ines.utils.Configuration.getHashMap_datatables </td>
@@ -363,14 +348,11 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>Get the hashmaps identified by a String and containing <a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_data_element.html">DataElement</a> objects. It is similar to a database. For example, we can get the tables like "Relations", "country", "role" etc.</p>
 <dl class="section return"><dt>Returns</dt><dd>a HashMap containing HashMaps identified by Strings. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_configuration_8java_source.html#l00065">65</a> of file <a class="el" href="_configuration_8java_source.html">Configuration.java</a>.</p>
 
 </div>
 </div>
@@ -379,9 +361,6 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">boolean netw4ppl.ines.utils.Configuration.hasElementInTable </td>
@@ -401,11 +380,6 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>Function to determine if given a specific table key (string) the given string for the key element is in the HashMap or not.</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -417,15 +391,21 @@ HashMap&lt; String, ArrayList&lt; <a class="el" href="classnetw4ppl_1_1ines_1_1u
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>boolean. True if the element identified by key_element is in HashMap identified by key_table. </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_configuration_8java_source.html#l00078">78</a> of file <a class="el" href="_configuration_8java_source.html">Configuration.java</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Netw4ppl/app/src/main/java/netw4ppl/ines/utils/Configuration.java</li>
+<li>app/src/main/java/netw4ppl/ines/utils/<a class="el" href="_configuration_8java_source.html">Configuration.java</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>netw4ppl</b></li><li class="navelem"><b>ines</b></li><li class="navelem"><b>utils</b></li><li class="navelem"><a class="el" href="classnetw4ppl_1_1ines_1_1utils_1_1_configuration.html">Configuration</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

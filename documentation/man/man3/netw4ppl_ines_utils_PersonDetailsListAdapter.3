@@ -1,0 +1,69 @@
+.TH "netw4ppl.ines.utils.PersonDetailsListAdapter" 3 "Mon Jun 7 2021" "Version 1.0.3" "Netw4ppl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+netw4ppl.ines.utils.PersonDetailsListAdapter
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits ArrayAdapter< Field >\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBPersonDetailsListAdapter\fP (Context context, int resource, ArrayList< \fBField\fP > fields, int index)"
+.br
+.ti -1c
+.RI "View \fBgetView\fP (int position, @Nullable View convertView, @NonNull ViewGroup parent)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Class to create a ListAdapter adapted to display the details of a person\&. 
+.PP
+Definition at line 27 of file PersonDetailsListAdapter\&.java\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "netw4ppl\&.ines\&.utils\&.PersonDetailsListAdapter\&.PersonDetailsListAdapter (Context context, int resource, ArrayList< \fBField\fP > fields, int index)"
+Constructor of the class 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP the application context 
+.br
+\fIresource\fP 
+.br
+\fIfields\fP an ArrayList of \fBField\fP objects 
+.br
+\fIindex\fP an int corresponding to the index of the person in the ManagePersonsActivity\&.array_persons object 
+.RE
+.PP
+
+.PP
+Definition at line 48 of file PersonDetailsListAdapter\&.java\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "View netw4ppl\&.ines\&.utils\&.PersonDetailsListAdapter\&.getView (int position, @Nullable View convertView, @NonNull ViewGroup parent)"
+Get the views to display the details of a person and set this values of the Labels\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIposition\fP the field index 
+.br
+\fIconvertView\fP a View 
+.br
+\fIparent\fP a ViewGroup 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+.RE
+.PP
+
+.PP
+Definition at line 66 of file PersonDetailsListAdapter\&.java\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Netw4ppl from the source code\&.

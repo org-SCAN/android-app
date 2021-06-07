@@ -1,0 +1,111 @@
+.TH "netw4ppl.ines.utils.InstantAutoComplete" 3 "Mon Jun 7 2021" "Version 1.0.3" "Netw4ppl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+netw4ppl.ines.utils.InstantAutoComplete
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits androidx\&.appcompat\&.widget\&.AppCompatAutoCompleteTextView\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBInstantAutoComplete\fP (Context context)"
+.br
+.ti -1c
+.RI "\fBInstantAutoComplete\fP (Context arg0, AttributeSet arg1)"
+.br
+.ti -1c
+.RI "\fBInstantAutoComplete\fP (Context arg0, AttributeSet arg1, int arg2)"
+.br
+.ti -1c
+.RI "boolean \fBenoughToFilter\fP ()"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBonFocusChanged\fP (boolean focused, int direction, Rect previouslyFocusedRect)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Class extending the AutoCompleteTextView class to modify its behaviour\&. 
+.PP
+Definition at line 10 of file InstantAutoComplete\&.java\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "netw4ppl\&.ines\&.utils\&.InstantAutoComplete\&.InstantAutoComplete (Context context)"
+Class constructor taking just the Context as an argument
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP the application Context 
+.RE
+.PP
+
+.PP
+Definition at line 17 of file InstantAutoComplete\&.java\&.
+.SS "netw4ppl\&.ines\&.utils\&.InstantAutoComplete\&.InstantAutoComplete (Context arg0, AttributeSet arg1)"
+Class constructor taking two parameters\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIarg0\fP the application context 
+.br
+\fIarg1\fP an AttributeSet object 
+.RE
+.PP
+
+.PP
+Definition at line 27 of file InstantAutoComplete\&.java\&.
+.SS "netw4ppl\&.ines\&.utils\&.InstantAutoComplete\&.InstantAutoComplete (Context arg0, AttributeSet arg1, int arg2)"
+Class constructor taking three parameters\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIarg0\fP the application context 
+.br
+\fIarg1\fP an AttributeSet object 
+.br
+\fIarg2\fP an int 
+.RE
+.PP
+
+.PP
+Definition at line 38 of file InstantAutoComplete\&.java\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "boolean netw4ppl\&.ines\&.utils\&.InstantAutoComplete\&.enoughToFilter ()"
+Always return true\&. That way, even when no letter is put in the AutoCompleteTextView, the dropdown will be shown\&.
+.PP
+\fBReturns\fP
+.RS 4
+a boolean, always true\&. 
+.RE
+.PP
+
+.PP
+Definition at line 49 of file InstantAutoComplete\&.java\&.
+.SS "void netw4ppl\&.ines\&.utils\&.InstantAutoComplete\&.onFocusChanged (boolean focused, int direction, Rect previouslyFocusedRect)\fC [protected]\fP"
+Override of the function onFocusChanged\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIfocused\fP a boolean 
+.br
+\fIdirection\fP an int 
+.br
+\fIpreviouslyFocusedRect\fP a Rect object 
+.RE
+.PP
+
+.PP
+Definition at line 61 of file InstantAutoComplete\&.java\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Netw4ppl from the source code\&.

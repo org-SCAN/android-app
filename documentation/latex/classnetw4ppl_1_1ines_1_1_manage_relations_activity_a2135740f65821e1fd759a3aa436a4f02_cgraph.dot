@@ -1,0 +1,24 @@
+digraph "netw4ppl.ines.ManageRelationsActivity.readRelationsFile"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="netw4ppl.ines.ManageRelations\lActivity.readRelationsFile",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="netw4ppl.ines.utils.Relation.associate\lIDWithNames",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_relation.html#ad758beb93d365b6dbfb84deb967cb422",tooltip=" "];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="netw4ppl.ines.utils.Person.get\lInfoByKey",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_person.html#aac5fc1d869afba24db0e941199b787aa",tooltip=" "];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="netw4ppl.ines.utils.File\lUtils.createDirectory",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_file_utils.html#a6dacfea9755bcfe03b4dff7651d6bcda",tooltip=" "];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="netw4ppl.ines.utils.File\lUtils.createFile",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_file_utils.html#a36128a95a9be40ce5ca3be03d9125a17",tooltip=" "];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="netw4ppl.ines.utils.File\lUtils.directoryExists",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_file_utils.html#a5f0f9fba13bb30496aa51ea47fc08c86",tooltip=" "];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="netw4ppl.ines.utils.File\lUtils.fileExists",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_file_utils.html#a262f1abc93a4091cd104b4d953973ed0",tooltip=" "];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid"];
+  Node8 [label="netw4ppl.ines.utils.File\lUtils.readFile",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_file_utils.html#a93166925da21ebeca0d21c662d9941a6",tooltip=" "];
+  Node8 -> Node9 [color="midnightblue",fontsize="10",style="solid"];
+  Node9 [label="netw4ppl.ines.utils.File\lUtils.readFileInputStream",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_file_utils.html#add9253223ad6b9a10af3709933569740",tooltip=" "];
+}

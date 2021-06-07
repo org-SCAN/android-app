@@ -1,0 +1,121 @@
+.TH "netw4ppl.ines.utils.RelationListAdapter" 3 "Mon Jun 7 2021" "Version 1.0.3" "Netw4ppl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+netw4ppl.ines.utils.RelationListAdapter
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits ArrayAdapter< Relation >\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBRelationListAdapter\fP (Context context, int resource, ArrayList< \fBRelation\fP > objects)"
+.br
+.ti -1c
+.RI "Filter \fBgetFilter\fP ()"
+.br
+.ti -1c
+.RI "void \fBnotifyDataSetChanged\fP ()"
+.br
+.ti -1c
+.RI "View \fBgetView\fP (int position, @Nullable View convertView, @NonNull ViewGroup parent)"
+.br
+.ti -1c
+.RI "int \fBgetCount\fP ()"
+.br
+.ti -1c
+.RI "\fBRelation\fP \fBgetItem\fP (int position)"
+.br
+.ti -1c
+.RI "long \fBgetItemId\fP (int position)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+A class to display the important informations about a relation\&. 
+.PP
+Definition at line 24 of file RelationListAdapter\&.java\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "netw4ppl\&.ines\&.utils\&.RelationListAdapter\&.RelationListAdapter (Context context, int resource, ArrayList< \fBRelation\fP > objects)"
+The class constructor\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP the application context 
+.br
+\fIresource\fP the layout id 
+.br
+\fIobjects\fP a ArrayList of \fBRelation\fP objects 
+.RE
+.PP
+
+.PP
+Definition at line 50 of file RelationListAdapter\&.java\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "int netw4ppl\&.ines\&.utils\&.RelationListAdapter\&.getCount ()"
+Get the number of elements in the adapter\&.
+.PP
+\fBReturns\fP
+.RS 4
+an int 
+.RE
+.PP
+
+.PP
+Definition at line 180 of file RelationListAdapter\&.java\&.
+.SS "Filter netw4ppl\&.ines\&.utils\&.RelationListAdapter\&.getFilter ()"
+Function to perform the filtering of the relations when the search bar is used\&. If you want to change the search criterias, you should modify the code of the \fBperformFiltering(CharSequence constraint)\fP function\&.
+.PP
+\fBReturns\fP
+.RS 4
+a Filter object 
+.RE
+.PP
+
+.PP
+Definition at line 67 of file RelationListAdapter\&.java\&.
+.SS "\fBRelation\fP netw4ppl\&.ines\&.utils\&.RelationListAdapter\&.getItem (int position)"
+Get the item in the dapter at the position given
+.PP
+\fBParameters\fP
+.RS 4
+\fIposition\fP an int 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a \fBPerson\fP 
+.RE
+.PP
+
+.PP
+Definition at line 191 of file RelationListAdapter\&.java\&.
+.SS "long netw4ppl\&.ines\&.utils\&.RelationListAdapter\&.getItemId (int position)"
+Get the item id (aka its position in the array)
+.PP
+\fBParameters\fP
+.RS 4
+\fIposition\fP an int 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a long 
+.RE
+.PP
+
+.PP
+Definition at line 202 of file RelationListAdapter\&.java\&.
+.SS "void netw4ppl\&.ines\&.utils\&.RelationListAdapter\&.notifyDataSetChanged ()"
+Notify the adapter if the content of the adapter changed\&. It is the case during the filtering\&. 
+.PP
+Definition at line 132 of file RelationListAdapter\&.java\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Netw4ppl from the source code\&.

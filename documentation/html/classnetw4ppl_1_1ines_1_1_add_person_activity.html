@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -20,6 +24,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo_netw4ppl_png.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Netw4ppl
    &#160;<span id="projectnumber">1.0.3</span>
@@ -47,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classnetw4ppl_1_1ines_1_1_add_person_activity.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -61,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><b>netw4ppl</b></li><li class="navelem"><b>ines</b></li><li class="navelem"><a class="el" href="classnetw4ppl_1_1ines_1_1_add_person_activity.html">AddPersonActivity</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -80,9 +97,13 @@ $(function() {
 <div class="dynheader">
 Inheritance diagram for netw4ppl.ines.AddPersonActivity:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classnetw4ppl_1_1ines_1_1_add_person_activity.png" alt=""/>
- </div></div>
+<div class="center"><img src="classnetw4ppl_1_1ines_1_1_add_person_activity__inherit__graph.png" border="0" usemap="#anetw4ppl_8ines_8_add_person_activity_inherit__map" alt="Inheritance graph"/></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for netw4ppl.ines.AddPersonActivity:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnetw4ppl_1_1ines_1_1_add_person_activity__coll__graph.png" border="0" usemap="#anetw4ppl_8ines_8_add_person_activity_coll__map" alt="Collaboration graph"/></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -124,7 +145,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>onSaveInstanceState</
 void&#160;</td><td class="memItemRight" valign="bottom"><b>onRestoreInstanceState</b> (@NonNull Bundle savedInstanceState)</td></tr>
 <tr class="separator:a9a685ec34b97830793604290eb236b20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="_add_person_activity_8java_source.html#l00030">30</a> of file <a class="el" href="_add_person_activity_8java_source.html">AddPersonActivity.java</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="acec4f2f1a4de80fb5c7997192acbc4f8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acec4f2f1a4de80fb5c7997192acbc4f8">&#9670;&nbsp;</a></span>getDefaultKey()</h2>
 
@@ -143,12 +167,19 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>onRestoreInstanceStat
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <p>Get the 3-letters code by default. Set by default at "AAA"</p>
 <dl class="section return"><dt>Returns</dt><dd>a String which gives the 3-letters code by default </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_add_person_activity_8java_source.html#l00144">144</a> of file <a class="el" href="_add_person_activity_8java_source.html">AddPersonActivity.java</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnetw4ppl_1_1ines_1_1_add_person_activity_acec4f2f1a4de80fb5c7997192acbc4f8_cgraph.png" border="0" usemap="#aclassnetw4ppl_1_1ines_1_1_add_person_activity_acec4f2f1a4de80fb5c7997192acbc4f8_cgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -171,7 +202,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>onRestoreInstanceStat
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -184,6 +215,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>onRestoreInstanceStat
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>an int of the first value available for this 3-letters code </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_add_person_activity_8java_source.html#l00179">179</a> of file <a class="el" href="_add_person_activity_8java_source.html">AddPersonActivity.java</a>.</p>
+
 </div>
 </div>
 <a id="ae565a7e4087176eaf482f6ededed0302"></a>
@@ -191,9 +224,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>onRestoreInstanceStat
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">boolean netw4ppl.ines.AddPersonActivity.saveIds </td>
@@ -213,11 +243,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>onRestoreInstanceStat
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>Save the file containing the ids (3-letters code + the value associated) Check before saving if for the 3-letters code, the value associated is the biggest one or not.</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -228,6 +253,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>onRestoreInstanceStat
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a boolean to determine whether the file was successfully saved or not </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_add_person_activity_8java_source.html#l00234">234</a> of file <a class="el" href="_add_person_activity_8java_source.html">AddPersonActivity.java</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnetw4ppl_1_1ines_1_1_add_person_activity_ae565a7e4087176eaf482f6ededed0302_cgraph.png" border="0" usemap="#aclassnetw4ppl_1_1ines_1_1_add_person_activity_ae565a7e4087176eaf482f6ededed0302_cgraph" alt=""/></div>
+</div>
 
 </div>
 </div>
@@ -250,7 +282,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>onRestoreInstanceStat
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -262,6 +294,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>onRestoreInstanceStat
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="_add_person_activity_8java_source.html#l00165">165</a> of file <a class="el" href="_add_person_activity_8java_source.html">AddPersonActivity.java</a>.</p>
+
 </div>
 </div>
 <a id="a3a748a4973cb20db28e03d8c14f6412c"></a>
@@ -269,9 +303,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>onRestoreInstanceStat
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">boolean netw4ppl.ines.AddPersonActivity.verificationInputPerson </td>
@@ -280,24 +311,30 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>onRestoreInstanceStat
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>Used to determine if the required fields for a person were completed or not. A toast is displayed if some required fields are not completed, and the user is notified of the different fields to complete.</p>
 <dl class="section return"><dt>Returns</dt><dd>a boolean. True if all the required fields are correctly completed or false if not. </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_add_person_activity_8java_source.html#l00198">198</a> of file <a class="el" href="_add_person_activity_8java_source.html">AddPersonActivity.java</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classnetw4ppl_1_1ines_1_1_add_person_activity_a3a748a4973cb20db28e03d8c14f6412c_cgraph.png" border="0" usemap="#aclassnetw4ppl_1_1ines_1_1_add_person_activity_a3a748a4973cb20db28e03d8c14f6412c_cgraph" alt=""/></div>
+</div>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Netw4ppl/app/src/main/java/netw4ppl/ines/AddPersonActivity.java</li>
+<li>app/src/main/java/netw4ppl/ines/<a class="el" href="_add_person_activity_8java_source.html">AddPersonActivity.java</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>netw4ppl</b></li><li class="navelem"><b>ines</b></li><li class="navelem"><a class="el" href="classnetw4ppl_1_1ines_1_1_add_person_activity.html">AddPersonActivity</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

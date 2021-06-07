@@ -1,0 +1,338 @@
+.TH "netw4ppl.ines.utils.FileUtils" 3 "Mon Jun 7 2021" "Version 1.0.3" "Netw4ppl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+netw4ppl.ines.utils.FileUtils
+.SH SYNOPSIS
+.br
+.PP
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static boolean \fBcreateFile\fP (String path)"
+.br
+.ti -1c
+.RI "static boolean \fBcreateFiles\fP (String path, String[] filenames)"
+.br
+.ti -1c
+.RI "static boolean \fBcreateDirectory\fP (String path)"
+.br
+.ti -1c
+.RI "static boolean \fBdirectoryExists\fP (String path)"
+.br
+.ti -1c
+.RI "static boolean \fBfileExists\fP (String path)"
+.br
+.ti -1c
+.RI "static boolean \fBwriteFile\fP (String path, String content)"
+.br
+.ti -1c
+.RI "static String \fBreadFile\fP (String path)  throws IOException "
+.br
+.ti -1c
+.RI "static String \fBreadFileInputStream\fP (InputStream is)  throws IOException "
+.br
+.ti -1c
+.RI "static boolean \fBdeleteFile\fP (String path)"
+.br
+.ti -1c
+.RI "static boolean \fBclearDirectory\fP (String directory_path)"
+.br
+.ti -1c
+.RI "static String \fBloadIdsFromFile\fP (Context context)  throws IOException "
+.br
+.ti -1c
+.RI "static String \fBloadApplicationIDFromFile\fP (Context context)  throws IOException "
+.br
+.ti -1c
+.RI "static boolean \fBsaveIdsToFile\fP (Context context, String content)"
+.br
+.ti -1c
+.RI "static boolean \fBsavePersonsToFile\fP (Context context, String content)"
+.br
+.ti -1c
+.RI "static boolean \fBsaveRelationsToFile\fP (Context context, String content)"
+.br
+.ti -1c
+.RI "static JSONObject \fBloadConfigFromFile\fP (Context context)  throws IOException "
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 26 of file FileUtils\&.java\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "static boolean netw4ppl\&.ines\&.utils\&.FileUtils\&.clearDirectory (String directory_path)\fC [static]\fP"
+Deletes a directory content
+.PP
+\fBParameters\fP
+.RS 4
+\fIdirectory_path\fP path to the directory 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if the directory content was completely deleted 
+.RE
+.PP
+
+.PP
+Definition at line 173 of file FileUtils\&.java\&.
+.SS "static boolean netw4ppl\&.ines\&.utils\&.FileUtils\&.createDirectory (String path)\fC [static]\fP"
+Create an empty directory 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP path of the directory to be created 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a boolean to determine whether the directory was successfully created or not 
+.RE
+.PP
+
+.PP
+Definition at line 71 of file FileUtils\&.java\&.
+.SS "static boolean netw4ppl\&.ines\&.utils\&.FileUtils\&.createFile (String path)\fC [static]\fP"
+Create an empty file
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP path for the two files 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a boolean to determine whether the file was created successfully or not 
+.RE
+.PP
+
+.PP
+Definition at line 34 of file FileUtils\&.java\&.
+.SS "static boolean netw4ppl\&.ines\&.utils\&.FileUtils\&.createFiles (String path, String[] filenames)\fC [static]\fP"
+Create the two \&.json empty files : persons\&.json and links\&.json
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP path of the directory for the two files 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a boolean to determine whether the files were created successfully or not 
+.RE
+.PP
+
+.PP
+Definition at line 51 of file FileUtils\&.java\&.
+.SS "static boolean netw4ppl\&.ines\&.utils\&.FileUtils\&.deleteFile (String path)\fC [static]\fP"
+Deletes a file
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP path to file 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if file was deleted 
+.RE
+.PP
+
+.PP
+Definition at line 162 of file FileUtils\&.java\&.
+.SS "static boolean netw4ppl\&.ines\&.utils\&.FileUtils\&.directoryExists (String path)\fC [static]\fP"
+Returns a boolean telling if a directory already exists or not 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP path of the directory to be looked for 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a boolean telling if the directory already exists or not 
+.RE
+.PP
+
+.PP
+Definition at line 85 of file FileUtils\&.java\&.
+.SS "static boolean netw4ppl\&.ines\&.utils\&.FileUtils\&.fileExists (String path)\fC [static]\fP"
+Returns a boolean telling if a file already exists or not 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP path of the file to be looked for 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a boolean telling if the file already exists or not 
+.RE
+.PP
+
+.PP
+Definition at line 95 of file FileUtils\&.java\&.
+.SS "static String netw4ppl\&.ines\&.utils\&.FileUtils\&.loadApplicationIDFromFile (Context context) throws IOException\fC [static]\fP"
+Load the application ID from a file, creates it if it doesn't already exists\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP the application context 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a string containing the application id 
+.RE
+.PP
+
+.PP
+Definition at line 234 of file FileUtils\&.java\&.
+.SS "static JSONObject netw4ppl\&.ines\&.utils\&.FileUtils\&.loadConfigFromFile (Context context) throws IOException\fC [static]\fP"
+Loads the fields configuration file to store it in a JsonObject 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP the context of the application 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a JSonObject of the configuration file 
+.RE
+.PP
+\fBExceptions\fP
+.RS 4
+\fIIOException\fP 
+.RE
+.PP
+
+.PP
+Definition at line 302 of file FileUtils\&.java\&.
+.SS "static String netw4ppl\&.ines\&.utils\&.FileUtils\&.loadIdsFromFile (Context context) throws IOException\fC [static]\fP"
+Load the file containing the IDs
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP the application context 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+return a string containing all the ids and the last value for the tricode 
+.RE
+.PP
+
+.PP
+Definition at line 211 of file FileUtils\&.java\&.
+.SS "static String netw4ppl\&.ines\&.utils\&.FileUtils\&.readFile (String path) throws IOException\fC [static]\fP"
+Read content of file
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP path to file 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+return a String of the content of the file 
+.RE
+.PP
+
+.PP
+Definition at line 126 of file FileUtils\&.java\&.
+.SS "static String netw4ppl\&.ines\&.utils\&.FileUtils\&.readFileInputStream (InputStream is) throws IOException\fC [static]\fP"
+Read content of file
+.PP
+\fBParameters\fP
+.RS 4
+\fIis\fP inputstream of the file 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+return a String of the content of the file 
+.RE
+.PP
+
+.PP
+Definition at line 137 of file FileUtils\&.java\&.
+.SS "static boolean netw4ppl\&.ines\&.utils\&.FileUtils\&.saveIdsToFile (Context context, String content)\fC [static]\fP"
+Save the ids (the tricodes and their highest value) in a file
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP the application context 
+.br
+\fIcontent\fP a String of the content to write 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a boolean, true if the save was possible, else return false 
+.RE
+.PP
+
+.PP
+Definition at line 261 of file FileUtils\&.java\&.
+.SS "static boolean netw4ppl\&.ines\&.utils\&.FileUtils\&.savePersonsToFile (Context context, String content)\fC [static]\fP"
+Save the Persons in a file
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP the application context 
+.br
+\fIcontent\fP a String of the content to write 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a boolean, true if the save was possible, else return false 
+.RE
+.PP
+
+.PP
+Definition at line 275 of file FileUtils\&.java\&.
+.SS "static boolean netw4ppl\&.ines\&.utils\&.FileUtils\&.saveRelationsToFile (Context context, String content)\fC [static]\fP"
+Save the Relations in a file
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP the application context 
+.br
+\fIcontent\fP a String of the content to write 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a boolean, true if the save was possible, else return false 
+.RE
+.PP
+
+.PP
+Definition at line 289 of file FileUtils\&.java\&.
+.SS "static boolean netw4ppl\&.ines\&.utils\&.FileUtils\&.writeFile (String path, String content)\fC [static]\fP"
+Write content in file
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP path to file 
+.br
+\fIcontent\fP the content to be written in the file, must be of type String 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+return a boolean true if the writing was a success, false if not 
+.RE
+.PP
+
+.PP
+Definition at line 107 of file FileUtils\&.java\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Netw4ppl from the source code\&.

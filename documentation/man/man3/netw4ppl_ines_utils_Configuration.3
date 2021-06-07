@@ -1,0 +1,179 @@
+.TH "netw4ppl.ines.utils.Configuration" 3 "Mon Jun 7 2021" "Version 1.0.3" "Netw4ppl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+netw4ppl.ines.utils.Configuration
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBConfiguration\fP (Context context, JSONObject config_content)"
+.br
+.ti -1c
+.RI "String \fBgetApplicationId\fP ()"
+.br
+.ti -1c
+.RI "HashMap< String, HashMap< String, \fBDataElement\fP > > \fBgetHashMap_datatables\fP ()"
+.br
+.ti -1c
+.RI "boolean \fBhasElementInTable\fP (String key_table, String key_element)"
+.br
+.ti -1c
+.RI "\fBField\fP \fBgetFieldFromHashMap\fP (String key_field)"
+.br
+.ti -1c
+.RI "String \fBgetElementFromTable\fP (String key_table, String key_element)"
+.br
+.ti -1c
+.RI "void \fBcreateHashMaps\fP (Context context, JSONObject config_content)"
+.br
+.ti -1c
+.RI "void \fBcreateArrayFields\fP (JSONObject fields)"
+.br
+.ti -1c
+.RI "ArrayList< \fBField\fP > \fBgetArrayFields\fP ()"
+.br
+.ti -1c
+.RI "ArrayAdapter \fBgetArrayAdapter\fP (String key)"
+.br
+.ti -1c
+.RI "HashMap< String, ArrayList< \fBDataElement\fP > > \fBgetHashMapDatabase\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 16 of file Configuration\&.java\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "void netw4ppl\&.ines\&.utils\&.Configuration\&.createArrayFields (JSONObject fields)"
+Function used to create the ArrayList of the fields present in the \fBAddPersonActivity\fP\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIfields\fP a JSONObject of the fields\&. 
+.RE
+.PP
+
+.PP
+Definition at line 172 of file Configuration\&.java\&.
+.SS "void netw4ppl\&.ines\&.utils\&.Configuration\&.createHashMaps (Context context, JSONObject config_content)"
+Function used to create not only hashmaps actually but also different objects\&. It used to create the different ArrayList of \fBDataElement\fP, the associated HashMaps and the asociated Adapters\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP an object of type Context representing the context of the application 
+.br
+\fIconfig_content\fP a JSONObject containing the configuraiton for the application\&. 
+.RE
+.PP
+
+.PP
+Definition at line 122 of file Configuration\&.java\&.
+.SS "String netw4ppl\&.ines\&.utils\&.Configuration\&.getApplicationId ()"
+Function to get the application ID from a \fBConfiguration\fP object\&.
+.PP
+\fBReturns\fP
+.RS 4
+a String 
+.RE
+.PP
+
+.PP
+Definition at line 36 of file Configuration\&.java\&.
+.SS "ArrayAdapter netw4ppl\&.ines\&.utils\&.Configuration\&.getArrayAdapter (String key)"
+Function to get an ArrayAdapter identified by a specific key\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP a String representing the identifier for the ArrayAdapter 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+an ArrayAdapter object if the HashMap contains the key or return null\&. 
+.RE
+.PP
+
+.PP
+Definition at line 204 of file Configuration\&.java\&.
+.SS "ArrayList<\fBField\fP> netw4ppl\&.ines\&.utils\&.Configuration\&.getArrayFields ()"
+Function to get the ArrayList containing all the fields\&.
+.PP
+\fBReturns\fP
+.RS 4
+an ArrayList of \fBField\fP objects\&. 
+.RE
+.PP
+
+.PP
+Definition at line 194 of file Configuration\&.java\&.
+.SS "String netw4ppl\&.ines\&.utils\&.Configuration\&.getElementFromTable (String key_table, String key_element)"
+Get an element from our 'internal database'\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey_table\fP a String representing the key value of the HashMap in the more global HashMap (ex: 'country') 
+.br
+\fIkey_element\fP a String representing the key value of a \fBDataElement\fP object in the hasmap (ex: 'FRA')
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a String containing the name of the element in the displayed language or an empty string if the element was not found\&. 
+.RE
+.PP
+
+.PP
+Definition at line 108 of file Configuration\&.java\&.
+.SS "\fBField\fP netw4ppl\&.ines\&.utils\&.Configuration\&.getFieldFromHashMap (String key_field)"
+Get a \fBField\fP object from the HashMap of fields if the field identified by the parameter given exists\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey_field\fP a String representing 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+an object of type \fBField\fP if it exists or null\&. 
+.RE
+.PP
+
+.PP
+Definition at line 93 of file Configuration\&.java\&.
+.SS "HashMap<String, HashMap<String, \fBDataElement\fP> > netw4ppl\&.ines\&.utils\&.Configuration\&.getHashMap_datatables ()"
+Get the hashmaps identified by a String and containing \fBDataElement\fP objects\&. It is similar to a database\&. For example, we can get the tables like 'Relations', 'country', 'role' etc\&.
+.PP
+\fBReturns\fP
+.RS 4
+a HashMap containing HashMaps identified by Strings\&. 
+.RE
+.PP
+
+.PP
+Definition at line 65 of file Configuration\&.java\&.
+.SS "boolean netw4ppl\&.ines\&.utils\&.Configuration\&.hasElementInTable (String key_table, String key_element)"
+Function to determine if given a specific table key (string) the given string for the key element is in the HashMap or not\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey_table\fP a String identifying a 'table'\&. Example : 'country'\&. 
+.br
+\fIkey_element\fP a String identifyin an element\&. Example : 'FRA' standing for 'France'\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+boolean\&. True if the element identified by key_element is in HashMap identified by key_table\&. 
+.RE
+.PP
+
+.PP
+Definition at line 78 of file Configuration\&.java\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Netw4ppl from the source code\&.

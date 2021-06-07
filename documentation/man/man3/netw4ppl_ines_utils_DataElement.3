@@ -1,0 +1,111 @@
+.TH "netw4ppl.ines.utils.DataElement" 3 "Mon Jun 7 2021" "Version 1.0.3" "Netw4ppl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+netw4ppl.ines.utils.DataElement
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits JSONObject\&.
+.PP
+Inherited by \fBnetw4ppl\&.ines\&.utils\&.Field\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBDataElement\fP ()"
+.br
+.ti -1c
+.RI "\fBDataElement\fP (String key, String string_fields)  throws JSONException "
+.br
+.ti -1c
+.RI "String \fBgetLinkedList\fP ()"
+.br
+.ti -1c
+.RI "String \fBgetKey\fP ()"
+.br
+.ti -1c
+.RI "String \fBgetTitle\fP ()"
+.br
+.ti -1c
+.RI "String \fBtoString\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 8 of file DataElement\&.java\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "netw4ppl\&.ines\&.utils\&.DataElement\&.DataElement ()"
+Default constructor of \fBDataElement\fP Sets the key to Non-Attributed 'NA' 
+.PP
+Definition at line 16 of file DataElement\&.java\&.
+.SS "netw4ppl\&.ines\&.utils\&.DataElement\&.DataElement (String key, String string_fields) throws JSONException"
+Constructor of \fBDataElement\fP Sets the key and the value of a \fBDataElement\fP 
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP key of the \fBDataElement\fP 
+.br
+\fIstring_fields\fP value of a \fBDataElement\fP 
+.RE
+.PP
+\fBExceptions\fP
+.RS 4
+\fIJSONException\fP 
+.RE
+.PP
+
+.PP
+Definition at line 28 of file DataElement\&.java\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "String netw4ppl\&.ines\&.utils\&.DataElement\&.getKey ()"
+Returns the associated key of a \fBDataElement\fP 
+.PP
+\fBReturns\fP
+.RS 4
+key 
+.RE
+.PP
+
+.PP
+Definition at line 53 of file DataElement\&.java\&.
+.SS "String netw4ppl\&.ines\&.utils\&.DataElement\&.getLinkedList ()"
+Returns the name of a list associated to this \fBDataElement\fP if there is one 
+.PP
+\fBReturns\fP
+.RS 4
+Name of the list associated to a \fBDataElement\fP 
+.RE
+.PP
+
+.PP
+Definition at line 37 of file DataElement\&.java\&.
+.SS "String netw4ppl\&.ines\&.utils\&.DataElement\&.getTitle ()"
+Returns the title of a \fBDataElement\fP in the preferential language of the device 
+.PP
+\fBReturns\fP
+.RS 4
+the title of the \fBDataElement\fP 
+.RE
+.PP
+
+.PP
+Definition at line 61 of file DataElement\&.java\&.
+.SS "String netw4ppl\&.ines\&.utils\&.DataElement\&.toString ()"
+Override of the toString class of JsonObject 
+.PP
+\fBReturns\fP
+.RS 4
+the title of a \fBDataElement\fP using the \fBgetTitle()\fP Class 
+.RE
+.PP
+
+.PP
+Definition at line 83 of file DataElement\&.java\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Netw4ppl from the source code\&.

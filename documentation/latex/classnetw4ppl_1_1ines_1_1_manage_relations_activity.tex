@@ -1,11 +1,13 @@
 \hypertarget{classnetw4ppl_1_1ines_1_1_manage_relations_activity}{}\doxysection{netw4ppl.\+ines.\+Manage\+Relations\+Activity Class Reference}
 \label{classnetw4ppl_1_1ines_1_1_manage_relations_activity}\index{netw4ppl.ines.ManageRelationsActivity@{netw4ppl.ines.ManageRelationsActivity}}
-Inheritance diagram for netw4ppl.\+ines.\+Manage\+Relations\+Activity\+:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{classnetw4ppl_1_1ines_1_1_manage_relations_activity}
-\end{center}
-\end{figure}
+
+
+Inheritance diagram for netw4ppl.\+ines.\+Manage\+Relations\+Activity\+:
+% FIG 0
+
+
+Collaboration diagram for netw4ppl.\+ines.\+Manage\+Relations\+Activity\+:
+% FIG 1
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -37,23 +39,34 @@ void {\bfseries on\+Resume} ()
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+
+
+Definition at line 30 of file Manage\+Relations\+Activity.\+java.
+
+
+
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a45e12c67cfdbc87058f64e3e0b19a1dc}\label{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a45e12c67cfdbc87058f64e3e0b19a1dc}} 
 \index{netw4ppl.ines.ManageRelationsActivity@{netw4ppl.ines.ManageRelationsActivity}!formatterJsonFile@{formatterJsonFile}}
 \index{formatterJsonFile@{formatterJsonFile}!netw4ppl.ines.ManageRelationsActivity@{netw4ppl.ines.ManageRelationsActivity}}
 \doxysubsubsection{\texorpdfstring{formatterJsonFile()}{formatterJsonFile()}}
-{\footnotesize\ttfamily static String netw4ppl.\+ines.\+Manage\+Relations\+Activity.\+formatter\+Json\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+{\footnotesize\ttfamily static String netw4ppl.\+ines.\+Manage\+Relations\+Activity.\+formatter\+Json\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 Convert the Array\+List of Relations in JSONArray to then convert it in a String because the server is expecting such format.
 
 \begin{DoxyReturn}{Returns}
 a String containing the Relations contained in relation, on a JSONArray format 
 \end{DoxyReturn}
+
+
+Definition at line 171 of file Manage\+Relations\+Activity.\+java.
+
 \mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a2135740f65821e1fd759a3aa436a4f02}\label{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a2135740f65821e1fd759a3aa436a4f02}} 
 \index{netw4ppl.ines.ManageRelationsActivity@{netw4ppl.ines.ManageRelationsActivity}!readRelationsFile@{readRelationsFile}}
 \index{readRelationsFile@{readRelationsFile}!netw4ppl.ines.ManageRelationsActivity@{netw4ppl.ines.ManageRelationsActivity}}
 \doxysubsubsection{\texorpdfstring{readRelationsFile()}{readRelationsFile()}}
-{\footnotesize\ttfamily static void netw4ppl.\+ines.\+Manage\+Relations\+Activity.\+read\+Relations\+File (\begin{DoxyParamCaption}\item[{Context}]{context }\end{DoxyParamCaption}) throws IOException, JSONException\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+{\footnotesize\ttfamily static void netw4ppl.\+ines.\+Manage\+Relations\+Activity.\+read\+Relations\+File (\begin{DoxyParamCaption}\item[{Context}]{context }\end{DoxyParamCaption}) throws IOException, JSONException\hspace{0.3cm}{\ttfamily [static]}}
 
 Read the Relations File associated with this application. The path is determined based on strings in the strings.\+xml file
 
@@ -62,17 +75,29 @@ Read the Relations File associated with this application. The path is determined
 {\em context} & the context of the current activity \\
 \hline
 \end{DoxyParams}
+
+
+Definition at line 130 of file Manage\+Relations\+Activity.\+java.
+
+Here is the call graph for this function\+:
+% FIG 2
 \mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a0daee7008caa443d93b40d8340ef4a5f}\label{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a0daee7008caa443d93b40d8340ef4a5f}} 
 \index{netw4ppl.ines.ManageRelationsActivity@{netw4ppl.ines.ManageRelationsActivity}!updateAdapter@{updateAdapter}}
 \index{updateAdapter@{updateAdapter}!netw4ppl.ines.ManageRelationsActivity@{netw4ppl.ines.ManageRelationsActivity}}
 \doxysubsubsection{\texorpdfstring{updateAdapter()}{updateAdapter()}}
-{\footnotesize\ttfamily static void netw4ppl.\+ines.\+Manage\+Relations\+Activity.\+update\+Adapter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+{\footnotesize\ttfamily static void netw4ppl.\+ines.\+Manage\+Relations\+Activity.\+update\+Adapter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
-Function to update the adapter. During an on\+Resume of the activity, this method will be called in case there have been any changes in the adapter (add, modification or deletion of a relation) \mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a4c98f3c2eacc5fef22984f23a08cdb96}\label{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a4c98f3c2eacc5fef22984f23a08cdb96}} 
+Function to update the adapter. During an on\+Resume of the activity, this method will be called in case there have been any changes in the adapter (add, modification or deletion of a relation) 
+
+Definition at line 194 of file Manage\+Relations\+Activity.\+java.
+
+Here is the call graph for this function\+:
+% FIG 3
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a4c98f3c2eacc5fef22984f23a08cdb96}\label{classnetw4ppl_1_1ines_1_1_manage_relations_activity_a4c98f3c2eacc5fef22984f23a08cdb96}} 
 \index{netw4ppl.ines.ManageRelationsActivity@{netw4ppl.ines.ManageRelationsActivity}!updateRelations@{updateRelations}}
 \index{updateRelations@{updateRelations}!netw4ppl.ines.ManageRelationsActivity@{netw4ppl.ines.ManageRelationsActivity}}
 \doxysubsubsection{\texorpdfstring{updateRelations()}{updateRelations()}}
-{\footnotesize\ttfamily static void netw4ppl.\+ines.\+Manage\+Relations\+Activity.\+update\+Relations (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_person}{Person}}}]{person }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+{\footnotesize\ttfamily static void netw4ppl.\+ines.\+Manage\+Relations\+Activity.\+update\+Relations (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_person}{Person}}}]{person }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 Function to update the name of a person in all the relations where this person is present in. Currently called after the edition of a person.
 
@@ -83,6 +108,12 @@ Function to update the name of a person in all the relations where this person i
 \end{DoxyParams}
 
 
+Definition at line 44 of file Manage\+Relations\+Activity.\+java.
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Netw4ppl/app/src/main/java/netw4ppl/ines/Manage\+Relations\+Activity.\+java\end{DoxyCompactItemize}
+app/src/main/java/netw4ppl/ines/Manage\+Relations\+Activity.\+java\end{DoxyCompactItemize}

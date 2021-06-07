@@ -1,0 +1,145 @@
+.TH "netw4ppl.ines.utils.Person" 3 "Mon Jun 7 2021" "Version 1.0.3" "Netw4ppl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+netw4ppl.ines.utils.Person
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits JSONObject\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBPerson\fP ()"
+.br
+.ti -1c
+.RI "\fBPerson\fP (String data_person)  throws JSONException "
+.br
+.ti -1c
+.RI "\fBPerson\fP (JSONObject data_person)  throws JSONException "
+.br
+.ti -1c
+.RI "String \fBgetInfoByKey\fP (String key)"
+.br
+.ti -1c
+.RI "void \fBputInfo\fP (String key, String value)"
+.br
+.ti -1c
+.RI "boolean \fBisSamePerson\fP (\fBPerson\fP individu)  throws JSONException "
+.br
+.ti -1c
+.RI "String \fBtoString\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 8 of file Person\&.java\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "netw4ppl\&.ines\&.utils\&.Person\&.Person ()"
+Default constructor Creates an empty \fBPerson\fP 
+.PP
+Definition at line 14 of file Person\&.java\&.
+.SS "netw4ppl\&.ines\&.utils\&.Person\&.Person (String data_person) throws JSONException"
+Constructor of \fBPerson\fP Sets the \fBPerson\fP using a String
+.PP
+\fBParameters\fP
+.RS 4
+\fIdata_person\fP String containing the data of a person in a Json syntax 
+.RE
+.PP
+\fBExceptions\fP
+.RS 4
+\fIJSONException\fP 
+.RE
+.PP
+
+.PP
+Definition at line 25 of file Person\&.java\&.
+.SS "netw4ppl\&.ines\&.utils\&.Person\&.Person (JSONObject data_person) throws JSONException"
+Constructor of \fBPerson\fP Sets the \fBPerson\fP using a JSONObject
+.PP
+\fBParameters\fP
+.RS 4
+\fIdata_person\fP JSONObject containing the data of a person 
+.RE
+.PP
+\fBExceptions\fP
+.RS 4
+\fIJSONException\fP 
+.RE
+.PP
+
+.PP
+Definition at line 36 of file Person\&.java\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "String netw4ppl\&.ines\&.utils\&.Person\&.getInfoByKey (String key)"
+Returns the value of a \fBPerson\fP associated to a key
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP key of the query 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a String corresponding to the value associated to the key 
+.RE
+.PP
+
+.PP
+Definition at line 46 of file Person\&.java\&.
+.SS "boolean netw4ppl\&.ines\&.utils\&.Person\&.isSamePerson (\fBPerson\fP individu) throws JSONException"
+Tests if two persons are the same comparing their unique_id
+.PP
+\fBParameters\fP
+.RS 4
+\fIindividu\fP \fBPerson\fP to be compared with this \fBPerson\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a boolean telling wether or not the \fBPerson\fP is the same, true if yes, false if not 
+.RE
+.PP
+\fBExceptions\fP
+.RS 4
+\fIJSONException\fP 
+.RE
+.PP
+
+.PP
+Definition at line 80 of file Person\&.java\&.
+.SS "void netw4ppl\&.ines\&.utils\&.Person\&.putInfo (String key, String value)"
+Adds an information with the key:value format to the \fBPerson\fP
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP key of the information 
+.br
+\fIvalue\fP value of the information 
+.RE
+.PP
+
+.PP
+Definition at line 65 of file Person\&.java\&.
+.SS "String netw4ppl\&.ines\&.utils\&.Person\&.toString ()"
+Override of the toString method
+.PP
+Returns a String containing the unique_id and the full_name of a person 
+.PP
+\fBReturns\fP
+.RS 4
+a String of the form 'unique_id - full_name' of the person 
+.RE
+.PP
+
+.PP
+Definition at line 91 of file Person\&.java\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Netw4ppl from the source code\&.
