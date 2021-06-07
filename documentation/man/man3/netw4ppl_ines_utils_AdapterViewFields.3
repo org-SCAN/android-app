@@ -1,0 +1,128 @@
+.TH "netw4ppl.ines.utils.AdapterViewFields" 3 "Mon Jun 7 2021" "Version 1.0.3" "Netw4ppl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+netw4ppl.ines.utils.AdapterViewFields
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits RecyclerView\&.Adapter< RecyclerView\&.ViewHolder >\&.
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBViewHolderAutoComplete\fP"
+.br
+.ti -1c
+.RI "class \fBViewHolderCalendarView\fP"
+.br
+.ti -1c
+.RI "class \fBViewHolderEditText\fP"
+.br
+.ti -1c
+.RI "class \fBViewHolderSpinner\fP"
+.br
+.ti -1c
+.RI "class \fBViewHolderUniqueID\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAdapterViewFields\fP (Context context, ArrayList< \fBField\fP > fields, boolean new_pers)"
+.br
+.ti -1c
+.RI "RecyclerView\&.ViewHolder \fBonCreateViewHolder\fP (@NonNull ViewGroup parent, int viewType)"
+.br
+.ti -1c
+.RI "void \fBonBindViewHolder\fP (@NonNull RecyclerView\&.ViewHolder holder, int position)"
+.br
+.ti -1c
+.RI "int \fBgetPositionInAdapter\fP (Adapter adapter, String key_val_pers)"
+.br
+.ti -1c
+.RI "int \fBgetItemViewType\fP (int position)"
+.br
+.ti -1c
+.RI "int \fBgetItemCount\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBAdapterViewFields\fP is the class used to display the \fBAddPersonActivity\fP form\&. It extends the object Adapter from the RecyclerView class\&. The adapter created will contain ViewHolders of different types\&. That way we can enter more than one type of data (ex: dates, numbers, strings \&.\&.\&.) 
+.PP
+Definition at line 45 of file AdapterViewFields\&.java\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "netw4ppl\&.ines\&.utils\&.AdapterViewFields\&.AdapterViewFields (Context context, ArrayList< \fBField\fP > fields, boolean new_pers)"
+Class constructor
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP the context of the application 
+.br
+\fIfields\fP an ArrayList of \fBField\fP objects 
+.br
+\fInew_pers\fP a boolean telling if it's a new person the user is adding or not 
+.RE
+.PP
+
+.PP
+Definition at line 282 of file AdapterViewFields\&.java\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "int netw4ppl\&.ines\&.utils\&.AdapterViewFields\&.getPositionInAdapter (Adapter adapter, String key_val_pers)"
+Function to get the position of a specified key in an adapter of \fBDataElement\fP objects\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIadapter\fP an Adapter object 
+.br
+\fIkey_val_pers\fP a String 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+an int giving the position of the key_val_person parameter in the adapter 
+.RE
+.PP
+
+.PP
+Definition at line 426 of file AdapterViewFields\&.java\&.
+.SS "void netw4ppl\&.ines\&.utils\&.AdapterViewFields\&.onBindViewHolder (@NonNull RecyclerView\&.ViewHolder holder, int position)"
+Override of the onBindViewHolder function\&. Set the ViewHolder content based on what they are representing\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIholder\fP a RecyclerView\&.ViewHolder object 
+.br
+\fIposition\fP an int 
+.RE
+.PP
+
+.PP
+Definition at line 330 of file AdapterViewFields\&.java\&.
+.SS "RecyclerView\&.ViewHolder netw4ppl\&.ines\&.utils\&.AdapterViewFields\&.onCreateViewHolder (@NonNull ViewGroup parent, int viewType)"
+Override of the onCreateViewHolder function\&. Create ViewHolders based on the viewType specified in parameters\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIparent\fP a ViewGroup object 
+.br
+\fIviewType\fP an int representing the view type 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a RecyclerView\&.ViewHolder object\&. The type of the object depends of the input type specified\&. 
+.RE
+.PP
+
+.PP
+Definition at line 298 of file AdapterViewFields\&.java\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Netw4ppl from the source code\&.

@@ -1,0 +1,193 @@
+\hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data}{}\doxysection{netw4ppl.\+ines.\+utils.\+Submit\+Data Class Reference}
+\label{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data}\index{netw4ppl.ines.utils.SubmitData@{netw4ppl.ines.utils.SubmitData}}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data_a2fc7b68f4aa3a5698f10308244df17c2}{manage\+Send}} (Context context, String file\+Path)  throws IOException, Interrupted\+Exception, JSONException 
+\item 
+static void \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data_af73486bbfd3decc6996f36291eb396c1}{manage\+Get}} (Context context)  throws IOException, Interrupted\+Exception 
+\item 
+static void \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data_a8119351b207ad31205f85129676ce371}{send\+By\+Email}} (Context context, String file\+Path)
+\item 
+static boolean \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data_a1196bc8dddebfe09c8d000a27a280e4e}{send\+To\+Server}} (Context context, String file\+Path, String server\+\_\+url, String token\+\_\+server, Ok\+Http\+Client http\+\_\+client, String target)  throws Interrupted\+Exception, JSONException, IOException 
+\item 
+static boolean \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data_a2fadf9e972816ad8352e119ca31bfd32}{get\+From\+Server}} (Context context, String server\+\_\+url, String token\+\_\+server, Ok\+Http\+Client http\+\_\+client)  throws IOException, Interrupted\+Exception 
+\item 
+static String \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data_acf5d6c6c30a4d835d573a498bac33fe8}{make\+Subject}} (Resources resources, String file\+Path)
+\item 
+static void \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data_a4d351315211811e61a5b81a94af93e86}{show\+Submit\+Result\+Dialog}} (Context context, boolean submit\+\_\+result, boolean get\+\_\+result)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 40 of file Submit\+Data.\+java.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data_a2fadf9e972816ad8352e119ca31bfd32}\label{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data_a2fadf9e972816ad8352e119ca31bfd32}} 
+\index{netw4ppl.ines.utils.SubmitData@{netw4ppl.ines.utils.SubmitData}!getFromServer@{getFromServer}}
+\index{getFromServer@{getFromServer}!netw4ppl.ines.utils.SubmitData@{netw4ppl.ines.utils.SubmitData}}
+\doxysubsubsection{\texorpdfstring{getFromServer()}{getFromServer()}}
+{\footnotesize\ttfamily static boolean netw4ppl.\+ines.\+utils.\+Submit\+Data.\+get\+From\+Server (\begin{DoxyParamCaption}\item[{Context}]{context,  }\item[{String}]{server\+\_\+url,  }\item[{String}]{token\+\_\+server,  }\item[{Ok\+Http\+Client}]{http\+\_\+client }\end{DoxyParamCaption}) throws IOException, Interrupted\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+Receive a String object from the server containing new configuration files (the config Json for exemple) A Json file is created with the received String and put at the file\+Path
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & context of the activity \\
+\hline
+{\em server\+\_\+url} & ip address of the server \\
+\hline
+{\em token\+\_\+server} & individual token of the user \\
+\hline
+{\em http\+\_\+client} & http client of Ok\+Http \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean which tells us if the reception was a success or not 
+\end{DoxyReturn}
+
+
+Definition at line 269 of file Submit\+Data.\+java.
+
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data_acf5d6c6c30a4d835d573a498bac33fe8}\label{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data_acf5d6c6c30a4d835d573a498bac33fe8}} 
+\index{netw4ppl.ines.utils.SubmitData@{netw4ppl.ines.utils.SubmitData}!makeSubject@{makeSubject}}
+\index{makeSubject@{makeSubject}!netw4ppl.ines.utils.SubmitData@{netw4ppl.ines.utils.SubmitData}}
+\doxysubsubsection{\texorpdfstring{makeSubject()}{makeSubject()}}
+{\footnotesize\ttfamily static String netw4ppl.\+ines.\+utils.\+Submit\+Data.\+make\+Subject (\begin{DoxyParamCaption}\item[{Resources}]{resources,  }\item[{String}]{file\+Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Create the subject for the email sending option. Composed of the name of the application added with a \textquotesingle{}-\/\textquotesingle{} and the name of the file
+
+
+\begin{DoxyParams}{Parameters}
+{\em resources} & resources of the application \\
+\hline
+{\em file\+Path} & path to the file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the subject for the email 
+\end{DoxyReturn}
+
+
+Definition at line 324 of file Submit\+Data.\+java.
+
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data_af73486bbfd3decc6996f36291eb396c1}\label{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data_af73486bbfd3decc6996f36291eb396c1}} 
+\index{netw4ppl.ines.utils.SubmitData@{netw4ppl.ines.utils.SubmitData}!manageGet@{manageGet}}
+\index{manageGet@{manageGet}!netw4ppl.ines.utils.SubmitData@{netw4ppl.ines.utils.SubmitData}}
+\doxysubsubsection{\texorpdfstring{manageGet()}{manageGet()}}
+{\footnotesize\ttfamily static void netw4ppl.\+ines.\+utils.\+Submit\+Data.\+manage\+Get (\begin{DoxyParamCaption}\item[{Context}]{context }\end{DoxyParamCaption}) throws IOException, Interrupted\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+Manages the downloading of files.
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & context of the activity \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em IOException} & \\
+\hline
+{\em Interrupted\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 141 of file Submit\+Data.\+java.
+
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data_a2fc7b68f4aa3a5698f10308244df17c2}\label{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data_a2fc7b68f4aa3a5698f10308244df17c2}} 
+\index{netw4ppl.ines.utils.SubmitData@{netw4ppl.ines.utils.SubmitData}!manageSend@{manageSend}}
+\index{manageSend@{manageSend}!netw4ppl.ines.utils.SubmitData@{netw4ppl.ines.utils.SubmitData}}
+\doxysubsubsection{\texorpdfstring{manageSend()}{manageSend()}}
+{\footnotesize\ttfamily static void netw4ppl.\+ines.\+utils.\+Submit\+Data.\+manage\+Send (\begin{DoxyParamCaption}\item[{Context}]{context,  }\item[{String}]{file\+Path }\end{DoxyParamCaption}) throws IOException, Interrupted\+Exception, JSONException\hspace{0.3cm}{\ttfamily [static]}}
+
+Manages the sending of the files. Reads the settings options and determine whether the selected option is by email or to the server. Verify the validity of the settings
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & context of the activity \\
+\hline
+{\em file\+Path} & path to the file \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 50 of file Submit\+Data.\+java.
+
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data_a8119351b207ad31205f85129676ce371}\label{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data_a8119351b207ad31205f85129676ce371}} 
+\index{netw4ppl.ines.utils.SubmitData@{netw4ppl.ines.utils.SubmitData}!sendByEmail@{sendByEmail}}
+\index{sendByEmail@{sendByEmail}!netw4ppl.ines.utils.SubmitData@{netw4ppl.ines.utils.SubmitData}}
+\doxysubsubsection{\texorpdfstring{sendByEmail()}{sendByEmail()}}
+{\footnotesize\ttfamily static void netw4ppl.\+ines.\+utils.\+Submit\+Data.\+send\+By\+Email (\begin{DoxyParamCaption}\item[{Context}]{context,  }\item[{String}]{file\+Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Function that makes the sending to an email address via an email application
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & context of the activity \\
+\hline
+{\em file\+Path} & path to the file \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 171 of file Submit\+Data.\+java.
+
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data_a1196bc8dddebfe09c8d000a27a280e4e}\label{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data_a1196bc8dddebfe09c8d000a27a280e4e}} 
+\index{netw4ppl.ines.utils.SubmitData@{netw4ppl.ines.utils.SubmitData}!sendToServer@{sendToServer}}
+\index{sendToServer@{sendToServer}!netw4ppl.ines.utils.SubmitData@{netw4ppl.ines.utils.SubmitData}}
+\doxysubsubsection{\texorpdfstring{sendToServer()}{sendToServer()}}
+{\footnotesize\ttfamily static boolean netw4ppl.\+ines.\+utils.\+Submit\+Data.\+send\+To\+Server (\begin{DoxyParamCaption}\item[{Context}]{context,  }\item[{String}]{file\+Path,  }\item[{String}]{server\+\_\+url,  }\item[{String}]{token\+\_\+server,  }\item[{Ok\+Http\+Client}]{http\+\_\+client,  }\item[{String}]{target }\end{DoxyParamCaption}) throws Interrupted\+Exception, JSONException, IOException\hspace{0.3cm}{\ttfamily [static]}}
+
+Sends the informations to the server in form of a String read from the file\+Path given in parameter
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & context of the activity \\
+\hline
+{\em file\+Path} & path to the file \\
+\hline
+{\em server\+\_\+url} & ip address of the server \\
+\hline
+{\em token\+\_\+server} & individual token of the user \\
+\hline
+{\em http\+\_\+client} & http client of Ok\+Http \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean which tells us if the sending was a success or not 
+\end{DoxyReturn}
+
+
+Definition at line 215 of file Submit\+Data.\+java.
+
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data_a4d351315211811e61a5b81a94af93e86}\label{classnetw4ppl_1_1ines_1_1utils_1_1_submit_data_a4d351315211811e61a5b81a94af93e86}} 
+\index{netw4ppl.ines.utils.SubmitData@{netw4ppl.ines.utils.SubmitData}!showSubmitResultDialog@{showSubmitResultDialog}}
+\index{showSubmitResultDialog@{showSubmitResultDialog}!netw4ppl.ines.utils.SubmitData@{netw4ppl.ines.utils.SubmitData}}
+\doxysubsubsection{\texorpdfstring{showSubmitResultDialog()}{showSubmitResultDialog()}}
+{\footnotesize\ttfamily static void netw4ppl.\+ines.\+utils.\+Submit\+Data.\+show\+Submit\+Result\+Dialog (\begin{DoxyParamCaption}\item[{Context}]{context,  }\item[{boolean}]{submit\+\_\+result,  }\item[{boolean}]{get\+\_\+result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Create a dialog window to display a message about the submitting status depending on if it was a success or a failure.
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & resources of the application \\
+\hline
+{\em submit\+\_\+result} & boolean of the submit status \\
+\hline
+{\em get\+\_\+result} & boolean of the get status \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 337 of file Submit\+Data.\+java.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app/src/main/java/netw4ppl/ines/utils/Submit\+Data.\+java\end{DoxyCompactItemize}

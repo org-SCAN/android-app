@@ -36,6 +36,12 @@ import netw4ppl.ines.AddPersonActivity;
 import netw4ppl.ines.MainActivity;
 import netw4ppl.ines.R;
 
+
+/**
+ * AdapterViewFields is the class used to display the AddPersonActivity form. It extends the object Adapter
+ * from the RecyclerView class. The adapter created will contain ViewHolders of different types. That way we
+ * can enter more than one type of data (ex: dates, numbers, strings ...)
+ */
 public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private ArrayList<Field> mFields;
@@ -43,7 +49,9 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     private final Context mContext;
     private boolean new_person;
 
-
+    /**
+     * ViewHolder used to enter what was originally called "Unique ID".
+     */
     class ViewHolderUniqueID extends RecyclerView.ViewHolder {
         TextView mTitleLetters;
         TextView mTitleFigures;
@@ -51,6 +59,12 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         EditText mValueFigures;
         CustomUniqueIDTextListener customUniqueIDTextListener;
 
+        /**
+         * Class constructor.
+         *
+         * @param itemView a View
+         * {@inheritDoc}
+         */
         public ViewHolderUniqueID(@NonNull View itemView) {
             super(itemView);
             mTitleLetters = itemView.findViewById(R.id.unique_id_title_letters);
@@ -61,16 +75,30 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             mValueLetters.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
         }
 
+        /**
+         * Function to set the TextListener of the ViewHolder.
+         *
+         * @param customUniqueIDTextListener a TextListener adapted for the Unique ID format.
+         */
         public void setTextListener(CustomUniqueIDTextListener customUniqueIDTextListener) {
             this.customUniqueIDTextListener = customUniqueIDTextListener;
             mValueLetters.addTextChangedListener(this.customUniqueIDTextListener);
         }
     }
 
+    /**
+     * ViewHolder used to contain an AutoCompleteTextView.
+     */
     class ViewHolderAutoComplete  extends RecyclerView.ViewHolder {
         TextView mTitle;
         AutoCompleteTextView mAutoComplete;
 
+        /**
+         * Class constructor.
+         *
+         * @param itemView a View
+         * {@inheritDoc}
+         */
         public ViewHolderAutoComplete(@NonNull View itemView) {
             super(itemView);
             mTitle = itemView.findViewById(R.id.autocomplete_title);
@@ -78,12 +106,21 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
+    /**
+     * ViewHolder used to contain an Spinner.
+     */
     class ViewHolderSpinner  extends RecyclerView.ViewHolder implements AdapterView.OnItemSelectedListener {
         TextView mTitle;
         Spinner mSpinner;
         String key_field;
         int spinner_position;
 
+        /**
+         * Class constructor.
+         *
+         * @param itemView a View
+         * {@inheritDoc}
+         */
         public ViewHolderSpinner(@NonNull View itemView) {
             super(itemView);
 
@@ -93,14 +130,32 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             this.spinner_position = 0;
         }
 
+        /**
+         * Get the spinner position.
+         *
+         * @return an int. The value of the attribute spinner_position.
+         */
         public int getPositionElement() {
             return this.spinner_position;
         }
 
+        /**
+         * Set the attribute key_field with the specified value in parameters.
+         *
+         * @param key a String representing the key of the Field object.
+         */
         public void setKey(String key) {
             this.key_field = key;
         }
 
+        /**
+         * Determine the actions done when an element is selected in the spinner.
+         *
+         * @param parent an AdapterView object
+         * @param view a View object
+         * @param position an int, representing the spinner position
+         * @param id a long
+         */
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             DataElement data_element = (DataElement) parent.getItemAtPosition(position);
@@ -113,12 +168,20 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             }
         }
 
+        /**
+         * Determine the actions done when nothing is selected. Here, no operation is performed.
+         *
+         * @param parent an AdapterView object
+         */
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
             // don't do anything
         }
     }
 
+    /**
+     * ViewHolder used to contain an EditText and a DatePicker.
+     */
     class ViewHolderCalendarView  extends RecyclerView.ViewHolder {
         TextView mTitle;
         DatePickerDialog mDatePicker;
@@ -128,6 +191,12 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         String regex_date;
 
+        /**
+         * Class constructor
+         *
+         * @param itemView the view associated with this ViewHolder
+         * @param customEditTextListener a TextListener to associate with the view
+         */
         public ViewHolderCalendarView(@NonNull View itemView, MyCustomEditTextListener customEditTextListener) {
             super(itemView);
             this.myCustomEditTextListener = customEditTextListener;
@@ -170,16 +239,30 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             });
         }
 
+        /**
+         * Set the mKey attribute wit the value given in parameter.
+         *
+         * @param key a String
+         */
         public void setKey(String key) {
             this.mKey = key;
         }
     }
 
+    /**
+     * A ViewHolder used for the input of text in an EditText.
+     */
     class ViewHolderEditText extends RecyclerView.ViewHolder {
         TextView mTitle;
         EditText mText;
         MyCustomEditTextListener myCustomEditTextListener;
 
+        /**
+         * Class Constructor
+         *
+         * @param itemView the view associated with this ViewHolder
+         * @param customEditTextListener the text listener to associate with the EditText
+         */
         public ViewHolderEditText(@NonNull View itemView, MyCustomEditTextListener customEditTextListener) {
             super(itemView);
             this.myCustomEditTextListener = customEditTextListener;
@@ -189,6 +272,13 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
+    /**
+     * Class constructor
+     *
+     * @param context the context of the application
+     * @param fields an ArrayList of Field objects
+     * @param new_pers a boolean telling if it's a new person the user is adding or not
+     */
     public AdapterViewFields(Context context, ArrayList<Field> fields, boolean new_pers) {
         this.mContext = context;
         this.mFields = fields;
@@ -196,6 +286,13 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.new_person = new_pers;
     }
 
+    /**
+     * Override of the onCreateViewHolder function. Create ViewHolders based on the viewType specified in parameters.
+     *
+     * @param parent a ViewGroup object
+     * @param viewType an int representing the view type
+     * @return a RecyclerView.ViewHolder object. The type of the object depends of the input type specified.
+     */
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -222,11 +319,15 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         return null;
     }
 
+    /**
+     * Override of the onBindViewHolder function. Set the ViewHolder content based on what they are representing.
+     *
+     * @param holder a RecyclerView.ViewHolder object
+     * @param position an int
+     */
     @SuppressLint("DefaultLocale")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        // position va de 0 à 19, car actuellement on 20 champs à saisir
-
         Field field = mFields.get(position);
 
         switch (field.getViewType()) {
@@ -315,6 +416,13 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
+    /**
+     * Function to get the position of a specified key in an adapter of DataElement objects.
+     *
+     * @param adapter an Adapter object
+     * @param key_val_pers a String
+     * @return an int giving the position of the key_val_person parameter in the adapter
+     */
     public int getPositionInAdapter(Adapter adapter, String key_val_pers) {
         DataElement data_element;
         for (int i=0; i<adapter.getCount(); i++) {
@@ -338,32 +446,67 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     // we make TextWatcher to be aware of the position it currently works with
     // this way, once a new item is attached in onBindViewHolder, it will
     // update current position MyCustomEditTextListener, reference to which is kept by ViewHolder
+
+    /**
+     * Class implementing TextWatcher for a Unique ID.
+     */
     private class CustomUniqueIDTextListener implements TextWatcher {
         private int position;
         ViewHolderUniqueID mView;
 
         private final String regex_id = "([A-Z]{3})";
 
+        /**
+         * Class constructor.
+         *
+         * @param v a ViewHolderUniqueID object
+         */
         public CustomUniqueIDTextListener(ViewHolderUniqueID v) {
             super();
             this.mView = v;
         }
 
+        /**
+         * Function to update the position of the cursor in the EditText
+         *
+         * @param position an int
+         */
         public void updatePosition(int position) {
             this.position = position;
         }
 
+        /**
+         * Function called before the text is changed.
+         *
+         * @param charSequence a CharSequence object representing the text written
+         * @param i an int
+         * @param i2 an int
+         * @param i3 an int
+         */
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
             // no op
         }
 
+        /**
+         * Function called when the text is changed.
+         *
+         * @param charSequence a CharSequence object
+         * @param i an int
+         * @param i2 an int
+         * @param i3 an int
+         */
         @SuppressLint("DefaultLocale")
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
             // no op
         }
 
+        /**
+         * Function called after the text is changed.
+         *
+         * @param editable an Editable object
+         */
         @Override
         public void afterTextChanged(Editable editable) {
             // no op
@@ -403,30 +546,62 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     // we make TextWatcher to be aware of the position it currently works with
     // this way, once a new item is attached in onBindViewHolder, it will
     // update current position MyCustomEditTextListener, reference to which is kept by ViewHolder
+    /**
+     * Class implementing TextWatcher for an basic EditText
+     */
     private class MyCustomEditTextListener implements TextWatcher {
         private int position;
         private String key_field;
         private String regex = null;
         private ViewHolderCalendarView mView;
 
+        /**
+         * Class Constructor
+         */
         public MyCustomEditTextListener() {
             super();
         }
 
+        /**
+         * Class constructor using a ViewHolderCalendarView view
+         *
+         * @param view a ViewHolderCalendarView object
+         */
         public MyCustomEditTextListener(ViewHolderCalendarView view) {
             super();
             mView = view;
         }
 
+        /**
+         * Function to update the position of the cursor in the EditText
+         *
+         * @param position an int
+         */
         public void updatePosition(int position) {
             this.position = position;
         }
 
+        /**
+         * Function called before the text is changed.
+         *
+         * @param charSequence a CharSequence object representing the text written
+         * @param i an int
+         * @param i2 an int
+         * @param i3 an int
+         */
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
             // no op
         }
 
+        /**
+         * Function called when the text is changed.
+         *
+         * @param charSequence a CharSequence object representing the text written
+         * @param i an int
+         * @param i2 an int
+         * @param i3 an int
+         */
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
 //                String field_key = mFields.get(position).getKey();
@@ -457,18 +632,38 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             // no op
         }
 
+        /**
+         * Function to set the key_field attribute.
+         *
+         * @param key a String representing the key of the field associated with the view.
+         */
         public void setKey(String key) {
             this.key_field = key;
         }
 
+        /**
+         * Associate a regex with the text listener to perform verifications when something is written.
+         *
+         * @param reg a String representing the regex.
+         */
         public void setRegex(String reg) {
             this.regex = reg;
         }
 
+        /**
+         * Get the regex associated with the TextListener.
+         *
+         * @return a String if the object exists, or null if it doesn't
+         */
         public String getRegex() {
             return this.regex;
         }
 
+        /**
+         * Function to set a view.
+         *
+         * @param view a ViewHolderCalendarView object
+         */
         public void setView(ViewHolderCalendarView view) {
             this.mView = view;
         }

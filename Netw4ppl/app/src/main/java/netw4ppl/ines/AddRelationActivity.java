@@ -229,8 +229,9 @@ public class AddRelationActivity extends AppCompatActivity {
     }
     
     /**
-     * Reset the static objects present in the class.
-     * TODO change this function, having static object is a source of errors and unpredictable behaviours
+     * Reset the objects present in the class
+     *
+     * @deprecated changed in version 1.0.2
      */
     public void resetObjects() {
         from_person = null;
@@ -373,6 +374,13 @@ public class AddRelationActivity extends AppCompatActivity {
         return (!test_relation_type);
     }
 
+    /**
+     * Determine if the Person To in the relation is valid or not.
+     * It tests if the unique id of the To person is empty or not.
+     *
+     * @param relation a Relation object
+     * @return false if the unique id of the To Person is empty and true if it isn't
+     */
     private boolean isPersonToValid(Relation relation) {
         boolean is_empty = relation.getInfoByKey("to_unique_id").equals("");
         String toast_text = this.getString(R.string.toast_person_not_selected);
@@ -383,6 +391,13 @@ public class AddRelationActivity extends AppCompatActivity {
         return !is_empty;
     }
 
+    /**
+     * Determine if the Person From in the relation is valid or not.
+     * It tests if the unique id of the From person is empty or not.
+     *
+     * @param relation a Relation object
+     * @return false if the unique id of the From Person is empty and true if it isn't
+     */
     private boolean isPersonFromValid(Relation relation) {
         boolean is_empty = relation.getInfoByKey("from_unique_id").equals("");
         String toast_text = this.getString(R.string.toast_person_not_selected);
@@ -401,6 +416,9 @@ public class AddRelationActivity extends AppCompatActivity {
         return (testRelationType(relation) && isPersonFromValid(relation) && isPersonToValid(relation) && !samePersonRelation(relation));
     }
 
+    /**
+     * Set the To Person AutoCompleteTextView with a value.
+     */
     private void setToPersonView() {
         // informations contenues dans to_person
         mAutoTextViewRelationTo.setText(to_person.toString(), false);
@@ -411,6 +429,9 @@ public class AddRelationActivity extends AppCompatActivity {
         mAutoTextViewRelationTo.setAdapter((ArrayAdapter<Person>) null);
     }
 
+    /**
+     * Set the From Person AutoCompleteTextView with a value.
+     */
     private void setFromPersonView() {
         mAutoTextViewRelationFrom.setText(from_person.toString(), false);
         mAutoTextViewRelationFrom.setEnabled(false);
@@ -420,6 +441,11 @@ public class AddRelationActivity extends AppCompatActivity {
         mAutoTextViewRelationFrom.setAdapter((ArrayAdapter<Person>) null);
     }
 
+    /**
+     * Set the person views based on the informations in the Relation given in parameter.
+     *
+     * @param relation a Relation object
+     */
     private void setPersonsViews(Relation relation) {
         // associate the ids and full_names with the Person objects and set the variables
         int index_from = associateInfosWithPerson(relation.getFromID());

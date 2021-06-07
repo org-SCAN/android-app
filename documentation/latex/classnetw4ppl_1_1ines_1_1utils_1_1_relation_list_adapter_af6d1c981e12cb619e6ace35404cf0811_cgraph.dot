@@ -1,0 +1,31 @@
+digraph "netw4ppl.ines.utils.RelationListAdapter.getFilter"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="netw4ppl.ines.utils.Relation\lListAdapter.getFilter",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="netw4ppl.ines.utils.Relation.get\lFromFullname",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_relation.html#a1917ce61ea1502a4ba78856518ed59a8",tooltip=" "];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="netw4ppl.ines.utils.Relation.get\lFromID",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_relation.html#a59c6d6c8ba8809e5fe8493861a711a20",tooltip=" "];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="netw4ppl.ines.utils.Relation.get\lInfoByKey",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_relation.html#ad64f7202fc6b98542bab454d710747e8",tooltip=" "];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="netw4ppl.ines.utils.Relation.get\lRelationType",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_relation.html#a12338832421bf83659bee1248a80f4af",tooltip=" "];
+  Node5 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="netw4ppl.ines.utils.Relation.get\lRelationTypeFull",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_relation.html#ac2f040a5dd12c838a347cf5507e4d020",tooltip=" "];
+  Node6 -> Node7 [color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="netw4ppl.ines.utils.Configuration.get\lElementFromTable",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_configuration.html#a4c09b0d33a51f144d36fa7147c166f3b",tooltip=" "];
+  Node7 -> Node8 [color="midnightblue",fontsize="10",style="solid"];
+  Node8 [label="netw4ppl.ines.utils.Configuration.has\lElementInTable",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_configuration.html#a33cd53086ed70e6c684b046b894d8a54",tooltip=" "];
+  Node6 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid"];
+  Node9 [label="netw4ppl.ines.utils.Relation.get\lToFullname",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_relation.html#ad2e44260a1adeec2b44041c4f4c7bf81",tooltip=" "];
+  Node1 -> Node10 [color="midnightblue",fontsize="10",style="solid"];
+  Node10 [label="netw4ppl.ines.utils.Relation.getToID",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_relation.html#ac57fc7df7ff11f442514ae63524864dc",tooltip=" "];
+  Node10 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node11 [color="midnightblue",fontsize="10",style="solid"];
+  Node11 [label="netw4ppl.ines.utils.Relation\lListAdapter.notifyDataSetChanged",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classnetw4ppl_1_1ines_1_1utils_1_1_relation_list_adapter.html#a6d7512a06db9e20c478981a90287e201",tooltip=" "];
+}

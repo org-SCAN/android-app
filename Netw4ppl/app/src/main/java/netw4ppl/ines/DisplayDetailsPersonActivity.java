@@ -35,6 +35,11 @@ import netw4ppl.ines.utils.PersonDetailsRelationFromAdapter;
 import netw4ppl.ines.utils.PersonDetailsRelationToAdapter;
 import netw4ppl.ines.utils.Relation;
 
+/**
+ * Class used to display the details about a Person. For the moment it is displaying the relations where this
+ * person if the "From" (on the right of the screen) and the relations where this person if the "To" (on the left of the screen).
+ * n the middle of the screen are displayed the details like the name, nationality etc.
+ */
 public class DisplayDetailsPersonActivity extends AppCompatActivity {
 
     TextView mTextViewFullnameTitle;
@@ -247,6 +252,13 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Function to get all the Relation objects in the object ManageRelationsActivity.array_relations
+     * where the person given in parameters is the "Person To".
+     *
+     * @param to_person a Person object
+     * @return an ArrayList of Relation objects
+     */
     private ArrayList<Relation> getRelationsFrom(Person to_person) {
         ArrayList<Relation> array_relations_from = new ArrayList<Relation>();
 
@@ -260,6 +272,10 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         return array_relations_from;
     }
 
+    /**
+     * Function to update the adapter of "relations From" in case the content of the adapter has changed.
+     * Example: A relation From was added.
+     */
     private void updateAdapterFrom() {
         Person person = ManagePersonsActivity.array_persons.get(index_person);
         ArrayList<Relation> array_relations_from = getRelationsFrom(person);
@@ -267,6 +283,10 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         mListRelationsFrom.setAdapter(adapter_relations_from);
     }
 
+    /**
+     * Function to update the adapter of "relations To" in case the content of the adapter has changed.
+     * Example: A relation To was added.
+     */
     private void updateAdapterTo() {
         Person person = ManagePersonsActivity.array_persons.get(index_person);
         ArrayList<Relation> array_relations_to = getRelationsTo(person);
@@ -274,6 +294,13 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         mListRelationsTo.setAdapter(adapter_relations_to);
     }
 
+    /**
+     * Function to get all the Relation objects in the object ManageRelationsActivity.array_relations
+     * where the person given in parameters is the "Person From".
+     *
+     * @param from_person a Person object
+     * @return an ArrayList of Relation objects
+     */
     private ArrayList<Relation> getRelationsTo(Person from_person) {
         ArrayList<Relation> array_relations_to = new ArrayList<Relation>();
 
@@ -296,6 +323,12 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         mTextViewFullnameTitle.setText(ManagePersonsActivity.array_persons.get(index_person).getInfoByKey("full_name"));
     }
 
+    /**
+     * Function used to delete the relations where the person was present in. Used only when we delete a person.
+     *
+     * @param p a Person object
+     * @return a boolean. true if the relations were successfully deleted and saved
+     */
     public boolean deleteAssociatedRelations(Person p) {
         ArrayList<Integer> index_relations = new ArrayList<Integer>();
 

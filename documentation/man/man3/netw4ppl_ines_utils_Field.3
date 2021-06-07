@@ -1,0 +1,116 @@
+.TH "netw4ppl.ines.utils.Field" 3 "Mon Jun 7 2021" "Version 1.0.3" "Netw4ppl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+netw4ppl.ines.utils.Field
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBnetw4ppl\&.ines\&.utils\&.DataElement\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBField\fP ()"
+.br
+.ti -1c
+.RI "\fBField\fP (String key, String string_fields)  throws JSONException "
+.br
+.ti -1c
+.RI "String \fBgetElementByKey\fP (String key)"
+.br
+.ti -1c
+.RI "int \fBgetViewType\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetViewType\fP (String android_type, int required)"
+.br
+.ti -1c
+.RI "int \fBgetRequired\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 11 of file Field\&.java\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "netw4ppl\&.ines\&.utils\&.Field\&.Field ()"
+Default Constructor 
+.PP
+Definition at line 18 of file Field\&.java\&.
+.SS "netw4ppl\&.ines\&.utils\&.Field\&.Field (String key, String string_fields) throws JSONException"
+Constructor of Fields Sets the key and value of a field Sets the type of user interface of this field according to its android-type and requirement level 
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP key of a \fBField\fP 
+.br
+\fIstring_fields\fP value of a \fBField\fP 
+.RE
+.PP
+\fBExceptions\fP
+.RS 4
+\fIJSONException\fP 
+.RE
+.PP
+
+.PP
+Definition at line 30 of file Field\&.java\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "String netw4ppl\&.ines\&.utils\&.Field\&.getElementByKey (String key)"
+Returns the value associated to a key 
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP key of the searched value 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+null if the key does not exist, the element if it does 
+.RE
+.PP
+
+.PP
+Definition at line 40 of file Field\&.java\&.
+.SS "int netw4ppl\&.ines\&.utils\&.Field\&.getRequired ()"
+Returns the level of requirement of a \fBField\fP 
+.PP
+\fBReturns\fP
+.RS 4
+an int corresponding to the requirement level 
+.RE
+.PP
+
+.PP
+Definition at line 91 of file Field\&.java\&.
+.SS "int netw4ppl\&.ines\&.utils\&.Field\&.getViewType ()"
+Returns the view_type of this \fBField\fP 
+.PP
+\fBReturns\fP
+.RS 4
+the value of view_type 
+.RE
+.PP
+
+.PP
+Definition at line 55 of file Field\&.java\&.
+.SS "void netw4ppl\&.ines\&.utils\&.Field\&.setViewType (String android_type, int required)"
+Sets the type of user interface of a field according to its android-type and requirement level Allows to create four types of UI : EditText, AutoCompleteTextView, Spinner and CalendarView 
+.PP
+\fBParameters\fP
+.RS 4
+\fIandroid_type\fP type of user interface 
+.br
+\fIrequired\fP level of requirement 
+.RE
+.PP
+
+.PP
+Definition at line 65 of file Field\&.java\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Netw4ppl from the source code\&.

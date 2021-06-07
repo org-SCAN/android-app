@@ -12,15 +12,31 @@ public class Field extends DataElement {
 
     private int view_type;
 
+    /**
+     * Default Constructor
+     */
     public Field() {
         super();
     }
 
+    /**
+     * Constructor of Fields
+     * Sets the key and value of a field
+     * Sets the type of user interface of this field according to its android-type and requirement level
+     * @param key key of a Field
+     * @param string_fields value of a Field
+     * @throws JSONException
+     */
     public Field(String key, String string_fields) throws JSONException {
         super(key, string_fields);
         setViewType(this.getString("android_type"), this.getInt("required"));
     }
 
+    /**
+     * Returns the value associated to a key
+     * @param key key of the searched value
+     * @return null if the key does not exist, the element if it does
+     */
     public String getElementByKey(String key) {
         if (this.has(key)) {
             try {
@@ -32,10 +48,20 @@ public class Field extends DataElement {
         return null;
     }
 
+    /**
+     * Returns the view_type of this Field
+     * @return the value of view_type
+     */
     public int getViewType() {
         return this.view_type;
     }
 
+    /**
+     * Sets the type of user interface of a field according to its android-type and requirement level
+     * Allows to create four types of UI : EditText, AutoCompleteTextView, Spinner and CalendarView
+     * @param android_type type of user interface
+     * @param required level of requirement
+     */
     public void setViewType(String android_type, int required) {
         switch (android_type) {
             case "EditText":
@@ -58,6 +84,10 @@ public class Field extends DataElement {
         }
     }
 
+    /**
+     * Returns the level of requirement of a Field
+     * @return an int corresponding to the requirement level
+     */
     public int getRequired() {
         int required = 0;
         try {
@@ -66,25 +96,5 @@ public class Field extends DataElement {
             e.printStackTrace();
         }
         return required;
-    }
-
-    /*
-    Useful method when the field is of type CalendarView, that way we can initialise them with the right value
-    using method setDate(long long_date)
-     */
-    public long getDateInMilliSeconds(String key) {
-        long long_date = 1588433899000L;
-        String string_date = this.getElementByKey(key);
-        if (!isNull(string_date)) {
-            // on essaie de parser la date en long
-            SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                Date d = f.parse(string_date);
-                long_date = d.getTime();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
-        return long_date;
     }
 }

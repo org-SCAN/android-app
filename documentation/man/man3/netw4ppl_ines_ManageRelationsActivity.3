@@ -1,0 +1,92 @@
+.TH "netw4ppl.ines.ManageRelationsActivity" 3 "Mon Jun 7 2021" "Version 1.0.3" "Netw4ppl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+netw4ppl.ines.ManageRelationsActivity
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits AppCompatActivity\&.
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBupdateRelations\fP (\fBPerson\fP person)"
+.br
+.ti -1c
+.RI "static void \fBreadRelationsFile\fP (Context context)  throws IOException, JSONException "
+.br
+.ti -1c
+.RI "static String \fBformatterJsonFile\fP ()"
+.br
+.ti -1c
+.RI "static void \fBupdateAdapter\fP ()"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static ArrayList< \fBRelation\fP > \fBarray_relations\fP = new ArrayList<\fBRelation\fP>()"
+.br
+.ti -1c
+.RI "static \fBRelationListAdapter\fP \fBmAdapter\fP"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBonCreate\fP (Bundle savedInstanceState)"
+.br
+.ti -1c
+.RI "void \fBonResume\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 30 of file ManageRelationsActivity\&.java\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "static String netw4ppl\&.ines\&.ManageRelationsActivity\&.formatterJsonFile ()\fC [static]\fP"
+Convert the ArrayList of Relations in JSONArray to then convert it in a String because the server is expecting such format\&.
+.PP
+\fBReturns\fP
+.RS 4
+a String containing the Relations contained in relation, on a JSONArray format 
+.RE
+.PP
+
+.PP
+Definition at line 171 of file ManageRelationsActivity\&.java\&.
+.SS "static void netw4ppl\&.ines\&.ManageRelationsActivity\&.readRelationsFile (Context context) throws IOException, JSONException\fC [static]\fP"
+Read the Relations File associated with this application\&. The path is determined based on strings in the strings\&.xml file
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP the context of the current activity 
+.RE
+.PP
+
+.PP
+Definition at line 130 of file ManageRelationsActivity\&.java\&.
+.SS "static void netw4ppl\&.ines\&.ManageRelationsActivity\&.updateAdapter ()\fC [static]\fP"
+Function to update the adapter\&. During an onResume of the activity, this method will be called in case there have been any changes in the adapter (add, modification or deletion of a relation) 
+.PP
+Definition at line 194 of file ManageRelationsActivity\&.java\&.
+.SS "static void netw4ppl\&.ines\&.ManageRelationsActivity\&.updateRelations (\fBPerson\fP person)\fC [static]\fP"
+Function to update the name of a person in all the relations where this person is present in\&. Currently called after the edition of a person\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIperson\fP a Person object 
+.RE
+.PP
+
+.PP
+Definition at line 44 of file ManageRelationsActivity\&.java\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Netw4ppl from the source code\&.

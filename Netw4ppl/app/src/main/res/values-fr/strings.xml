@@ -5,7 +5,6 @@
     <string name="title_activity_manage_relations">Gérer les relations</string>
     <string name="title_activity_manage_persons">Gérer les personnes</string>
     <string name="title_send_data">Envoi des données</string>
-    <string name="action_settings">Paramètres</string>
     <string name="settings_server_header">Serveur</string>
     <string name="settings_email_header">Email</string>
     <string name="settings_sending_option_header">Option d\'envoi</string>
@@ -17,7 +16,6 @@
     <string name="settings_server_maj_off">Désactivée</string>
     <string name="settings_server_maj_on">Activée</string>
     <string name="settings_email_default_title">Adresse mail d\'envoi</string>
-    <string name="settings_delete_option_title">Suppression de données</string>
     <string name="settings_delete_button_title">Supprimer</string>
     <string name="settings_delete_button_summary">Supprimer les fichiers sur cet appareil</string>
     <string name="main_submit_success_title">Envoi réussi</string>
@@ -32,12 +30,6 @@
     <string name="main_submit_token_fail_msg">Veuillez renseigner une clé serveur dans les paramètres</string>
     <string name="no_submit_option_title">Option d\'envoi</string>
     <string name="no_submit_option_msg">Veuillez sélectionner une option d\'envoi dans les paramètres</string>
-    <string name="settings_default_pwd_hashing_pending_title">Sécurisation de votre mot de passe</string>
-    <string name="settings_default_pwd_hashing_pending_message">Votre mot de passe est en train d\'être sécurisé et sauvegardé, veuillez patienter...</string>
-    <string name="settings_default_pwd_hashing_error_title">Erreur de hashage</string>
-    <string name="settings_default_pwd_hashing_error_message">Une erreur est parvenue lors de la sécurisation et la sauvegarde de votre mot de passe</string>
-    <string name="settings_default_pwd_hashing_success_title">Mot de passe enregistré</string>
-    <string name="settings_default_pwd_hashing_success_message">Votre mot de passe a été sécurisé et enregistré avec succès</string>
     <string name="change_settings">ALLER VERS LES PARAMETRES</string>
     <string name="toast_delete_success">Suppression réussie</string>
     <string name="toast_delete_fail">Echec de la suppression</string>
@@ -46,15 +38,12 @@
     <string name="toast_same_person_relation">Les personnes d\'une relation doivent être différentes</string>
     <string name="toast_relation_type_non_selected">Vous devez sélectionner une type de relation valide</string>
     <string name="toast_person_not_selected">Vous devez sélectionner des personnes en cliquant dans le menu déroulant</string>
-    <string name="toast_edit_person_relation">Les personnes d\'une relation ne peuvent pas être modifiées lors d\'une modification de relation</string>
     <string name="add_person_activity_title">Ajouter une personne</string>
     <string name="add_relation_activity_title">Ajouter une relation</string>
     <string name="display_details_relation_activity_title">Details de la relation</string>
     <string name="display_details_person_activity_title">Details de la personne</string>
     <string name="manage_persons_activity_title">Gérer les personnes</string>
     <string name="manage_relations_activity_title">Gérer les relations</string>
-    <string name="bottom_menu_page_1">Page 1</string>
-    <string name="bottom_menu_page_2">Page 2</string>
     <string name="age_title">Age:</string>
     <string name="sex_title">Sexe:</string>
     <string name="button_edit_title">Modifier</string>

@@ -157,6 +157,11 @@ public class AddPersonActivity extends AppCompatActivity {
         return default_val;
     }
 
+    /**
+     * Function to set the default key for the "unique ids".
+     *
+     * @param tricode a String composed of three letters
+     */
     public static void setDefaultKey(String tricode) {
         try {
             json_ids.put("default", tricode);

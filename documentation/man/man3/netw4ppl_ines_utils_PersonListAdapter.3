@@ -1,0 +1,131 @@
+.TH "netw4ppl.ines.utils.PersonListAdapter" 3 "Mon Jun 7 2021" "Version 1.0.3" "Netw4ppl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+netw4ppl.ines.utils.PersonListAdapter
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits ArrayAdapter< Person >, and Filterable\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBPersonListAdapter\fP (Context context, int resource, ArrayList< \fBPerson\fP > objects)"
+.br
+.ti -1c
+.RI "Filter \fBgetFilter\fP ()"
+.br
+.ti -1c
+.RI "void \fBnotifyDataSetChanged\fP ()"
+.br
+.ti -1c
+.RI "View \fBgetView\fP (int position, @Nullable View convertView, @NonNull ViewGroup parent)"
+.br
+.ti -1c
+.RI "int \fBgetCount\fP ()"
+.br
+.ti -1c
+.RI "\fBPerson\fP \fBgetItem\fP (int position)"
+.br
+.ti -1c
+.RI "long \fBgetItemId\fP (int position)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "ArrayList< \fBPerson\fP > \fBmObjects\fP"
+.br
+.ti -1c
+.RI "ArrayList< \fBPerson\fP > \fBmObjects_tmp\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+A class to display the important informations about the persons 
+.PP
+Definition at line 31 of file PersonListAdapter\&.java\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "netw4ppl\&.ines\&.utils\&.PersonListAdapter\&.PersonListAdapter (Context context, int resource, ArrayList< \fBPerson\fP > objects)"
+The class constructor 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP the application context 
+.br
+\fIresource\fP the id of the layout to use to pt the informations 
+.br
+\fIobjects\fP an ArrayList of \fBPerson\fP objects 
+.RE
+.PP
+
+.PP
+Definition at line 55 of file PersonListAdapter\&.java\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "int netw4ppl\&.ines\&.utils\&.PersonListAdapter\&.getCount ()"
+Get the number of elements in the adapter\&.
+.PP
+\fBReturns\fP
+.RS 4
+an int 
+.RE
+.PP
+
+.PP
+Definition at line 188 of file PersonListAdapter\&.java\&.
+.SS "Filter netw4ppl\&.ines\&.utils\&.PersonListAdapter\&.getFilter ()"
+Function to perform the filtering of the persons when the search bar is used\&. If you want to change the search criterias, you should modify the code of the \fBperformFiltering(CharSequence constraint)\fP function\&.
+.PP
+\fBReturns\fP
+.RS 4
+a Filter object 
+.RE
+.PP
+
+.PP
+Definition at line 72 of file PersonListAdapter\&.java\&.
+.SS "\fBPerson\fP netw4ppl\&.ines\&.utils\&.PersonListAdapter\&.getItem (int position)"
+Get the item in the dapter at the position given
+.PP
+\fBParameters\fP
+.RS 4
+\fIposition\fP an int 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a \fBPerson\fP 
+.RE
+.PP
+
+.PP
+Definition at line 199 of file PersonListAdapter\&.java\&.
+.SS "long netw4ppl\&.ines\&.utils\&.PersonListAdapter\&.getItemId (int position)"
+Get the item id (aka its position in the array)
+.PP
+\fBParameters\fP
+.RS 4
+\fIposition\fP an int 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a long 
+.RE
+.PP
+
+.PP
+Definition at line 210 of file PersonListAdapter\&.java\&.
+.SS "void netw4ppl\&.ines\&.utils\&.PersonListAdapter\&.notifyDataSetChanged ()"
+Notify the adapter if the content of the adapter changed\&. It is the case during the filtering\&. 
+.PP
+Definition at line 142 of file PersonListAdapter\&.java\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Netw4ppl from the source code\&.

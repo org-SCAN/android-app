@@ -1,0 +1,67 @@
+.TH "netw4ppl.ines.DisplayDetailsPersonActivity" 3 "Mon Jun 7 2021" "Version 1.0.3" "Netw4ppl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+netw4ppl.ines.DisplayDetailsPersonActivity
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits AppCompatActivity\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "boolean \fBdeleteAssociatedRelations\fP (\fBPerson\fP p)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "int \fBindex_person\fP"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBonCreate\fP (Bundle savedInstanceState)"
+.br
+.ti -1c
+.RI "void \fBonResume\fP ()"
+.br
+.ti -1c
+.RI "void \fBonSaveInstanceState\fP (@NonNull Bundle outState)"
+.br
+.ti -1c
+.RI "void \fBonRestoreInstanceState\fP (@NonNull Bundle savedInstanceState)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Class used to display the details about a Person\&. For the moment it is displaying the relations where this person if the 'From' (on the right of the screen) and the relations where this person if the 'To' (on the left of the screen)\&. n the middle of the screen are displayed the details like the name, nationality etc\&. 
+.PP
+Definition at line 43 of file DisplayDetailsPersonActivity\&.java\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "boolean netw4ppl\&.ines\&.DisplayDetailsPersonActivity\&.deleteAssociatedRelations (\fBPerson\fP p)"
+Function used to delete the relations where the person was present in\&. Used only when we delete a person\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIp\fP a Person object 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a boolean\&. true if the relations were successfully deleted and saved 
+.RE
+.PP
+
+.PP
+Definition at line 332 of file DisplayDetailsPersonActivity\&.java\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Netw4ppl from the source code\&.

@@ -1,0 +1,94 @@
+.TH "netw4ppl.ines.AddRelationActivity" 3 "Mon Jun 7 2021" "Version 1.0.3" "Netw4ppl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+netw4ppl.ines.AddRelationActivity
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits AppCompatActivity\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBresetObjects\fP ()"
+.br
+.ti -1c
+.RI "int \fBassociateInfosWithPerson\fP (String unique_id)"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static int \fBgetPositionInAdapter\fP (Adapter adapter, String key_val_pers)"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBonCreate\fP (Bundle savedInstanceState)"
+.br
+.ti -1c
+.RI "void \fBonDestroy\fP ()"
+.br
+.ti -1c
+.RI "void \fBonSaveInstanceState\fP (@NonNull Bundle outState)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 33 of file AddRelationActivity\&.java\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "int netw4ppl\&.ines\&.AddRelationActivity\&.associateInfosWithPerson (String unique_id)"
+Function to associate specific information with a person saved in the application\&. Example of string_p: 'AAA-000001 - John DOE'
+.PP
+\fBParameters\fP
+.RS 4
+\fIunique_id\fP a String containing a unique_id (ex: AAA-000001) 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int 
+.RE
+.PP
+
+.PP
+Definition at line 249 of file AddRelationActivity\&.java\&.
+.SS "static int netw4ppl\&.ines\&.AddRelationActivity\&.getPositionInAdapter (Adapter adapter, String key_val_pers)\fC [static]\fP"
+Returns the index of an item identified by a key in an adapter 
+.PP
+\fBParameters\fP
+.RS 4
+\fIadapter\fP 
+.br
+\fIkey_val_pers\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+an int corresponding to the index of the key in the adapter 
+.RE
+.PP
+
+.PP
+Definition at line 481 of file AddRelationActivity\&.java\&.
+.SS "void netw4ppl\&.ines\&.AddRelationActivity\&.resetObjects ()"
+Reset the objects present in the class
+.PP
+\fBDeprecated\fP
+.RS 4
+changed in version 1\&.0\&.2 
+.RE
+.PP
+
+.PP
+Definition at line 236 of file AddRelationActivity\&.java\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Netw4ppl from the source code\&.

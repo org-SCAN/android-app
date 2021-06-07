@@ -1,0 +1,165 @@
+.TH "netw4ppl.ines.utils.SubmitData" 3 "Mon Jun 7 2021" "Version 1.0.3" "Netw4ppl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+netw4ppl.ines.utils.SubmitData
+.SH SYNOPSIS
+.br
+.PP
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBmanageSend\fP (Context context, String filePath)  throws IOException, InterruptedException, JSONException "
+.br
+.ti -1c
+.RI "static void \fBmanageGet\fP (Context context)  throws IOException, InterruptedException "
+.br
+.ti -1c
+.RI "static void \fBsendByEmail\fP (Context context, String filePath)"
+.br
+.ti -1c
+.RI "static boolean \fBsendToServer\fP (Context context, String filePath, String server_url, String token_server, OkHttpClient http_client, String target)  throws InterruptedException, JSONException, IOException "
+.br
+.ti -1c
+.RI "static boolean \fBgetFromServer\fP (Context context, String server_url, String token_server, OkHttpClient http_client)  throws IOException, InterruptedException "
+.br
+.ti -1c
+.RI "static String \fBmakeSubject\fP (Resources resources, String filePath)"
+.br
+.ti -1c
+.RI "static void \fBshowSubmitResultDialog\fP (Context context, boolean submit_result, boolean get_result)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 40 of file SubmitData\&.java\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "static boolean netw4ppl\&.ines\&.utils\&.SubmitData\&.getFromServer (Context context, String server_url, String token_server, OkHttpClient http_client) throws IOException, InterruptedException\fC [static]\fP"
+Receive a String object from the server containing new configuration files (the config Json for exemple) A Json file is created with the received String and put at the filePath
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP context of the activity 
+.br
+\fIserver_url\fP ip address of the server 
+.br
+\fItoken_server\fP individual token of the user 
+.br
+\fIhttp_client\fP http client of OkHttp 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+boolean which tells us if the reception was a success or not 
+.RE
+.PP
+
+.PP
+Definition at line 269 of file SubmitData\&.java\&.
+.SS "static String netw4ppl\&.ines\&.utils\&.SubmitData\&.makeSubject (Resources resources, String filePath)\fC [static]\fP"
+Create the subject for the email sending option\&. Composed of the name of the application added with a '-' and the name of the file
+.PP
+\fBParameters\fP
+.RS 4
+\fIresources\fP resources of the application 
+.br
+\fIfilePath\fP path to the file 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the subject for the email 
+.RE
+.PP
+
+.PP
+Definition at line 324 of file SubmitData\&.java\&.
+.SS "static void netw4ppl\&.ines\&.utils\&.SubmitData\&.manageGet (Context context) throws IOException, InterruptedException\fC [static]\fP"
+Manages the downloading of files\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP context of the activity 
+.RE
+.PP
+\fBExceptions\fP
+.RS 4
+\fIIOException\fP 
+.br
+\fIInterruptedException\fP 
+.RE
+.PP
+
+.PP
+Definition at line 141 of file SubmitData\&.java\&.
+.SS "static void netw4ppl\&.ines\&.utils\&.SubmitData\&.manageSend (Context context, String filePath) throws IOException, InterruptedException, JSONException\fC [static]\fP"
+Manages the sending of the files\&. Reads the settings options and determine whether the selected option is by email or to the server\&. Verify the validity of the settings
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP context of the activity 
+.br
+\fIfilePath\fP path to the file 
+.RE
+.PP
+
+.PP
+Definition at line 50 of file SubmitData\&.java\&.
+.SS "static void netw4ppl\&.ines\&.utils\&.SubmitData\&.sendByEmail (Context context, String filePath)\fC [static]\fP"
+Function that makes the sending to an email address via an email application
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP context of the activity 
+.br
+\fIfilePath\fP path to the file 
+.RE
+.PP
+
+.PP
+Definition at line 171 of file SubmitData\&.java\&.
+.SS "static boolean netw4ppl\&.ines\&.utils\&.SubmitData\&.sendToServer (Context context, String filePath, String server_url, String token_server, OkHttpClient http_client, String target) throws InterruptedException, JSONException, IOException\fC [static]\fP"
+Sends the informations to the server in form of a String read from the filePath given in parameter
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP context of the activity 
+.br
+\fIfilePath\fP path to the file 
+.br
+\fIserver_url\fP ip address of the server 
+.br
+\fItoken_server\fP individual token of the user 
+.br
+\fIhttp_client\fP http client of OkHttp 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+boolean which tells us if the sending was a success or not 
+.RE
+.PP
+
+.PP
+Definition at line 215 of file SubmitData\&.java\&.
+.SS "static void netw4ppl\&.ines\&.utils\&.SubmitData\&.showSubmitResultDialog (Context context, boolean submit_result, boolean get_result)\fC [static]\fP"
+Create a dialog window to display a message about the submitting status depending on if it was a success or a failure\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP resources of the application 
+.br
+\fIsubmit_result\fP boolean of the submit status 
+.br
+\fIget_result\fP boolean of the get status 
+.RE
+.PP
+
+.PP
+Definition at line 337 of file SubmitData\&.java\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Netw4ppl from the source code\&.

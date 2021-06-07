@@ -22,6 +22,10 @@ import netw4ppl.ines.utils.Person;
 import netw4ppl.ines.utils.PersonDetailsListAdapter;
 import netw4ppl.ines.utils.Relation;
 
+/**
+ * Class used to display the details about a relation like the ids and names of the person associated,
+ * the relation type and finally the comments about this relation if there are any.
+ */
 public class DisplayDetailsRelationActivity extends AppCompatActivity {
 
     TextView mTextViewFullnameTitle;
@@ -105,6 +109,11 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Function to set the views based on a Relation object given in parameters.
+     *
+     * @param relation a Relation object
+     */
     private void setViews(Relation relation){
         mTextViewFromFullname.setText(relation.getFromFullname());
 

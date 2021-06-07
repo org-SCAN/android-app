@@ -39,12 +39,8 @@ public class MainActivity extends AppCompatActivity{
     Button mSendDataBtn;
 
     public static String device_language;
-
     public static boolean mApplicationLaunch = true;
-
     public static Configuration mConfiguration;
-
-    static boolean FLAG_EMAIL_SUCCESS;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -132,6 +128,11 @@ public class MainActivity extends AppCompatActivity{
         Log.d("life-cycle", "Main onDestroy()");
     }
 
+    /**
+     * Function to load the configuration and read all the jsons files.
+     *
+     * @param context the application context
+     */
     public static void loadConfiguration(Context context) {
         // lecture de tous les json
         try {

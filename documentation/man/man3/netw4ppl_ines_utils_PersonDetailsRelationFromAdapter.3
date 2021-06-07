@@ -1,0 +1,55 @@
+.TH "netw4ppl.ines.utils.PersonDetailsRelationFromAdapter" 3 "Mon Jun 7 2021" "Version 1.0.3" "Netw4ppl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+netw4ppl.ines.utils.PersonDetailsRelationFromAdapter
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits ArrayAdapter< Relation >\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBPersonDetailsRelationFromAdapter\fP (Context context, int resource, ArrayList< \fBRelation\fP > relations)"
+.br
+.ti -1c
+.RI "View \fBgetView\fP (int position, @Nullable View convertView, @NonNull ViewGroup parent)"
+.br
+.ti -1c
+.RI "void \fBnotifyDataSetChanged\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Class to create an ArrayAdapter of \fBRelation\fP objects\&. This class is currently used in the \fBDisplayDetailsPersonActivity\fP to show the 'relations from'\&. 
+.PP
+Definition at line 24 of file PersonDetailsRelationFromAdapter\&.java\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "netw4ppl\&.ines\&.utils\&.PersonDetailsRelationFromAdapter\&.PersonDetailsRelationFromAdapter (Context context, int resource, ArrayList< \fBRelation\fP > relations)"
+The class constructor 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP the application context 
+.br
+\fIresource\fP an int representing the id of the layout to put the elements inside 
+.br
+\fIrelations\fP an ArrayList of \fBRelation\fP objects 
+.RE
+.PP
+
+.PP
+Definition at line 43 of file PersonDetailsRelationFromAdapter\&.java\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "void netw4ppl\&.ines\&.utils\&.PersonDetailsRelationFromAdapter\&.notifyDataSetChanged ()"
+Function to notify the adapter if elements were added, deleted or modified\&. 
+.PP
+Definition at line 84 of file PersonDetailsRelationFromAdapter\&.java\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Netw4ppl from the source code\&.

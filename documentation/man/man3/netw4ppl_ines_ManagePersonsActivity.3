@@ -1,0 +1,75 @@
+.TH "netw4ppl.ines.ManagePersonsActivity" 3 "Mon Jun 7 2021" "Version 1.0.3" "Netw4ppl" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+netw4ppl.ines.ManagePersonsActivity
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits AppCompatActivity\&.
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBupdateAdapter\fP ()"
+.br
+.ti -1c
+.RI "static void \fBreadPersonsFile\fP (Context context)  throws IOException, JSONException "
+.br
+.ti -1c
+.RI "static String \fBformatterJsonFile\fP ()"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static ArrayList< \fBPerson\fP > \fBarray_persons\fP = new ArrayList<\fBPerson\fP>()"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBonCreate\fP (Bundle savedInstanceState)"
+.br
+.ti -1c
+.RI "void \fBonResume\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 27 of file ManagePersonsActivity\&.java\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "static String netw4ppl\&.ines\&.ManagePersonsActivity\&.formatterJsonFile ()\fC [static]\fP"
+Convert the ArrayList of Persons in JSONArray to then convert it in a String because the server is expecting such format\&.
+.PP
+\fBReturns\fP
+.RS 4
+a String containing the Persons contained in person, on a JSONArray format 
+.RE
+.PP
+
+.PP
+Definition at line 170 of file ManagePersonsActivity\&.java\&.
+.SS "static void netw4ppl\&.ines\&.ManagePersonsActivity\&.readPersonsFile (Context context) throws IOException, JSONException\fC [static]\fP"
+Read the Persons File associated with this application\&. The path is determined based on strings in the strings\&.xml file
+.PP
+\fBParameters\fP
+.RS 4
+\fIcontext\fP the context of the current activity 
+.RE
+.PP
+
+.PP
+Definition at line 131 of file ManagePersonsActivity\&.java\&.
+.SS "static void netw4ppl\&.ines\&.ManagePersonsActivity\&.updateAdapter ()\fC [static]\fP"
+Function to update the adapter\&. During an onResume of the activity, this method will be called in case there have been any changes in the adapter (add, modification or deletion of a person) 
+.PP
+Definition at line 114 of file ManagePersonsActivity\&.java\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Netw4ppl from the source code\&.

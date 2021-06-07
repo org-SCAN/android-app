@@ -1,0 +1,160 @@
+\hypertarget{classnetw4ppl_1_1ines_1_1_add_person_activity}{}\doxysection{netw4ppl.\+ines.\+Add\+Person\+Activity Class Reference}
+\label{classnetw4ppl_1_1ines_1_1_add_person_activity}\index{netw4ppl.ines.AddPersonActivity@{netw4ppl.ines.AddPersonActivity}}
+
+
+Inheritance diagram for netw4ppl.\+ines.\+Add\+Person\+Activity\+:
+% FIG 0
+
+
+Collaboration diagram for netw4ppl.\+ines.\+Add\+Person\+Activity\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+boolean \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_add_person_activity_a3a748a4973cb20db28e03d8c14f6412c}{verification\+Input\+Person}} ()
+\item 
+boolean \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_add_person_activity_ae565a7e4087176eaf482f6ededed0302}{save\+Ids}} (Context context, \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_person}{Person}} person)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static String \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_add_person_activity_acec4f2f1a4de80fb5c7997192acbc4f8}{get\+Default\+Key}} ()
+\item 
+static void \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_add_person_activity_af032d5e5d1ea5e8ea9db70e8a3fe1136}{set\+Default\+Key}} (String tricode)
+\item 
+static int \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1_add_person_activity_a28e172448478944448044c8910560168}{get\+Next\+Id}} (String key)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_add_person_activity_aa221205cb3fd8d27e874764dc6193cd9}\label{classnetw4ppl_1_1ines_1_1_add_person_activity_aa221205cb3fd8d27e874764dc6193cd9}} 
+static JSONObject {\bfseries json\+\_\+ids} = new JSONObject()
+\item 
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_add_person_activity_a680cc2a8167bb12c845b6f0defb1d810}\label{classnetw4ppl_1_1ines_1_1_add_person_activity_a680cc2a8167bb12c845b6f0defb1d810}} 
+static \mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_person}{Person}} {\bfseries person}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_add_person_activity_a9fffb457a171b820f3d3926819ed467a}\label{classnetw4ppl_1_1ines_1_1_add_person_activity_a9fffb457a171b820f3d3926819ed467a}} 
+void {\bfseries on\+Create} (Bundle saved\+Instance\+State)
+\item 
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_add_person_activity_ae41e480c2a406bc7b1cc66d069c275dc}\label{classnetw4ppl_1_1ines_1_1_add_person_activity_ae41e480c2a406bc7b1cc66d069c275dc}} 
+void {\bfseries on\+Destroy} ()
+\item 
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_add_person_activity_a839b50bc7eeec85835b356fadc30f021}\label{classnetw4ppl_1_1ines_1_1_add_person_activity_a839b50bc7eeec85835b356fadc30f021}} 
+void {\bfseries on\+Save\+Instance\+State} (@Non\+Null Bundle out\+State)
+\item 
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_add_person_activity_a9a685ec34b97830793604290eb236b20}\label{classnetw4ppl_1_1ines_1_1_add_person_activity_a9a685ec34b97830793604290eb236b20}} 
+void {\bfseries on\+Restore\+Instance\+State} (@Non\+Null Bundle saved\+Instance\+State)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 30 of file Add\+Person\+Activity.\+java.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_add_person_activity_acec4f2f1a4de80fb5c7997192acbc4f8}\label{classnetw4ppl_1_1ines_1_1_add_person_activity_acec4f2f1a4de80fb5c7997192acbc4f8}} 
+\index{netw4ppl.ines.AddPersonActivity@{netw4ppl.ines.AddPersonActivity}!getDefaultKey@{getDefaultKey}}
+\index{getDefaultKey@{getDefaultKey}!netw4ppl.ines.AddPersonActivity@{netw4ppl.ines.AddPersonActivity}}
+\doxysubsubsection{\texorpdfstring{getDefaultKey()}{getDefaultKey()}}
+{\footnotesize\ttfamily static String netw4ppl.\+ines.\+Add\+Person\+Activity.\+get\+Default\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Get the 3-\/letters code by default. Set by default at \char`\"{}\+AAA\char`\"{}
+
+\begin{DoxyReturn}{Returns}
+a String which gives the 3-\/letters code by default 
+\end{DoxyReturn}
+
+
+Definition at line 144 of file Add\+Person\+Activity.\+java.
+
+Here is the call graph for this function\+:
+% FIG 2
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_add_person_activity_a28e172448478944448044c8910560168}\label{classnetw4ppl_1_1ines_1_1_add_person_activity_a28e172448478944448044c8910560168}} 
+\index{netw4ppl.ines.AddPersonActivity@{netw4ppl.ines.AddPersonActivity}!getNextId@{getNextId}}
+\index{getNextId@{getNextId}!netw4ppl.ines.AddPersonActivity@{netw4ppl.ines.AddPersonActivity}}
+\doxysubsubsection{\texorpdfstring{getNextId()}{getNextId()}}
+{\footnotesize\ttfamily static int netw4ppl.\+ines.\+Add\+Person\+Activity.\+get\+Next\+Id (\begin{DoxyParamCaption}\item[{String}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Return the next id available for a specific key given
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & a String of letters, usually a 3-\/letters code \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an int of the first value available for this 3-\/letters code 
+\end{DoxyReturn}
+
+
+Definition at line 179 of file Add\+Person\+Activity.\+java.
+
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_add_person_activity_ae565a7e4087176eaf482f6ededed0302}\label{classnetw4ppl_1_1ines_1_1_add_person_activity_ae565a7e4087176eaf482f6ededed0302}} 
+\index{netw4ppl.ines.AddPersonActivity@{netw4ppl.ines.AddPersonActivity}!saveIds@{saveIds}}
+\index{saveIds@{saveIds}!netw4ppl.ines.AddPersonActivity@{netw4ppl.ines.AddPersonActivity}}
+\doxysubsubsection{\texorpdfstring{saveIds()}{saveIds()}}
+{\footnotesize\ttfamily boolean netw4ppl.\+ines.\+Add\+Person\+Activity.\+save\+Ids (\begin{DoxyParamCaption}\item[{Context}]{context,  }\item[{\mbox{\hyperlink{classnetw4ppl_1_1ines_1_1utils_1_1_person}{Person}}}]{person }\end{DoxyParamCaption})}
+
+Save the file containing the ids (3-\/letters code + the value associated) Check before saving if for the 3-\/letters code, the value associated is the biggest one or not.
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & context of the activity/application \\
+\hline
+{\em person} & the person currently being added/edited \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a boolean to determine whether the file was successfully saved or not 
+\end{DoxyReturn}
+
+
+Definition at line 234 of file Add\+Person\+Activity.\+java.
+
+Here is the call graph for this function\+:
+% FIG 3
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_add_person_activity_af032d5e5d1ea5e8ea9db70e8a3fe1136}\label{classnetw4ppl_1_1ines_1_1_add_person_activity_af032d5e5d1ea5e8ea9db70e8a3fe1136}} 
+\index{netw4ppl.ines.AddPersonActivity@{netw4ppl.ines.AddPersonActivity}!setDefaultKey@{setDefaultKey}}
+\index{setDefaultKey@{setDefaultKey}!netw4ppl.ines.AddPersonActivity@{netw4ppl.ines.AddPersonActivity}}
+\doxysubsubsection{\texorpdfstring{setDefaultKey()}{setDefaultKey()}}
+{\footnotesize\ttfamily static void netw4ppl.\+ines.\+Add\+Person\+Activity.\+set\+Default\+Key (\begin{DoxyParamCaption}\item[{String}]{tricode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Function to set the default key for the \char`\"{}unique ids\char`\"{}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tricode} & a String composed of three letters \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 165 of file Add\+Person\+Activity.\+java.
+
+\mbox{\Hypertarget{classnetw4ppl_1_1ines_1_1_add_person_activity_a3a748a4973cb20db28e03d8c14f6412c}\label{classnetw4ppl_1_1ines_1_1_add_person_activity_a3a748a4973cb20db28e03d8c14f6412c}} 
+\index{netw4ppl.ines.AddPersonActivity@{netw4ppl.ines.AddPersonActivity}!verificationInputPerson@{verificationInputPerson}}
+\index{verificationInputPerson@{verificationInputPerson}!netw4ppl.ines.AddPersonActivity@{netw4ppl.ines.AddPersonActivity}}
+\doxysubsubsection{\texorpdfstring{verificationInputPerson()}{verificationInputPerson()}}
+{\footnotesize\ttfamily boolean netw4ppl.\+ines.\+Add\+Person\+Activity.\+verification\+Input\+Person (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Used to determine if the required fields for a person were completed or not. A toast is displayed if some required fields are not completed, and the user is notified of the different fields to complete.
+
+\begin{DoxyReturn}{Returns}
+a boolean. True if all the required fields are correctly completed or false if not. 
+\end{DoxyReturn}
+
+
+Definition at line 198 of file Add\+Person\+Activity.\+java.
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app/src/main/java/netw4ppl/ines/Add\+Person\+Activity.\+java\end{DoxyCompactItemize}
