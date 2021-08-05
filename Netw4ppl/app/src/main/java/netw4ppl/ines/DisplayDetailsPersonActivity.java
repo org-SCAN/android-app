@@ -172,7 +172,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
 
         mButtonAddRelationFrom.setOnClickListener(v -> {
 
-            // TODO changer cette merde
+            // TODO changer ça
             Intent intent = new Intent(DisplayDetailsPersonActivity.this, AddRelationActivity.class);
             Bundle b = new Bundle();
             b.putBoolean("new_relation", true);
@@ -241,7 +241,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
                     .show();
         });
         mButtonAddRelationTo.setOnClickListener(v -> {
-            // TODO changer cette merde
+            // TODO changer ça
             Intent intent = new Intent(DisplayDetailsPersonActivity.this, AddRelationActivity.class);
             Bundle b = new Bundle();
             b.putBoolean("new_relation", true);
