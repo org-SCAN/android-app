@@ -68,4 +68,5 @@
     <string name="yes">Si</string>
     <string name="button_show_relations_title">Mostrar relaciones</string>
     <string name="button_hide_relations_title">Ocultar relaciones</string>
+    <string name="toast_fields_required">Estos campos son obligatorios :</string>
 </resources>
