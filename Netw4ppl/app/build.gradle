@@ -1,5 +1,14 @@
 plugins {
     id 'com.android.application'
+    id "org.sonarqube" version "3.4.0.2513"
+}
+
+sonarqube {
+  properties {
+    property "sonar.projectKey", "TC-netw4ppl_TC-netw4ppl-app"
+    property "sonar.organization", "tc-netw4ppl"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
 }
 
 android {
