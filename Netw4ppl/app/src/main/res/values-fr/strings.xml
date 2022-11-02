@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Netw4ppl</string>
+    <string name="app_name">SCAN</string>
     <string name="title_activity_settings">Paramètres</string>
     <string name="title_activity_manage_relations">Gérer les relations</string>
     <string name="title_activity_manage_persons">Gérer les personnes</string>
