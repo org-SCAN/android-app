@@ -227,7 +227,7 @@ public class SubmitData {
             public void run() {
                 try  {
                     Request request = new Request.Builder()
-                            .url("http://"+server_url+"/api/"+target)
+                            .url(server_url+"/api/"+target)
                             .method("POST", body)
                             .addHeader("Application-id", unique_app_id)
                             .addHeader("Accept", "application/json")
@@ -279,7 +279,7 @@ public class SubmitData {
             public void run() {
                 try  {
                     Request request = new Request.Builder()
-                            .url("http://"+server_url+"/api/fields")
+                            .url(server_url+"/api/fields")
                             .method("GET", null)
                             .addHeader("Accept", "application/json")
                             .addHeader("Content-Type", "application/json")
@@ -295,6 +295,7 @@ public class SubmitData {
                         http_success[0] = true;
 
                         // write the new configuration file
+                        System.out.println(data_path+dir_path+file_fields);
                         http_success[1] = FileUtils.writeFile(data_path+dir_path+file_fields, response_string);
 
                         // read the new configuration file and set all the objects
