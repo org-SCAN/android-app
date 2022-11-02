@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="netw4ppl.ines">
 
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
+        tools:ignore="CoarseFineLocation" />
+    <uses-sdk android:minSdkVersion="22" android:targetSdkVersion="33"
+        tools:ignore="GradleOverrides" />
 
     <application
         android:allowBackup="true"
@@ -19,33 +23,42 @@
         <activity
             android:name=".DisplayDetailsRelationActivity"
             android:label="@string/display_details_relation_activity_title"
-            android:parentActivityName=".ManageRelationsActivity"/>
+            android:parentActivityName=".ManageRelationsActivity"
+            android:exported="false"/>
         <activity
             android:name=".DisplayDetailsPersonActivity"
             android:label="@string/display_details_person_activity_title"
-            android:parentActivityName=".ManagePersonsActivity"/>
+            android:parentActivityName=".ManagePersonsActivity"
+            android:exported="false"/>
         <activity
             android:label="@string/add_relation_activity_title"
             android:parentActivityName=".ManageRelationsActivity"
-            android:name=".AddRelationActivity" />
+            android:name=".AddRelationActivity"
+            android:exported="false"/>
         <activity
             android:name=".ManageRelationsActivity"
             android:label="@string/manage_relations_activity_title"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:exported="false"/>
         <activity
             android:name=".AddPersonActivity"
             android:label="@string/add_person_activity_title"
-            android:parentActivityName=".ManagePersonsActivity"/>
+            android:parentActivityName=".ManagePersonsActivity"
+            android:exported="false"/>
         <activity
             android:name=".ManagePersonsActivity"
             android:label="@string/manage_persons_activity_title"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".SettingsActivity"

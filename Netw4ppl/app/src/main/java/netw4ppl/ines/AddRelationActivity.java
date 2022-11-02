@@ -231,7 +231,7 @@ public class AddRelationActivity extends AppCompatActivity {
     /**
      * Reset the objects present in the class
      *
-     * @deprecated changed in version 1.0.2
+     * @Deprecated
      */
     public void resetObjects() {
         from_person = null;
