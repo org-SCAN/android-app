@@ -232,7 +232,7 @@ public class AddPersonActivity extends AppCompatActivity {
      * @return a boolean to determine whether the file was successfully saved or not
      */
     public boolean saveIds(Context context, Person person) {
-        // ajout de l'id au dico des IDS et sauvegarde les toutes dans le fichier associé
+        // ajout de l'id au dico des IDS et sauvegarde les toutes dans le fichier associé (not working)
         String[] id = person.getInfoByKey("unique_id").split("-");
         String letters_id = id[0];
         int figures_id = Integer.parseInt(id[1]);
