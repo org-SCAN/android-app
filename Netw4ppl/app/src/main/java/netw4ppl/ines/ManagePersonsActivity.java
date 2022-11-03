@@ -31,14 +31,14 @@ public class ManagePersonsActivity extends AppCompatActivity {
     FloatingActionButton mButtonAdd;
     ListView mListView;
     SearchView mSearchBar;
-    public static ArrayList<Person> array_persons = new ArrayList<Person>();
+    public static ArrayList<Person> array_persons = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_persons);
 
-        // lire le fichier files/cases/refugees.json et initialiser array_persons
+        // lire le fichier files/cases/persons.json et initialiser array_persons
         try {
             readPersonsFile(this);
         } catch (IOException | JSONException e) {
@@ -135,7 +135,7 @@ public class ManagePersonsActivity extends AppCompatActivity {
         String path_file = context.getFilesDir().getPath()+dir_name+file_name;
         String content_file = "";
         JSONArray jsonArray_persons = null;
-        array_persons = new ArrayList<Person>();
+        array_persons = new ArrayList<>();
         if (FileUtils.directoryExists(path_dir) && FileUtils.fileExists(path_file)) {
             content_file = FileUtils.readFile(path_file);
 

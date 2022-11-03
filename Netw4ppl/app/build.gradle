@@ -12,6 +12,7 @@ sonarqube {
 }
 
 android {
+    namespace 'netw4ppl.ines'
     compileSdkVersion 33
     buildToolsVersion "30.0.3"
 

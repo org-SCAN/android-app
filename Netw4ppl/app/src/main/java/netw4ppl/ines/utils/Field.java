@@ -25,7 +25,6 @@ public class Field extends DataElement {
      * Sets the type of user interface of this field according to its android-type and requirement level
      * @param key key of a Field
      * @param string_fields value of a Field
-     * @throws JSONException
      */
     public Field(String key, String string_fields) throws JSONException {
         super(key, string_fields);
@@ -69,6 +68,9 @@ public class Field extends DataElement {
                     this.view_type = -1;
                 else
                     this.view_type = 0;
+                break;
+            case "number":
+                this.view_type = 0;
                 break;
             case "Spinner":
                 this.view_type = 1;

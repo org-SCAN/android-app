@@ -142,15 +142,18 @@ public class MainActivity extends AppCompatActivity{
 
             Log.d("general-display", "Hashmap database content: " + mConfiguration.getHashMapDatabase().toString());
 
+            /*
             String ids = FileUtils.loadIdsFromFile(context);
             if (ids.equals(""))
                 AddPersonActivity.json_ids = new JSONObject();
             else
                 AddPersonActivity.json_ids = new JSONObject(ids);
+
+             */
             readPersonsFile(context);
             readRelationsFile(context);
 
-            Log.d("test-read-ids", AddPersonActivity.json_ids.toString(2));
+            //Log.d("test-read-ids", AddPersonActivity.json_ids.toString(2));
 
         } catch (IOException | JSONException e) {
             e.printStackTrace();
