@@ -296,7 +296,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        System.out.println("viewType = " + viewType);
+        //System.out.println("viewType = " + viewType);
         switch (viewType) {
             case -1:
                 view = mInflater.inflate(R.layout.view_holder_unique_id, parent, false);

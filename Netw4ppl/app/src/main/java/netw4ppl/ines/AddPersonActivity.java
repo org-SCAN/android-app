@@ -87,12 +87,10 @@ public class AddPersonActivity extends AppCompatActivity {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     String date_creation = dateFormat.format(calendar.getTime());
                     person.putInfo("date", date_creation);
-                    System.out.println(person.getInfoByKey("date"));
 
                     // ajouter du champ d'application id
                     String application_id = MainActivity.mConfiguration.getApplicationId();
                     person.putInfo("application_id", application_id);
-                    System.out.println(person.getInfoByKey("application_id"));
 
                     // ajout dans l'array de personnes
                     ManagePersonsActivity.array_persons.add(person);
@@ -199,7 +197,6 @@ public class AddPersonActivity extends AppCompatActivity {
      */
     public boolean verificationInputPerson() {
         boolean all_good = true;
-        System.out.println("verificationInputPerson");
         ArrayList<Field> array_fields = MainActivity.mConfiguration.getArrayFields();
         // TODO passer ça dans le fichier string.xml
         String fields_a_remplir = this.getString(R.string.toast_fields_required)+"\n";
