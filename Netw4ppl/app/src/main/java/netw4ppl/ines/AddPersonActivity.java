@@ -75,18 +75,14 @@ public class AddPersonActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mButtonCancel.setOnClickListener(v -> {
-            this.finish();
-        });
+        mButtonCancel.setOnClickListener(v -> this.finish());
 
         mButtonSave.setOnClickListener(v -> {
 
             if (verificationInputPerson()) {
-
                 Calendar calendar = Calendar.getInstance();
                 /* Ajout d'une nouvelle personne */
                 if (new_person) {
-
                     // ajout du champ date indispensable pour la database
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     String date_creation = dateFormat.format(calendar.getTime());
@@ -117,7 +113,11 @@ public class AddPersonActivity extends AppCompatActivity {
                     ManagePersonsActivity.array_persons.add(index, person);
                 }
 
+                /*
+                System.out.println("saving id");
                 boolean save_ids = saveIds(this, person);
+                System.out.println("saved id: " + save_ids);
+                 */
 
                 // enregistre les données dans le fichier associé
                 boolean save_persons = FileUtils.savePersonsToFile(this, ManagePersonsActivity.formatterJsonFile());
@@ -125,7 +125,7 @@ public class AddPersonActivity extends AppCompatActivity {
                 // reset some variables
                 new_person = true;
 
-                if (save_persons && save_ids){
+                if (save_persons /*&& save_ids*/){
                     ManageRelationsActivity.updateRelations(person);
                     finish();
                 }
@@ -197,7 +197,6 @@ public class AddPersonActivity extends AppCompatActivity {
      */
     public boolean verificationInputPerson() {
         boolean all_good = true;
-
         ArrayList<Field> array_fields = MainActivity.mConfiguration.getArrayFields();
         // TODO passer ça dans le fichier string.xml
         String fields_a_remplir = this.getString(R.string.toast_fields_required)+"\n";
@@ -232,7 +231,7 @@ public class AddPersonActivity extends AppCompatActivity {
      * @return a boolean to determine whether the file was successfully saved or not
      */
     public boolean saveIds(Context context, Person person) {
-        // ajout de l'id au dico des IDS et sauvegarde les toutes dans le fichier associé
+        // ajout de l'id au dico des IDS et sauvegarde les toutes dans le fichier associé (not working)
         String[] id = person.getInfoByKey("unique_id").split("-");
         String letters_id = id[0];
         int figures_id = Integer.parseInt(id[1]);
