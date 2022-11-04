@@ -7,16 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import org.json.JSONException;
-
 import java.util.ArrayList;
 
-import netw4ppl.ines.DisplayDetailsPersonActivity;
 import netw4ppl.ines.MainActivity;
 import netw4ppl.ines.ManagePersonsActivity;
 import netw4ppl.ines.R;
@@ -28,7 +24,7 @@ public class PersonDetailsListAdapter extends ArrayAdapter<Field> {
 
     private final Context mContext;
     private final int mResource;
-    private int index_person;
+    private final String id_person;
 
     /**
      * A simple ViewHolder containing a title (of a field) and the text associated to it in the person data
@@ -45,11 +41,11 @@ public class PersonDetailsListAdapter extends ArrayAdapter<Field> {
      * @param fields an ArrayList of Field objects
      * @param index an int corresponding to the index of the person in the ManagePersonsActivity.array_persons object
      */
-    public PersonDetailsListAdapter(Context context, int resource, ArrayList<Field> fields, int index) {
+    public PersonDetailsListAdapter(Context context, int resource, ArrayList<Field> fields, String index) {
         super(context, resource, fields);
         mContext = context;
         mResource = resource;
-        index_person = index;
+        id_person = index;
     }
 
 
@@ -68,7 +64,7 @@ public class PersonDetailsListAdapter extends ArrayAdapter<Field> {
         Log.d("general-display", "Beginning getView");
         // get the person informations
         Field field = getItem(position);
-        Person mPerson = ManagePersonsActivity.array_persons.get(index_person);
+        Person mPerson = ManagePersonsActivity.hashmap_persons.get(id_person);
 
         final View result;
         PersonDetailsListAdapter.ViewHolder holder;

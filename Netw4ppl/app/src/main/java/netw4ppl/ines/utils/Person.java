@@ -4,6 +4,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
+import java.util.Objects;
+
+import netw4ppl.ines.ManagePersonsActivity;
 
 public class Person extends JSONObject {
 
@@ -57,6 +60,20 @@ public class Person extends JSONObject {
     }
 
     /**
+     * Returns the value of the key having this person in the hashmap of persons
+     */
+    public String getKey() {
+        String key = "";
+        for (String key_temp : ManagePersonsActivity.hashmap_persons.keySet()) {
+            if (Objects.equals(ManagePersonsActivity.hashmap_persons.get(key_temp), this)) {
+                key = key_temp;
+                break;
+            }
+        }
+        return key;
+    }
+
+    /**
      * Adds an information with the key:value format to the Person
      *
      * @param key key of the information
@@ -90,7 +107,7 @@ public class Person extends JSONObject {
     @Override
     public String toString(){
         String res = null;
-        res = this.getInfoByKey("unique_id") + " - " + this.getInfoByKey("full_name");
+        res = this.getKey() + " - " + this.getInfoByKey("full_name");
         return res;
     }
 

@@ -24,6 +24,10 @@ import com.google.gson.Gson;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Set;
+
 import netw4ppl.ines.utils.DataElement;
 import netw4ppl.ines.utils.FileUtils;
 import netw4ppl.ines.utils.Person;
@@ -241,27 +245,24 @@ public class AddRelationActivity extends AppCompatActivity {
 
     /**
      * Function to associate specific information with a person saved in the application.
-     * Example of string_p: "AAA-000001 - John DOE"
      *
-     * @param unique_id a String containing a unique_id (ex: AAA-000001)
+     * @param unique_id a String containing a specific Uuid
      * @return int
      */
-    public int associateInfosWithPerson(String unique_id) {
+    public String associateInfosWithPerson(String unique_id) {
         // aller chercher dans la liste ManagePersonActivity.array_persons la personne associée à ces deux éléments
         boolean found = false;
-        int i= 0;
-        int index_p = -1;
-        while (i < ManagePersonsActivity.array_persons.size() && !found) {
-            Person p = ManagePersonsActivity.array_persons.get(i);
-
-            if (p.getInfoByKey("unique_id").equals(unique_id)) {
-                index_p = i;
-                found = true;
+        String id_person = null;
+        for (String key : ManagePersonsActivity.hashmap_persons.keySet()) {
+            if (!found) {
+                if (ManagePersonsActivity.hashmap_persons.get(key).equals((unique_id))) {
+                    found = true;
+                    id_person = key;
+                }
             }
-
-            i++;
         }
-        return index_p;
+
+        return id_person;
     }
 
     /**
@@ -313,7 +314,9 @@ public class AddRelationActivity extends AppCompatActivity {
      * For the definition of Adapter, please check the Android Studio documentation.
      */
     private void setAdapters() {
-        ArrayAdapter<Person> autocomplete_adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, ManagePersonsActivity.array_persons);
+        Collection<Person> persons = ManagePersonsActivity.hashmap_persons.values();
+        ArrayList<Person> listOfPersons = new ArrayList<>(persons);
+        ArrayAdapter<Person> autocomplete_adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, listOfPersons);
         mAutoTextViewRelationFrom.setAdapter(autocomplete_adapter);
         mAutoTextViewRelationTo.setAdapter(autocomplete_adapter);
 
@@ -448,11 +451,11 @@ public class AddRelationActivity extends AppCompatActivity {
      */
     private void setPersonsViews(Relation relation) {
         // associate the ids and full_names with the Person objects and set the variables
-        int index_from = associateInfosWithPerson(relation.getFromID());
-        int index_to = associateInfosWithPerson(relation.getToID());
+        String index_from = associateInfosWithPerson(relation.getFromID());
+        String index_to = associateInfosWithPerson(relation.getToID());
 
-        from_person = ManagePersonsActivity.array_persons.get(index_from);
-        to_person = ManagePersonsActivity.array_persons.get(index_to);
+        from_person = ManagePersonsActivity.hashmap_persons.get(index_from);
+        to_person = ManagePersonsActivity.hashmap_persons.get(index_to);
 
         setFromPersonView();
         setToPersonView();

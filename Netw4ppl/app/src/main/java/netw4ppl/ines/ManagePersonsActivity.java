@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,6 +20,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.UUID;
 
 import netw4ppl.ines.utils.FileUtils;
 import netw4ppl.ines.utils.Person;
@@ -31,7 +35,7 @@ public class ManagePersonsActivity extends AppCompatActivity {
     FloatingActionButton mButtonAdd;
     ListView mListView;
     SearchView mSearchBar;
-    public static ArrayList<Person> array_persons = new ArrayList<>();
+    public static HashMap<String, Person> hashmap_persons = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +61,10 @@ public class ManagePersonsActivity extends AppCompatActivity {
         mSearchBar = (SearchView) findViewById(R.id.searchViewPerson);
 
         // faire l'affichage
-        mAdapter = new PersonListAdapter(this, R.layout.adapter_nutshell_person_layout, ManagePersonsActivity.array_persons);
+        Collection<Person> persons = ManagePersonsActivity.hashmap_persons.values();
+        ArrayList<Person> listOfPersons = new ArrayList<>(persons);
+
+        mAdapter = new PersonListAdapter(this, R.layout.adapter_nutshell_person_layout, listOfPersons);
         mListView.setAdapter(mAdapter);
 
         // attach setOnQueryTextListener
@@ -84,23 +91,21 @@ public class ManagePersonsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
                 // position correspond à la position de la personne dans l'adapter
                 boolean got_it = false;
-                int index_reel = 0;
-                int i=0;
                 Person p = (Person) adapter.getItemAtPosition(position);
                 // associer cette position à la position réelle dans l'array de base
-                while (i < array_persons.size() && !got_it) {
-                    if (array_persons.get(i).equals(p)) {
-                        index_reel = i;
-                        got_it = true;
+                String id_person = null;
+                for (String key : hashmap_persons.keySet()) {
+                    if (!got_it) {
+                        if (hashmap_persons.get(key).equals(p)) {
+                            got_it = true;
+                            id_person = key;
+                        }
                     }
-                    i++;
                 }
 
                 // DisplayDetailsPersonActivity.index_person = index_reel;
                 Intent intent = new Intent(ManagePersonsActivity.this, DisplayDetailsPersonActivity.class);
-                Bundle b = new Bundle();
-                b.putInt("index_person", index_reel); //Your id
-                intent.putExtras(b); //Put your id to your next Intent
+                intent.putExtra("id_person", id_person); //Put your id to your next Intent
                 startActivity(intent);
             }
         });
@@ -135,7 +140,7 @@ public class ManagePersonsActivity extends AppCompatActivity {
         String path_file = context.getFilesDir().getPath()+dir_name+file_name;
         String content_file = "";
         JSONArray jsonArray_persons = null;
-        array_persons = new ArrayList<>();
+        hashmap_persons = new HashMap<>();
         if (FileUtils.directoryExists(path_dir) && FileUtils.fileExists(path_file)) {
             content_file = FileUtils.readFile(path_file);
 
@@ -147,7 +152,7 @@ public class ManagePersonsActivity extends AppCompatActivity {
 
             for (int i=0; i<jsonArray_persons.length(); i++) {
                 JSONObject json_person = jsonArray_persons.getJSONObject(i);
-                array_persons.add(new Person(json_person.toString()));
+                hashmap_persons.put(UUID.randomUUID().toString(),new Person(json_person.toString()));
             }
         }
         else if (FileUtils.directoryExists(path_dir)) {
@@ -168,15 +173,22 @@ public class ManagePersonsActivity extends AppCompatActivity {
      * @return a String containing the Persons contained in person, on a JSONArray format
      */
     public static String formatterJsonFile() {
+        /*
         JSONArray json_array = new JSONArray();
-        for (int i=0; i<array_persons.size(); i++) {
-            json_array.put(array_persons.get(i));
+        // for each key in the hashmap, get the person and add it to the json_array
+        for (String key : hashmap_persons.keySet()) {
+            json_array.put(hashmap_persons.get(key));
         }
         try {
+            System.out.println(json_array.toString(2));
             return json_array.toString(2);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return "";
+
+         */
+        JSONObject jsonObject = new JSONObject(hashmap_persons);
+        return jsonObject.toString();
     }
 }
