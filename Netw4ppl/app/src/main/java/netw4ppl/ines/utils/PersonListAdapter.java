@@ -169,16 +169,22 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
 
         this.lastPosition = position;
 
-
-
         Iterator<String> keys = person.keys();
         while(keys.hasNext()) {
             String key = keys.next();
-            Field field = MainActivity.mConfiguration.getFieldFromHashMap(key);
+            // This ugly while loop (and if statement) are used to ignore the fields hidden values,
+            // as editing the persons's field values mess up the field's orders
+            while (Arrays.asList(Field.hidden_values).contains(key)) {
+                if (!keys.hasNext()) {
+                    break;
+                }
+                key = keys.next();
+            }
             if (Arrays.asList(Field.hidden_values).contains(key)) {
                 break;
             }
-            else if (field.isDescriptiveValue() && !field.isBestDescriptiveValue() &&holder.mDescriptiveField1.getText().equals("")) {
+            Field field = MainActivity.mConfiguration.getFieldFromHashMap(key);
+            if (field.isDescriptiveValue() && !field.isBestDescriptiveValue() &&holder.mDescriptiveField1.getText().equals("")) {
                 holder.mDescriptiveField1.setText(String.valueOf(person.getInfoByKey(key)));
                 holder.mDescriptiveField1Title.setText(field+" : ");
             }

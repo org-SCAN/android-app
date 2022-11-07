@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 import java.util.TimeZone;
 import java.util.UUID;
 
@@ -60,9 +61,9 @@ public class AddPersonActivity extends AppCompatActivity {
 
         if(extra_parameters != null) {
             if (extra_parameters.containsKey("id_person")) {
-                id_person = extra_parameters.getString("index_person");
+                id_person = extra_parameters.getString("id_person");
                 try {
-                    person = new Person(ManagePersonsActivity.hashmap_persons.get(id_person).toString(2));
+                    person = new Person(Objects.requireNonNull(ManagePersonsActivity.hashmap_persons.get(id_person)));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -11,7 +11,7 @@ import java.util.Locale;
 public class Field extends DataElement {
 
     private int view_type;
-    public static String[] hidden_values = {"date", "application_id"};
+    public static String[] hidden_values = {"date", "application_id", "date_update"};
 
     /**
      * Default Constructor
