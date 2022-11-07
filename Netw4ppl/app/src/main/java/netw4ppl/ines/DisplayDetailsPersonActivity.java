@@ -76,7 +76,9 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         Bundle extra_parameter = getIntent().getExtras();
         id_person = null;
         if(extra_parameter != null)
-            id_person = extra_parameter.getString("index_person");
+            id_person = extra_parameter.getString("id_person");
+
+
 
         mTextViewFullnameTitle = (TextView) findViewById(R.id.details_title_full_name);
 

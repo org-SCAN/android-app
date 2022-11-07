@@ -1,5 +1,6 @@
 package netw4ppl.ines.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 import netw4ppl.ines.MainActivity;
@@ -30,13 +32,14 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
     public ArrayList<Person> mObjects_tmp;
 
     /**
-     * A basic ViewHolder to put informations like the fullname, the unique ID, the sex and the age of a person.
+     * A basic ViewHolder to put the BestDescriptiveValue of the Person
      */
     private static class ViewHolder {
-        TextView mFullName;
-        TextView mUniqueID;
-        TextView mSex;
-        TextView mAge;
+        TextView mDescriptiveField2Title;
+        TextView mDescriptiveField1Title;
+        TextView mDescriptiveField2;
+        TextView mDescriptiveField1;
+        TextView mBestDescriptiveValue;
     }
 
     /**
@@ -136,6 +139,7 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
         super.notifyDataSetChanged();
     }
 
+    @SuppressLint("SetTextI18n")
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -149,10 +153,11 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
             LayoutInflater inflater = LayoutInflater.from(mContext);
             convertView = inflater.inflate(mResource, parent, false);
             holder = new ViewHolder();
-            holder.mAge = (TextView) convertView.findViewById(R.id.age_person);
-            holder.mFullName = (TextView) convertView.findViewById(R.id.full_name_person);
-            holder.mSex = (TextView) convertView.findViewById(R.id.sex_person);
-            holder.mUniqueID = (TextView) convertView.findViewById(R.id.id_person);
+            holder.mBestDescriptiveValue = (TextView) convertView.findViewById(R.id.best_descriptive_value);
+            holder.mDescriptiveField1 = (TextView) convertView.findViewById(R.id.descriptive_field_1);
+            holder.mDescriptiveField1Title = (TextView) convertView.findViewById(R.id.descriptive_field_1_title);
+            holder.mDescriptiveField2 = (TextView) convertView.findViewById(R.id.descriptive_field_2);
+            holder.mDescriptiveField2Title = (TextView) convertView.findViewById(R.id.descriptive_field_2_title);
 
             result = convertView;
             convertView.setTag(holder);
@@ -164,10 +169,27 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
 
         this.lastPosition = position;
 
-        holder.mUniqueID.setText(person.getInfoByKey("unique_id"));
-        holder.mSex.setText(person.getInfoByKey("gender"));
-        holder.mFullName.setText(person.getInfoByKey("full_name"));
-        holder.mAge.setText(person.getInfoByKey("age"));
+
+
+        Iterator<String> keys = person.keys();
+        while(keys.hasNext()) {
+            String key = keys.next();
+            Field field = MainActivity.mConfiguration.getFieldFromHashMap(key);
+            if (Arrays.asList(Field.hidden_values).contains(key)) {
+                break;
+            }
+            else if (field.isDescriptiveValue() && !field.isBestDescriptiveValue() &&holder.mDescriptiveField1.getText().equals("")) {
+                holder.mDescriptiveField1.setText(String.valueOf(person.getInfoByKey(key)));
+                holder.mDescriptiveField1Title.setText(field+" : ");
+            }
+            else if (field.isDescriptiveValue() && !field.isBestDescriptiveValue() && !holder.mDescriptiveField1.getText().equals("")) {
+                holder.mDescriptiveField2.setText(String.valueOf(person.getInfoByKey(key)));
+                holder.mDescriptiveField2Title.setText(field+" : ");
+            }
+            else if (field.isBestDescriptiveValue()) {
+                holder.mBestDescriptiveValue.setText(String.valueOf(person.getInfoByKey(key)));
+            }
+        }
 
         return convertView;
     }

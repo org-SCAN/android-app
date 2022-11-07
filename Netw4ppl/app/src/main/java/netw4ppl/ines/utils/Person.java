@@ -97,18 +97,4 @@ public class Person extends JSONObject {
     public boolean isSamePerson(Person individu) throws JSONException {
         return this.getInfoByKey("unique_id").equals(individu.getInfoByKey("unique_id"));
     }
-
-    /**
-     * Override of the toString method
-     *
-     * Returns a String containing the unique_id and the full_name of a person
-     * @return a String of the form "unique_id - full_name" of the person
-     */
-    @Override
-    public String toString(){
-        String res = null;
-        res = this.getKey() + " - " + this.getInfoByKey("full_name");
-        return res;
-    }
-
 }

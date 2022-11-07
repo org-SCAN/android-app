@@ -11,6 +11,7 @@ import java.util.Locale;
 public class Field extends DataElement {
 
     private int view_type;
+    public static String[] hidden_values = {"date", "application_id"};
 
     /**
      * Default Constructor
@@ -98,5 +99,25 @@ public class Field extends DataElement {
             e.printStackTrace();
         }
         return required;
+    }
+
+    /**
+     * Checks if the field has "best_descriptive_value" set to 1
+     * @return true if the field has "best_descriptive_value" set to 1, false otherwise
+     */
+    public boolean isBestDescriptiveValue() {
+        String is_best_descriptive_value;
+        is_best_descriptive_value = this.getElementByKey("best_descriptive_value");
+        return is_best_descriptive_value.equals("1");
+    }
+
+    /**
+     * Checks if the field has "descriptive_value" set to 1
+     * @return true if the field has "descriptive_value" set to 1, false otherwise
+     */
+    public boolean isDescriptiveValue() {
+        String is_descriptive_value;
+        is_descriptive_value = this.getElementByKey("descriptive_value");
+        return is_descriptive_value.equals("1");
     }
 }

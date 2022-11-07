@@ -8,21 +8,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/id_person"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center|center_horizontal"
-            android:gravity="center"
-            android:text="AAA-000000"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:padding="5dp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+        android:orientation="vertical"/>
 
     <!-- Infos Layout -->
     <LinearLayout
@@ -38,13 +24,13 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/full_name_person"
+                android:id="@+id/best_descriptive_value"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:text="John DOE"
-                android:textSize="20sp"
-                android:textAlignment="center" />
+                android:text="Best Descriptive Value"
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -64,20 +50,19 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/descriptive_field_1_title"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/age_title"
-                    android:textSize="15sp"
-                    android:textAlignment="textEnd" />
+                    android:textAlignment="textEnd"
+                    android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/descriptive_field_1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="40"
-                    android:textSize="15sp"
-                    android:id="@+id/age_person"/>
+                    android:textSize="15sp" />
             </LinearLayout>
 
             <!-- Sex layout -->
@@ -89,20 +74,19 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/descriptive_field_2_title"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/sex_title"
                     android:layout_weight="1"
-                    android:textSize="15sp"
-                    android:textAlignment="textEnd" />
+                    android:textAlignment="textEnd"
+                    android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/descriptive_field_2"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="M"
                     android:layout_weight="1"
-                    android:textSize="15sp"
-                    android:id="@+id/sex_person"/>
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
