@@ -255,7 +255,7 @@ public class AddRelationActivity extends AppCompatActivity {
         String id_person = null;
         for (String key : ManagePersonsActivity.hashmap_persons.keySet()) {
             if (!found) {
-                if (ManagePersonsActivity.hashmap_persons.get(key).equals((unique_id))) {
+                if (key.equals((unique_id))) {
                     found = true;
                     id_person = key;
                 }
