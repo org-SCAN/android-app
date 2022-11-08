@@ -20,7 +20,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 import java.util.TimeZone;
+import java.util.UUID;
 
 import netw4ppl.ines.utils.AdapterViewFields;
 import netw4ppl.ines.utils.Field;
@@ -35,7 +37,7 @@ public class AddPersonActivity extends AppCompatActivity {
     Button mButtonSave;
     Button mButtonCancel;
 
-    private int index_person;
+    private String id_person;
     public static Person person;
     private boolean new_person = true;
 
@@ -45,7 +47,7 @@ public class AddPersonActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_person);
 
         // initialize some variables
-        index_person = 0;
+        id_person = null;
         new_person = true;
         person = new Person();
 
@@ -58,10 +60,10 @@ public class AddPersonActivity extends AppCompatActivity {
         Bundle extra_parameters = getIntent().getExtras();
 
         if(extra_parameters != null) {
-            if (extra_parameters.containsKey("index_person")) {
-                index_person = extra_parameters.getInt("index_person");
+            if (extra_parameters.containsKey("id_person")) {
+                id_person = extra_parameters.getString("id_person");
                 try {
-                    person = new Person(ManagePersonsActivity.array_persons.get(index_person).toString(2));
+                    person = new Person(Objects.requireNonNull(ManagePersonsActivity.hashmap_persons.get(id_person)));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -93,7 +95,7 @@ public class AddPersonActivity extends AppCompatActivity {
                     person.putInfo("application_id", application_id);
 
                     // ajout dans l'array de personnes
-                    ManagePersonsActivity.array_persons.add(person);
+                    ManagePersonsActivity.hashmap_persons.put(UUID.randomUUID().toString(),person);
                 }
                 /* Modification d'une personne existante */
                 else {
@@ -108,9 +110,9 @@ public class AddPersonActivity extends AppCompatActivity {
                     person.putInfo("date_update", date_update);
 
                     // on supprime l'ancienne version avant d'ajouter la nouvelle
-                    int index = index_person;
-                    ManagePersonsActivity.array_persons.remove(index);
-                    ManagePersonsActivity.array_persons.add(index, person);
+                    String id_person = extra_parameters.getString("id_person");
+                    ManagePersonsActivity.hashmap_persons.remove(id_person);
+                    ManagePersonsActivity.hashmap_persons.put(id_person, person); //remplacer index par uuid
                 }
 
                 /*
@@ -278,7 +280,7 @@ public class AddPersonActivity extends AppCompatActivity {
 
         outState.putSerializable("person", new Gson().toJson(person));
         outState.putBoolean("new_person", new_person);
-        outState.putInt("index_person", index_person);
+        outState.putString("index_person", id_person);
     }
 
     @Override
@@ -289,6 +291,6 @@ public class AddPersonActivity extends AppCompatActivity {
         person = new Gson().fromJson(info_person, Person.class);
 
         new_person = savedInstanceState.getBoolean("new_person");
-        index_person = savedInstanceState.getInt("index_person");
+        id_person = savedInstanceState.getString("index_person");
     }
 }

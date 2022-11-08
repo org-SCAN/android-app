@@ -27,6 +27,7 @@ import org.json.JSONException;
 import java.lang.reflect.Array;
 import java.security.interfaces.RSAKey;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import netw4ppl.ines.utils.FileUtils;
 import netw4ppl.ines.utils.Person;
@@ -60,7 +61,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
     ListView mListDetailsPerson;
     ListView mListRelationsTo;
 
-    public int index_person;
+    public String id_person;
     private boolean show_relations;
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -73,9 +74,11 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         show_relations = prefs.getBoolean(getString(R.string.show_relations_boolean_key), false);
 
         Bundle extra_parameter = getIntent().getExtras();
-        index_person = 0;
+        id_person = null;
         if(extra_parameter != null)
-            index_person = extra_parameter.getInt("index_person");
+            id_person = extra_parameter.getString("id_person");
+
+
 
         mTextViewFullnameTitle = (TextView) findViewById(R.id.details_title_full_name);
 
@@ -92,12 +95,12 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         mListRelationsFrom = (ListView) findViewById(R.id.list_relations_from);
         mListRelationsTo = (ListView) findViewById(R.id.list_relations_to);
 
-        Person person = ManagePersonsActivity.array_persons.get(index_person);
+        Person person = ManagePersonsActivity.hashmap_persons.get(id_person);
 
         mTextViewFullnameTitle.setText(person.getInfoByKey("full_name"));
 
         /* Adapters for the different list views */
-        adapter_details_person = new PersonDetailsListAdapter(this, R.layout.adapter_details_person_fields, MainActivity.mConfiguration.getArrayFields(), index_person);
+        adapter_details_person = new PersonDetailsListAdapter(this, R.layout.adapter_details_person_fields, MainActivity.mConfiguration.getArrayFields(), id_person);
         mListDetailsPerson.setAdapter(adapter_details_person);
 
         updateAdapterFrom();
@@ -117,27 +120,22 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // position correspond à la position de la personne dans l'adapter
                 boolean got_it = false;
-                int index_reel = 0;
-                int i=0;
                 Relation r = (Relation) adapter_relations_from.getItem(position);
                 String person_from_string = r.getFrom();
-
-                // associer cette position à la position réelle dans l'array de base
-                while (i < ManagePersonsActivity.array_persons.size() && !got_it) {
-                    if (ManagePersonsActivity.array_persons.get(i).toString().equals(person_from_string)) {
-                        index_reel = i;
-                        got_it = true;
+                String id_person = null;
+                for (String key : ManagePersonsActivity.hashmap_persons.keySet()) {
+                    if (!got_it) {
+                        if (Objects.equals(Objects.requireNonNull(ManagePersonsActivity.hashmap_persons.get(key)).toString(), person_from_string)) {
+                            got_it = true;
+                            id_person = key;
+                        }
                     }
-                    i++;
                 }
-
                 // on a désormais la bonne relation, il faut cherche l'index de la personne
 
                 // DisplayDetailsPersonActivity.index_person = index_reel;
                 Intent intent = new Intent(DisplayDetailsPersonActivity.this, DisplayDetailsPersonActivity.class);
-                Bundle b = new Bundle();
-                b.putInt("index_person", index_reel); //Your id
-                intent.putExtras(b); //Put your id to your next Intent
+                intent.putExtra("id_person", id_person); //Put your id to your next Intent
                 startActivity(intent);
             }
         });
@@ -147,25 +145,22 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // position correspond à la position de la personne dans l'adapter
                 boolean got_it = false;
-                int index_reel = 0;
-                int i=0;
                 Relation r = (Relation) adapter_relations_to.getItem(position);
-                String person_from_string = r.getTo();
-
-                // associer cette position à la position réelle dans l'array de base
-                while (i < ManagePersonsActivity.array_persons.size() && !got_it) {
-                    if (ManagePersonsActivity.array_persons.get(i).toString().equals(person_from_string)) {
-                        index_reel = i;
-                        got_it = true;
+                String person_to_string = r.getTo();
+                String id_person = null;
+                for (String key : ManagePersonsActivity.hashmap_persons.keySet()) {
+                    if (!got_it) {
+                        if (Objects.equals(Objects.requireNonNull(ManagePersonsActivity.hashmap_persons.get(key)).toString(), person_to_string)) {
+                            got_it = true;
+                            id_person = key;
+                        }
                     }
-                    i++;
                 }
+                // on a désormais la bonne relation, il faut cherche l'index de la personne
 
                 // DisplayDetailsPersonActivity.index_person = index_reel;
                 Intent intent = new Intent(DisplayDetailsPersonActivity.this, DisplayDetailsPersonActivity.class);
-                Bundle b = new Bundle();
-                b.putInt("index_person", index_reel); //Your id
-                intent.putExtras(b); //Put your id to your next Intent
+                intent.putExtra("id_person", id_person); //Put your id to your next Intent
                 startActivity(intent);
             }
         });
@@ -183,9 +178,9 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         });
         mButtonEditPerson.setOnClickListener(v -> {
             Intent intent = new Intent(DisplayDetailsPersonActivity.this, AddPersonActivity.class);
+            intent.putExtra("id_person", id_person); //Put your id to your next Intent
 
             Bundle b = new Bundle();
-            b.putInt("index_person", index_person); //Your id
             b.putBoolean("new_person", false);
             b.putSerializable("person", new Gson().toJson(person));
             intent.putExtras(b); //Put your id to your next Intent
@@ -218,10 +213,10 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
                     .setCancelable(true)
                     .setPositiveButton(R.string.yes, (a,b) -> {
                         // supprime les relations avant de supprimer la personne
-                        boolean save_relations = this.deleteAssociatedRelations(ManagePersonsActivity.array_persons.get(index_person));
+                        boolean save_relations = this.deleteAssociatedRelations(ManagePersonsActivity.hashmap_persons.get(id_person));
 
                         // supprime la personne de l'array
-                        ManagePersonsActivity.array_persons.remove(index_person);
+                        ManagePersonsActivity.hashmap_persons.remove(id_person);
 
                         // sauvegarde le fichier
                         boolean save_persons = FileUtils.savePersonsToFile(this, ManagePersonsActivity.formatterJsonFile());
@@ -277,7 +272,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
      * Example: A relation From was added.
      */
     private void updateAdapterFrom() {
-        Person person = ManagePersonsActivity.array_persons.get(index_person);
+        Person person = ManagePersonsActivity.hashmap_persons.get(id_person);
         ArrayList<Relation> array_relations_from = getRelationsFrom(person);
         adapter_relations_from = new PersonDetailsRelationFromAdapter(this, R.layout.adapter_relation_details_person, array_relations_from);
         mListRelationsFrom.setAdapter(adapter_relations_from);
@@ -288,7 +283,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
      * Example: A relation To was added.
      */
     private void updateAdapterTo() {
-        Person person = ManagePersonsActivity.array_persons.get(index_person);
+        Person person = ManagePersonsActivity.hashmap_persons.get(id_person);
         ArrayList<Relation> array_relations_to = getRelationsTo(person);
         adapter_relations_to = new PersonDetailsRelationToAdapter(this, R.layout.adapter_relation_details_person, array_relations_to);
         mListRelationsTo.setAdapter(adapter_relations_to);
@@ -320,7 +315,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         adapter_details_person.notifyDataSetChanged();
         updateAdapterFrom();
         updateAdapterTo();
-        mTextViewFullnameTitle.setText(ManagePersonsActivity.array_persons.get(index_person).getInfoByKey("full_name"));
+        mTextViewFullnameTitle.setText(Objects.requireNonNull(ManagePersonsActivity.hashmap_persons.get(id_person)).getInfoByKey("full_name"));
     }
 
     /**

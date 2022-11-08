@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -19,6 +18,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.UUID;
 
 import netw4ppl.ines.utils.FileUtils;
 import netw4ppl.ines.utils.Person;
@@ -31,7 +34,7 @@ public class ManagePersonsActivity extends AppCompatActivity {
     FloatingActionButton mButtonAdd;
     ListView mListView;
     SearchView mSearchBar;
-    public static ArrayList<Person> array_persons = new ArrayList<>();
+    public static HashMap<String, Person> hashmap_persons = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +60,10 @@ public class ManagePersonsActivity extends AppCompatActivity {
         mSearchBar = (SearchView) findViewById(R.id.searchViewPerson);
 
         // faire l'affichage
-        mAdapter = new PersonListAdapter(this, R.layout.adapter_nutshell_person_layout, ManagePersonsActivity.array_persons);
+        Collection<Person> persons = ManagePersonsActivity.hashmap_persons.values();
+        ArrayList<Person> listOfPersons = new ArrayList<>(persons);
+
+        mAdapter = new PersonListAdapter(this, R.layout.adapter_nutshell_person_layout, listOfPersons);
         mListView.setAdapter(mAdapter);
 
         // attach setOnQueryTextListener
@@ -84,23 +90,21 @@ public class ManagePersonsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
                 // position correspond à la position de la personne dans l'adapter
                 boolean got_it = false;
-                int index_reel = 0;
-                int i=0;
                 Person p = (Person) adapter.getItemAtPosition(position);
                 // associer cette position à la position réelle dans l'array de base
-                while (i < array_persons.size() && !got_it) {
-                    if (array_persons.get(i).equals(p)) {
-                        index_reel = i;
-                        got_it = true;
+                String id_person = null;
+                for (String key : hashmap_persons.keySet()) {
+                    if (!got_it) {
+                        if (hashmap_persons.get(key).equals(p)) {
+                            got_it = true;
+                            id_person = key;
+                        }
                     }
-                    i++;
                 }
 
                 // DisplayDetailsPersonActivity.index_person = index_reel;
                 Intent intent = new Intent(ManagePersonsActivity.this, DisplayDetailsPersonActivity.class);
-                Bundle b = new Bundle();
-                b.putInt("index_person", index_reel); //Your id
-                intent.putExtras(b); //Put your id to your next Intent
+                intent.putExtra("id_person", id_person); //Put your id to your next Intent
                 startActivity(intent);
             }
         });
@@ -122,6 +126,7 @@ public class ManagePersonsActivity extends AppCompatActivity {
         updateAdapter();
     }
 
+
     /**
      * Read the Persons File associated with this application.
      * The path is determined based on strings in the strings.xml file
@@ -134,20 +139,24 @@ public class ManagePersonsActivity extends AppCompatActivity {
         String path_dir = context.getFilesDir().getPath()+dir_name;
         String path_file = context.getFilesDir().getPath()+dir_name+file_name;
         String content_file = "";
-        JSONArray jsonArray_persons = null;
-        array_persons = new ArrayList<>();
+        JSONObject jsonObject_persons = null;
+        HashMap<String, Person> new_hashmap_persons = new HashMap<>();
         if (FileUtils.directoryExists(path_dir) && FileUtils.fileExists(path_file)) {
-            content_file = FileUtils.readFile(path_file);
+        content_file = FileUtils.readFile(path_file);
 
             if (content_file.equals("")){
-                jsonArray_persons = new JSONArray();
+                jsonObject_persons = new JSONObject();
             }else{
-                jsonArray_persons = new JSONArray(content_file);
+                jsonObject_persons = new JSONObject(content_file);
             }
 
-            for (int i=0; i<jsonArray_persons.length(); i++) {
-                JSONObject json_person = jsonArray_persons.getJSONObject(i);
-                array_persons.add(new Person(json_person.toString()));
+            Iterator<String> keys = jsonObject_persons.keys();
+            while(keys.hasNext()) {
+                String key = keys.next();
+                if (jsonObject_persons.get(key) instanceof JSONObject) {
+                    JSONObject json_person = jsonObject_persons.getJSONObject(key);
+                    hashmap_persons.put(key,new Person(json_person.toString()));
+                }
             }
         }
         else if (FileUtils.directoryExists(path_dir)) {
@@ -162,21 +171,13 @@ public class ManagePersonsActivity extends AppCompatActivity {
     }
 
     /**
-     * Convert the ArrayList of Persons in JSONArray to then convert it in a String because the server
+     * Convert the hashmap of Persons in JSONObject to then convert it in a String because the server
      * is expecting such format.
      *
-     * @return a String containing the Persons contained in person, on a JSONArray format
+     * @return a String containing the Persons contained in person, on a JSONObject format
      */
     public static String formatterJsonFile() {
-        JSONArray json_array = new JSONArray();
-        for (int i=0; i<array_persons.size(); i++) {
-            json_array.put(array_persons.get(i));
-        }
-        try {
-            return json_array.toString(2);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return "";
+        JSONObject jsonObject_persons = new JSONObject(hashmap_persons);
+        return jsonObject_persons.toString();
     }
 }

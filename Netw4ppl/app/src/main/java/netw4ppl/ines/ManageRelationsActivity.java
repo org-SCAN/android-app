@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import netw4ppl.ines.utils.FileUtils;
 import netw4ppl.ines.utils.Person;
@@ -146,7 +147,10 @@ public class ManageRelationsActivity extends AppCompatActivity {
                 JSONObject json_relation = jsonArray_relations.getJSONObject(i);
                 Relation relat = new Relation(json_relation.toString());
 
-                relat.associateIDWithNames(ManagePersonsActivity.array_persons);
+                Collection<Person> persons = ManagePersonsActivity.hashmap_persons.values();
+                ArrayList<Person> listOfPersons = new ArrayList<>(persons);
+
+                relat.associateIDWithNames(listOfPersons);
 
                 array_relations.add(relat);
             }

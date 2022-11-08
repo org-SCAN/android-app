@@ -4,6 +4,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
+import java.util.Objects;
+
+import netw4ppl.ines.ManagePersonsActivity;
 
 public class Person extends JSONObject {
 
@@ -57,6 +60,20 @@ public class Person extends JSONObject {
     }
 
     /**
+     * Returns the value of the key having this person in the hashmap of persons
+     */
+    public String getKey() {
+        String key = "";
+        for (String key_temp : ManagePersonsActivity.hashmap_persons.keySet()) {
+            if (Objects.equals(ManagePersonsActivity.hashmap_persons.get(key_temp), this)) {
+                key = key_temp;
+                break;
+            }
+        }
+        return key;
+    }
+
+    /**
      * Adds an information with the key:value format to the Person
      *
      * @param key key of the information
@@ -80,18 +97,4 @@ public class Person extends JSONObject {
     public boolean isSamePerson(Person individu) throws JSONException {
         return this.getInfoByKey("unique_id").equals(individu.getInfoByKey("unique_id"));
     }
-
-    /**
-     * Override of the toString method
-     *
-     * Returns a String containing the unique_id and the full_name of a person
-     * @return a String of the form "unique_id - full_name" of the person
-     */
-    @Override
-    public String toString(){
-        String res = null;
-        res = this.getInfoByKey("unique_id") + " - " + this.getInfoByKey("full_name");
-        return res;
-    }
-
 }
