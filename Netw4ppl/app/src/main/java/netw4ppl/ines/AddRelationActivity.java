@@ -87,12 +87,12 @@ public class AddRelationActivity extends AppCompatActivity {
             if (extra_parameters.containsKey("to_person")) {
                 String string_to_person = (String) extra_parameters.getSerializable("to_person");
                 to_person = new Gson().fromJson(string_to_person, Person.class);
-                relation.setPersonTo(to_person);
+                relation.setPersonTo(to_person.getKey());
             }
             if (extra_parameters.containsKey("from_person")) {
                 String string_from_person = (String) extra_parameters.getSerializable("from_person");
                 from_person = new Gson().fromJson(string_from_person, Person.class);
-                relation.setPersonFrom(from_person);
+                relation.setPersonFrom(from_person.getKey());
             }
             if (extra_parameters.containsKey("from_already_set"))
                 from_already_set = extra_parameters.getBoolean("from_already_set");
@@ -112,12 +112,12 @@ public class AddRelationActivity extends AppCompatActivity {
             if (savedInstanceState.containsKey("to_person")) {
                 String string_to_person = (String) savedInstanceState.getSerializable("to_person");
                 to_person = new Gson().fromJson(string_to_person, Person.class);
-                relation.setPersonTo(to_person);
+                relation.setPersonTo(to_person.getKey());
             }
             if (savedInstanceState.containsKey("from_person")) {
                 String string_from_person = (String) savedInstanceState.getSerializable("from_person");
                 from_person = new Gson().fromJson(string_from_person, Person.class);
-                relation.setPersonFrom(from_person);
+                relation.setPersonFrom(from_person.getKey());
             }
             if (savedInstanceState.containsKey("from_already_set"))
                 from_already_set = savedInstanceState.getBoolean("from_already_set");
@@ -436,7 +436,7 @@ public class AddRelationActivity extends AppCompatActivity {
      * Set the From Person AutoCompleteTextView with a value.
      */
     private void setFromPersonView() {
-        mAutoTextViewRelationFrom.setText(from_person.toString(), false);
+        mAutoTextViewRelationFrom.setText(from_person.bestDescriptiveValueKey, false);
         mAutoTextViewRelationFrom.setEnabled(false);
 
         // TODO à changer car c'est pas très propre

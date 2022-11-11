@@ -72,8 +72,8 @@ public class Relation extends JSONObject {
      * @param person To Person used to set the relation
      */
     public void setPersonTo(Person person) {
-        this.putInfo("to_unique_id", person.getInfoByKey("unique_id"));
-        to_person_name = person.getInfoByKey("full_name");
+        this.putInfo("to_unique_id", person.getKey());
+        to_person_name = person.getInfoByKey(person.bestDescriptiveValueKey);
     }
 
     /**
@@ -89,8 +89,8 @@ public class Relation extends JSONObject {
      * @param person From Person used to set the relation
      */
     public void setPersonFrom(Person person) {
-        this.putInfo("from_unique_id", person.getInfoByKey("unique_id"));
-        from_person_name = person.getInfoByKey("full_name");
+        this.putInfo("from_unique_id", person.getKey());
+        from_person_name = person.getInfoByKey(person.bestDescriptiveValueKey);
     }
 
     /**

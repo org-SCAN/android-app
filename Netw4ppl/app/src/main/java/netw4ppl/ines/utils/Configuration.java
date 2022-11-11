@@ -12,6 +12,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class Configuration {
     private ArrayList<Field> array_fields = new ArrayList<>();
@@ -114,10 +115,10 @@ public class Configuration {
 
     /**
      * Function used to create not only hashmaps actually but also different objects. It used to
-     * create the different ArrayList of DataElement, the associated HashMaps and the asociated Adapters.
+     * create the different ArrayList of DataElement, the associated HashMaps and the associated Adapters.
      *
      * @param context an object of type Context representing the context of the application
-     * @param config_content a JSONObject containing the configuraiton for the application.
+     * @param config_content a JSONObject containing the configuration for the application.
      */
     public void createHashMaps(Context context, JSONObject config_content) {
         // récupère toutes les clés de l'objet json config_content
@@ -214,4 +215,30 @@ public class Configuration {
         return this.hashMap_database;
     }
 
+    /**
+     * Get the key of the field that have "best_descriptive_value" set to "1" in the hashmap of fields
+     */
+    public String getBestDescriptiveKey() {
+        String res = "";
+        for (String key : this.hashMap_fields.keySet()) {
+            if (Objects.requireNonNull(this.hashMap_fields.get(key)).isBestDescriptiveValue()) {
+                res = key;
+                break;
+            }
+        }
+        return res;
+    }
+
+    /**
+     * Get the key of the fields that have "descriptive_value" set to "1" in the hashmap of fields
+     */
+    public String[] getDescriptiveKeys() {
+        ArrayList<String> res = new ArrayList<>();
+        for (String key : this.hashMap_fields.keySet()) {
+            if (Objects.requireNonNull(this.hashMap_fields.get(key)).isDescriptiveValue()) {
+                res.add(key);
+            }
+        }
+        return res.toArray(new String[0]);
+    }
 }

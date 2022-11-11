@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import netw4ppl.ines.MainActivity;
+
 public class Field extends DataElement {
 
     private int view_type;
@@ -29,6 +31,7 @@ public class Field extends DataElement {
      */
     public Field(String key, String string_fields) throws JSONException {
         super(key, string_fields);
+        System.out.println("Field: " + this.getString("android_type"));
         setViewType(this.getString("android_type"), this.getInt("required"));
     }
 
@@ -119,5 +122,19 @@ public class Field extends DataElement {
         String is_descriptive_value;
         is_descriptive_value = this.getElementByKey("descriptive_value");
         return is_descriptive_value.equals("1");
+    }
+
+    /**
+     * Get the Linked List Value of a Field
+     * @param person
+     * @return
+     */
+    public String getLinkedListValue(Person person) {
+        String key_table = this.getLinkedList();
+        String key_elem = person.getInfoByKey(this.getKey());
+        if (MainActivity.mConfiguration.hasElementInTable(key_table, key_elem)) {
+            return MainActivity.mConfiguration.getElementFromTable(key_table, key_elem);
+        }
+        return null;
     }
 }

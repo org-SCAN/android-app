@@ -13,8 +13,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import netw4ppl.ines.MainActivity;
@@ -30,6 +32,7 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
     private int lastPosition = -1;
     public ArrayList<Person> mObjects;
     public ArrayList<Person> mObjects_tmp;
+    public HashMap<Person, ArrayList<String>> usedFields = new HashMap<>();
 
     /**
      * A basic ViewHolder to put the BestDescriptiveValue of the Person
@@ -54,6 +57,9 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
         mResource = resource;
         mObjects = objects;
         mObjects_tmp = objects;
+        for (Person p : mObjects) {
+            usedFields.put(p, new ArrayList<String>());
+        }
     }
 
     /**
@@ -171,6 +177,8 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
 
         Iterator<String> keys = person.keys();
         while(keys.hasNext()) {
+            String linkedListValue = null;
+
             String key = keys.next();
             // This ugly while loop (and if statement) are used to ignore the fields hidden values,
             // as editing the persons's field values mess up the field's orders
@@ -184,19 +192,37 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
                 break;
             }
             Field field = MainActivity.mConfiguration.getFieldFromHashMap(key);
-            if (field.isDescriptiveValue() && !field.isBestDescriptiveValue() &&holder.mDescriptiveField1.getText().equals("")) {
-                holder.mDescriptiveField1.setText(String.valueOf(person.getInfoByKey(key)));
-                holder.mDescriptiveField1Title.setText(field+" : ");
-            }
-            else if (field.isDescriptiveValue() && !field.isBestDescriptiveValue() && !holder.mDescriptiveField1.getText().equals("")) {
-                holder.mDescriptiveField2.setText(String.valueOf(person.getInfoByKey(key)));
-                holder.mDescriptiveField2Title.setText(field+" : ");
-            }
-            else if (field.isBestDescriptiveValue()) {
-                holder.mBestDescriptiveValue.setText(String.valueOf(person.getInfoByKey(key)));
+            if (!usedFields.get(person).contains(key)) {
+                if (!field.isBestDescriptiveValue()) {
+                    if (field.isDescriptiveValue()) {
+                        if (holder.mDescriptiveField1Title.getText().equals("")) {
+                            holder.mDescriptiveField1Title.setText(field + " : ");
+                            if (!field.getLinkedList().equals("")) {
+                                linkedListValue = field.getLinkedListValue(person);
+                            }
+                            if (linkedListValue != null) {
+                                holder.mDescriptiveField1.setText(linkedListValue);
+                            } else {
+                                holder.mDescriptiveField1.setText(String.valueOf(person.getInfoByKey(key)));
+                            }
+                        } else {
+                            holder.mDescriptiveField2Title.setText(field + " : ");
+                            if (!field.getLinkedList().equals("")) {
+                                linkedListValue = field.getLinkedListValue(person);
+                            }
+                            if (linkedListValue != null) {
+                                holder.mDescriptiveField2.setText(linkedListValue);
+                            } else {
+                                holder.mDescriptiveField2.setText(String.valueOf(person.getInfoByKey(key)));
+                            }
+                        }
+                    }
+                } else if (field.isBestDescriptiveValue()) {
+                    holder.mBestDescriptiveValue.setText(String.valueOf(person.getInfoByKey(key)));
+                }
+                usedFields.get(person).add(key);
             }
         }
-
         return convertView;
     }
 
@@ -230,5 +256,14 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+    /**
+     * Clear function for ArrayLists
+     *
+     */
+    public void clear(ArrayList<String> list) {
+        for (int i = 0; i < list.size(); i++)
+            list.set(i, null);
     }
 }
