@@ -329,7 +329,6 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Field field = mFields.get(position);
-
         switch (field.getViewType()) {
             case -1:
                 /* Section UNIQUE ID */

@@ -115,16 +115,16 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
      * @param relation a Relation object
      */
     private void setViews(Relation relation){
-        mTextViewFromFullname.setText(relation.getFromFullname());
+        mTextViewFromFullname.setText(relation.getFromBestDescriptiveValue());
 
         // associate the relation key with its string for a better visualisation
         String relation_key = relation.getInfoByKey("relation");
-        ArrayAdapter relations_adapter = MainActivity.mConfiguration.getArrayAdapter("Relations");
+        ArrayAdapter relations_adapter = MainActivity.mConfiguration.getArrayAdapter("ListRelations");
         int pos_in_adapter = AddRelationActivity.getPositionInAdapter(relations_adapter, relation_key);
         String text_relation = relations_adapter.getItem(pos_in_adapter).toString();
 
         mTextViewRelationType.setText(text_relation); // relation.getInfoByKey("relation")
-        mTextViewToFullname.setText(relation.getToFullname());
+        mTextViewToFullname.setText(relation.getToBestDescriptiveValue());
         mTextViewComments.setText(relation.getDetails());
     }
 

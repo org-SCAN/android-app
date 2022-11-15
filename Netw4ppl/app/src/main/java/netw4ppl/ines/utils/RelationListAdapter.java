@@ -33,10 +33,8 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
      * A basic ViewHolder to put informations like the two fullnames and Unique IDs and the relation type
      */
     private static class ViewHolder {
-        TextView mFullName1;
-        TextView mFullName2;
-        TextView mUniqueID1;
-        TextView mUniqueID2;
+        TextView mBestDescriptiveValueFrom;
+        TextView mBestDescriptiveValueTo;
         TextView mRelationType;
     }
 
@@ -146,10 +144,8 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             convertView = inflater.inflate(mResource, parent, false);
             holder = new RelationListAdapter.ViewHolder();
-            holder.mFullName1 = (TextView) convertView.findViewById(R.id.full_name_person_1);
-            holder.mFullName2 = (TextView) convertView.findViewById(R.id.full_name_person_2);
-            holder.mUniqueID1 = (TextView) convertView.findViewById(R.id.id_person_1);
-            holder.mUniqueID2 = (TextView) convertView.findViewById(R.id.id_person_2);
+            holder.mBestDescriptiveValueFrom = (TextView) convertView.findViewById(R.id.best_descriptive_value_1);
+            holder.mBestDescriptiveValueTo = (TextView) convertView.findViewById(R.id.best_descriptive_value_2);
             holder.mRelationType = (TextView) convertView.findViewById(R.id.relation_type);
 
             result = convertView;
@@ -162,10 +158,8 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
 
         this.lastPosition = position;
 
-        holder.mFullName1.setText(relation.getFromFullname());
-        holder.mFullName2.setText(relation.getToFullname());
-        holder.mUniqueID1.setText(relation.getFromID());
-        holder.mUniqueID2.setText(relation.getToID());
+        holder.mBestDescriptiveValueFrom.setText(relation.getFromBestDescriptiveValue());
+        holder.mBestDescriptiveValueTo.setText(relation.getToBestDescriptiveValue());
         holder.mRelationType.setText(relation.getRelationType());
 
         return convertView;

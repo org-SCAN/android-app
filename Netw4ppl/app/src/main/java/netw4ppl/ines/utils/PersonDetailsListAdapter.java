@@ -90,18 +90,19 @@ public class PersonDetailsListAdapter extends ArrayAdapter<Field> {
         holder.mTitle.setHint(field.getTitle());
 
         // associer la clé à la bonne valeur
-        String key_table;
-        String key_elem;
+        String linkedListValue = null;
         String text = mPerson.getInfoByKey(field.getKey());
 
         if (!field.getLinkedList().equals("")) {
-            key_table = field.getLinkedList();
-            key_elem = mPerson.getInfoByKey(field.getKey());
-            if (MainActivity.mConfiguration.hasElementInTable(key_table, key_elem))
-                text = MainActivity.mConfiguration.getElementFromTable(key_table, key_elem);
+            linkedListValue = field.getLinkedListValue(mPerson);
         }
 
-        holder.mText.setText(text);
+        if (linkedListValue != null) {
+            holder.mText.setText(linkedListValue);
+        }
+        else {
+            holder.mText.setText(text);
+        }
 
         return convertView;
     }

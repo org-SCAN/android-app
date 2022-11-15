@@ -8,11 +8,14 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Objects;
 import java.util.TimeZone;
 import java.util.UUID;
 
 import netw4ppl.ines.MainActivity;
+import netw4ppl.ines.ManagePersonsActivity;
 
 public class Relation extends JSONObject {
 
@@ -72,8 +75,8 @@ public class Relation extends JSONObject {
      * @param person To Person used to set the relation
      */
     public void setPersonTo(Person person) {
-        this.putInfo("to_unique_id", person.getInfoByKey("unique_id"));
-        to_person_name = person.getInfoByKey("full_name");
+        this.putInfo("to_unique_id", person.getKey());
+        to_person_name = person.getInfoByKey(person.bestDescriptiveValueKey);
     }
 
     /**
@@ -89,8 +92,8 @@ public class Relation extends JSONObject {
      * @param person From Person used to set the relation
      */
     public void setPersonFrom(Person person) {
-        this.putInfo("from_unique_id", person.getInfoByKey("unique_id"));
-        from_person_name = person.getInfoByKey("full_name");
+        this.putInfo("from_unique_id", person.getKey());
+        from_person_name = person.getInfoByKey(person.bestDescriptiveValueKey);
     }
 
     /**
@@ -236,7 +239,7 @@ public class Relation extends JSONObject {
      * Warning : it only returns the code of the RelationType
      */
     public String getRelationType() {
-        return (this.getInfoByKey("relation"));
+        return (Objects.requireNonNull(MainActivity.mConfiguration.getHashMap_datatables().get("ListRelations")).get(this.getInfoByKey("relation")).toString());
     }
 
     /**
@@ -312,5 +315,13 @@ public class Relation extends JSONObject {
             if (from_found && to_found)
                 break;
         }
+    }
+
+    public String getFromBestDescriptiveValue() {
+        return ManagePersonsActivity.hashmap_persons.get(this.getFromID()).getInfoByKey(Person.bestDescriptiveValueKey);
+    }
+
+    public String getToBestDescriptiveValue() {
+        return ManagePersonsActivity.hashmap_persons.get(this.getToID()).getInfoByKey(Person.bestDescriptiveValueKey);
     }
 }

@@ -3,12 +3,16 @@ package netw4ppl.ines.utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.Objects;
 
+import netw4ppl.ines.MainActivity;
 import netw4ppl.ines.ManagePersonsActivity;
 
 public class Person extends JSONObject {
+
+    public static String bestDescriptiveValueKey;
+    public static String[] descriptiveFieldsKeys;
 
     /**
      * Default constructor
@@ -27,6 +31,8 @@ public class Person extends JSONObject {
      */
     public Person(String data_person) throws JSONException {
         super(data_person);
+        bestDescriptiveValueKey = MainActivity.mConfiguration.getBestDescriptiveKey();
+        descriptiveFieldsKeys = MainActivity.mConfiguration.getDescriptiveKeys();
     }
 
     /**
@@ -38,6 +44,16 @@ public class Person extends JSONObject {
      */
     public Person(JSONObject data_person) throws JSONException {
         super(data_person.toString());
+        bestDescriptiveValueKey = MainActivity.mConfiguration.getBestDescriptiveKey();
+        descriptiveFieldsKeys = MainActivity.mConfiguration.getDescriptiveKeys();
+    }
+
+    /**
+     * Get all the fields of the Person
+     * @return an ArrayList of Field objects
+     */
+    public static ArrayList<Field> getFields() {
+        return MainActivity.mConfiguration.getArrayFields();
     }
 
     /**
@@ -96,5 +112,13 @@ public class Person extends JSONObject {
      */
     public boolean isSamePerson(Person individu) throws JSONException {
         return this.getInfoByKey("unique_id").equals(individu.getInfoByKey("unique_id"));
+    }
+
+    /**
+     * Overrides the toString method
+     */
+    @Override
+    public String toString() {
+        return this.getInfoByKey(this.bestDescriptiveValueKey);
     }
 }
