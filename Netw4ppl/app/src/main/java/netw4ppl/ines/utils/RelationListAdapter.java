@@ -33,8 +33,8 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
      * A basic ViewHolder to put informations like the two fullnames and Unique IDs and the relation type
      */
     private static class ViewHolder {
-        TextView mBestDescriptiveValue1;
-        TextView mBestDescriptiveValue2;
+        TextView mBestDescriptiveValueFrom;
+        TextView mBestDescriptiveValueTo;
         TextView mRelationType;
     }
 
@@ -144,8 +144,8 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             convertView = inflater.inflate(mResource, parent, false);
             holder = new RelationListAdapter.ViewHolder();
-            holder.mBestDescriptiveValue1 = (TextView) convertView.findViewById(R.id.best_descriptive_value_1);
-            holder.mBestDescriptiveValue2 = (TextView) convertView.findViewById(R.id.best_descriptive_value_2);
+            holder.mBestDescriptiveValueFrom = (TextView) convertView.findViewById(R.id.best_descriptive_value_1);
+            holder.mBestDescriptiveValueTo = (TextView) convertView.findViewById(R.id.best_descriptive_value_2);
             holder.mRelationType = (TextView) convertView.findViewById(R.id.relation_type);
 
             result = convertView;
@@ -158,8 +158,8 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
 
         this.lastPosition = position;
 
-        holder.mBestDescriptiveValue1.setText(relation.getFromBestDescriptiveValue());
-        holder.mBestDescriptiveValue2.setText(relation.getToBestDescriptiveValue());
+        holder.mBestDescriptiveValueFrom.setText(relation.getFromBestDescriptiveValue());
+        holder.mBestDescriptiveValueTo.setText(relation.getToBestDescriptiveValue());
         holder.mRelationType.setText(relation.getRelationType());
 
         return convertView;
