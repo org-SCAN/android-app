@@ -60,8 +60,7 @@
             <Spinner
                 android:id="@+id/add_relation_type"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="visible"></Spinner>
+                android:layout_height="match_parent"></Spinner>
         </LinearLayout>
 
         <!-- To Person -->

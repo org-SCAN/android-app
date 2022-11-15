@@ -244,28 +244,6 @@ public class AddRelationActivity extends AppCompatActivity {
     }
 
     /**
-     * Function to associate specific information with a person saved in the application.
-     *
-     * @param unique_id a String containing a specific Uuid
-     * @return int
-     */
-    public String associateInfosWithPerson(String unique_id) {
-        // aller chercher dans la liste ManagePersonActivity.array_persons la personne associée à ces deux éléments
-        boolean found = false;
-        String id_person = null;
-        for (String key : ManagePersonsActivity.hashmap_persons.keySet()) {
-            if (!found) {
-                if (key.equals((unique_id))) {
-                    found = true;
-                    id_person = key;
-                }
-            }
-        }
-
-        return id_person;
-    }
-
-    /**
      * Sets the listeners of the autocompleteTextView
      * onItemClick methods initialize from_person and to_person with the Persons clicked in the
      * AutoCompletTextView dropdown
@@ -320,7 +298,7 @@ public class AddRelationActivity extends AppCompatActivity {
         mAutoTextViewRelationFrom.setAdapter(autocomplete_adapter);
         mAutoTextViewRelationTo.setAdapter(autocomplete_adapter);
 
-        spinner_adapter = MainActivity.mConfiguration.getArrayAdapter("Relations");
+        spinner_adapter = MainActivity.mConfiguration.getArrayAdapter("ListRelations");
         mSpinnerRelationType.setAdapter(spinner_adapter);
     }
 
@@ -424,7 +402,7 @@ public class AddRelationActivity extends AppCompatActivity {
      */
     private void setToPersonView() {
         // informations contenues dans to_person
-        mAutoTextViewRelationTo.setText(to_person.toString(), false);
+        mAutoTextViewRelationTo.setText(to_person.getInfoByKey(Person.bestDescriptiveValueKey), false);
         mAutoTextViewRelationTo.setEnabled(false);
 
         // TODO à changer car c'est pas très propre
@@ -436,7 +414,7 @@ public class AddRelationActivity extends AppCompatActivity {
      * Set the From Person AutoCompleteTextView with a value.
      */
     private void setFromPersonView() {
-        mAutoTextViewRelationFrom.setText(from_person.bestDescriptiveValueKey, false);
+        mAutoTextViewRelationFrom.setText(from_person.getInfoByKey(Person.bestDescriptiveValueKey), false);
         mAutoTextViewRelationFrom.setEnabled(false);
 
         // TODO à changer car c'est pas très propre
@@ -450,12 +428,8 @@ public class AddRelationActivity extends AppCompatActivity {
      * @param relation a Relation object
      */
     private void setPersonsViews(Relation relation) {
-        // associate the ids and full_names with the Person objects and set the variables
-        String index_from = associateInfosWithPerson(relation.getFromID());
-        String index_to = associateInfosWithPerson(relation.getToID());
-
-        from_person = ManagePersonsActivity.hashmap_persons.get(index_from);
-        to_person = ManagePersonsActivity.hashmap_persons.get(index_to);
+        from_person = ManagePersonsActivity.hashmap_persons.get(relation.getFromID());
+        to_person = ManagePersonsActivity.hashmap_persons.get(relation.getToID());
 
         setFromPersonView();
         setToPersonView();

@@ -11,8 +11,8 @@ import netw4ppl.ines.ManagePersonsActivity;
 
 public class Person extends JSONObject {
 
-    public String bestDescriptiveValueKey;
-    public String[] descriptiveFieldsKeys;
+    public static String bestDescriptiveValueKey;
+    public static String[] descriptiveFieldsKeys;
 
     /**
      * Default constructor
