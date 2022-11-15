@@ -257,13 +257,4 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
     public long getItemId(int position) {
         return position;
     }
-
-    /**
-     * Clear function for ArrayLists
-     *
-     */
-    public void clear(ArrayList<String> list) {
-        for (int i = 0; i < list.size(); i++)
-            list.set(i, null);
-    }
 }
