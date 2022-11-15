@@ -31,7 +31,6 @@ public class Field extends DataElement {
      */
     public Field(String key, String string_fields) throws JSONException {
         super(key, string_fields);
-        System.out.println("Field: " + this.getString("android_type"));
         setViewType(this.getString("android_type"), this.getInt("required"));
     }
 
