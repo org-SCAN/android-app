@@ -26,6 +26,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Set;
 
 import netw4ppl.ines.utils.DataElement;
@@ -214,8 +215,20 @@ public class AddRelationActivity extends AppCompatActivity {
 
                         // ajout du champ date_update
                         relation.setUpdateDate();
+                        String serv_id = Objects.requireNonNull(relation).getInfoByKey("id");
+                        String initial_date = Objects.requireNonNull(relation).getInfoByKey("date");
                         ManageRelationsActivity.array_relations.remove(index_relation);
                         ManageRelationsActivity.array_relations.add(index_relation, relation);
+                        try {
+                            Objects.requireNonNull(relation).put("date", initial_date);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            Objects.requireNonNull(relation).put("id", serv_id);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         success_write = FileUtils.saveRelationsToFile(getApplicationContext(), ManageRelationsActivity.formatterJsonFile());
                     }
                 }
@@ -312,7 +325,7 @@ public class AddRelationActivity extends AppCompatActivity {
      * True if p1 and p2 are different
      */
     private boolean samePersonRelation(Relation relation){
-        boolean test = (relation.getInfoByKey("from_unique_id").equals(relation.getInfoByKey("to_unique_id")));
+        boolean test = (relation.getInfoByKey("from_unique_id").equals(relation.getInfoByKey("to")));
         String toast_text = this.getString(R.string.toast_same_person_relation);
 
         if (test){
@@ -363,7 +376,7 @@ public class AddRelationActivity extends AppCompatActivity {
      * @return false if the unique id of the To Person is empty and true if it isn't
      */
     private boolean isPersonToValid(Relation relation) {
-        boolean is_empty = relation.getInfoByKey("to_unique_id").equals("");
+        boolean is_empty = relation.getInfoByKey("to").equals("");
         String toast_text = this.getString(R.string.toast_person_not_selected);
         if (is_empty) {
             Toast toast = Toast.makeText(this, toast_text, Toast.LENGTH_SHORT);
@@ -380,7 +393,7 @@ public class AddRelationActivity extends AppCompatActivity {
      * @return false if the unique id of the From Person is empty and true if it isn't
      */
     private boolean isPersonFromValid(Relation relation) {
-        boolean is_empty = relation.getInfoByKey("from_unique_id").equals("");
+        boolean is_empty = relation.getInfoByKey("from").equals("");
         String toast_text = this.getString(R.string.toast_person_not_selected);
         if (is_empty) {
             Toast toast = Toast.makeText(this, toast_text, Toast.LENGTH_SHORT);

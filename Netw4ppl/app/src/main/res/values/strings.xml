@@ -93,6 +93,8 @@
 
     <string name="directory_files" translatable="false">/cases</string>
     <string name="filename_persons" translatable="false">/persons.json</string>
+    <string name="filename_persons_api" translatable="false">/persons_api.json</string>
+    <string name="filename_relations_api" translatable="false">/relations_api.json</string>
     <string name="filename_relations" translatable="false">/relations.json</string>
 
     <string name="age_title">Age: </string>

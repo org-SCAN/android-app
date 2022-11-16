@@ -111,15 +111,21 @@ public class AddPersonActivity extends AppCompatActivity {
 
                     // on supprime l'ancienne version avant d'ajouter la nouvelle
                     String id_person = extra_parameters.getString("id_person");
+                    String serv_id = Objects.requireNonNull(ManagePersonsActivity.hashmap_persons.get(id_person)).getInfoByKey("id");
+                    String initial_date = Objects.requireNonNull(ManagePersonsActivity.hashmap_persons.get(id_person)).getInfoByKey("date");
                     ManagePersonsActivity.hashmap_persons.remove(id_person);
-                    ManagePersonsActivity.hashmap_persons.put(id_person, person); //remplacer index par uuid
+                    ManagePersonsActivity.hashmap_persons.put(id_person, person);
+                    try {
+                        Objects.requireNonNull(ManagePersonsActivity.hashmap_persons.get(id_person)).put("date", initial_date);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        Objects.requireNonNull(ManagePersonsActivity.hashmap_persons.get(id_person)).put("id", serv_id);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
-
-                /*
-                System.out.println("saving id");
-                boolean save_ids = saveIds(this, person);
-                System.out.println("saved id: " + save_ids);
-                 */
 
                 // enregistre les données dans le fichier associé
                 boolean save_persons = FileUtils.savePersonsToFile(this, ManagePersonsActivity.formatterJsonFile());

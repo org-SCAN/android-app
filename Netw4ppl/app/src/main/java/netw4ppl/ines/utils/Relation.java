@@ -47,6 +47,20 @@ public class Relation extends JSONObject {
     }
 
     /**
+     * Constructor of relation
+     * Sets the relation using a JSONObject
+     *
+     * @param data_relation JSONObject containing the data of a relation
+     * @throws JSONException
+     */
+    public Relation(JSONObject data_relation) throws JSONException {
+        super(data_relation.toString());
+
+        from_person_name = "";
+        to_person_name = "";
+    }
+
+    /**
      * Sets the fullname of the From person
      * @param full_name String of the From person's fullname
      */
@@ -75,7 +89,7 @@ public class Relation extends JSONObject {
      * @param person To Person used to set the relation
      */
     public void setPersonTo(Person person) {
-        this.putInfo("to_unique_id", person.getKey());
+        this.putInfo("to", person.getKey());
         to_person_name = person.getInfoByKey(person.bestDescriptiveValueKey);
     }
 
@@ -92,7 +106,7 @@ public class Relation extends JSONObject {
      * @param person From Person used to set the relation
      */
     public void setPersonFrom(Person person) {
-        this.putInfo("from_unique_id", person.getKey());
+        this.putInfo("from", person.getKey());
         from_person_name = person.getInfoByKey(person.bestDescriptiveValueKey);
     }
 
@@ -182,7 +196,7 @@ public class Relation extends JSONObject {
      * @return a String corresponding to the unique_id of the From Person of the Relation
      */
     public String getFromID() {
-        return this.getInfoByKey("from_unique_id");
+        return this.getInfoByKey("from");
     }
 
     /**
@@ -190,7 +204,7 @@ public class Relation extends JSONObject {
      * @return a String corresponding to the unique_id of the To Person of the Relation
      */
     public String getToID() {
-        return this.getInfoByKey("to_unique_id");
+        return this.getInfoByKey("to");
     }
 
     /**
@@ -323,5 +337,13 @@ public class Relation extends JSONObject {
 
     public String getToBestDescriptiveValue() {
         return ManagePersonsActivity.hashmap_persons.get(this.getToID()).getInfoByKey(Person.bestDescriptiveValueKey);
+    }
+
+    public void setFromId(String s) {
+        this.putInfo("from", s);
+    }
+
+    public void setToId(String s) {
+        this.putInfo("to", s);
     }
 }
