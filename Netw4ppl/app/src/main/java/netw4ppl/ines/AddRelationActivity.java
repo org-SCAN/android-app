@@ -182,8 +182,7 @@ public class AddRelationActivity extends AppCompatActivity {
 
                 try {
                     Log.d("save-relation-button", relation.toString(2));
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                } catch (JSONException ignored) {
                 }
 
                 // si la relation est valide on passe à l'étape suivante
@@ -221,13 +220,11 @@ public class AddRelationActivity extends AppCompatActivity {
                         ManageRelationsActivity.array_relations.add(index_relation, relation);
                         try {
                             Objects.requireNonNull(relation).put("date", initial_date);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                        } catch (JSONException ignored) {
                         }
                         try {
                             Objects.requireNonNull(relation).put("id", serv_id);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                        } catch (JSONException ignored) {
                         }
                         success_write = FileUtils.saveRelationsToFile(getApplicationContext(), ManageRelationsActivity.formatterJsonFile());
                     }

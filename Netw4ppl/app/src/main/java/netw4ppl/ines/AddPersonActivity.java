@@ -64,8 +64,7 @@ public class AddPersonActivity extends AppCompatActivity {
                 id_person = extra_parameters.getString("id_person");
                 try {
                     person = new Person(Objects.requireNonNull(ManagePersonsActivity.hashmap_persons.get(id_person)));
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                } catch (JSONException ignored) {
                 }
             }
             if (extra_parameters.containsKey("new_person"))
@@ -117,13 +116,11 @@ public class AddPersonActivity extends AppCompatActivity {
                     ManagePersonsActivity.hashmap_persons.put(id_person, person);
                     try {
                         Objects.requireNonNull(ManagePersonsActivity.hashmap_persons.get(id_person)).put("date", initial_date);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    } catch (JSONException ignored) {
                     }
                     try {
                         Objects.requireNonNull(ManagePersonsActivity.hashmap_persons.get(id_person)).put("id", serv_id);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    } catch (JSONException ignored) {
                     }
                 }
 
@@ -155,8 +152,7 @@ public class AddPersonActivity extends AppCompatActivity {
         if (json_ids.has("default")) {
             try {
                 default_val = json_ids.getString("default");
-            } catch (JSONException e) {
-                e.printStackTrace();
+            } catch (JSONException ignored) {
             }
         }
         else {
@@ -173,8 +169,7 @@ public class AddPersonActivity extends AppCompatActivity {
     public static void setDefaultKey(String tricode) {
         try {
             json_ids.put("default", tricode);
-        } catch (JSONException e) {
-            e.printStackTrace();
+        } catch (JSONException ignored) {
         }
     }
 
@@ -190,7 +185,6 @@ public class AddPersonActivity extends AppCompatActivity {
             try {
                 last_id = json_ids.getInt(key);
             } catch (JSONException e) {
-                e.printStackTrace();
                 last_id = 0;
             }
         return last_id+1;
@@ -259,15 +253,13 @@ public class AddPersonActivity extends AppCompatActivity {
             // it means its the first value for this tricode so we need to save it
             try {
                 json_ids.put(letters_id, figures_id);
-            } catch (JSONException jsonException) {
-                jsonException.printStackTrace();
+            } catch (JSONException ignored) {
             }
         }
 
         try {
             save_ids = FileUtils.saveIdsToFile(this, json_ids.toString(2));
-        } catch (JSONException e) {
-            e.printStackTrace();
+        } catch (JSONException ignored) {
         }
 
         return save_ids;
