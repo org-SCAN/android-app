@@ -241,8 +241,6 @@ public class SubmitData {
                             .build();
                     Response response = http_client.newCall(request).execute();
                     String response_string = response.body().string();
-                    Log.d("Code de réception", String.valueOf(response.code()));
-                    Log.d("GetResponse", response_string);
 
                     if (filePath.contains("person")){
                         ManagePersonsActivity.saveServerIds(response_string);
