@@ -322,7 +322,7 @@ public class AddRelationActivity extends AppCompatActivity {
      * True if p1 and p2 are different
      */
     private boolean samePersonRelation(Relation relation){
-        boolean test = (relation.getInfoByKey("from_unique_id").equals(relation.getInfoByKey("to")));
+        boolean test = (relation.getInfoByKey("from").equals(relation.getInfoByKey("to")));
         String toast_text = this.getString(R.string.toast_same_person_relation);
 
         if (test){
