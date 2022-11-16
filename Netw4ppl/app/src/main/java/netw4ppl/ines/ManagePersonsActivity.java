@@ -127,7 +127,6 @@ public class ManagePersonsActivity extends AppCompatActivity {
         String path_file = context.getFilesDir().getPath()+dir_name+file_name;
         String content_file = "";
         JSONObject jsonObject_persons = null;
-        HashMap<String, Person> new_hashmap_persons = new HashMap<>();
         if (FileUtils.directoryExists(path_dir) && FileUtils.fileExists(path_file)) {
         content_file = FileUtils.readFile(path_file);
 
@@ -166,5 +165,30 @@ public class ManagePersonsActivity extends AppCompatActivity {
     public static String formatterJsonFile() {
         JSONObject jsonObject_persons = new JSONObject(hashmap_persons);
         return jsonObject_persons.toString();
+    }
+
+    /**
+     * Put the server id from the response string into the corresponding persons
+     *
+     * @param response_string the response from the server
+     */
+    public static void saveServerIds(String response_string) throws JSONException {
+        int index = 0;
+        String[] id_array = response_string.split("\",\"");
+        String[] clean_array = new String[id_array.length];
+        //print all values of the array
+        for (String id : id_array) {
+            id = id.replace("\"", "");
+            id = id.replace("[", "");
+            id = id.replace("]", "");
+            clean_array[index] = id;
+            index++;
+        }
+        index = 0;
+        for (String key : ManagePersonsActivity.hashmap_persons.keySet()) {
+            hashmap_persons.get(key).put("id", clean_array[index]);
+            ManageRelationsActivity.hashmap_android_to_server_id.put(key, clean_array[index]);
+            index++;
+        }
     }
 }

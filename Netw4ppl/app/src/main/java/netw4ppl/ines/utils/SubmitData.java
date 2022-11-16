@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 import netw4ppl.ines.MainActivity;
 import netw4ppl.ines.ManagePersonsActivity;
+import netw4ppl.ines.ManageRelationsActivity;
 import netw4ppl.ines.R;
 import netw4ppl.ines.SettingsActivity;
 import okhttp3.MediaType;
@@ -50,8 +51,8 @@ public class SubmitData {
     public static void manageSend(Context context, String filePath) throws IOException, InterruptedException, JSONException {
 
         String dir_name = context.getString(R.string.directory_files);
-        String file_name_relations = context.getString(R.string.filename_relations);
-        String file_name_persons = context.getString(R.string.filename_persons);
+        String file_name_relations = context.getString(R.string.filename_relations_api);
+        String file_name_persons = context.getString(R.string.filename_persons_api);
 
         // gets the sending option selected by the user in the parameters
         String sending_option = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_sending_option_key), null);
@@ -101,7 +102,11 @@ public class SubmitData {
                         .build();
 
                 //Submissions
-                boolean submit_persons = sendToServer(context, context.getFilesDir().getPath() + dir_name + file_name_persons, ip_port, token_server, client, "manage_refugees");
+                //write the API compatible file to send (hashmap to Arraylist of JsonObjects)
+                writeAPIPersonsFile(context);
+                boolean submit_persons = sendToServer(context, context.getFilesDir().getPath() + dir_name + file_name_persons, ip_port, token_server, client, "person");
+                //write the API compatible relation file to send (android uuid to server id)
+                writeAPIRelationsFile(context);
                 boolean submit_relations = sendToServer(context, context.getFilesDir().getPath() + dir_name + file_name_relations, ip_port, token_server, client, "links");
                 boolean submit_result = (submit_persons && submit_relations);
 
@@ -236,8 +241,13 @@ public class SubmitData {
                             .build();
                     Response response = http_client.newCall(request).execute();
                     String response_string = response.body().string();
-                    Log.d("Code de réception", String.valueOf(response.code()));
-                    Log.d("GetResponse", response_string);
+
+                    if (filePath.contains("person")){
+                        ManagePersonsActivity.saveServerIds(response_string);
+                    }
+                    else if (filePath.contains("relation")){
+                        ManageRelationsActivity.saveServerIds(response_string);
+                    }
 
                     if (response.code()==201) {
                         http_success[0] = true;
@@ -346,4 +356,71 @@ public class SubmitData {
                 .create()
                 .show();
     }
+
+    /**
+     * Write the API compatible JSON file containing the Persons :
+     * We need to push with this format :
+     * [
+     *     {
+     *         'field_id_1': 'value 1-1',
+     *         'field_id_2': 'value 2-1',
+     *         'date': '',
+     *         ...
+     *     },
+     *     {
+     *         'field_id_1': 'value 1-2',
+     *         'field_id_2': 'value 2-3',
+     *         'date': ''
+     *         ...
+     *     }
+     * ]
+     */
+    public static void writeAPIPersonsFile(Context context) throws IOException {
+        String dir_name = context.getString(R.string.directory_files);
+        String file_name = context.getString(R.string.filename_persons_api);
+        String path_file = context.getFilesDir().getPath() + dir_name + file_name;
+        JSONArray persons = new JSONArray();
+        for (Person person : ManagePersonsActivity.hashmap_persons.values()) {
+            persons.put(person);
+        }
+        FileUtils.writeFile(path_file, persons.toString());
+    }
+
+    /**
+     * Write the API compatible JSON file containing the Relations
+     * We need to push with this format :
+     * [
+     *   {
+     *     "from": "",
+     *     "to": "",
+     *     "relation": "",
+     *     "date": "",
+     *     "detail": ""
+     *   },
+     *   {
+     *     "from": "",
+     *     "to": "",
+     *     "relation": "",
+     *     "date": "",
+     *     "detail": ""
+     *   }
+     * ]
+     */
+    private static void writeAPIRelationsFile(Context context) throws JSONException {
+        String dir_name = context.getString(R.string.directory_files);
+        String file_name = context.getString(R.string.filename_relations_api);
+        String path_file = context.getFilesDir().getPath() + dir_name + file_name;
+        System.out.println(path_file);
+        JSONArray relations = new JSONArray();
+        Relation relation;
+        for (int i = 0; i < ManageRelationsActivity.array_relations.size(); i++) {
+            relation = new Relation(ManageRelationsActivity.array_relations.get(i));
+            relation.setFromId(ManageRelationsActivity.hashmap_android_to_server_id.get(relation.getFromID()));
+            relation.setToId(ManageRelationsActivity.hashmap_android_to_server_id.get(relation.getToID()));
+
+            relations.put(relation);
+        }
+        FileUtils.writeFile(path_file, relations.toString());
+    }
+
 }

@@ -13,7 +13,7 @@ import netw4ppl.ines.MainActivity;
 public class Field extends DataElement {
 
     private int view_type;
-    public static String[] hidden_values = {"date", "application_id", "date_update"};
+    public static String[] hidden_values = {"date", "application_id", "date_update", "id"};
 
     /**
      * Default Constructor

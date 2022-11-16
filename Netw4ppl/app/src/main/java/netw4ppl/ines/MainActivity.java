@@ -67,9 +67,10 @@ public class MainActivity extends AppCompatActivity{
             startActivity(intent);
         });
         mSendDataBtn.setOnClickListener(v -> {
-            Log.d("Send Data","ON EST LA");
             try {
                 SubmitData.manageSend(this, getString(R.string.directory_files));
+                FileUtils.savePersonsToFile(this, ManagePersonsActivity.formatterJsonFile());
+                FileUtils.saveRelationsToFile(this, ManageRelationsActivity.formatterJsonFile());
             } catch (IOException | InterruptedException | JSONException e) {
                 e.printStackTrace();
             }

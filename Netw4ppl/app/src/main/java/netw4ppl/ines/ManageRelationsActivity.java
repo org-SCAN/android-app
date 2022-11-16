@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 import netw4ppl.ines.utils.FileUtils;
 import netw4ppl.ines.utils.Person;
@@ -35,6 +36,7 @@ public class ManageRelationsActivity extends AppCompatActivity {
     SearchView mSearchBar;
     public static ArrayList<Relation> array_relations = new ArrayList<Relation>();
     public static RelationListAdapter mAdapter; // TODO changer le static ici car c'est une memory leak
+    public static HashMap<String, String> hashmap_android_to_server_id = new HashMap<>();
 
     /**
      * Function to update the name of a person in all the relations where this person is present in. Currently called after the
@@ -197,5 +199,27 @@ public class ManageRelationsActivity extends AppCompatActivity {
      */
     public static void updateAdapter(){
         mAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * Put the server id from the response string into the corresponding persons
+     *
+     * @param response_string the response from the server
+     */
+    public static void saveServerIds(String response_string) throws JSONException {
+        int index = 0;
+        String[] id_array = response_string.split("\",\"");
+        String[] clean_array = new String[id_array.length];
+        //print all values of the array
+        for (String id : id_array) {
+            id = id.replace("\"", "");
+            id = id.replace("[", "");
+            id = id.replace("]", "");
+            clean_array[index] = id;
+        }
+        for (Relation relation : ManageRelationsActivity.array_relations) {
+            relation.put("id", clean_array[index]);
+            index++;
+        }
     }
 }

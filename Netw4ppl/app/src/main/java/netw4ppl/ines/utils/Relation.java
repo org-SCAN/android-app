@@ -19,8 +19,8 @@ import netw4ppl.ines.ManagePersonsActivity;
 
 public class Relation extends JSONObject {
 
-    private String from_person_name;
-    private String to_person_name;
+    private String from_best_descriptive_value;
+    private String to_best_descriptive_value;
 
     /**
      * Default constructor of Relation
@@ -29,8 +29,8 @@ public class Relation extends JSONObject {
     public Relation(){
         super();
 
-        from_person_name = "";
-        to_person_name = "";
+        from_best_descriptive_value = "";
+        to_best_descriptive_value = "";
     }
 
     /**
@@ -42,8 +42,22 @@ public class Relation extends JSONObject {
     public Relation(String infos_relat) throws JSONException {
         super(infos_relat);
 
-        from_person_name = "";
-        to_person_name = "";
+        from_best_descriptive_value = "";
+        to_best_descriptive_value = "";
+    }
+
+    /**
+     * Constructor of relation
+     * Sets the relation using a JSONObject
+     *
+     * @param data_relation JSONObject containing the data of a relation
+     * @throws JSONException
+     */
+    public Relation(JSONObject data_relation) throws JSONException {
+        super(data_relation.toString());
+
+        from_best_descriptive_value = "";
+        to_best_descriptive_value = "";
     }
 
     /**
@@ -51,7 +65,7 @@ public class Relation extends JSONObject {
      * @param full_name String of the From person's fullname
      */
     public void setFromFullname(String full_name) {
-        from_person_name = full_name;
+        from_best_descriptive_value = full_name;
     }
 
     /**
@@ -59,7 +73,7 @@ public class Relation extends JSONObject {
      * @param full_name String of the To person's fullname
      */
     public void setToFullname(String full_name) {
-        to_person_name = full_name;
+        to_best_descriptive_value = full_name;
     }
 
     /**
@@ -75,8 +89,8 @@ public class Relation extends JSONObject {
      * @param person To Person used to set the relation
      */
     public void setPersonTo(Person person) {
-        this.putInfo("to_unique_id", person.getKey());
-        to_person_name = person.getInfoByKey(person.bestDescriptiveValueKey);
+        this.putInfo("to", person.getKey());
+        to_best_descriptive_value = person.getInfoByKey(person.bestDescriptiveValueKey);
     }
 
     /**
@@ -92,8 +106,8 @@ public class Relation extends JSONObject {
      * @param person From Person used to set the relation
      */
     public void setPersonFrom(Person person) {
-        this.putInfo("from_unique_id", person.getKey());
-        from_person_name = person.getInfoByKey(person.bestDescriptiveValueKey);
+        this.putInfo("from", person.getKey());
+        from_best_descriptive_value = person.getInfoByKey(person.bestDescriptiveValueKey);
     }
 
     /**
@@ -182,7 +196,7 @@ public class Relation extends JSONObject {
      * @return a String corresponding to the unique_id of the From Person of the Relation
      */
     public String getFromID() {
-        return this.getInfoByKey("from_unique_id");
+        return this.getInfoByKey("from");
     }
 
     /**
@@ -190,7 +204,7 @@ public class Relation extends JSONObject {
      * @return a String corresponding to the unique_id of the To Person of the Relation
      */
     public String getToID() {
-        return this.getInfoByKey("to_unique_id");
+        return this.getInfoByKey("to");
     }
 
     /**
@@ -198,7 +212,7 @@ public class Relation extends JSONObject {
      * @return a String corresponding to the fullname of the From Person of the Relation
      */
     public String getFromFullname() {
-        return from_person_name;
+        return from_best_descriptive_value;
     }
 
     /**
@@ -206,7 +220,7 @@ public class Relation extends JSONObject {
      * @return a String corresponding to the fullname of the To Person of the Relation
      */
     public String getToFullname() {
-        return to_person_name;
+        return to_best_descriptive_value;
     }
 
     /**
@@ -303,12 +317,12 @@ public class Relation extends JSONObject {
         for (int i=0; i<array_persons.size(); i++) {
             // si la personne a l'index i à cette ID
             Person p = array_persons.get(i);
-            if (p.getInfoByKey("unique_id").equals(this.getInfoByKey("from_unique_id"))) {
-                from_person_name = p.getInfoByKey("full_name");
+            if (p.getKey().equals(this.getInfoByKey("from"))) {
+                from_best_descriptive_value = p.getInfoByKey(Person.bestDescriptiveValueKey);
                 from_found = true;
             }
-            if (p.getInfoByKey("unique_id").equals(this.getInfoByKey("to_unique_id"))) {
-                to_person_name = p.getInfoByKey("full_name");
+            if (p.getKey().equals(this.getInfoByKey("to"))) {
+                to_best_descriptive_value = p.getInfoByKey(Person.bestDescriptiveValueKey);
                 to_found = true;
             }
 
@@ -323,5 +337,13 @@ public class Relation extends JSONObject {
 
     public String getToBestDescriptiveValue() {
         return ManagePersonsActivity.hashmap_persons.get(this.getToID()).getInfoByKey(Person.bestDescriptiveValueKey);
+    }
+
+    public void setFromId(String s) {
+        this.putInfo("from", s);
+    }
+
+    public void setToId(String s) {
+        this.putInfo("to", s);
     }
 }
