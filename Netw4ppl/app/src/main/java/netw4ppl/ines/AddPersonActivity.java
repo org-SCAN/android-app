@@ -62,9 +62,11 @@ public class AddPersonActivity extends AppCompatActivity {
         if(extra_parameters != null) {
             if (extra_parameters.containsKey("id_person")) {
                 id_person = extra_parameters.getString("id_person");
+                Person reference_person = (ManagePersonsActivity.hashmap_persons.get(id_person));
                 try {
-                    person = new Person(Objects.requireNonNull(ManagePersonsActivity.hashmap_persons.get(id_person)));
-                } catch (JSONException ignored) {
+                    assert reference_person != null;
+                    person = (Person) reference_person.clone();
+                } catch (CloneNotSupportedException ignored) {
                 }
             }
             if (extra_parameters.containsKey("new_person"))
