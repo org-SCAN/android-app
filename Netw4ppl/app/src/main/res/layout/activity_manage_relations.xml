@@ -16,11 +16,14 @@
             android:id="@+id/searchViewRelation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:queryHint="AAA-000001"
-            android:iconifiedByDefault="true"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
-            android:layout_margin="20dp"/>
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:iconifiedByDefault="true"
+            android:queryHint="Filter by persons or relation type" />
     </RelativeLayout>
 
 

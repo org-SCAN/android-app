@@ -108,8 +108,12 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
                             Field f = MainActivity.mConfiguration.getFieldFromHashMap(key_field);
                             if (f != null) {
                                 if (!f.getLinkedList().equals("")) {
-                                    key_table = f.getLinkedList();
-                                    value_field = MainActivity.mConfiguration.getElementFromTable(key_table, value_field);
+                                    String linkedListValue = f.getLinkedListValue(p);
+                                    if (linkedListValue != null) {
+                                        value_field = linkedListValue;
+                                    } else {
+                                        value_field = "";
+                                    }
                                 }
                             }
 
@@ -127,6 +131,7 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
                     filterResults.values = tempList;
                     filterResults.count = tempList.size();
                 }
+                cleanUsedFields();
                 return filterResults;
             }
 
@@ -138,9 +143,19 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
                     // réinitialiser la liste de l'adapter
                     mObjects_tmp = mObjects;
                 }
-                notifyDataSetChanged();
+                update();
             }
         };
+    }
+
+    public void cleanUsedFields() {
+        usedFields.clear();
+        for (Person p : mObjects) {
+            //check if usedFields contains the person
+            if (!usedFields.containsKey(p)) {
+                usedFields.put(p, new ArrayList<String>());
+            }
+        }
     }
 
     public void update() {
@@ -167,52 +182,50 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        if (convertView != null)
-            return convertView;
+        // get the person informations
+        Person person = mObjects_tmp.get(position);
+
+        final View result;
+        ViewHolder holder;
+
+        if (convertView == null) {
+            LayoutInflater inflater = LayoutInflater.from(mContext);
+            convertView = inflater.inflate(mResource, parent, false);
+            holder = new ViewHolder();
+            holder.mBestDescriptiveValue = (TextView) convertView.findViewById(R.id.best_descriptive_value);
+            holder.mDescriptiveField1 = (TextView) convertView.findViewById(R.id.descriptive_field_1);
+            holder.mDescriptiveField1Title = (TextView) convertView.findViewById(R.id.descriptive_field_1_title);
+            holder.mDescriptiveField2 = (TextView) convertView.findViewById(R.id.descriptive_field_2);
+            holder.mDescriptiveField2Title = (TextView) convertView.findViewById(R.id.descriptive_field_2_title);
+
+            result = convertView;
+            convertView.setTag(holder);
+        }
         else {
-            // get the person informations
-            Person person = mObjects_tmp.get(position);
+            holder = (ViewHolder) convertView.getTag();
+            result = convertView;
+        }
 
-            final View result;
-            ViewHolder holder;
+        this.lastPosition = position;
 
-            if (convertView == null) {
-                LayoutInflater inflater = LayoutInflater.from(mContext);
-                convertView = inflater.inflate(mResource, parent, false);
-                holder = new ViewHolder();
-                holder.mBestDescriptiveValue = (TextView) convertView.findViewById(R.id.best_descriptive_value);
-                holder.mDescriptiveField1 = (TextView) convertView.findViewById(R.id.descriptive_field_1);
-                holder.mDescriptiveField1Title = (TextView) convertView.findViewById(R.id.descriptive_field_1_title);
-                holder.mDescriptiveField2 = (TextView) convertView.findViewById(R.id.descriptive_field_2);
-                holder.mDescriptiveField2Title = (TextView) convertView.findViewById(R.id.descriptive_field_2_title);
+        Iterator<String> keys = person.keys();
+        while(keys.hasNext()) {
+            String linkedListValue = null;
 
-                result = convertView;
-                convertView.setTag(holder);
-            }
-            else {
-                holder = (ViewHolder) convertView.getTag();
-                result = convertView;
-            }
-
-            this.lastPosition = position;
-
-            Iterator<String> keys = person.keys();
-            while(keys.hasNext()) {
-                String linkedListValue = null;
-
-                String key = keys.next();
-                // This ugly while loop (and if statement) are used to ignore the fields hidden values,
-                // as editing the persons's field values mess up the field's orders
-                while (Arrays.asList(Field.hidden_values).contains(key)) {
-                    if (!keys.hasNext()) {
-                        break;
-                    }
-                    key = keys.next();
-                }
-                if (Arrays.asList(Field.hidden_values).contains(key)) {
+            String key = keys.next();
+            // This ugly while loop (and if statement) are used to ignore the fields hidden values,
+            // as editing the persons's field values mess up the field's orders
+            while (Arrays.asList(Field.hidden_values).contains(key)) {
+                if (!keys.hasNext()) {
                     break;
                 }
-                Field field = MainActivity.mConfiguration.getFieldFromHashMap(key);
+                key = keys.next();
+            }
+            if (Arrays.asList(Field.hidden_values).contains(key)) {
+                break;
+            }
+            Field field = MainActivity.mConfiguration.getFieldFromHashMap(key);
+            if (usedFields.containsKey(person)) {
                 if (!usedFields.get(person).contains(key)) {
                     if (!field.isBestDescriptiveValue()) {
                         if (field.isDescriptiveValue()) {
@@ -244,10 +257,11 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
                     usedFields.get(person).add(key);
                 }
             }
-            usedFields.remove(person);
-            return convertView;
         }
+        cleanUsedFields();
+        return result;
     }
+
 
     /**
      * Get the number of elements in the adapter.

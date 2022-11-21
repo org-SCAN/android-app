@@ -2,6 +2,7 @@ package netw4ppl.ines;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -71,8 +72,10 @@ public class ManagePersonsActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // si on appuie sur le bouton de recherche
-                if (query.length() > 0)
+                if (query.length() > 0) {
                     mAdapter.getFilter().filter(query);
+                    updateAdapter();
+                }
                 return false;
             }
 
@@ -80,6 +83,7 @@ public class ManagePersonsActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 // dès qu'on ajoute ou enlève une lettre
                 mAdapter.getFilter().filter(newText);
+                updateAdapter();
                 return false;
             }
         });
@@ -102,7 +106,7 @@ public class ManagePersonsActivity extends AppCompatActivity {
      * case there have been any changes in the adapter (add, modification or deletion of a person)
      */
     public static void updateAdapter() {
-        mAdapter.notifyDataSetChanged();
+        mAdapter.update();
     }
 
     @Override

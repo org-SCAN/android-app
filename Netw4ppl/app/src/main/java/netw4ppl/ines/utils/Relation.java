@@ -173,8 +173,8 @@ public class Relation extends JSONObject {
         boolean res_uid_from = false;
         boolean res_uid_to = false;
         boolean res_type_relation = false;
-        res_uid_from = this.getInfoByKey("from_unique_id").equals(relat.getInfoByKey("from_unique_id"));
-        res_uid_to = this.getInfoByKey("to_unique_id").equals(relat.getInfoByKey("to_unique_id"));
+        res_uid_from = this.getInfoByKey("from").equals(relat.getInfoByKey("from"));
+        res_uid_to = this.getInfoByKey("to").equals(relat.getInfoByKey("to"));
         res_type_relation = this.getInfoByKey("relation").equals(relat.getInfoByKey("relation"));
         return res_uid_from && res_uid_to && res_type_relation;
     }

@@ -302,9 +302,7 @@ public class AddRelationActivity extends AppCompatActivity {
      * For the definition of Adapter, please check the Android Studio documentation.
      */
     private void setAdapters() {
-        Collection<Person> persons = ManagePersonsActivity.hashmap_persons.values();
-        ArrayList<Person> listOfPersons = new ArrayList<>(persons);
-        ArrayAdapter<Person> autocomplete_adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, listOfPersons);
+        ArrayAdapter<Person> autocomplete_adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, ManagePersonsActivity.array_persons);
         mAutoTextViewRelationFrom.setAdapter(autocomplete_adapter);
         mAutoTextViewRelationTo.setAdapter(autocomplete_adapter);
 
@@ -342,6 +340,7 @@ public class AddRelationActivity extends AppCompatActivity {
     private boolean testExistingRelation(Relation relation){
         for(int i=0 ; i<ManageRelationsActivity.array_relations.size();i++){
             if (relation.isSameRelation(ManageRelationsActivity.array_relations.get(i))){
+                System.out.println("Relation already exists");
                 return true;
             }
         }

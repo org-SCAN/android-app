@@ -116,9 +116,10 @@
                     android:id="@+id/display_person_show_relations"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:backgroundTint="@color/purple_500"
-                    android:scaleType="centerCrop"
-                    android:layout_margin="5dp"/>
+                    android:enabled="false"
+                    android:scaleType="centerCrop" />
 
             </com.google.android.flexbox.FlexboxLayout>
 
