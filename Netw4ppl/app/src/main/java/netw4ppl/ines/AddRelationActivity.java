@@ -340,7 +340,7 @@ public class AddRelationActivity extends AppCompatActivity {
     private boolean testExistingRelation(Relation relation){
         for(int i=0 ; i<ManageRelationsActivity.array_relations.size();i++){
             if (relation.isSameRelation(ManageRelationsActivity.array_relations.get(i))){
-                System.out.println("Relation already exists");
+                
                 return true;
             }
         }
