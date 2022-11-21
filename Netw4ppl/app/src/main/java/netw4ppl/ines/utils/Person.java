@@ -9,7 +9,7 @@ import java.util.Objects;
 import netw4ppl.ines.MainActivity;
 import netw4ppl.ines.ManagePersonsActivity;
 
-public class Person extends JSONObject {
+public class Person extends JSONObject implements Cloneable {
 
     public static String bestDescriptiveValueKey;
     public static String[] descriptiveFieldsKeys;
@@ -46,6 +46,11 @@ public class Person extends JSONObject {
         super(data_person.toString());
         bestDescriptiveValueKey = MainActivity.mConfiguration.getBestDescriptiveKey();
         descriptiveFieldsKeys = MainActivity.mConfiguration.getDescriptiveKeys();
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        Person persClone = (Person)super.clone();
+        return persClone;
     }
 
     /**

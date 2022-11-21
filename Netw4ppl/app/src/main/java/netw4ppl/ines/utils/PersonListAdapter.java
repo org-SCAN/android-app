@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import netw4ppl.ines.MainActivity;
+import netw4ppl.ines.ManagePersonsActivity;
 import netw4ppl.ines.R;
 
 /**
@@ -47,9 +48,10 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
 
     /**
      * The class constructor
-     * @param context the application context
+     *
+     * @param context  the application context
      * @param resource the id of the layout to use to pt the informations
-     * @param objects an ArrayList of Person objects
+     * @param objects  an ArrayList of Person objects
      */
     public PersonListAdapter(Context context, int resource, ArrayList<Person> objects) {
         super(context, resource, objects);
@@ -58,7 +60,10 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
         mObjects = objects;
         mObjects_tmp = objects;
         for (Person p : mObjects) {
-            usedFields.put(p, new ArrayList<String>());
+            //check if usedFields contains the person
+            if (!usedFields.containsKey(p)) {
+                usedFields.put(p, new ArrayList<String>());
+            }
         }
     }
 
@@ -82,7 +87,7 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
                 // objects is the dataset
                 if (constraint != null && mObjects != null) {
                     int length = mObjects.size();
-                    int i=0;
+                    int i = 0;
                     while (i < length) {
                         Person p = mObjects.get(i);
 
@@ -101,10 +106,14 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
 
                             // si la linked_list associée au field est définie on va regarder dedans
                             Field f = MainActivity.mConfiguration.getFieldFromHashMap(key_field);
-                            if (f!=null){
+                            if (f != null) {
                                 if (!f.getLinkedList().equals("")) {
-                                    key_table = f.getLinkedList();
-                                    value_field = MainActivity.mConfiguration.getElementFromTable(key_table, value_field);
+                                    String linkedListValue = f.getLinkedListValue(p);
+                                    if (linkedListValue != null) {
+                                        value_field = linkedListValue;
+                                    } else {
+                                        value_field = "";
+                                    }
                                 }
                             }
 
@@ -122,6 +131,7 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
                     filterResults.values = tempList;
                     filterResults.count = tempList.size();
                 }
+                cleanUsedFields();
                 return filterResults;
             }
 
@@ -133,9 +143,32 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
                     // réinitialiser la liste de l'adapter
                     mObjects_tmp = mObjects;
                 }
-                notifyDataSetChanged();
+                update();
             }
         };
+    }
+
+    public void cleanUsedFields() {
+        usedFields.clear();
+        for (Person p : mObjects) {
+            //check if usedFields contains the person
+            if (!usedFields.containsKey(p)) {
+                usedFields.put(p, new ArrayList<String>());
+            }
+        }
+    }
+
+    public void update() {
+        ArrayList<Person> tmp = new ArrayList<>(ManagePersonsActivity.hashmap_persons.values());
+        ManagePersonsActivity.array_persons.clear();
+        ManagePersonsActivity.array_persons.addAll(tmp);
+        for (Person p : mObjects) {
+            //check if usedFields contains the person
+            if (!usedFields.containsKey(p)) {
+                usedFields.put(p, new ArrayList<String>());
+            }
+        }
+        notifyDataSetChanged();
     }
 
     /**
@@ -192,39 +225,43 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
                 break;
             }
             Field field = MainActivity.mConfiguration.getFieldFromHashMap(key);
-            if (!usedFields.get(person).contains(key)) {
-                if (!field.isBestDescriptiveValue()) {
-                    if (field.isDescriptiveValue()) {
-                        if (holder.mDescriptiveField1Title.getText().equals("")) {
-                            holder.mDescriptiveField1Title.setText(field + " : ");
-                            if (!field.getLinkedList().equals("")) {
-                                linkedListValue = field.getLinkedListValue(person);
-                            }
-                            if (linkedListValue != null) {
-                                holder.mDescriptiveField1.setText(linkedListValue);
+            if (usedFields.containsKey(person)) {
+                if (!usedFields.get(person).contains(key)) {
+                    if (!field.isBestDescriptiveValue()) {
+                        if (field.isDescriptiveValue()) {
+                            if (holder.mDescriptiveField1Title.getText().equals("")) {
+                                holder.mDescriptiveField1Title.setText(field + " : ");
+                                if (!field.getLinkedList().equals("")) {
+                                    linkedListValue = field.getLinkedListValue(person);
+                                }
+                                if (linkedListValue != null) {
+                                    holder.mDescriptiveField1.setText(linkedListValue);
+                                } else {
+                                    holder.mDescriptiveField1.setText(String.valueOf(person.getInfoByKey(key)));
+                                }
                             } else {
-                                holder.mDescriptiveField1.setText(String.valueOf(person.getInfoByKey(key)));
-                            }
-                        } else {
-                            holder.mDescriptiveField2Title.setText(field + " : ");
-                            if (!field.getLinkedList().equals("")) {
-                                linkedListValue = field.getLinkedListValue(person);
-                            }
-                            if (linkedListValue != null) {
-                                holder.mDescriptiveField2.setText(linkedListValue);
-                            } else {
-                                holder.mDescriptiveField2.setText(String.valueOf(person.getInfoByKey(key)));
+                                holder.mDescriptiveField2Title.setText(field + " : ");
+                                if (!field.getLinkedList().equals("")) {
+                                    linkedListValue = field.getLinkedListValue(person);
+                                }
+                                if (linkedListValue != null) {
+                                    holder.mDescriptiveField2.setText(linkedListValue);
+                                } else {
+                                    holder.mDescriptiveField2.setText(String.valueOf(person.getInfoByKey(key)));
+                                }
                             }
                         }
+                    } else if (field.isBestDescriptiveValue()) {
+                        holder.mBestDescriptiveValue.setText(String.valueOf(person.getInfoByKey(key)));
                     }
-                } else if (field.isBestDescriptiveValue()) {
-                    holder.mBestDescriptiveValue.setText(String.valueOf(person.getInfoByKey(key)));
+                    usedFields.get(person).add(key);
                 }
-                usedFields.get(person).add(key);
             }
         }
-        return convertView;
+        cleanUsedFields();
+        return result;
     }
+
 
     /**
      * Get the number of elements in the adapter.

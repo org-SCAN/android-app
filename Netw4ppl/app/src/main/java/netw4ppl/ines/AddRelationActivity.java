@@ -188,7 +188,7 @@ public class AddRelationActivity extends AppCompatActivity {
                 // si la relation est valide on passe à l'étape suivante
                 if (valid_relation) {
                     if (new_relation) {
-                        // dans le cas d'un ajout, si la relation existe, adios mec
+                        // dans le cas d'un ajout, si la relation existe
                         if (!already_exists) {
                             // ajout du champ application id
                             relation.setApplicationID(MainActivity.mConfiguration.getApplicationId());
@@ -302,9 +302,7 @@ public class AddRelationActivity extends AppCompatActivity {
      * For the definition of Adapter, please check the Android Studio documentation.
      */
     private void setAdapters() {
-        Collection<Person> persons = ManagePersonsActivity.hashmap_persons.values();
-        ArrayList<Person> listOfPersons = new ArrayList<>(persons);
-        ArrayAdapter<Person> autocomplete_adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, listOfPersons);
+        ArrayAdapter<Person> autocomplete_adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, ManagePersonsActivity.array_persons);
         mAutoTextViewRelationFrom.setAdapter(autocomplete_adapter);
         mAutoTextViewRelationTo.setAdapter(autocomplete_adapter);
 
@@ -342,6 +340,7 @@ public class AddRelationActivity extends AppCompatActivity {
     private boolean testExistingRelation(Relation relation){
         for(int i=0 ; i<ManageRelationsActivity.array_relations.size();i++){
             if (relation.isSameRelation(ManageRelationsActivity.array_relations.get(i))){
+                
                 return true;
             }
         }
@@ -469,8 +468,9 @@ public class AddRelationActivity extends AppCompatActivity {
         DataElement data_element;
         for (int i=0; i<adapter.getCount(); i++) {
             data_element = (DataElement) adapter.getItem(i);
-            if (data_element.getKey().equals(key_val_pers))
+            if (data_element.toString().equals(key_val_pers) || data_element.getKey().equals(key_val_pers)) {
                 return i;
+            }
         }
         return 0;
     }

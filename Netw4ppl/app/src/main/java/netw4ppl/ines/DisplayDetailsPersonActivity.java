@@ -97,7 +97,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
 
         Person person = ManagePersonsActivity.hashmap_persons.get(id_person);
 
-        mTextViewFullnameTitle.setText(person.getInfoByKey("full_name"));
+        mTextViewFullnameTitle.setText(person.getInfoByKey(Person.bestDescriptiveValueKey));
 
         /* Adapters for the different list views */
         adapter_details_person = new PersonDetailsListAdapter(this, R.layout.adapter_details_person_fields, MainActivity.mConfiguration.getArrayFields(), id_person);
