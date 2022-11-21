@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Objects;
 import java.util.TimeZone;
 import java.util.UUID;
@@ -253,7 +254,17 @@ public class Relation extends JSONObject {
      * Warning : it only returns the code of the RelationType
      */
     public String getRelationType() {
-        return (Objects.requireNonNull(MainActivity.mConfiguration.getHashMap_datatables().get("ListRelations")).get(this.getInfoByKey("relation")).toString());
+        HashMap<String, DataElement> datatable_relation_types = MainActivity.mConfiguration.getHashMap_datatables().get("ListRelations");
+        if (datatable_relation_types != null) {
+            String relation_type = this.getInfoByKey("relation");
+            if (relation_type != null) {
+                DataElement relation_type_element = datatable_relation_types.get(relation_type);
+                if (relation_type_element != null) {
+                    return relation_type_element.toString();
+                }
+            }
+        }
+        return "";
     }
 
     /**

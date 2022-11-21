@@ -30,11 +30,12 @@ import netw4ppl.ines.utils.PersonListAdapter;
 public class ManagePersonsActivity extends AppCompatActivity {
 
     // TODO changer le static ici car c'est une memory leak
-    private static PersonListAdapter mAdapter;
+    public static PersonListAdapter mAdapter;
     FloatingActionButton mButtonAdd;
     ListView mListView;
     SearchView mSearchBar;
     public static HashMap<String, Person> hashmap_persons = new HashMap<>();
+    public static ArrayList<Person> array_persons = new ArrayList<Person>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +60,9 @@ public class ManagePersonsActivity extends AppCompatActivity {
 
         mSearchBar = (SearchView) findViewById(R.id.searchViewPerson);
 
-        // faire l'affichage
-        Collection<Person> persons = ManagePersonsActivity.hashmap_persons.values();
-        ArrayList<Person> listOfPersons = new ArrayList<>(persons);
+        array_persons = new ArrayList<>(ManagePersonsActivity.hashmap_persons.values());
 
-        mAdapter = new PersonListAdapter(this, R.layout.adapter_nutshell_person_layout, listOfPersons);
+        mAdapter = new PersonListAdapter(this, R.layout.adapter_nutshell_person_layout, array_persons);
         mListView.setAdapter(mAdapter);
 
         // attach setOnQueryTextListener

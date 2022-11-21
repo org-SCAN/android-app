@@ -188,7 +188,7 @@ public class AddRelationActivity extends AppCompatActivity {
                 // si la relation est valide on passe à l'étape suivante
                 if (valid_relation) {
                     if (new_relation) {
-                        // dans le cas d'un ajout, si la relation existe, adios mec
+                        // dans le cas d'un ajout, si la relation existe
                         if (!already_exists) {
                             // ajout du champ application id
                             relation.setApplicationID(MainActivity.mConfiguration.getApplicationId());
@@ -469,8 +469,9 @@ public class AddRelationActivity extends AppCompatActivity {
         DataElement data_element;
         for (int i=0; i<adapter.getCount(); i++) {
             data_element = (DataElement) adapter.getItem(i);
-            if (data_element.getKey().equals(key_val_pers))
+            if (data_element.toString().equals(key_val_pers) || data_element.getKey().equals(key_val_pers)) {
                 return i;
+            }
         }
         return 0;
     }

@@ -128,6 +128,8 @@ public class AddPersonActivity extends AppCompatActivity {
 
                 // enregistre les données dans le fichier associé
                 boolean save_persons = FileUtils.savePersonsToFile(this, ManagePersonsActivity.formatterJsonFile());
+                //refresh l'adapter de managePersonsActivity
+                ManagePersonsActivity.mAdapter.update();
 
                 // reset some variables
                 new_person = true;
