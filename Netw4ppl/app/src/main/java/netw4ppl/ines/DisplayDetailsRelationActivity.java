@@ -54,9 +54,6 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
             index_relation = 0;
         }
 
-
-        mTextViewFullnameTitle = (TextView) findViewById(R.id.details_title_full_name);
-
         mTextViewFromFullname = (TextView) findViewById(R.id.relation_from_fullname);
         mTextViewRelationType = (TextView) findViewById(R.id.relation_type);
         mTextViewToFullname = (TextView) findViewById(R.id.relation_to_fullname);

@@ -48,8 +48,8 @@
     <string name="sex_title">Sexe:</string>
     <string name="button_edit_title">Modifier</string>
     <string name="button_delete_title">Supprimer</string>
-    <string name="button_add_relation_to">Ajouter une relation vers</string>
-    <string name="button_add_relation_from">Ajouter une relation depuis</string>
+    <string name="button_add_relation_to">+Vers</string>
+    <string name="button_add_relation_from">+Depuis</string>
     <string name="details_title_full_name">Informations</string>
     <string name="relation_from_indication">Depuis</string>
     <string name="relation_type_indication">Type de relation</string>
@@ -69,4 +69,5 @@
     <string name="toast_fields_required">Ces champs sont requis :</string>
     <string name="button_show_relations_title">Afficher relations</string>
     <string name="button_hide_relations_title">Cacher relations</string>
+    <string name="relation_indication">Relation</string>
 </resources>

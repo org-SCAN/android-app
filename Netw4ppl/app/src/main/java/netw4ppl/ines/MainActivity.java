@@ -8,6 +8,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity{
 
     Button mManagePersonsBtn;
     Button mManageRelationsBtn;
-    Button mSettingsBtn;
+    ImageView mSettingsBtn;
     Button mSendDataBtn;
 
     public static String device_language;

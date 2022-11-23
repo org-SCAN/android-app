@@ -51,17 +51,15 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/add_relation_type_indication"
+                android:id="@+id/add_relation_indication"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/relation_type_indication">
-            </TextView>
+                android:text="@string/relation_indication" />
 
             <Spinner
-                android:id="@+id/add_relation_type"
+                android:id="@+id/add_relation"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </Spinner>
+                android:layout_height="match_parent" />
         </LinearLayout>
 
         <!-- To Person -->
@@ -115,27 +113,48 @@
 
     <!-- Linear Layout Buttons -->
     <LinearLayout
-        android:layout_margin="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="78dp"
+        android:layout_margin="5dp"
         android:orientation="horizontal">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/display_add_relation_cancel"
-            android:text="@string/button_relation_cancel_title"
-            android:backgroundTint="@color/red"
-            android:layout_margin="5dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/customborder"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/add_relation_type_indication"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/relation_type_indication" />
+
+            <Spinner
+                android:id="@+id/add_relation_type"
+                android:layout_width="match_parent"
+                android:layout_height="36dp" />
+
+        </LinearLayout>
 
         <Button
+            android:id="@+id/display_add_relation_cancel"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/display_add_relation_save"
-            android:text="@string/button_relation_save_title"
-            android:backgroundTint="@color/forestgreen"
+            android:layout_height="61dp"
             android:layout_margin="5dp"
-            />
+            android:backgroundTint="@color/red"
+            android:text="@string/button_relation_cancel_title" />
+
+        <Button
+            android:id="@+id/display_add_relation_save"
+            android:layout_width="wrap_content"
+            android:layout_height="62dp"
+            android:layout_margin="5dp"
+            android:backgroundTint="@color/forestgreen"
+            android:text="@string/button_relation_save_title" />
+
     </LinearLayout>
 
 </LinearLayout>
