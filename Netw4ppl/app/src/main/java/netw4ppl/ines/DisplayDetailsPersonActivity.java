@@ -102,7 +102,6 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
             mLayoutFrom.setVisibility(View.GONE);
             mLayoutTo.setVisibility(View.GONE);
         }
-        else {
             //mButtonShowRelations.setText(getString(R.string.button_hide_relations_title));
         }
 
