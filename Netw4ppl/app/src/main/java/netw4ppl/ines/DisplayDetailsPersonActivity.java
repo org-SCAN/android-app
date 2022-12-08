@@ -109,11 +109,11 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
                 // position correspond à la position de la personne dans l'adapter
                 boolean got_it = false;
                 Relation r = (Relation) adapter_relations_from.getItem(position);
-                String person_from_string = r.getFrom();
+                String person_from_string = r.getFromID();
                 String id_person = null;
                 for (String key : ManagePersonsActivity.hashmap_persons.keySet()) {
                     if (!got_it) {
-                        if (Objects.equals(Objects.requireNonNull(ManagePersonsActivity.hashmap_persons.get(key)).toString(), person_from_string)) {
+                        if (Objects.equals(Objects.requireNonNull(ManagePersonsActivity.hashmap_persons.get(key)).getKey(), person_from_string)) {
                             got_it = true;
                             id_person = key;
                         }
@@ -134,11 +134,11 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
                 // position correspond à la position de la personne dans l'adapter
                 boolean got_it = false;
                 Relation r = (Relation) adapter_relations_to.getItem(position);
-                String person_to_string = r.getTo();
+                String person_to_string = r.getToID();
                 String id_person = null;
                 for (String key : ManagePersonsActivity.hashmap_persons.keySet()) {
                     if (!got_it) {
-                        if (Objects.equals(Objects.requireNonNull(ManagePersonsActivity.hashmap_persons.get(key)).toString(), person_to_string)) {
+                        if (Objects.equals(Objects.requireNonNull(ManagePersonsActivity.hashmap_persons.get(key)).getKey(), person_to_string)) {
                             got_it = true;
                             id_person = key;
                         }
@@ -252,7 +252,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
 
         for (int i=0; i<ManageRelationsActivity.array_relations.size(); i++) {
             Relation r = ManageRelationsActivity.array_relations.get(i);
-            if (r.getToID().equals(to_person.getInfoByKey("unique_id"))) {
+            if (r.getToID().equals(to_person.getKey())) {
                 array_relations_from.add(r);
             }
         }
@@ -294,7 +294,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
 
         for (int i=0; i<ManageRelationsActivity.array_relations.size(); i++) {
             Relation r = ManageRelationsActivity.array_relations.get(i);
-            if (r.getFromID().equals(from_person.getInfoByKey("unique_id"))) {
+            if (r.getFromID().equals(from_person.getKey())) {
                 array_relations_to.add(r);
             }
         }

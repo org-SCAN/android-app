@@ -174,7 +174,7 @@ public class Relation extends JSONObject {
         String p_full_name = p.getInfoByKey("full_name");
         String person = p_id + " - " + p_full_name;
 
-        return this.getFrom().equals(person) || this.getTo().equals(person);
+        return this.getFromID().equals(person) || this.getToID().equals(person);
     }
 
     /**
@@ -207,22 +207,6 @@ public class Relation extends JSONObject {
      */
     public String getToFullname() {
         return to_best_descriptive_value;
-    }
-
-    /**
-     * Returns the unique_id and the fullname of the From Person of the Relation
-     * @return a String with the format "unique_id - fullname" corresponding to the From Person of the Relation
-     */
-    public String getFrom() {
-        return getFromID() + " - " + getFromFullname();
-    }
-
-    /**
-     * Returns the unique_id and the fullname of the To Person of the Relation
-     * @return a String with the format "unique_id - fullname" corresponding to the TO Person of the Relation
-     */
-    public String getTo() {
-        return getToID() + " - " + getToFullname();
     }
 
     /**
