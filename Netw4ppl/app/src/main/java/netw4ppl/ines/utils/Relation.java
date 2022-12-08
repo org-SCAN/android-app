@@ -17,6 +17,7 @@ import java.util.UUID;
 
 import netw4ppl.ines.MainActivity;
 import netw4ppl.ines.ManagePersonsActivity;
+import netw4ppl.ines.ManageRelationsActivity;
 
 public class Relation extends JSONObject {
 
@@ -62,19 +63,11 @@ public class Relation extends JSONObject {
     }
 
     /**
-     * Sets the fullname of the From person
-     * @param full_name String of the From person's fullname
+     * Sets the relation type using the key of a relation type (e.g SE for service)
+     * @param key_relation String of the key of a relation type
      */
-    public void setFromFullname(String full_name) {
-        from_best_descriptive_value = full_name;
-    }
-
-    /**
-     * Sets the fullname of the To person
-     * @param full_name String of the To person's fullname
-     */
-    public void setToFullname(String full_name) {
-        to_best_descriptive_value = full_name;
+    public void setRelation(String key_relation) {
+        this.putInfo("relation_id", key_relation);
     }
 
     /**
@@ -82,7 +75,7 @@ public class Relation extends JSONObject {
      * @param key_relation String of the key of a relation type
      */
     public void setRelationType(String key_relation) {
-        this.putInfo("relation", key_relation);
+        this.putInfo("type", key_relation);
     }
 
     /**
@@ -99,7 +92,7 @@ public class Relation extends JSONObject {
      * @param unique_id String containing the unique_id of the To Person
      */
     public void setPersonTo(String unique_id) {
-        this.putInfo("to_unique_id", unique_id);
+        this.putInfo("to", unique_id);
     }
 
     /**
@@ -116,7 +109,7 @@ public class Relation extends JSONObject {
      * @param unique_id String containing the unique_id of the From Person
      */
     public void setPersonFrom(String unique_id) {
-        this.putInfo("from_unique_id", unique_id);
+        this.putInfo("from", unique_id);
     }
 
     /**
@@ -125,14 +118,6 @@ public class Relation extends JSONObject {
      */
     public void setDetails(String details) {
         this.putInfo("detail", details);
-    }
-
-    /**
-     * Sets the Unique ID of a Relation
-     */
-    public void setUUIDRelation() {
-        String uuid = UUID.randomUUID().toString();
-        this.putInfo("relation_application_id", uuid);
     }
 
     /**
@@ -175,7 +160,7 @@ public class Relation extends JSONObject {
         boolean res_type_relation = false;
         res_uid_from = this.getInfoByKey("from").equals(relat.getInfoByKey("from"));
         res_uid_to = this.getInfoByKey("to").equals(relat.getInfoByKey("to"));
-        res_type_relation = this.getInfoByKey("relation").equals(relat.getInfoByKey("relation"));
+        res_type_relation = this.getInfoByKey("relation_id").equals(relat.getInfoByKey("relation_id"));
         return res_uid_from && res_uid_to && res_type_relation;
     }
 
@@ -249,31 +234,22 @@ public class Relation extends JSONObject {
     }
 
     /**
-     * Returns the RelationType of the Relation
+     * Returns the nature of the relation
      * @return a String corresponding to the RelationType of a Relation
      * Warning : it only returns the code of the RelationType
      */
-    public String getRelationType() {
-        HashMap<String, DataElement> datatable_relation_types = MainActivity.mConfiguration.getHashMap_datatables().get("ListRelations");
-        if (datatable_relation_types != null) {
-            String relation_type = this.getInfoByKey("relation");
-            if (relation_type != null) {
-                DataElement relation_type_element = datatable_relation_types.get(relation_type);
-                if (relation_type_element != null) {
-                    return relation_type_element.toString();
+    public String getRelation() {
+        HashMap<String, DataElement> datatable_relations = MainActivity.mConfiguration.getHashMap_datatables().get("ListRelations");
+        if (datatable_relations != null) {
+            String relation = this.getInfoByKey("relation_id");
+            if (relation != null) {
+                DataElement relation_element = datatable_relations.get(relation);
+                if (relation_element != null) {
+                    return relation_element.toString();
                 }
             }
         }
         return "";
-    }
-
-    /**
-     * Returns the RelationType of the Relation
-     * @return a String corresponding to the RelationType of a Relation
-     * This method returns the full name of the RelationType
-     */
-    public String getRelationTypeFull() {
-        return MainActivity.mConfiguration.getElementFromTable("Relations", getRelationType());
     }
 
     /**
@@ -356,5 +332,18 @@ public class Relation extends JSONObject {
 
     public void setToId(String s) {
         this.putInfo("to", s);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        Relation relation = (Relation) object;
+        // check for all fields of this person if they are equal to the fields of the other person
+        if (this.getFromID().equals(relation.getFromID()) && this.getToID().equals(relation.getToID()) && this.getRelation().equals(relation.getRelation())) {
+            return true;
+        }
+        return false;
     }
 }

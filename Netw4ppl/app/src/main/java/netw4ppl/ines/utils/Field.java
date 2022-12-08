@@ -73,7 +73,7 @@ public class Field extends DataElement {
                     this.view_type = 0;
                 break;
             case "number":
-                this.view_type = 0;
+                this.view_type = 4;
                 break;
             case "Spinner":
                 this.view_type = 1;
@@ -85,7 +85,7 @@ public class Field extends DataElement {
                 this.view_type = 3;
                 break;
             default:
-                this.view_type = 4;
+                this.view_type = 5;
         }
     }
 

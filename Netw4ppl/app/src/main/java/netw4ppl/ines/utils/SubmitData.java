@@ -50,10 +50,6 @@ public class SubmitData {
      */
     public static void manageSend(Context context, String filePath) throws IOException, InterruptedException, JSONException {
 
-        String dir_name = context.getString(R.string.directory_files);
-        String file_name_relations = context.getString(R.string.filename_relations_api);
-        String file_name_persons = context.getString(R.string.filename_persons_api);
-
         // gets the sending option selected by the user in the parameters
         String sending_option = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_sending_option_key), null);
 
@@ -103,11 +99,11 @@ public class SubmitData {
 
                 //Submissions
                 //write the API compatible file to send (hashmap to Arraylist of JsonObjects)
-                writeAPIPersonsFile(context);
-                boolean submit_persons = sendToServer(context, context.getFilesDir().getPath() + dir_name + file_name_persons, ip_port, token_server, client, "person");
+                String api_persons_content = writeAPIPersonsFile(context);
+                boolean submit_persons = sendToServer(context, api_persons_content, ip_port, token_server, client, "person");
                 //write the API compatible relation file to send (android uuid to server id)
-                writeAPIRelationsFile(context);
-                boolean submit_relations = sendToServer(context, context.getFilesDir().getPath() + dir_name + file_name_relations, ip_port, token_server, client, "links");
+                String api_relations_content = writeAPIRelationsFile(context);
+                boolean submit_relations = sendToServer(context,  api_relations_content, ip_port, token_server, client, "links");
                 boolean submit_result = (submit_persons && submit_relations);
 
                 //Downloads
@@ -117,6 +113,11 @@ public class SubmitData {
                 if (download_config) {
                     get_success = getFromServer(context, ip_port, token_server, client);
                 }
+
+                if (submit_result) {
+                    syncData(context);
+                }
+
                 // Log.d("Fichier", new File(context.getFilesDir(), filePath).getPath()+"HHH");
                 showSubmitResultDialog(context, submit_result, get_success);
 
@@ -134,6 +135,14 @@ public class SubmitData {
                     .show();
             return;
         }
+    }
+
+    /**
+     * Mark data pushed as "synced", and write a new record file
+     */
+    private static void syncData(Context context) throws JSONException{
+        ManagePersonsActivity.syncPersons(context);
+        ManageRelationsActivity.syncRelations(context);
     }
 
     /**
@@ -161,6 +170,7 @@ public class SubmitData {
 
         if (toast_text.equals("")){
             boolean get_result = getFromServer(context,ip_port,token_server,client);
+            MainActivity.mConfiguration.checkIfBestDescriptiveValueExist(context);
             toast_text = get_result ? context.getString(R.string.main_get_success_msg) : context.getString(R.string.main_get_fail_msg);
             Toast toast = Toast.makeText(context, toast_text, Toast.LENGTH_LONG);
             toast.show();
@@ -211,17 +221,17 @@ public class SubmitData {
      * parameter
      *
      * @param context context of the activity
-     * @param filePath path to the file
+     * @param fileContent path to the file
      * @param server_url ip address of the server
      * @param token_server individual token of the user
      * @param http_client http client of OkHttp
      * @return boolean which tells us if the sending was a success or not
      */
-    public static boolean sendToServer(Context context, String filePath, String server_url, String token_server, OkHttpClient http_client, String target) throws InterruptedException, JSONException, IOException {
+    public static boolean sendToServer(Context context, String fileContent, String server_url, String token_server, OkHttpClient http_client, String target) throws InterruptedException, JSONException, IOException {
 
         String unique_app_id = MainActivity.mConfiguration.getApplicationId();
 
-        String data_to_send = FileUtils.readFile(filePath);
+        String data_to_send = fileContent;
 
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body = RequestBody.create(mediaType, data_to_send);
@@ -241,12 +251,14 @@ public class SubmitData {
                             .build();
                     Response response = http_client.newCall(request).execute();
                     String response_string = response.body().string();
+                    System.out.println("response"+response_string);
 
-                    if (filePath.contains("person")){
-                        ManagePersonsActivity.saveServerIds(response_string);
+
+                    if (target == "person"){
+                        ManagePersonsActivity.saveServerIds(context,response_string);
                     }
-                    else if (filePath.contains("relation")){
-                        ManageRelationsActivity.saveServerIds(response_string);
+                    else if (target == "links"){
+                        ManageRelationsActivity.saveServerIds(context,response_string);
                     }
 
                     if (response.code()==201) {
@@ -375,15 +387,15 @@ public class SubmitData {
      *     }
      * ]
      */
-    public static void writeAPIPersonsFile(Context context) throws IOException {
-        String dir_name = context.getString(R.string.directory_files);
-        String file_name = context.getString(R.string.filename_persons_api);
-        String path_file = context.getFilesDir().getPath() + dir_name + file_name;
+    public static String writeAPIPersonsFile(Context context) throws IOException {
         JSONArray persons = new JSONArray();
         for (Person person : ManagePersonsActivity.hashmap_persons.values()) {
+            if (person.getInfoByKey("id") == null) {
+                person.remove("id");
+            }
             persons.put(person);
         }
-        FileUtils.writeFile(path_file, persons.toString());
+        return persons.toString();
     }
 
     /**
@@ -406,11 +418,7 @@ public class SubmitData {
      *   }
      * ]
      */
-    private static void writeAPIRelationsFile(Context context) throws JSONException {
-        String dir_name = context.getString(R.string.directory_files);
-        String file_name = context.getString(R.string.filename_relations_api);
-        String path_file = context.getFilesDir().getPath() + dir_name + file_name;
-        System.out.println(path_file);
+    private static String writeAPIRelationsFile(Context context) throws JSONException {
         JSONArray relations = new JSONArray();
         Relation relation;
         for (int i = 0; i < ManageRelationsActivity.array_relations.size(); i++) {
@@ -420,7 +428,7 @@ public class SubmitData {
 
             relations.put(relation);
         }
-        FileUtils.writeFile(path_file, relations.toString());
+        return relations.toString();
     }
 
 }

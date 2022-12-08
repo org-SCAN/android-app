@@ -56,9 +56,10 @@
         android:id="@+id/imageView"
         android:layout_width="64dp"
         android:layout_height="63dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/main_activity_send_data_btn"
+        android:layout_marginBottom="7dp"
+        app:layout_constraintBottom_toTopOf="@+id/main_activity_data_sync_state"
         app:layout_constraintEnd_toEndOf="@+id/main_activity_send_data_btn"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/main_activity_send_data_btn"
         app:srcCompat="@drawable/logo_scan_minimal" />
 
@@ -94,6 +95,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView2"
         app:srcCompat="@drawable/icons8_settings_64" />
+
+    <ImageView
+        android:id="@+id/main_activity_data_sync_state"
+        android:layout_width="32dp"
+        android:layout_height="36dp"
+        app:layout_constraintBottom_toTopOf="@+id/main_activity_send_data_btn"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:srcCompat="@drawable/icons8_cloud_48" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

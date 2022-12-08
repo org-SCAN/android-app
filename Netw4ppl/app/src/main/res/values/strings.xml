@@ -11,6 +11,7 @@
     <string name="settings_email_header">Email</string>
     <string name="settings_sending_option_header">Sending option</string>
     <string name="settings_delete_option_header">Clear data</string>
+    <string name="settings_get_option_header">Get fields</string>
 
     <!-- Sending Option Preferences -->
     <string name="settings_sending_option_title">Sending option</string>
@@ -28,6 +29,8 @@
     <string name="settings_server_ip_port_key" translatable="false">default_server_ip_port_key</string>
     <string name="settings_server_maj_auto_key" translatable="false">default_server_maj_auto</string>
 
+    <string name="url_not_valid">The URL you entered is not valid</string>
+
     <!-- Email Preferences -->
     <string name="settings_email_category" translatable="false">settings_email_category</string>
     <string name="settings_email_default_title">Submitting Email Address</string>
@@ -40,6 +43,13 @@
     <string name="settings_delete_button_key" translatable="false">delete_button</string>
     <string name="settings_delete_button_title">Clear</string>
     <string name="settings_delete_button_summary">Delete the files on this device</string>
+
+    <!-- Get Preferences -->
+    <string name="settings_get_button_summary">Force get Fields and List data from the web</string>
+    <string name="settings_get_button_title">Force Get</string>
+    <string name="settings_get_button_key" translatable="false">get_button</string>
+    <string name="settings_get_option_key" translatable="false">settings_get</string>
+    <string name="toast_get_processing">Force get Fields is processing…</string>
 
     <!-- Alert Dialog Messages -->
     <!-- Strings Submit status -->
@@ -70,12 +80,16 @@
     <string name="toast_delete_fail">Deletion failed</string>
     <string name="toast_delete_processing">Deletion ...</string>
 
+    <!-- Alert message for no Best Descriptive Value-->
+    <string name="no_bdv_title">No Best Descriptive Value = application is unusable</string>
+    <string name="no_bdv_message">Ask your admin to add a Best Descriptive Value field to your team, in its current state, the application is unusable.</string>
+    <string name="no_bdv_confirmation">Exit</string>
+
     <!-- Add Relations Alerts-->
     <string name="toast_already_existing_relation">This relation already exists</string>
     <string name="toast_same_person_relation">The persons of a relation must be different</string>
-    <string name="toast_relation_type_non_selected">You must select a valid relation type</string>
+    <string name="toast_relation_type_non_selected">You must select a valid relation (Saw, Travelled With…)</string>
     <string name="toast_person_not_selected">You must select persons by clicking on the dropdown menu</string>
-
 
     <!-- Activity names -->
     <string name="add_person_activity_title">Add Person</string>
@@ -93,8 +107,8 @@
 
     <string name="directory_files" translatable="false">/cases</string>
     <string name="filename_persons" translatable="false">/persons.json</string>
-    <string name="filename_persons_api" translatable="false">/persons_api.json</string>
-    <string name="filename_relations_api" translatable="false">/relations_api.json</string>
+    <string name="filename_persons_server_id" translatable="false">/persons_id.json</string>
+    <string name="filename_relations_server_id" translatable="false">/relations_id.json</string>
     <string name="filename_relations" translatable="false">/relations.json</string>
 
     <string name="age_title">Age: </string>
@@ -130,5 +144,7 @@
 
     <string name="yes">Yes</string>
     <string name="relation_indication">Relation</string>
+    <string name="filename_synced_relations" translatable="false">/synced_relations.json</string>
+    <string name="filename_synced_persons" translatable="false">/synced_persons.json</string>
 
 </resources>

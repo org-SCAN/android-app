@@ -11,7 +11,7 @@
         android:orientation="vertical" >
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/sync_state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/icons8_cloud_48" />
@@ -23,9 +23,9 @@
         android:id="@+id/best_descriptive_value"
         android:layout_width="132dp"
         android:layout_height="49dp"
-        android:layout_gravity="center"
+        android:paddingLeft="10dp"
         android:text="Best Descriptive Value"
-        android:textAlignment="center"
+        android:textAlignment="viewStart"
         android:textSize="20sp"
         android:textStyle="bold" />
 

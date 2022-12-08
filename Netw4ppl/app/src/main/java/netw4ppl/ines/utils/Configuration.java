@@ -4,6 +4,9 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 
+import androidx.appcompat.app.AlertDialog;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,6 +16,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Objects;
+
+import netw4ppl.ines.ManagePersonsActivity;
+import netw4ppl.ines.ManageRelationsActivity;
+import netw4ppl.ines.R;
+import netw4ppl.ines.SettingsActivity;
 
 public class Configuration {
     private ArrayList<Field> array_fields = new ArrayList<>();
@@ -27,6 +35,43 @@ public class Configuration {
         this.application_id = readApplicationIDFile(context);
 
         Log.d("general-settings", "Application id: " + this.getApplicationId());
+
+        checkForSync(context);
+    }
+
+    /**
+     * This method reads the sync file and checks the data sync status.
+     */
+    private void checkForSync(Context context) {
+        String dir_name = context.getString(R.string.directory_files);
+        String file_name_relations = context.getString(R.string.filename_synced_relations);
+        String file_name_persons = context.getString(R.string.filename_synced_persons);
+        String path_file_synced_relations = context.getFilesDir().getPath() + dir_name + file_name_relations;
+        String path_file_synced_persons = context.getFilesDir().getPath() + dir_name + file_name_persons;
+        //for all relations from the sync file, add them in the array_relations_synced array
+        ManageRelationsActivity.array_relations_synced = new ArrayList<>();
+        ManagePersonsActivity.array_persons_synced = new ArrayList<>();
+        try {
+            JSONArray sync_content = FileUtils.readJSONFile(path_file_synced_relations);
+            for (int i = 0; i < sync_content.length(); i++) {
+                JSONObject relation = sync_content.getJSONObject(i);
+                Relation relation_object = new Relation(relation);
+                ManageRelationsActivity.array_relations_synced.add(relation_object);
+            }
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+        //for all persons from the sync file, add them in the array_persons_synced array
+        try {
+            JSONArray sync_content = FileUtils.readJSONFile(path_file_synced_persons);
+            for (int i = 0; i < sync_content.length(); i++) {
+                JSONObject person = sync_content.getJSONObject(i);
+                Person person_object = new Person(person);
+                ManagePersonsActivity.array_persons_synced.add(person_object);
+            }
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -72,7 +117,7 @@ public class Configuration {
      * is in the HashMap or not.
      *
      * @param key_table a String identifying a "table". Example : "country".
-     * @param key_element a String identifyin an element. Example : "FRA" standing for "France".
+     * @param key_element a String identifying an element. Example : "FRA" standing for "France".
      *
      * @return boolean. True if the element identified by key_element is in HashMap identified by key_table.
      */
@@ -151,7 +196,6 @@ public class Configuration {
                     hashMap_database.put(key_table, data_array);
                     hashMap_datatables.put(key_table, data_table);
 
-                    // create the adapters from the array just created
                     ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_item, data_array);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     hashMap_adapters.put(key_table, adapter);
@@ -240,5 +284,25 @@ public class Configuration {
             }
         }
         return res.toArray(new String[0]);
+    }
+
+    /**
+     * Get if there is at least 1 field that have "best_descriptive_value" set to "1" in the hashmap of fields
+     */
+    public void checkIfBestDescriptiveValueExist(Context context) {
+        for (String key : this.hashMap_fields.keySet()) {
+            if (Objects.requireNonNull(this.hashMap_fields.get(key)).isBestDescriptiveValue()) {
+                return;
+            }
+        }
+        new AlertDialog.Builder(context)
+                .setTitle(R.string.no_bdv_title)
+                .setMessage(R.string.no_bdv_message)
+                .setCancelable(false)
+                .setPositiveButton(R.string.no_bdv_confirmation, (a,b) -> {
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                })
+                .create()
+                .show();
     }
 }

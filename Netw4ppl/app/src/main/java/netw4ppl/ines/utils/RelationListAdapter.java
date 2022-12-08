@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,8 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import netw4ppl.ines.ManagePersonsActivity;
+import netw4ppl.ines.ManageRelationsActivity;
 import netw4ppl.ines.R;
 
 /**
@@ -36,6 +39,7 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
         TextView mBestDescriptiveValueFrom;
         TextView mBestDescriptiveValueTo;
         TextView mRelationType;
+        ImageView mSyncState;
     }
 
     /**
@@ -96,8 +100,8 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
                             has_it = true;
 
                         // regarder le type de relation
-                        String relation_fullname = r.getRelationTypeFull();
-                        if (r.getRelationType().toLowerCase().contains(query) || relation_fullname.toLowerCase().contains(query))
+                        String relation_fullname = r.getRelation();
+                        if (r.getRelation().toLowerCase().contains(query) || relation_fullname.toLowerCase().contains(query))
                             has_it = true;
 
                         if (has_it)
@@ -147,6 +151,8 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
             holder.mBestDescriptiveValueFrom = (TextView) convertView.findViewById(R.id.best_descriptive_value_1);
             holder.mBestDescriptiveValueTo = (TextView) convertView.findViewById(R.id.best_descriptive_value_2);
             holder.mRelationType = (TextView) convertView.findViewById(R.id.relation_type);
+            holder.mSyncState = (ImageView) convertView.findViewById(R.id.relation_sync_state);
+
 
             result = convertView;
             convertView.setTag(holder);
@@ -156,11 +162,17 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
             result = convertView;
         }
 
+        if (ManageRelationsActivity.array_relations_synced.contains(relation)) {
+            holder.mSyncState.setImageResource(R.drawable.icons8_cloud_check_48);
+        } else {
+            holder.mSyncState.setImageResource(R.drawable.icons8_cloud_48);
+        }
+
         this.lastPosition = position;
 
         holder.mBestDescriptiveValueFrom.setText(relation.getFromBestDescriptiveValue());
         holder.mBestDescriptiveValueTo.setText(relation.getToBestDescriptiveValue());
-        holder.mRelationType.setText(relation.getRelationType());
+        holder.mRelationType.setText(relation.getRelation());
 
         return convertView;
     }

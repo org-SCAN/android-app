@@ -314,6 +314,9 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
             case 3:
                 view = mInflater.inflate(R.layout.view_holder_calendar, parent, false);
                 return new ViewHolderCalendarView(view, new MyCustomEditTextListener());
+            case 4:
+                view = mInflater.inflate(R.layout.view_holder_numberview, parent, false);
+                return new ViewHolderEditText(view, new MyCustomEditTextListener());
         }
         return null;
     }
@@ -354,20 +357,15 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                 break;
             case 0:
+            case 4:
                 /* Section EditText basique */
                 ((ViewHolderEditText) holder).mTitle.setText(field.getTitle());
                 ((ViewHolderEditText) holder).mText.setHint(field.getElementByKey("placeholder"));
                 ((ViewHolderEditText) holder).myCustomEditTextListener.updatePosition(holder.getAdapterPosition());
                 ((ViewHolderEditText) holder).myCustomEditTextListener.setKey(field.getKey());
                 ((ViewHolderEditText) holder).mText.setText(AddPersonActivity.person.getInfoByKey(field.getKey()));
-
-                if (field.getElementByKey("database_type").equals("integer"))
-                    ((ViewHolderEditText) holder).mText.setInputType(InputType.TYPE_CLASS_NUMBER);
-                else if (field.getElementByKey("database_type").equals("string"))
-                    ((ViewHolderEditText) holder).mText.setInputType(InputType.TYPE_CLASS_TEXT);
-                else
-                    ((ViewHolderEditText) holder).mText.setInputType(InputType.TYPE_CLASS_TEXT);
                 break;
+
             case 1:
                 ((ViewHolderSpinner) holder).mTitle.setText(field.getTitle());
                 try {
@@ -409,6 +407,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
                 ((ViewHolderCalendarView) holder).mDateText.setHint(field.getElementByKey("placeholder"));
                 ((ViewHolderCalendarView) holder).mDateText.setText(AddPersonActivity.person.getInfoByKey(field.getKey()));
                 break;
+
             default:
                 break;
         }

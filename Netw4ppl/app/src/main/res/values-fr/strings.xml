@@ -9,6 +9,7 @@
     <string name="settings_email_header">Email</string>
     <string name="settings_sending_option_header">Option d\'envoi</string>
     <string name="settings_delete_option_header">Supression des données</string>
+    <string name="settings_get_option_header">Récupérer les champs</string>
     <string name="settings_sending_option_title">Option d\'envoi</string>
     <string name="settings_server_token_title">Clé serveur</string>
     <string name="settings_server_ip_port_title">Adresse du serveur</string>
@@ -36,7 +37,7 @@
     <string name="toast_delete_processing">Suppression...</string>
     <string name="toast_already_existing_relation">Cette relation existe déjà</string>
     <string name="toast_same_person_relation">Les personnes d\'une relation doivent être différentes</string>
-    <string name="toast_relation_type_non_selected">Vous devez sélectionner une type de relation valide</string>
+    <string name="toast_relation_type_non_selected">Vous devez sélectionner une relation valide (A vu, A voyagé avec…)</string>
     <string name="toast_person_not_selected">Vous devez sélectionner des personnes en cliquant dans le menu déroulant</string>
     <string name="add_person_activity_title">Ajouter une personne</string>
     <string name="add_relation_activity_title">Ajouter une relation</string>
@@ -70,4 +71,11 @@
     <string name="button_show_relations_title">Afficher relations</string>
     <string name="button_hide_relations_title">Cacher relations</string>
     <string name="relation_indication">Relation</string>
+    <string name="settings_get_button_summary">Forcer la récupération des Champs et Listes depuis le Web</string>
+    <string name="settings_get_button_title">Forcer la récupération</string>
+    <string name="toast_get_processing">Récupération des donnés du web en cours…</string>
+    <string name="url_not_valid">L\'adresse URL que vous avez entré n\'est pas valide</string>
+    <string name="no_bdv_title">Pas de "Best Descriptive Value" = l\'application est inutilisable</string>
+    <string name="no_bdv_message">Demandez à votre administrateur d\'ajouter un champ Best Descriptive Value à votre équipe. Actuellement, l\'application est inutilisable.</string>
+    <string name="no_bdv_confirmation">Quitter</string>
 </resources>

@@ -87,7 +87,12 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
                         // supprime la relation de l'array
                         ManageRelationsActivity.array_relations.remove(index_relation);
                         // sauvegarde le fichier
-                        boolean save_relations = FileUtils.saveRelationsToFile(this, ManageRelationsActivity.formatterJsonFile());
+                        boolean save_relations = false;
+                        try {
+                            save_relations = FileUtils.saveRelationsToFile(this, ManageRelationsActivity.formatterJsonFile());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         // quitte l'activité
                         if (save_relations) {
                             // maj de la listview de l'activité ManagePersonActivity

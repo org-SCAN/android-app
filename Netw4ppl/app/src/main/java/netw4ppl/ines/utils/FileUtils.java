@@ -294,6 +294,32 @@ public class FileUtils {
     }
 
     /**
+     * Reads the Persons file
+     *
+     * @param context the application context
+     * @return a String
+     */
+    public static String readPersonsFile(Context context) throws IOException {
+        String dir_name = context.getString(R.string.directory_files);
+        String file_name = context.getString(R.string.filename_persons);
+        String path_file = context.getFilesDir().getPath()+dir_name+file_name;
+        return readFile(path_file);
+    }
+
+    /**
+     * Reads the Relations file
+     *
+     * @param context the application context
+     * @return a String
+     */
+    public static String readRelationsFile(Context context) throws IOException {
+        String dir_name = context.getString(R.string.directory_files);
+        String file_name = context.getString(R.string.filename_relations);
+        String path_file = context.getFilesDir().getPath()+dir_name+file_name;
+        return readFile(path_file);
+    }
+
+    /**
      *Loads the fields configuration file to store it in a JsonObject
      * @param context the context of the application
      * @return a JSonObject of the configuration file
@@ -332,5 +358,19 @@ public class FileUtils {
         }
 
         return config_content;
+    }
+
+    /**
+     * Reads the content of a file and returns it as a JSONObject
+     */
+    public static JSONArray readJSONFile(String path) throws IOException {
+        String file_content = readFile(path);
+        JSONArray content = null;
+        try {
+            content = new JSONArray(file_content);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return content;
     }
 }

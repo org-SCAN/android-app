@@ -44,8 +44,6 @@ public class Person extends JSONObject implements Cloneable {
      */
     public Person(JSONObject data_person) throws JSONException {
         super(data_person.toString());
-        bestDescriptiveValueKey = MainActivity.mConfiguration.getBestDescriptiveKey();
-        descriptiveFieldsKeys = MainActivity.mConfiguration.getDescriptiveKeys();
     }
 
     public Object clone() throws CloneNotSupportedException {
@@ -109,21 +107,25 @@ public class Person extends JSONObject implements Cloneable {
     }
 
     /**
-     * Tests if two persons are the same comparing their unique_id
-     *
-     * @param individu Person to be compared with this Person
-     * @return a boolean telling wether or not the Person is the same, true if yes, false if not
-     * @throws JSONException
-     */
-    public boolean isSamePerson(Person individu) throws JSONException {
-        return this.getInfoByKey("unique_id").equals(individu.getInfoByKey("unique_id"));
-    }
-
-    /**
      * Overrides the toString method
      */
     @Override
     public String toString() {
         return this.getInfoByKey(this.bestDescriptiveValueKey);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        Person person = (Person) object;
+        // check for all fields of this person if they are equal to the fields of the other person
+        for (Field field : getFields()) {
+            if (!this.getInfoByKey(field.getKey()).equals(person.getInfoByKey(field.getKey()))) {
+                return false;
+            }
+        }
+        return true;
     }
 }

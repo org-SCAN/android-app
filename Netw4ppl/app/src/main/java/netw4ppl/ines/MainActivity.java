@@ -17,6 +17,9 @@ import netw4ppl.ines.utils.Configuration;
 import netw4ppl.ines.utils.DataElement;
 import netw4ppl.ines.utils.Field;
 import netw4ppl.ines.utils.FileUtils;
+import netw4ppl.ines.utils.Person;
+import netw4ppl.ines.utils.PersonListAdapter;
+import netw4ppl.ines.utils.Relation;
 import netw4ppl.ines.utils.SubmitData;
 
 import org.json.JSONException;
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity{
     Button mManageRelationsBtn;
     ImageView mSettingsBtn;
     Button mSendDataBtn;
+    ImageView mDataSyncState;
 
     public static String device_language;
     public static boolean mApplicationLaunch = true;
@@ -57,6 +61,7 @@ public class MainActivity extends AppCompatActivity{
         mManageRelationsBtn = findViewById(R.id.main_activity_manage_relations_btn);
         mSettingsBtn = findViewById(R.id.main_activity_settings_btn);
         mSendDataBtn = findViewById(R.id.main_activity_send_data_btn);
+        mDataSyncState = findViewById(R.id.main_activity_data_sync_state);
 
         // add listeners to every buttons
         mManagePersonsBtn.setOnClickListener(v -> {
@@ -72,6 +77,11 @@ public class MainActivity extends AppCompatActivity{
                 SubmitData.manageSend(this, getString(R.string.directory_files));
                 FileUtils.savePersonsToFile(this, ManagePersonsActivity.formatterJsonFile());
                 FileUtils.saveRelationsToFile(this, ManageRelationsActivity.formatterJsonFile());
+                if (MainActivity.checkIfFullSynced()) {
+                    mDataSyncState.setImageResource(R.drawable.icons8_cloud_check_48);
+                } else {
+                    mDataSyncState.setImageResource(R.drawable.icons8_cloud_48);
+                }
             } catch (IOException | InterruptedException | JSONException e) {
                 e.printStackTrace();
             }
@@ -81,23 +91,25 @@ public class MainActivity extends AppCompatActivity{
             startActivity(intent);
         });
 
-        // si c'est le lancement de l'application, chargement en mémoire des json de configuration
         if (mApplicationLaunch) {
-            loadConfiguration(this);
-
-            boolean download_config = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(this.getResources().getString(R.string.settings_server_maj_auto_key),false);
-            if (download_config){
-                try {
-                    SubmitData.manageGet(this);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-
+            initiateData(this);
             mApplicationLaunch = false;
         }
+
+        if (checkIfFullSynced()) {
+            mDataSyncState.setImageResource(R.drawable.icons8_cloud_check_48);
+        } else {
+            mDataSyncState.setImageResource(R.drawable.icons8_cloud_48);
+        }
+    }
+
+    public static boolean checkIfFullSynced(){
+        PersonListAdapter.resetArrayPersons(ManagePersonsActivity.array_persons);
+
+        Boolean relation_synced = ManageRelationsActivity.array_relations.equals(ManageRelationsActivity.array_relations_synced);
+        Boolean person_synced = ManagePersonsActivity.array_persons.equals(ManagePersonsActivity.array_persons_synced);
+
+        return relation_synced && person_synced;
     }
 
     @Override
@@ -128,6 +140,21 @@ public class MainActivity extends AppCompatActivity{
     protected void onDestroy() {
         super.onDestroy();
         Log.d("life-cycle", "Main onDestroy()");
+    }
+
+    public static void initiateData(Context context) {
+        loadConfiguration(context);
+
+        boolean download_config = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getResources().getString(R.string.settings_server_maj_auto_key),false);
+        if (download_config){
+            try {
+                SubmitData.manageGet(context);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**

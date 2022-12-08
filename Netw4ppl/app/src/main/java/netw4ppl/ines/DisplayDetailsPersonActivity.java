@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -86,7 +88,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         Person person = ManagePersonsActivity.hashmap_persons.get(id_person);
 
         //change the title of the action bar to the name of the person
-        Objects.requireNonNull(getSupportActionBar()).setTitle(person.getInfoByKey(Person.bestDescriptiveValueKey)+"'s details");
+        Objects.requireNonNull(getSupportActionBar()).setTitle(person.getInfoByKey(Person.bestDescriptiveValueKey)+"\'s details");
 
         /* Adapters for the different list views */
         adapter_details_person = new PersonDetailsListAdapter(this, R.layout.adapter_details_person_fields, MainActivity.mConfiguration.getArrayFields(), id_person);
@@ -202,7 +204,12 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
                     .setCancelable(true)
                     .setPositiveButton(R.string.yes, (a,b) -> {
                         // supprime les relations avant de supprimer la personne
-                        boolean save_relations = this.deleteAssociatedRelations(ManagePersonsActivity.hashmap_persons.get(id_person));
+                        boolean save_relations = false;
+                        try {
+                            save_relations = this.deleteAssociatedRelations(ManagePersonsActivity.hashmap_persons.get(id_person));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
                         // supprime la personne de l'array
                         ManagePersonsActivity.hashmap_persons.remove(id_person);
@@ -312,7 +319,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
      * @param p a Person object
      * @return a boolean. true if the relations were successfully deleted and saved
      */
-    public boolean deleteAssociatedRelations(Person p) {
+    public boolean deleteAssociatedRelations(Person p) throws JSONException {
         ArrayList<Integer> index_relations = new ArrayList<Integer>();
 
         // suppression dans les listes

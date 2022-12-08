@@ -9,6 +9,7 @@
     <string name="settings_email_header">Email</string>
     <string name="settings_sending_option_header">Opción de envío</string>
     <string name="settings_delete_option_header">Eliminación de datos</string>
+    <string name="settings_get_option_header">Obtener campos</string>
     <string name="settings_sending_option_title">Opción de envío</string>
     <string name="settings_server_token_title">Clave de servidor</string>
     <string name="settings_server_ip_port_title">Dirección del servidor</string>
@@ -17,7 +18,7 @@
     <string name="settings_server_maj_on">Activada</string>
     <string name="settings_email_default_title">Dirección de envío</string>
     <string name="settings_delete_button_title">Eliminar</string>
-    <string name="settings_delete_button_summary">"Eliminar los ficheros de este aparato  "</string>
+    <string name="settings_delete_button_summary">Eliminar los ficheros de este aparato</string>
     <string name="main_submit_success_title">Envío conseguido</string>
     <string name="main_submit_fail_title">Envío fracasado</string>
     <string name="main_submit_success_msg">El envío ha funcionado, puede eliminar los ficheros</string>
@@ -36,7 +37,7 @@
     <string name="toast_delete_processing">Eliminación...</string>
     <string name="toast_already_existing_relation">Este relación ya existe</string>
     <string name="toast_same_person_relation">Las personas de una relación tienen que ser distintos</string>
-    <string name="toast_relation_type_non_selected">"Tiene que seleccionar un tipo de relación válido "</string>
+    <string name="toast_relation_type_non_selected">"Tiene que seleccionar una relación válida"</string>
     <string name="toast_person_not_selected">Tiene que seleccionar personas haciendo clic en el menú desplegable</string>
     <string name="add_person_activity_title">Añadir una persona</string>
     <string name="add_relation_activity_title">Añadir una relación</string>
@@ -70,4 +71,11 @@
     <string name="button_hide_relations_title">Ocultar relaciones</string>
     <string name="toast_fields_required">Estos campos son obligatorios :</string>
     <string name="relation_indication">Relacion</string>
+    <string name="settings_get_button_summary">Forzar la obtención de los Campos y Listas desde la web</string>
+    <string name="settings_get_button_title">Forzar la obtención</string>
+    <string name="toast_get_processing">Recuperación de datos de la web en proceso…</string>
+    <string name="url_not_valid">La URL introducida no es válida</string>
+    <string name="no_bdv_title">No hay \'mejor valor descriptivo\' = la aplicación es inutilizable</string>
+    <string name="no_bdv_message">Pide a tu administrador que añada un campo "Mejor valor descriptivo" a tu equipo, en su estado actual la aplicación es inutilizable.</string>
+    <string name="no_bdv_confirmation">Salir</string>
 </resources>
