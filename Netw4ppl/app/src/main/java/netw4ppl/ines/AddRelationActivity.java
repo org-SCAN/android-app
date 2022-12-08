@@ -338,7 +338,7 @@ public class AddRelationActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // ne rien faire
+                // do nothing
             }
         });
 
