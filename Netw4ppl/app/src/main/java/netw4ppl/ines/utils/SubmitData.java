@@ -251,7 +251,6 @@ public class SubmitData {
                             .build();
                     Response response = http_client.newCall(request).execute();
                     String response_string = response.body().string();
-                    System.out.println("response"+response_string);
 
 
                     if (target.equals("person")){
