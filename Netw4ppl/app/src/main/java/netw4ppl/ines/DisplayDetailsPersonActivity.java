@@ -99,7 +99,6 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         updateAdapterTo();
 
         if (!show_relations) {
-            //mButtonShowRelations.setText(getString(R.string.button_show_relations_title));
             mLayoutFrom.setVisibility(View.GONE);
             mLayoutTo.setVisibility(View.GONE);
         }
