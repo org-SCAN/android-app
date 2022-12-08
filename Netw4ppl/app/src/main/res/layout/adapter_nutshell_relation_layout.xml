@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp">
@@ -9,23 +10,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/relation_sync_state"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:maxHeight="30dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/icons8_cloud_48" />
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/best_descriptive_value_1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center|center_horizontal"
-                android:gravity="center"
-                android:text="Zorglub"
                 android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Zorglub"
                 android:textAlignment="center"
                 android:textSize="20sp"
-                android:padding="5dp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -33,9 +50,9 @@
         <!-- Infos Layout -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/relation_type"
@@ -43,29 +60,29 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="Travelled With"
-                android:textSize="20sp"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
-            <!-- Age and Sex layout -->
+        <!-- Age and Sex layout -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/best_descriptive_value_2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center|center_horizontal"
-                android:gravity="center"
-                android:text="Zorglub"
                 android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Zorglub"
                 android:textAlignment="center"
                 android:textSize="20sp"
-                android:padding="5dp"
                 android:textStyle="bold" />
 
         </LinearLayout>

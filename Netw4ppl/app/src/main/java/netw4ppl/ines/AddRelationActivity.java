@@ -52,11 +52,13 @@ public class AddRelationActivity extends AppCompatActivity {
     AutoCompleteTextView mAutoTextViewRelationFrom;
     AutoCompleteTextView mAutoTextViewRelationTo;
     Spinner mSpinnerRelationType;
+    Spinner mSpinnerRelation;
     EditText mEditTextRelationComments;
     Button mButtonRelationSave;
     Button mButtonRelationCancel;
 
-    ArrayAdapter<DataElement> spinner_adapter;
+    ArrayAdapter spinner_adapter_relation;
+    ArrayAdapter spinner_adapter_relation_type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +133,7 @@ public class AddRelationActivity extends AppCompatActivity {
         mButtonRelationCancel = findViewById(R.id.display_add_relation_cancel);
         mAutoTextViewRelationFrom = findViewById(R.id.add_relation_from);
         mAutoTextViewRelationTo = findViewById(R.id.add_relation_to);
+        mSpinnerRelation = findViewById(R.id.add_relation);
         mSpinnerRelationType = findViewById(R.id.add_relation_type);
         mEditTextRelationComments = findViewById(R.id.add_relation_comments);
 
@@ -147,9 +150,13 @@ public class AddRelationActivity extends AppCompatActivity {
 
         /*
         * Associer au spinner de type de relations les objets de types de relations
-        * Associer aux AutoCompleteTextView la liste des personnes présentent dans l'application
+        * Associer aux AutoCompleteTextView la liste des personnes présentes dans l'application
         * */
-        setAdapters();
+        try {
+            setAdapters();
+        } catch (JSONException e) {
+            Log.d("context", String.valueOf(e));
+        }
 
         Log.d("general", "onCreate() -> set the views");
 
@@ -196,11 +203,28 @@ public class AddRelationActivity extends AppCompatActivity {
                             // ajout du champ date
                             relation.setCreationDate();
 
-                            // ajout de l'id de relation
-                            relation.setUUIDRelation();
-
                             ManageRelationsActivity.array_relations.add(relation);
-                            success_write = FileUtils.saveRelationsToFile(getApplicationContext(), ManageRelationsActivity.formatterJsonFile());
+
+                            if (relation.getInfoByKey("type").equals("bilateral")) {
+                                Relation relation2 = null;
+                                try {
+                                    relation2 = new Relation(relation);
+                                } catch (JSONException e) {
+                                    Log.d("context", String.valueOf(e));
+                                }
+                                relation2.setToId(relation.getFromID());
+                                relation2.setFromId(relation.getToID());
+                                //check if relation2 is equal to one the the relation already present in array_relation
+                                if (!testExistingRelation(relation2)) {
+                                    ManageRelationsActivity.array_relations.add(relation2);
+                                }
+                            }
+
+                            try {
+                                success_write = FileUtils.saveRelationsToFile(getApplicationContext(), ManageRelationsActivity.formatterJsonFile());
+                            } catch (JSONException e) {
+                                Log.d("context", String.valueOf(e));
+                            }
                         }
                         else {
                             // display du message d'erreur
@@ -223,10 +247,16 @@ public class AddRelationActivity extends AppCompatActivity {
                         } catch (JSONException ignored) {
                         }
                         try {
-                            Objects.requireNonNull(relation).put("id", serv_id);
+                            if (!Objects.equals(serv_id, "")) {
+                                Objects.requireNonNull(relation).put("id", serv_id);
+                            }
                         } catch (JSONException ignored) {
                         }
-                        success_write = FileUtils.saveRelationsToFile(getApplicationContext(), ManageRelationsActivity.formatterJsonFile());
+                        try {
+                            success_write = FileUtils.saveRelationsToFile(getApplicationContext(), ManageRelationsActivity.formatterJsonFile());
+                        } catch (JSONException e) {
+                            Log.d("context", String.valueOf(e));
+                        }
                     }
                 }
 
@@ -275,12 +305,25 @@ public class AddRelationActivity extends AppCompatActivity {
             }
         });
 
-        mSpinnerRelationType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mSpinnerRelation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 DataElement data_element = (DataElement) parent.getItemAtPosition(position);
                 if (!data_element.getKey().equals("NA")) {
-                    relation.setRelationType(data_element.getKey());
+                    relation.setRelation(data_element.getKey());
+                    DataElement type = null;
+                    // TODO if edit : no listener from relation nature + mSpinnerRelationType disabled
+                    try {
+                        type = Objects.requireNonNull(MainActivity.mConfiguration.getHashMap_datatables().get("ListRelationTypes")).get(data_element.getString("relation_type_id"));
+                    } catch (JSONException e) {
+                        Log.d("context", String.valueOf(e));
+                    }
+                    try {
+                        relation.setRelationType(type.getString("type"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    mSpinnerRelationType.setSelection(spinner_adapter_relation_type.getPosition(type));
                 }
                 else {
                     relation.remove("relation");
@@ -293,6 +336,19 @@ public class AddRelationActivity extends AppCompatActivity {
             }
         });
 
+        mSpinnerRelationType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Object type = parent.getAdapter().getItem(position);
+                relation.setRelationType(type.toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // do nothing
+            }
+        });
+
         mEditTextRelationComments.addTextChangedListener(new TextListenerDetailsRelation());
     }
 
@@ -301,13 +357,16 @@ public class AddRelationActivity extends AppCompatActivity {
      * We basically have to set the adapters for the two AutocompleteTextViews and one for the spinner.
      * For the definition of Adapter, please check the Android Studio documentation.
      */
-    private void setAdapters() {
+    private void setAdapters() throws JSONException {
+        PersonListAdapter.resetArrayPersons(ManagePersonsActivity.array_persons);
         ArrayAdapter<Person> autocomplete_adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, ManagePersonsActivity.array_persons);
         mAutoTextViewRelationFrom.setAdapter(autocomplete_adapter);
         mAutoTextViewRelationTo.setAdapter(autocomplete_adapter);
 
-        spinner_adapter = MainActivity.mConfiguration.getArrayAdapter("ListRelations");
-        mSpinnerRelationType.setAdapter(spinner_adapter);
+        spinner_adapter_relation = MainActivity.mConfiguration.getArrayAdapter("ListRelations");
+        mSpinnerRelation.setAdapter(spinner_adapter_relation);
+        spinner_adapter_relation_type = MainActivity.mConfiguration.getArrayAdapter("ListRelationTypes");
+        mSpinnerRelationType.setAdapter(spinner_adapter_relation_type);
     }
 
     /**
@@ -353,7 +412,7 @@ public class AddRelationActivity extends AppCompatActivity {
      * @return a boolean corresponding to the validity of the relation_type
      */
     private boolean testRelationType(Relation relation) {
-        String relation_type = relation.getRelationType();
+        String relation_type = relation.getRelation();
 
         String toast_text = this.getString(R.string.toast_relation_type_non_selected);
         boolean test_relation_type = relation_type.equals("");
@@ -451,9 +510,9 @@ public class AddRelationActivity extends AppCompatActivity {
     private void setEditInformation(Relation relation){
         setPersonsViews(relation);
 
-        String relation_key = relation.getRelationType();
-        int pos_in_adapter = getPositionInAdapter(spinner_adapter, relation_key);
-        mSpinnerRelationType.setSelection(pos_in_adapter);
+        String relation_key = relation.getRelation();
+        int pos_in_adapter = getPositionInAdapter(spinner_adapter_relation, relation_key);
+        mSpinnerRelation.setSelection(pos_in_adapter);
 
         mEditTextRelationComments.setText(relation.getDetails());
     }

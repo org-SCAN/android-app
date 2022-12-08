@@ -54,9 +54,6 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
             index_relation = 0;
         }
 
-
-        mTextViewFullnameTitle = (TextView) findViewById(R.id.details_title_full_name);
-
         mTextViewFromFullname = (TextView) findViewById(R.id.relation_from_fullname);
         mTextViewRelationType = (TextView) findViewById(R.id.relation_type);
         mTextViewToFullname = (TextView) findViewById(R.id.relation_to_fullname);
@@ -90,7 +87,12 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
                         // supprime la relation de l'array
                         ManageRelationsActivity.array_relations.remove(index_relation);
                         // sauvegarde le fichier
-                        boolean save_relations = FileUtils.saveRelationsToFile(this, ManageRelationsActivity.formatterJsonFile());
+                        boolean save_relations = false;
+                        try {
+                            save_relations = FileUtils.saveRelationsToFile(this, ManageRelationsActivity.formatterJsonFile());
+                        } catch (JSONException e) {
+                            Log.d("context", String.valueOf(e));
+                        }
                         // quitte l'activité
                         if (save_relations) {
                             // maj de la listview de l'activité ManagePersonActivity

@@ -1,5 +1,7 @@
 package netw4ppl.ines.utils;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -40,7 +42,7 @@ public class DataElement extends JSONObject {
             try {
                 res = this.getString("linked_list");
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.d("context", String.valueOf(e));
             }
         }
         return res;
@@ -69,7 +71,7 @@ public class DataElement extends JSONObject {
                     return this.getJSONObject("displayed_value").getString("eng");
             }
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
 
         return res;

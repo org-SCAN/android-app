@@ -72,7 +72,7 @@ public class PersonDetailsRelationFromAdapter extends ArrayAdapter<Relation> {
         holder.name_person.setText(relation.getFrom());
 
         // associates the relation type with the full name
-        String relation_key = relation.getRelationType();
+        String relation_key = relation.getRelation();
         holder.relation_type.setText(relation_key);
 
         return convertView;

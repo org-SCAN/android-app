@@ -2,12 +2,14 @@ package netw4ppl.ines.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,7 +35,7 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
     private int lastPosition = -1;
     public ArrayList<Person> mObjects;
     public ArrayList<Person> mObjects_tmp;
-    public HashMap<Person, ArrayList<String>> usedFields = new HashMap<>();
+    public static HashMap<Person, ArrayList<String>> usedFields = new HashMap<>();
 
     /**
      * A basic ViewHolder to put the BestDescriptiveValue of the Person
@@ -44,6 +46,7 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
         TextView mDescriptiveField2;
         TextView mDescriptiveField1;
         TextView mBestDescriptiveValue;
+        ImageView mSyncState;
     }
 
     /**
@@ -159,6 +162,11 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
     }
 
     public void update() {
+        resetArrayPersons(mObjects);
+        notifyDataSetChanged();
+    }
+
+    public static void resetArrayPersons(ArrayList<Person> mObjects) {
         ArrayList<Person> tmp = new ArrayList<>(ManagePersonsActivity.hashmap_persons.values());
         ManagePersonsActivity.array_persons.clear();
         ManagePersonsActivity.array_persons.addAll(tmp);
@@ -168,7 +176,6 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
                 usedFields.put(p, new ArrayList<String>());
             }
         }
-        notifyDataSetChanged();
     }
 
     /**
@@ -197,6 +204,7 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
             holder.mDescriptiveField1Title = (TextView) convertView.findViewById(R.id.descriptive_field_1_title);
             holder.mDescriptiveField2 = (TextView) convertView.findViewById(R.id.descriptive_field_2);
             holder.mDescriptiveField2Title = (TextView) convertView.findViewById(R.id.descriptive_field_2_title);
+            holder.mSyncState = (ImageView) convertView.findViewById(R.id.sync_state);
 
             result = convertView;
             convertView.setTag(holder);
@@ -204,6 +212,12 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
         else {
             holder = (ViewHolder) convertView.getTag();
             result = convertView;
+        }
+
+        if (ManagePersonsActivity.array_persons_synced.contains(person)) {
+            holder.mSyncState.setImageResource(R.drawable.icons8_cloud_check_48);
+        } else {
+            holder.mSyncState.setImageResource(R.drawable.icons8_cloud_48);
         }
 
         this.lastPosition = position;
@@ -225,6 +239,9 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
                 break;
             }
             Field field = MainActivity.mConfiguration.getFieldFromHashMap(key);
+            if (field == null) {
+                break;
+            }
             if (usedFields.containsKey(person)) {
                 if (!usedFields.get(person).contains(key)) {
                     if (!field.isBestDescriptiveValue()) {

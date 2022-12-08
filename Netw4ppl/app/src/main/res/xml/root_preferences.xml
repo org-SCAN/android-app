@@ -44,14 +44,23 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        app:title="@string/settings_delete_option_header"
-        app:key="@string/settings_delete_option_key">
+        app:key="@string/settings_delete_option_key"
+        app:title="@string/settings_delete_option_header">
 
         <Preference
             app:key="@string/settings_delete_button_key"
-            app:title="@string/settings_delete_button_title"
             app:summary="@string/settings_delete_button_summary"
-            />
+            app:title="@string/settings_delete_button_title" />
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        app:key="@string/settings_get_option_key"
+        app:title="@string/settings_get_option_header">
+
+        <Preference
+            app:key="@string/settings_get_button_key"
+            app:summary="@string/settings_get_button_summary"
+            app:title="@string/settings_get_button_title" />
 
     </PreferenceCategory>
 

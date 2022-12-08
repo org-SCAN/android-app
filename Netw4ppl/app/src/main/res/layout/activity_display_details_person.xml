@@ -2,47 +2,33 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp">
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:visibility="visible">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <!-- Title fullname person -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="32sp"
-            android:layout_margin="5dp"
-            android:id="@+id/details_title_full_name"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/details_title_full_name"
-            android:textSize="32sp"
-            android:layout_margin="5dp" />
-
-    </LinearLayout>
+        android:orientation="horizontal" />
 
     <!-- Layouts avec les ListViews -->
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
         <!-- Layout From Relations -->
         <LinearLayout
+            android:id="@+id/linearlayout_relations_from"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:background="@drawable/customborder"
-            android:id="@+id/linearlayout_relations_from"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:visibility="visible">
 
 
             <!-- Layout Add Relation button -->
@@ -53,17 +39,22 @@
                 android:gravity="center">
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/display_person_add_relation_from"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:backgroundTint="@color/forestgreen"
-                    android:text="@string/button_add_relation_from" />
+                    android:text="@string/button_add_relation_from"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:icon="@drawable/icons8_add_user_male_24"
+                    app:iconGravity="textTop" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                tools:visibility="visible">
 
                 <ListView
                     android:id="@+id/list_relations_from"
@@ -79,82 +70,72 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="2"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
+            android:layout_weight="2"
             android:background="@drawable/customborder"
             android:orientation="vertical">
 
             <!-- Layout Buttons Modify and Delete -->
 
-            <com.google.android.flexbox.FlexboxLayout
-                android:id="@+id/flexboxLayout1"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:flexWrap="wrap"
-                app:alignContent="flex_start">
+                android:orientation="horizontal">
 
-                <Button
+                <ImageView
                     android:id="@+id/display_person_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/blue_doge"
-                    android:text="@string/button_edit_title"
-                    android:scaleType="centerCrop"
-                    android:layout_margin="5dp" />
+                    app:srcCompat="@drawable/icons8_modifier_48" />
 
-                <Button
+                <ImageView
+                    android:id="@+id/display_person_show_relations"
+                    android:layout_width="134dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/icons8_links_7_48" />
+
+                <ImageView
                     android:id="@+id/display_person_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/red"
-                    android:text="@string/button_delete_title"
-                    android:scaleType="centerCrop"
-                    android:layout_margin="5dp"/>
+                    app:srcCompat="@drawable/icons8_effacer_48" />
 
-                <Button
-                    android:id="@+id/display_person_show_relations"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:backgroundTint="@color/purple_500"
-                    android:enabled="false"
-                    android:scaleType="centerCrop" />
+            </LinearLayout>
 
-            </com.google.android.flexbox.FlexboxLayout>
+            <!--            <RelativeLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content">-->
 
-<!--            <RelativeLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content">-->
+            <!--                <Button-->
+            <!--                    android:id="@+id/display_person_edit"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:backgroundTint="@color/blue_doge"-->
+            <!--                    android:text="@string/button_edit_title"-->
+            <!--                    android:layout_alignParentStart="true"-->
+            <!--                    android:layout_margin="5dp"/>-->
 
-<!--                <Button-->
-<!--                    android:id="@+id/display_person_edit"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:backgroundTint="@color/blue_doge"-->
-<!--                    android:text="@string/button_edit_title"-->
-<!--                    android:layout_alignParentStart="true"-->
-<!--                    android:layout_margin="5dp"/>-->
+            <!--                <Button-->
+            <!--                    android:id="@+id/display_person_delete"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:backgroundTint="@color/red"-->
+            <!--                    android:text="@string/button_delete_title"-->
+            <!--                    android:layout_toEndOf="@+id/display_person_edit"-->
+            <!--                    android:layout_margin="5dp"/>-->
 
-<!--                <Button-->
-<!--                    android:id="@+id/display_person_delete"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:backgroundTint="@color/red"-->
-<!--                    android:text="@string/button_delete_title"-->
-<!--                    android:layout_toEndOf="@+id/display_person_edit"-->
-<!--                    android:layout_margin="5dp"/>-->
+            <!--                <Button-->
+            <!--                    android:id="@+id/display_person_show_relations"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:backgroundTint="@color/purple_500"-->
+            <!--                    android:text="@string/button_show_relations_title"-->
+            <!--                    android:layout_alignParentEnd="true"-->
+            <!--                    android:layout_margin="5dp"/>-->
 
-<!--                <Button-->
-<!--                    android:id="@+id/display_person_show_relations"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:backgroundTint="@color/purple_500"-->
-<!--                    android:text="@string/button_show_relations_title"-->
-<!--                    android:layout_alignParentEnd="true"-->
-<!--                    android:layout_margin="5dp"/>-->
-
-<!--            </RelativeLayout>-->
+            <!--            </RelativeLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -172,12 +153,13 @@
 
         <!-- Layout To Relations -->
         <LinearLayout
+            android:id="@+id/linearlayout_relations_to"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:background="@drawable/customborder"
-            android:id="@+id/linearlayout_relations_to"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:visibility="visible">
 
             <!-- Layout Add Relation button -->
             <LinearLayout
@@ -187,11 +169,15 @@
                 android:gravity="center">
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/display_person_add_relation_to"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:backgroundTint="@color/forestgreen"
-                    android:text="@string/button_add_relation_to" />
+                    android:text="@string/button_add_relation_to"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:icon="@drawable/icons8_add_user_male_24"
+                    app:iconGravity="textTop" />
 
             </LinearLayout>
 

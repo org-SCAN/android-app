@@ -37,7 +37,7 @@ public class FileUtils {
         try {
             file.createNewFile();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
         return file.exists();
     }
@@ -111,7 +111,7 @@ public class FileUtils {
             file.write(content);
             file.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
             writing_success = false;
         }
         return writing_success;
@@ -144,9 +144,9 @@ public class FileUtils {
                 writer.write(buffer, 0, n);
             }
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         } finally {
             is.close();
         }
@@ -294,6 +294,32 @@ public class FileUtils {
     }
 
     /**
+     * Reads the Persons file
+     *
+     * @param context the application context
+     * @return a String
+     */
+    public static String readPersonsFile(Context context) throws IOException {
+        String dir_name = context.getString(R.string.directory_files);
+        String file_name = context.getString(R.string.filename_persons);
+        String path_file = context.getFilesDir().getPath()+dir_name+file_name;
+        return readFile(path_file);
+    }
+
+    /**
+     * Reads the Relations file
+     *
+     * @param context the application context
+     * @return a String
+     */
+    public static String readRelationsFile(Context context) throws IOException {
+        String dir_name = context.getString(R.string.directory_files);
+        String file_name = context.getString(R.string.filename_relations);
+        String path_file = context.getFilesDir().getPath()+dir_name+file_name;
+        return readFile(path_file);
+    }
+
+    /**
      *Loads the fields configuration file to store it in a JsonObject
      * @param context the context of the application
      * @return a JSonObject of the configuration file
@@ -328,9 +354,23 @@ public class FileUtils {
         try {
             config_content = new JSONObject(file_content);
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
 
         return config_content;
+    }
+
+    /**
+     * Reads the content of a file and returns it as a JSONObject
+     */
+    public static JSONArray readJSONFile(String path) throws IOException {
+        String file_content = readFile(path);
+        JSONArray content = null;
+        try {
+            content = new JSONArray(file_content);
+        } catch (JSONException e) {
+            Log.d("context", String.valueOf(e));
+        }
+        return content;
     }
 }

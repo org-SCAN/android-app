@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -37,6 +38,7 @@ public class ManagePersonsActivity extends AppCompatActivity {
     SearchView mSearchBar;
     public static HashMap<String, Person> hashmap_persons = new HashMap<>();
     public static ArrayList<Person> array_persons = new ArrayList<Person>();
+    public static ArrayList<Person> array_persons_synced = new ArrayList<Person>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,7 @@ public class ManagePersonsActivity extends AppCompatActivity {
         try {
             readPersonsFile(this);
         } catch (IOException | JSONException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
 
         mButtonAdd = (FloatingActionButton) findViewById(R.id.add_person_fab);
@@ -175,7 +177,13 @@ public class ManagePersonsActivity extends AppCompatActivity {
      *
      * @param response_string the response from the server
      */
-    public static void saveServerIds(String response_string) throws JSONException {
+    public static void saveServerIds(Context context,String response_string) throws JSONException {
+        if (response_string.equals("[]") || response_string.contains("error")) {
+            return;
+        }
+        String dir_name = context.getString(R.string.directory_files);
+        String file_name = context.getString(R.string.filename_persons_server_id);
+        String path_file = context.getFilesDir().getPath() + dir_name + file_name;
         int index = 0;
         String[] id_array = response_string.split("\",\"");
         String[] clean_array = new String[id_array.length];
@@ -193,5 +201,35 @@ public class ManagePersonsActivity extends AppCompatActivity {
             ManageRelationsActivity.hashmap_android_to_server_id.put(key, clean_array[index]);
             index++;
         }
+        JSONObject jsonObject_server_ids = new JSONObject(ManageRelationsActivity.hashmap_android_to_server_id);
+        FileUtils.writeFile(path_file, jsonObject_server_ids.toString());
+    }
+
+    /**
+     * Function that add the pushed persons to the hashmap of synced persons
+     */
+    public static void syncPersons(Context context) {
+        String dir_name = context.getString(R.string.directory_files);
+        String file_name = context.getString(R.string.filename_synced_persons);
+        String path_file = context.getFilesDir().getPath() + dir_name + file_name;
+
+        String content = "";
+        JSONArray json_array = new JSONArray();
+
+        array_persons_synced.clear();
+        for (Person person : array_persons) {
+            json_array.put(person);
+            if (!array_persons_synced.contains(person)) {
+                array_persons_synced.add(person);
+            }
+        }
+
+        try {
+            content = json_array.toString(2);
+        } catch (JSONException e) {
+            Log.d("context", String.valueOf(e));
+        }
+
+        FileUtils.writeFile(path_file, content);
     }
 }

@@ -1,6 +1,8 @@
 package netw4ppl.ines.utils;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -104,6 +106,8 @@ public class PersonDetailsListAdapter extends ArrayAdapter<Field> {
             holder.mText.setText(text);
         }
 
-        return convertView;
+        holder.mText.setTextColor(0xff000000);
+
+        return result;
     }
 }

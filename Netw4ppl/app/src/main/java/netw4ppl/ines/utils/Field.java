@@ -1,5 +1,7 @@
 package netw4ppl.ines.utils;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -44,7 +46,7 @@ public class Field extends DataElement {
             try {
                 return this.getString(key);
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.d("context", String.valueOf(e));
             }
         }
         return null;
@@ -73,7 +75,7 @@ public class Field extends DataElement {
                     this.view_type = 0;
                 break;
             case "number":
-                this.view_type = 0;
+                this.view_type = 4;
                 break;
             case "Spinner":
                 this.view_type = 1;
@@ -85,7 +87,7 @@ public class Field extends DataElement {
                 this.view_type = 3;
                 break;
             default:
-                this.view_type = 4;
+                this.view_type = 5;
         }
     }
 
@@ -98,7 +100,7 @@ public class Field extends DataElement {
         try {
             required = this.getInt("required");
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
         return required;
     }

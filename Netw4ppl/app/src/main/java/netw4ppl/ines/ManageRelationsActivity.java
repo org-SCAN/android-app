@@ -20,9 +20,13 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Objects;
 
+import netw4ppl.ines.utils.DataElement;
 import netw4ppl.ines.utils.FileUtils;
 import netw4ppl.ines.utils.Person;
 import netw4ppl.ines.utils.PersonListAdapter;
@@ -37,32 +41,19 @@ public class ManageRelationsActivity extends AppCompatActivity {
     public static ArrayList<Relation> array_relations = new ArrayList<Relation>();
     public static RelationListAdapter mAdapter; // TODO changer le static ici car c'est une memory leak
     public static HashMap<String, String> hashmap_android_to_server_id = new HashMap<>();
-
-    /**
-     * Function to update the name of a person in all the relations where this person is present in. Currently called after the
-     * edition of a person.
-     *
-     * @param person a Person object
-     */
-    public static void updateRelations(Person person) {
-        // parcourir toutes les relations
-        for (int i=0; i<ManageRelationsActivity.array_relations.size(); i++) {
-            // si le unique id de la personne correspond à un unique_id dans la relation (from ou to)
-            if (person.getInfoByKey("unique_id").equals(ManageRelationsActivity.array_relations.get(i).getFromID())) {
-                Log.d("display", "Je m'appelais " + ManageRelationsActivity.array_relations.get(i).getFromFullname() + "et maintenant je m'appelle " + person.getInfoByKey("full_name"));
-                ManageRelationsActivity.array_relations.get(i).setFromFullname(person.getInfoByKey("full_name"));
-            }
-            if (person.getInfoByKey("unique_id").equals(ManageRelationsActivity.array_relations.get(i).getToID())) {
-                Log.d("display", "Je m'appelais " + ManageRelationsActivity.array_relations.get(i).getToFullname() + "et maintenant je m'appelle " + person.getInfoByKey("full_name"));
-                ManageRelationsActivity.array_relations.get(i).setToFullname(person.getInfoByKey("full_name"));
-            }
-        }
-    }
+    public static ArrayList<String> relation_types;
+    public static ArrayList<Relation> array_relations_synced = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_relations);
+
+        try {
+            ManagePersonsActivity.readPersonsFile(this);
+        } catch (IOException | JSONException e) {
+            Log.d("context", String.valueOf(e));
+        }
 
         mButtonAdd = (FloatingActionButton) findViewById(R.id.add_relation_fab);
         mButtonAdd.setOnClickListener(v -> {
@@ -77,7 +68,7 @@ public class ManageRelationsActivity extends AppCompatActivity {
         try {
             readRelationsFile(this);
         } catch (IOException | JSONException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
 
         mSearchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -174,7 +165,7 @@ public class ManageRelationsActivity extends AppCompatActivity {
      *
      * @return a String containing the Relations contained in relation, on a JSONArray format
      */
-    public static String formatterJsonFile() {
+    public static String formatterJsonFile() throws JSONException {
         JSONArray json_array = new JSONArray();
         for (int i=0; i<array_relations.size(); i++) {
             json_array.put(array_relations.get(i));
@@ -182,7 +173,7 @@ public class ManageRelationsActivity extends AppCompatActivity {
         try {
             return json_array.toString(2);
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
         return "";
     }
@@ -206,20 +197,42 @@ public class ManageRelationsActivity extends AppCompatActivity {
      *
      * @param response_string the response from the server
      */
-    public static void saveServerIds(String response_string) throws JSONException {
+    public static void saveServerIds(Context context,String response_string) throws JSONException {
+        if (response_string.equals("[]") || response_string.contains("error")) {
+            return;
+        }
         int index = 0;
         String[] id_array = response_string.split("\",\"");
         String[] clean_array = new String[id_array.length];
-        //print all values of the array
         for (String id : id_array) {
             id = id.replace("\"", "");
             id = id.replace("[", "");
             id = id.replace("]", "");
             clean_array[index] = id;
+            index++;
         }
+        index = 0;
         for (Relation relation : ManageRelationsActivity.array_relations) {
             relation.put("id", clean_array[index]);
             index++;
         }
+        FileUtils.saveRelationsToFile(context, ManageRelationsActivity.formatterJsonFile());
+    }
+
+    /**
+     * Function that add the pushed relations to the hashmap of synced relations
+     */
+    public static void syncRelations(Context context) throws JSONException {
+        String dir_name = context.getString(R.string.directory_files);
+        String file_name = context.getString(R.string.filename_synced_relations);
+        String path_file = context.getFilesDir().getPath() + dir_name + file_name;
+
+        array_relations_synced.clear();
+        for (Relation relation : array_relations) {
+            if (!array_relations_synced.contains(relation)) {
+                array_relations_synced.add(relation);
+            }
+        }
+        FileUtils.writeFile(path_file, formatterJsonFile());
     }
 }

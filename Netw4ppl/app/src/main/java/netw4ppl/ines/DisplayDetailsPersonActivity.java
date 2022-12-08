@@ -3,8 +3,6 @@ package netw4ppl.ines;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
-import androidx.preference.SwitchPreference;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -14,18 +12,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 
 import org.json.JSONException;
 
-import java.lang.reflect.Array;
-import java.security.interfaces.RSAKey;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -45,10 +40,10 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
 
     TextView mTextViewFullnameTitle;
     Button mButtonAddRelationFrom;
-    Button mButtonEditPerson;
-    Button mButtonDeletePerson;
+    ImageView mButtonEditPerson;
+    ImageView mButtonDeletePerson;
     Button mButtonAddRelationTo;
-    Button mButtonShowRelations;
+    ImageView mButtonShowRelations;
 
     LinearLayout mLayoutFrom;
     LinearLayout mLayoutTo;
@@ -78,15 +73,11 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         if(extra_parameter != null)
             id_person = extra_parameter.getString("id_person");
 
-
-
-        mTextViewFullnameTitle = (TextView) findViewById(R.id.details_title_full_name);
-
         mButtonAddRelationFrom = (Button) findViewById(R.id.display_person_add_relation_from);
         mButtonAddRelationTo = (Button) findViewById(R.id.display_person_add_relation_to);
-        mButtonEditPerson = (Button) findViewById(R.id.display_person_edit);
-        mButtonDeletePerson = (Button) findViewById(R.id.display_person_delete);
-        mButtonShowRelations = (Button) findViewById(R.id.display_person_show_relations);
+        mButtonEditPerson = findViewById(R.id.display_person_edit);
+        mButtonDeletePerson = findViewById(R.id.display_person_delete);
+        mButtonShowRelations = findViewById(R.id.display_person_show_relations);
 
         mLayoutFrom = (LinearLayout) findViewById(R.id.linearlayout_relations_from);
         mLayoutTo = (LinearLayout) findViewById(R.id.linearlayout_relations_to);
@@ -97,7 +88,8 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
 
         Person person = ManagePersonsActivity.hashmap_persons.get(id_person);
 
-        mTextViewFullnameTitle.setText(person.getInfoByKey(Person.bestDescriptiveValueKey));
+        //change the title of the action bar to the name of the person
+        Objects.requireNonNull(getSupportActionBar()).setTitle(person.getInfoByKey(Person.bestDescriptiveValueKey)+"\'s details");
 
         /* Adapters for the different list views */
         adapter_details_person = new PersonDetailsListAdapter(this, R.layout.adapter_details_person_fields, MainActivity.mConfiguration.getArrayFields(), id_person);
@@ -107,12 +99,8 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         updateAdapterTo();
 
         if (!show_relations) {
-            mButtonShowRelations.setText(getString(R.string.button_show_relations_title));
             mLayoutFrom.setVisibility(View.GONE);
             mLayoutTo.setVisibility(View.GONE);
-        }
-        else {
-            mButtonShowRelations.setText(getString(R.string.button_hide_relations_title));
         }
 
         mListRelationsFrom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -192,13 +180,13 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
             if (show_relations) {
                 mLayoutTo.setVisibility(View.VISIBLE);
                 mLayoutFrom.setVisibility(View.VISIBLE);
-                mButtonShowRelations.setText(DisplayDetailsPersonActivity.this.getString(R.string.button_hide_relations_title));
+                //mButtonShowRelations.setText(DisplayDetailsPersonActivity.this.getString(R.string.button_hide_relations_title));
 //                mButtonShowRelations.setImageDrawable(this.getDrawable(R.drawable.baseline_visibility_24));
             }
             else {
                 mLayoutFrom.setVisibility(View.GONE);
                 mLayoutTo.setVisibility(View.GONE);
-                mButtonShowRelations.setText(DisplayDetailsPersonActivity.this.getString(R.string.button_show_relations_title));
+                //mButtonShowRelations.setText(DisplayDetailsPersonActivity.this.getString(R.string.button_show_relations_title));
 //                mButtonShowRelations.setImageDrawable(this.getDrawable(R.drawable.baseline_visibility_off_24));
             }
             SharedPreferences shared = getSharedPreferences(getString(R.string.show_relations_boolean_key),MODE_PRIVATE);
@@ -213,7 +201,12 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
                     .setCancelable(true)
                     .setPositiveButton(R.string.yes, (a,b) -> {
                         // supprime les relations avant de supprimer la personne
-                        boolean save_relations = this.deleteAssociatedRelations(ManagePersonsActivity.hashmap_persons.get(id_person));
+                        boolean save_relations = false;
+                        try {
+                            save_relations = this.deleteAssociatedRelations(ManagePersonsActivity.hashmap_persons.get(id_person));
+                        } catch (JSONException e) {
+                            Log.d("context", String.valueOf(e));
+                        }
 
                         // supprime la personne de l'array
                         ManagePersonsActivity.hashmap_persons.remove(id_person);
@@ -315,7 +308,6 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         adapter_details_person.notifyDataSetChanged();
         updateAdapterFrom();
         updateAdapterTo();
-        mTextViewFullnameTitle.setText(Objects.requireNonNull(ManagePersonsActivity.hashmap_persons.get(id_person)).getInfoByKey("full_name"));
     }
 
     /**
@@ -324,7 +316,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
      * @param p a Person object
      * @return a boolean. true if the relations were successfully deleted and saved
      */
-    public boolean deleteAssociatedRelations(Person p) {
+    public boolean deleteAssociatedRelations(Person p) throws JSONException {
         ArrayList<Integer> index_relations = new ArrayList<Integer>();
 
         // suppression dans les listes

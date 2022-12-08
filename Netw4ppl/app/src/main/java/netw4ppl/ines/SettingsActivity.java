@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
+import java.net.URL;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -17,6 +18,7 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.SwitchPreference;
 
 import netw4ppl.ines.utils.FileUtils;
+import netw4ppl.ines.utils.SubmitData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -105,16 +107,21 @@ public class SettingsActivity extends AppCompatActivity {
                 // if the user did not change the value then don't update the value in memory
                 if (v.toString().equals(""))
                     return false;
+
                 return true;
             });
 
-//            EditTextPreference input_ip_port = findPreference(res.getString(R.string.settings_server_ip_port_key));
-//            input_ip_port.setOnPreferenceChangeListener((e,v) -> {
-//                if (v == null) return false;
-//                // check the ip address
-//                String pattern_ip = "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}:[1-9][0-9]{0,4}$";
-//                return Pattern.matches(pattern_ip, v.toString());
-//            });
+            EditTextPreference input_ip_port = findPreference(res.getString(R.string.settings_server_ip_port_key));
+            input_ip_port.setOnPreferenceChangeListener((e,v) -> {
+                if (v == null) return false;
+                // check if the address is an URL
+                Boolean isURL = isValid(v.toString());
+                if (!isURL) {
+                    displayToast(this.getContext(), res.getString(R.string.url_not_valid));
+                    return false;
+                }
+                return true;
+            });
 
             SwitchPreference switch_auto_update = findPreference(res.getString(R.string.settings_server_maj_auto_key));
             switch_auto_update.setOnPreferenceChangeListener((e,v) -> {
@@ -162,6 +169,12 @@ public class SettingsActivity extends AppCompatActivity {
                         .show();
                 return true;
             });
+
+            findPreference(res.getString(R.string.settings_get_button_key)).setOnPreferenceClickListener(e -> {
+                displayToast(this.getContext(), res.getString(R.string.toast_get_processing));
+                MainActivity.initiateData(this.getContext());
+                return true;
+            });
         }
     }
 
@@ -198,5 +211,20 @@ public class SettingsActivity extends AppCompatActivity {
 
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+    }
+
+    /**
+     * Check if an String url is valid
+     * @param url
+     * @return a boolean
+     */
+    public static boolean isValid(String url)
+    {
+        try {
+            new URL(url).toURI();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

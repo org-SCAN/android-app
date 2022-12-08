@@ -121,7 +121,9 @@ public class AddPersonActivity extends AppCompatActivity {
                     } catch (JSONException ignored) {
                     }
                     try {
-                        Objects.requireNonNull(ManagePersonsActivity.hashmap_persons.get(id_person)).put("id", serv_id);
+                        if (!Objects.equals(serv_id, "")) {
+                            Objects.requireNonNull(ManagePersonsActivity.hashmap_persons.get(id_person)).put("id", serv_id);
+                        }
                     } catch (JSONException ignored) {
                     }
                 }
@@ -135,7 +137,6 @@ public class AddPersonActivity extends AppCompatActivity {
                 new_person = true;
 
                 if (save_persons /*&& save_ids*/){
-                    ManageRelationsActivity.updateRelations(person);
                     finish();
                 }
                 else {
