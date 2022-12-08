@@ -37,7 +37,7 @@
     <string name="toast_delete_processing">Suppression...</string>
     <string name="toast_already_existing_relation">Cette relation existe déjà</string>
     <string name="toast_same_person_relation">Les personnes d\'une relation doivent être différentes</string>
-    <string name="toast_relation_type_non_selected">Vous devez sélectionner une relation valide (A vu, A voyagé avec…)</string>
+    <string name="toast_relation_type_non_selected">Vous devez sélectionner une relation valide </string>
     <string name="toast_person_not_selected">Vous devez sélectionner des personnes en cliquant dans le menu déroulant</string>
     <string name="add_person_activity_title">Ajouter une personne</string>
     <string name="add_relation_activity_title">Ajouter une relation</string>
