@@ -254,10 +254,10 @@ public class SubmitData {
                     System.out.println("response"+response_string);
 
 
-                    if (target == "person"){
+                    if (target.equals("person")){
                         ManagePersonsActivity.saveServerIds(context,response_string);
                     }
-                    else if (target == "links"){
+                    else if (target.equals("links")){
                         ManageRelationsActivity.saveServerIds(context,response_string);
                     }
 

@@ -178,7 +178,7 @@ public class ManagePersonsActivity extends AppCompatActivity {
      * @param response_string the response from the server
      */
     public static void saveServerIds(Context context,String response_string) throws JSONException {
-        if (response_string == "[]" || response_string.contains("error")) {
+        if (response_string.equals("[]") || response_string.contains("error")) {
             return;
         }
         String dir_name = context.getString(R.string.directory_files);
