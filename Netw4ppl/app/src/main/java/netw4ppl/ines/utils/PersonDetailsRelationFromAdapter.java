@@ -30,8 +30,8 @@ public class PersonDetailsRelationFromAdapter extends ArrayAdapter<Relation> {
      * A basic viewholder to put a person's name and a relation type
      */
     private static class ViewHolder {
-        TextView name_person;
-        TextView relation_type;
+        TextView bdv;
+        TextView relation;
     }
 
     /**
@@ -58,8 +58,8 @@ public class PersonDetailsRelationFromAdapter extends ArrayAdapter<Relation> {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             convertView = inflater.inflate(mResource, parent, false);
             holder = new PersonDetailsRelationFromAdapter.ViewHolder();
-            holder.name_person = (TextView) convertView.findViewById(R.id.details_person_relation_person);
-            holder.relation_type = (TextView) convertView.findViewById(R.id.details_person_relation_type);
+            holder.bdv = (TextView) convertView.findViewById(R.id.details_person_relation_person);
+            holder.relation = (TextView) convertView.findViewById(R.id.details_person_relation_type);
 
             result = convertView;
             convertView.setTag(holder);
@@ -69,11 +69,10 @@ public class PersonDetailsRelationFromAdapter extends ArrayAdapter<Relation> {
             result = convertView;
         }
 
-        holder.name_person.setText(relation.getFrom());
-
-        // associates the relation type with the full name
+        holder.bdv.setText(ManagePersonsActivity.hashmap_persons.get(relation.getFromID()).getInfoByKey(Person.bestDescriptiveValueKey));
+        holder.bdv.setTextColor(0xff000000);
         String relation_key = relation.getRelation();
-        holder.relation_type.setText(relation_key);
+        holder.relation.setText(relation_key);
 
         return convertView;
     }

@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+import netw4ppl.ines.ManagePersonsActivity;
 import netw4ppl.ines.R;
 
 /**
@@ -26,8 +27,8 @@ public class PersonDetailsRelationToAdapter  extends ArrayAdapter<Relation> {
      * A basic viewholder to put a person's name and a relation type
      */
     private static class ViewHolder {
-        TextView name_person;
-        TextView relation_type;
+        TextView bdv;
+        TextView relation;
     }
 
     /**
@@ -54,8 +55,8 @@ public class PersonDetailsRelationToAdapter  extends ArrayAdapter<Relation> {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             convertView = inflater.inflate(mResource, parent, false);
             holder = new PersonDetailsRelationToAdapter.ViewHolder();
-            holder.name_person = (TextView) convertView.findViewById(R.id.details_person_relation_person);
-            holder.relation_type = (TextView) convertView.findViewById(R.id.details_person_relation_type);
+            holder.bdv = (TextView) convertView.findViewById(R.id.details_person_relation_person);
+            holder.relation = (TextView) convertView.findViewById(R.id.details_person_relation_type);
 
             result = convertView;
             convertView.setTag(holder);
@@ -65,11 +66,10 @@ public class PersonDetailsRelationToAdapter  extends ArrayAdapter<Relation> {
             result = convertView;
         }
 
-        holder.name_person.setText(relation.getTo());
-
-        // associates the relation type with the full name
+        holder.bdv.setText(ManagePersonsActivity.hashmap_persons.get(relation.getToID()).getInfoByKey(Person.bestDescriptiveValueKey));
+        holder.bdv.setTextColor(0xff000000);
         String relation_key = relation.getRelation();
-        holder.relation_type.setText(relation_key);
+        holder.relation.setText(relation_key);
 
         return convertView;
     }
