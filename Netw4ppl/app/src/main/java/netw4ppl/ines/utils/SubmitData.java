@@ -265,7 +265,7 @@ public class SubmitData {
                         http_success[0] = true;
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Log.d("context", String.valueOf(e));
                 }
             }
         });
@@ -325,7 +325,7 @@ public class SubmitData {
                         MainActivity.mConfiguration = new Configuration(context, config_content);
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Log.d("context", String.valueOf(e));
                 }
             }
         });

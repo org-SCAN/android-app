@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity{
                     mDataSyncState.setImageResource(R.drawable.icons8_cloud_48);
                 }
             } catch (IOException | InterruptedException | JSONException e) {
-                e.printStackTrace();
+                Log.d("context", String.valueOf(e));
             }
         });
         mSettingsBtn.setOnClickListener(v -> {
@@ -150,9 +150,9 @@ public class MainActivity extends AppCompatActivity{
             try {
                 SubmitData.manageGet(context);
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.d("context", String.valueOf(e));
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Log.d("context", String.valueOf(e));
             }
         }
     }
@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity{
             //Log.d("test-read-ids", AddPersonActivity.json_ids.toString(2));
 
         } catch (IOException | JSONException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
     }
 }

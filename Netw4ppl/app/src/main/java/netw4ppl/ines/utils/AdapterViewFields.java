@@ -379,7 +379,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
                     int pos_in_adapt = getPositionInAdapter(adapter, key_val_pers);
                     ((ViewHolderSpinner) holder).mSpinner.setSelection(pos_in_adapt);
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    Log.d("context", String.valueOf(e));
                 }
                 break;
             case 2:
@@ -398,7 +398,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
                         }
                     });
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    Log.d("context", String.valueOf(e));
                 }
                 break;
             case 3:
@@ -528,7 +528,7 @@ public class AdapterViewFields extends RecyclerView.Adapter<RecyclerView.ViewHol
                     try {
                         AddPersonActivity.person.put(field_key, new_value);
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        Log.d("context", String.valueOf(e));
                     }
                 }
             }

@@ -52,13 +52,13 @@ public class ManageRelationsActivity extends AppCompatActivity {
         try {
             setRelationTypes();
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
 
         try {
             ManagePersonsActivity.readPersonsFile(this);
         } catch (IOException | JSONException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
 
         mButtonAdd = (FloatingActionButton) findViewById(R.id.add_relation_fab);
@@ -74,7 +74,7 @@ public class ManageRelationsActivity extends AppCompatActivity {
         try {
             readRelationsFile(this);
         } catch (IOException | JSONException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
 
         mSearchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -198,7 +198,7 @@ public class ManageRelationsActivity extends AppCompatActivity {
         try {
             return json_array.toString(2);
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
         return "";
     }

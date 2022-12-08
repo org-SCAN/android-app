@@ -91,7 +91,7 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
                         try {
                             save_relations = FileUtils.saveRelationsToFile(this, ManageRelationsActivity.formatterJsonFile());
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            Log.d("context", String.valueOf(e));
                         }
                         // quitte l'activité
                         if (save_relations) {

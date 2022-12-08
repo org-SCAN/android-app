@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -48,7 +49,7 @@ public class ManagePersonsActivity extends AppCompatActivity {
         try {
             readPersonsFile(this);
         } catch (IOException | JSONException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
 
         mButtonAdd = (FloatingActionButton) findViewById(R.id.add_person_fab);
@@ -226,7 +227,7 @@ public class ManagePersonsActivity extends AppCompatActivity {
         try {
             content = json_array.toString(2);
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
 
         FileUtils.writeFile(path_file, content);

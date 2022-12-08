@@ -37,7 +37,7 @@ public class FileUtils {
         try {
             file.createNewFile();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
         return file.exists();
     }
@@ -111,7 +111,7 @@ public class FileUtils {
             file.write(content);
             file.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
             writing_success = false;
         }
         return writing_success;
@@ -144,9 +144,9 @@ public class FileUtils {
                 writer.write(buffer, 0, n);
             }
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         } finally {
             is.close();
         }
@@ -354,7 +354,7 @@ public class FileUtils {
         try {
             config_content = new JSONObject(file_content);
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
 
         return config_content;
@@ -369,7 +369,7 @@ public class FileUtils {
         try {
             content = new JSONArray(file_content);
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
         return content;
     }

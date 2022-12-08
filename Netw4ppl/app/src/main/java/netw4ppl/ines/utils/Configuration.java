@@ -59,7 +59,7 @@ public class Configuration {
                 ManageRelationsActivity.array_relations_synced.add(relation_object);
             }
         } catch (IOException | JSONException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
         //for all persons from the sync file, add them in the array_persons_synced array
         try {
@@ -70,7 +70,7 @@ public class Configuration {
                 ManagePersonsActivity.array_persons_synced.add(person_object);
             }
         } catch (IOException | JSONException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
     }
 
@@ -97,7 +97,7 @@ public class Configuration {
         try {
             file_content = FileUtils.loadApplicationIDFromFile(context);
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
         return file_content;
     }
@@ -204,7 +204,7 @@ public class Configuration {
                     createArrayFields(table);
                 }
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.d("context", String.valueOf(e));
             }
         }
     }
@@ -226,7 +226,7 @@ public class Configuration {
                 array_fields.add(f);
                 this.hashMap_fields.put(key, f);
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.d("context", String.valueOf(e));
             }
         }
     }

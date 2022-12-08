@@ -155,7 +155,7 @@ public class AddRelationActivity extends AppCompatActivity {
         try {
             setAdapters();
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
 
         Log.d("general", "onCreate() -> set the views");
@@ -210,7 +210,7 @@ public class AddRelationActivity extends AppCompatActivity {
                                 try {
                                     relation2 = new Relation(relation);
                                 } catch (JSONException e) {
-                                    e.printStackTrace();
+                                    Log.d("context", String.valueOf(e));
                                 }
                                 relation2.setToId(relation.getFromID());
                                 relation2.setFromId(relation.getToID());
@@ -220,7 +220,7 @@ public class AddRelationActivity extends AppCompatActivity {
                             try {
                                 success_write = FileUtils.saveRelationsToFile(getApplicationContext(), ManageRelationsActivity.formatterJsonFile());
                             } catch (JSONException e) {
-                                e.printStackTrace();
+                                Log.d("context", String.valueOf(e));
                             }
                         }
                         else {
@@ -252,7 +252,7 @@ public class AddRelationActivity extends AppCompatActivity {
                         try {
                             success_write = FileUtils.saveRelationsToFile(getApplicationContext(), ManageRelationsActivity.formatterJsonFile());
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            Log.d("context", String.valueOf(e));
                         }
                     }
                 }
@@ -313,7 +313,7 @@ public class AddRelationActivity extends AppCompatActivity {
                     try {
                         type = Objects.requireNonNull(MainActivity.mConfiguration.getHashMap_datatables().get("ListRelationTypes")).get(data_element.getString("relation_type_id"));
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        Log.d("context", String.valueOf(e));
                     }
                     relation.setRelationType(type.toString());
                     mSpinnerRelationType.setSelection(spinner_adapter_relation_type.getPosition(type));

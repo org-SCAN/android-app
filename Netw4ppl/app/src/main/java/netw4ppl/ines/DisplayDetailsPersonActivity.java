@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -208,7 +209,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
                         try {
                             save_relations = this.deleteAssociatedRelations(ManagePersonsActivity.hashmap_persons.get(id_person));
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            Log.d("context", String.valueOf(e));
                         }
 
                         // supprime la personne de l'array

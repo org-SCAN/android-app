@@ -1,5 +1,7 @@
 package netw4ppl.ines.utils;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -72,7 +74,7 @@ public class Person extends JSONObject implements Cloneable {
             try {
                 value = this.getString(key);
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.d("context", String.valueOf(e));
             }
         }
         return value;
@@ -102,7 +104,7 @@ public class Person extends JSONObject implements Cloneable {
         try {
             this.put(key, value);
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
     }
 

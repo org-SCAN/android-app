@@ -130,7 +130,7 @@ public class Relation extends JSONObject {
         try {
             this.put(key, info);
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
     }
 
@@ -144,7 +144,7 @@ public class Relation extends JSONObject {
         try {
             res = this.getString(key);
         } catch (JSONException e) {
-            // e.printStackTrace();
+            // Log.d("context", String.valueOf(e));
         }
         return res;
     }
