@@ -102,7 +102,6 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
             mLayoutFrom.setVisibility(View.GONE);
             mLayoutTo.setVisibility(View.GONE);
         }
-        }
 
         mListRelationsFrom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
