@@ -205,7 +205,7 @@ public class AddRelationActivity extends AppCompatActivity {
 
                             ManageRelationsActivity.array_relations.add(relation);
 
-                            if (relation.getInfoByKey("type").equals("Bilateral")) {
+                            if (relation.getInfoByKey("type").equals("bilateral")) {
                                 Relation relation2 = null;
                                 try {
                                     relation2 = new Relation(relation);
@@ -214,7 +214,10 @@ public class AddRelationActivity extends AppCompatActivity {
                                 }
                                 relation2.setToId(relation.getFromID());
                                 relation2.setFromId(relation.getToID());
-                                ManageRelationsActivity.array_relations.add(relation2);
+                                //check if relation2 is equal to one the the relation already present in array_relation
+                                if (!testExistingRelation(relation2)) {
+                                    ManageRelationsActivity.array_relations.add(relation2);
+                                }
                             }
 
                             try {
@@ -308,14 +311,18 @@ public class AddRelationActivity extends AppCompatActivity {
                 DataElement data_element = (DataElement) parent.getItemAtPosition(position);
                 if (!data_element.getKey().equals("NA")) {
                     relation.setRelation(data_element.getKey());
-                    Object type = null;
+                    DataElement type = null;
                     // TODO if edit : no listener from relation nature + mSpinnerRelationType disabled
                     try {
                         type = Objects.requireNonNull(MainActivity.mConfiguration.getHashMap_datatables().get("ListRelationTypes")).get(data_element.getString("relation_type_id"));
                     } catch (JSONException e) {
                         Log.d("context", String.valueOf(e));
                     }
-                    relation.setRelationType(type.toString());
+                    try {
+                        relation.setRelationType(type.getString("type"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     mSpinnerRelationType.setSelection(spinner_adapter_relation_type.getPosition(type));
                 }
                 else {

@@ -50,12 +50,6 @@ public class ManageRelationsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_manage_relations);
 
         try {
-            setRelationTypes();
-        } catch (JSONException e) {
-            Log.d("context", String.valueOf(e));
-        }
-
-        try {
             ManagePersonsActivity.readPersonsFile(this);
         } catch (IOException | JSONException e) {
             Log.d("context", String.valueOf(e));
@@ -119,25 +113,6 @@ public class ManageRelationsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-
-    /**
-     * Function to initialize relation_types arraylist based on the "type" attribute of the relations natures
-     */
-    public static void setRelationTypes() throws JSONException {
-        relation_types = new ArrayList<>();
-        for (DataElement relation : Objects.requireNonNull(MainActivity.mConfiguration.getHashMapDatabase().get("ListRelations"))) {
-            Iterator<String> iterator = relation.keys();
-            while (iterator.hasNext()) {
-                String key = iterator.next();
-                if (key.equals("type")) {
-                    String type = relation.getString(key);
-                    if (!relation_types.contains(type)) {
-                        relation_types.add(type);
-                    }
-                }
-            }
-        }
     }
 
     /**

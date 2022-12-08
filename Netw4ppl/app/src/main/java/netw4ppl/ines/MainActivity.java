@@ -77,11 +77,7 @@ public class MainActivity extends AppCompatActivity{
                 SubmitData.manageSend(this, getString(R.string.directory_files));
                 FileUtils.savePersonsToFile(this, ManagePersonsActivity.formatterJsonFile());
                 FileUtils.saveRelationsToFile(this, ManageRelationsActivity.formatterJsonFile());
-                if (MainActivity.checkIfFullSynced()) {
-                    mDataSyncState.setImageResource(R.drawable.icons8_cloud_check_48);
-                } else {
-                    mDataSyncState.setImageResource(R.drawable.icons8_cloud_48);
-                }
+                updateSyncImage();
             } catch (IOException | InterruptedException | JSONException e) {
                 Log.d("context", String.valueOf(e));
             }
@@ -95,8 +91,11 @@ public class MainActivity extends AppCompatActivity{
             initiateData(this);
             mApplicationLaunch = false;
         }
+        updateSyncImage();
+    }
 
-        if (checkIfFullSynced()) {
+    private void updateSyncImage() {
+        if (MainActivity.checkIfFullSynced()) {
             mDataSyncState.setImageResource(R.drawable.icons8_cloud_check_48);
         } else {
             mDataSyncState.setImageResource(R.drawable.icons8_cloud_48);
