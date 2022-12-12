@@ -78,4 +78,5 @@
     <string name="no_bdv_title">Pas de "Best Descriptive Value" = l\'application est inutilisable</string>
     <string name="no_bdv_message">Demandez à votre administrateur d\'ajouter un champ Best Descriptive Value à votre équipe. Actuellement, l\'application est inutilisable.</string>
     <string name="no_bdv_confirmation">Quitter</string>
+    <string name="toast_save_failed">L\'enregistrement de la nouvelle personne a échoué</string>
 </resources>

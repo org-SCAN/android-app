@@ -106,7 +106,6 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         mListRelationsFrom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // position correspond à la position de la personne dans l'adapter
                 boolean got_it = false;
                 Relation r = (Relation) adapter_relations_from.getItem(position);
                 String person_from_string = r.getFromID();
@@ -119,9 +118,6 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
                         }
                     }
                 }
-                // on a désormais la bonne relation, il faut cherche l'index de la personne
-
-                // DisplayDetailsPersonActivity.index_person = index_reel;
                 Intent intent = new Intent(DisplayDetailsPersonActivity.this, DisplayDetailsPersonActivity.class);
                 intent.putExtra("id_person", id_person); //Put your id to your next Intent
                 startActivity(intent);
@@ -200,7 +196,7 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
                     .setMessage(R.string.delete_person_message)
                     .setCancelable(true)
                     .setPositiveButton(R.string.yes, (a,b) -> {
-                        // supprime les relations avant de supprimer la personne
+                        // delete the associated relations before deleting the person
                         boolean save_relations = false;
                         try {
                             save_relations = this.deleteAssociatedRelations(ManagePersonsActivity.hashmap_persons.get(id_person));
@@ -319,22 +315,16 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
     public boolean deleteAssociatedRelations(Person p) throws JSONException {
         ArrayList<Integer> index_relations = new ArrayList<Integer>();
 
-        // suppression dans les listes
         for (int i=0; i<ManageRelationsActivity.array_relations.size(); i++) {
-            if (ManageRelationsActivity.array_relations.get(i).isPersonInRelation(p)) {
-                index_relations.add(i);
+            Relation r = ManageRelationsActivity.array_relations.get(i);
+            if (r.isPersonInRelation(p)) {
+                ManageRelationsActivity.array_relations.remove(r);
             }
         }
 
-        // pour chaque relation qui possède cette personne
-        int index = 0;
-        for (int i=0; i<index_relations.size(); i++) {
-            ManageRelationsActivity.array_relations.remove(index_relations.get(i) + (-1*index));
-            index++;
-        }
-
-        // sauvegarde le fichier
         boolean save_relations = FileUtils.saveRelationsToFile(this, ManageRelationsActivity.formatterJsonFile());
+        ManageRelationsActivity.updateAdapter();
+        ManagePersonsActivity.updateAdapter();
 
         return save_relations;
     }

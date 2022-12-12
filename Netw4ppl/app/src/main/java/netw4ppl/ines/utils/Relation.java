@@ -170,11 +170,7 @@ public class Relation extends JSONObject {
      * @return a boolean telling if the Person is already contained in the Relation, true if yes, false if not
      */
     public boolean isPersonInRelation(Person p) {
-        String p_id = p.getInfoByKey("unique_id");
-        String p_full_name = p.getInfoByKey("full_name");
-        String person = p_id + " - " + p_full_name;
-
-        return this.getFromID().equals(person) || this.getToID().equals(person);
+        return this.getFromID().equals(p.getKey()) || this.getToID().equals(p.getKey());
     }
 
     /**

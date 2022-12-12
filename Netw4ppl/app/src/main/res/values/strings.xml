@@ -147,4 +147,6 @@
     <string name="filename_synced_relations" translatable="false">/synced_relations.json</string>
     <string name="filename_synced_persons" translatable="false">/synced_persons.json</string>
 
+    <string name="toast_save_failed">Saving of the new Person has failed</string>
+
 </resources>

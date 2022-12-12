@@ -160,6 +160,10 @@ public class SettingsActivity extends AppCompatActivity {
                             // create the new empty ones
                             String[] filenames = {"persons.json", "relations.json"};
                             boolean result_creation = FileUtils.createFiles(SettingsFragment.this.getContext().getFilesDir().toString()+"/cases/", filenames);
+                            ManagePersonsActivity.hashmap_persons.clear();
+                            ManagePersonsActivity.updateAdapter();
+                            ManageRelationsActivity.array_relations.clear();
+                            ManageRelationsActivity.updateAdapter();
                             displayToast(this.getContext(), result_deletion ? res.getString(R.string.toast_delete_success) : res.getString(R.string.toast_delete_fail));
                         })
                         .setNegativeButton(R.string.button_relation_cancel_title, (a,b) -> {
