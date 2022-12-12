@@ -128,9 +128,8 @@ public class AddPersonActivity extends AppCompatActivity {
                     }
                 }
 
-                // enregistre les données dans le fichier associé
                 boolean save_persons = FileUtils.savePersonsToFile(this, ManagePersonsActivity.formatterJsonFile());
-                //refresh l'adapter de managePersonsActivity
+                //refresh adapter of managePersonsActivity
                 ManagePersonsActivity.updateAdapter();
 
                 // reset some variables
@@ -140,7 +139,7 @@ public class AddPersonActivity extends AppCompatActivity {
                     finish();
                 }
                 else {
-                    // TODO faire apparaitre un toast pour dire que la sauvegarde a échoué
+                    SettingsActivity.displayToast(this, getString(R.string.toast_save_failed));
                 }
             }
         });

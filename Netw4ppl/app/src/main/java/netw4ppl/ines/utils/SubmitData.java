@@ -241,8 +241,10 @@ public class SubmitData {
             @Override
             public void run() {
                 try  {
+                    String url = server_url;
+                    if (!url.contains("/api/")) {url += "/api/";}
                     Request request = new Request.Builder()
-                            .url(server_url+"/api/"+target)
+                            .url(url+target)
                             .method("POST", body)
                             .addHeader("Application-id", unique_app_id)
                             .addHeader("Accept", "application/json")

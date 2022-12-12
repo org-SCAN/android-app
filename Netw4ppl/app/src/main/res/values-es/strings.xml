@@ -78,4 +78,5 @@
     <string name="no_bdv_title">No hay \'mejor valor descriptivo\' = la aplicación es inutilizable</string>
     <string name="no_bdv_message">Pide a tu administrador que añada un campo "Mejor valor descriptivo" a tu equipo, en su estado actual la aplicación es inutilizable.</string>
     <string name="no_bdv_confirmation">Salir</string>
+    <string name="toast_save_failed">El registro de la nueva persona ha fallado</string>
 </resources>
