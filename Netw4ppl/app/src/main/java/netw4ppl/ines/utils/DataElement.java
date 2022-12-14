@@ -36,9 +36,9 @@ public class DataElement extends JSONObject {
      * Returns the name of a list associated to this DataElement if there is one
      * @return Name of the list associated to a DataElement
      */
-    public String getLinkedList() {
+    public String getLinkedList() throws JSONException {
         String res = "";
-        if (this.has("linked_list")) {
+        if (this.has("linked_list") && !this.getString("linked_list").equals("null")) {
             try {
                 res = this.getString("linked_list");
             } catch (JSONException e) {

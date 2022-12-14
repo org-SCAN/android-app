@@ -162,7 +162,7 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
             result = convertView;
         }
 
-        if (ManageRelationsActivity.array_relations_synced.contains(relation)) {
+        if (lowContains(ManageRelationsActivity.array_relations_synced,relation)) {
             holder.mSyncState.setImageResource(R.drawable.icons8_cloud_check_48);
         } else {
             holder.mSyncState.setImageResource(R.drawable.icons8_cloud_48);
@@ -175,6 +175,16 @@ public class RelationListAdapter extends ArrayAdapter<Relation> {
         holder.mRelationType.setText(relation.getRelation());
 
         return convertView;
+    }
+
+    private boolean lowContains(ArrayList<Relation> array_relations, Relation relation) {
+        //check in array_relations, if the from_id, the to_id and the relation type are the same
+        for (Relation r : array_relations) {
+            if (r.getFromID().equals(relation.getFromID()) && r.getToID().equals(relation.getToID()) && r.getRelation().equals(relation.getRelation())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

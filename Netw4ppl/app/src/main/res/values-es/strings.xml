@@ -52,7 +52,7 @@
     <string name="button_add_relation_to">+Hacia</string>
     <string name="button_add_relation_from">+Desde</string>
     <string name="relation_from_indication">Desde</string>
-    <string name="relation_type_indication">Tipo de relación</string>
+    <string name="relation_type_indication">Relación</string>
     <string name="details_title_full_name">Informaciones</string>
     <string name="relation_to_indication">Hacia</string>
     <string name="relation_comment_indication">Comentarios</string>

@@ -53,7 +53,7 @@
     <string name="button_add_relation_from">+Depuis</string>
     <string name="details_title_full_name">Informations</string>
     <string name="relation_from_indication">Depuis</string>
-    <string name="relation_type_indication">Type de relation</string>
+    <string name="relation_type_indication">Relation</string>
     <string name="relation_to_indication">Vers</string>
     <string name="relation_comment_indication">Commentaires</string>
     <string name="button_relation_save_title">Sauvegarder</string>

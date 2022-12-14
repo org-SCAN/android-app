@@ -2,6 +2,7 @@ package netw4ppl.ines;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -74,14 +75,17 @@ public class ManageRelationsActivity extends AppCompatActivity {
         mSearchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if (query.length() > 0)
+                if (query.length() > 0) {
                     mAdapter.getFilter().filter(query);
+                    mListView.setAdapter(mAdapter);
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 mAdapter.getFilter().filter(newText);
+                mListView.setAdapter(mAdapter);
                 return false;
             }
         });

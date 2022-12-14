@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ import java.io.IOException;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -202,6 +204,10 @@ public class SubmitData {
         File directory = new File(filePath);
         Log.d("general-display", "Le dossier contenant les pièces jointes : " + directory.getAbsolutePath());
         File[] arrFiles = directory.listFiles();
+        //remove the files in arrFiles containing "id" and "synced" in their path
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            arrFiles = Arrays.stream(arrFiles).filter(f -> !f.getPath().contains("id") && !f.getPath().contains("synced")).toArray(File[]::new);
+        }
 
         // for every file present in the directory, add it in the attachments list
         if (arrFiles != null) {
@@ -316,6 +322,8 @@ public class SubmitData {
 
                     if (response.code()==200) {
                         http_success[0] = true;
+
+                        //TODO : warning message if team change + wait for ok to go on
 
                         // write the new configuration file
                         System.out.println(data_path+dir_path+file_fields);

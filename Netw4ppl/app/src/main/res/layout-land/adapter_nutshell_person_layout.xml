@@ -21,10 +21,10 @@
 
     <TextView
         android:id="@+id/best_descriptive_value"
-        android:layout_width="132dp"
+        android:layout_width="311dp"
         android:layout_height="49dp"
+        android:gravity="center"
         android:paddingLeft="10dp"
-        android:textAlignment="viewStart"
         android:textSize="20sp"
         android:textStyle="bold" />
 

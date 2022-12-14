@@ -3,6 +3,7 @@ package netw4ppl.ines;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity{
     ImageView mSettingsBtn;
     Button mSendDataBtn;
     ImageView mDataSyncState;
+    Button mInfo;
 
     public static String device_language;
     public static boolean mApplicationLaunch = true;
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity{
         mSettingsBtn = findViewById(R.id.main_activity_settings_btn);
         mSendDataBtn = findViewById(R.id.main_activity_send_data_btn);
         mDataSyncState = findViewById(R.id.main_activity_data_sync_state);
+        mInfo = findViewById(R.id.info);
 
         // add listeners to every buttons
         mManagePersonsBtn.setOnClickListener(v -> {
@@ -85,6 +88,13 @@ public class MainActivity extends AppCompatActivity{
         mSettingsBtn.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
+        });
+        mInfo.setOnClickListener(v ->{
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse("https://user-doc.netw4ppl.tech"));
+                startActivity(intent);
         });
 
         if (mApplicationLaunch) {
