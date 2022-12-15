@@ -153,7 +153,7 @@
 
     <string name="team_change_title">Your Team has changed !</string>
     <string name="team_change_message">This involves a new form for creating people, all currently unsynchronised data stored in your application will be lost. You can save them below by sending them by email.</string>
-    <string name="team_change_send_mail">Upload old data by mail</string>
+    <string name="team_change_send_mail">Upload old data by email</string>
     <string name="team_change_confirmation">Continue (old data will be lost)</string>
 
     <string name="change_team_back_title">Be careful!</string>
