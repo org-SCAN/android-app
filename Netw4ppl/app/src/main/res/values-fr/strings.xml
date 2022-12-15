@@ -86,5 +86,5 @@
     <string name="change_team_back_title">Faites attention !</string>
     <string name="change_team_back_message">Avez vous envoyé vos données par email ?</string>
     <string name="change_team_back_yes">Oui, supprimer mes anciennes données et changer d\'équipe</string>
-    <string name="change_team_back_send_mail">Non, envoyer mes anciennes données par mail</string>
+    <string name="change_team_back_send_mail">Non, envoyer mes anciennes données par email</string>
 </resources>
