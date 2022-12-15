@@ -80,7 +80,7 @@
     <string name="no_bdv_confirmation">Quitter</string>
     <string name="toast_save_failed">L\'enregistrement de la nouvelle personne a échoué</string>
     <string name="team_change_title">On vous a attribué une nouvelle équipe !</string>
-    <string name="team_change_message">Cela implique un nouveau formulaire pour créer des personnes, toutes les données actuellement non synchronisés stockées dans votre application seront perdues. Vous pouvez ci dessous les sauvegarder en les envoyant par mail.</string>
+    <string name="team_change_message">Cela implique un nouveau formulaire pour créer des personnes, toutes les données actuellement non synchronisées stockées dans votre application seront perdues. Vous pouvez ci dessous les sauvegarder en les envoyant par email.</string>
     <string name="team_change_send_mail">Envoyer mes anciennes données par mail</string>
     <string name="team_change_confirmation">Continuer (Mes anciennes données seront perdues)</string>
     <string name="change_team_back_title">Faites attention !</string>
