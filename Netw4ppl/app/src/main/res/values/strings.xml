@@ -158,7 +158,7 @@
 
     <string name="change_team_back_title">Be careful!</string>
     <string name="change_team_back_message">Did you send your data by email?</string>
-    <string name="change_team_back_yes">Yes, delete old data + change team</string>
+    <string name="change_team_back_yes">Yes, delete old data & change team</string>
     <string name="change_team_back_send_mail">No, upload old data by email</string>
 
 </resources>
