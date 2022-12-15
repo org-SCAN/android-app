@@ -1,6 +1,8 @@
 package netw4ppl.ines.utils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -8,6 +10,8 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -155,7 +159,11 @@ public class SubmitData {
      * @throws InterruptedException
      */
   public static void manageGet(Context context) throws IOException, InterruptedException {
-      //gets and creates all the http objects needed
+      String data_path = context.getFilesDir().getPath();
+      String dir_path = context.getString(R.string.config_files);
+      String crew_id_field = context.getString(R.string.crew_id_path);
+
+        //gets and creates all the http objects needed
         String token_server = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getResources().getString(R.string.settings_server_token_key), "");
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(100, TimeUnit.MILLISECONDS)
@@ -171,6 +179,38 @@ public class SubmitData {
         }
 
         if (toast_text.equals("")){
+            // before getting the result from the /api/fields GET, we check if the user's team has not changed, if not we let him push his old data by mail before loosing it
+            MainActivity.old_crew_id = FileUtils.readFile(data_path+dir_path+crew_id_field);
+            MainActivity.crew_id = getCrewId(context,ip_port,token_server,client);
+            if (!MainActivity.old_crew_id.equals("") && !MainActivity.crew_id.equals(MainActivity.old_crew_id)){
+                final AlertDialog dialog = new AlertDialog.Builder(context)
+                        .setTitle(R.string.team_change_title)
+                        .setMessage(R.string.team_change_message)
+                        .setCancelable(false)
+                        .setNeutralButton(R.string.team_change_send_mail, null)
+                        .setPositiveButton(R.string.team_change_confirmation, (a, b) -> {})
+                        .create();
+
+                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+
+                    @Override
+                    public void onShow(DialogInterface dialogInterface) {
+
+                        Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEUTRAL);
+                        button.setOnClickListener(new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View view) {
+                                sendByEmail(context, new File(context.getFilesDir(), context.getString(R.string.directory_files)).getPath());
+                                //Dismiss once everything is OK.
+                                dialog.dismiss();
+                            }
+                        });
+                    }
+                });
+                dialog.show();
+            }
+            // now we get the fields configuration, and we check if there is a BestDescriptiveField
             boolean get_result = getFromServer(context,ip_port,token_server,client);
             MainActivity.mConfiguration.checkIfBestDescriptiveValueExist(context);
             toast_text = get_result ? context.getString(R.string.main_get_success_msg) : context.getString(R.string.main_get_fail_msg);
@@ -197,6 +237,7 @@ public class SubmitData {
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, makeSubject(context.getResources(), filePath));
         emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         emailIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         emailIntent.setSelector(emailSelectorIntent);
 
         // get the files in the source directory
@@ -212,6 +253,7 @@ public class SubmitData {
         // for every file present in the directory, add it in the attachments list
         if (arrFiles != null) {
             for (File f : arrFiles){
+                System.out.println(f.getAbsolutePath());
                 Uri attachment = FileProvider.getUriForFile(context, MainActivity.class.getPackage().getName() + ".fileprovider", new File(String.valueOf(f)));
                 attachments.add(attachment);
             }
@@ -316,14 +358,12 @@ public class SubmitData {
                             .addHeader("Authorization", "Bearer "+token_server)
                             .build();
                     Response response = http_client.newCall(request).execute();
-                    Log.d("Code de réception", String.valueOf(response.code()));
+                    Log.d("Reception Code", String.valueOf(response.code()));
                     String response_string = response.body().string();
                     Log.d("GetResponse", response_string);
 
                     if (response.code()==200) {
                         http_success[0] = true;
-
-                        //TODO : warning message if team change + wait for ok to go on
 
                         // write the new configuration file
                         System.out.println(data_path+dir_path+file_fields);
@@ -440,4 +480,56 @@ public class SubmitData {
         return relations.toString();
     }
 
+    /**
+     * Get from the server (at url /api/user) the list "crew_id" associated to the user
+     *
+     * @param context context of the activity
+     * @param server_url ip address of the server
+     * @param token_server individual token of the user
+     * @param http_client http client of OkHttp
+     * @return the String containing the user's crew_id
+     */
+    public static String getCrewId(Context context, String server_url, String token_server, OkHttpClient http_client) throws IOException, InterruptedException {
+        String data_path = context.getFilesDir().getPath();
+        String dir_path = context.getString(R.string.config_files);
+        String crew_id_field = context.getString(R.string.crew_id_path);
+
+        final String[] crewId = new String[1];
+
+        String unique_app_id = MainActivity.mConfiguration.getApplicationId();
+        final boolean[] http_success = {false, false};
+        Thread thread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    Request request = new Request.Builder()
+                            .url(server_url+"/api/user")
+                            .method("GET", null)
+                            .addHeader("Accept", "application/json")
+                            .addHeader("Content-Type", "application/json")
+                            .addHeader("Application-id",unique_app_id)
+                            .addHeader("Authorization", "Bearer "+token_server)
+                            .build();
+                    Response response = http_client.newCall(request).execute();
+                    Log.d("Reception code", String.valueOf(response.code()));
+                    String response_string = response.body().string();
+                    // assign to the crewId String the value of the "crew_id" tag in response_string
+                    crewId[0] = new JSONObject(response_string).getString("crew_id");
+                    Log.d("GetResponse", response_string);
+
+                    if (response.code()==200) {
+                        http_success[1] = FileUtils.writeFile(data_path + dir_path + crew_id_field, crewId[0]);
+                    }
+                } catch (Exception e) {
+                    Log.d("context", String.valueOf(e));
+                }
+            }
+        });
+
+        thread.start();
+        thread.join();
+
+        return crewId[0];
+    }
 }

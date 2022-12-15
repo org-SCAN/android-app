@@ -193,7 +193,9 @@ public class ManageRelationsActivity extends AppCompatActivity {
      * case there have been any changes in the adapter (add, modification or deletion of a relation)
      */
     public static void updateAdapter(){
-        mAdapter.notifyDataSetChanged();
+        if (mAdapter != null) {
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     /**

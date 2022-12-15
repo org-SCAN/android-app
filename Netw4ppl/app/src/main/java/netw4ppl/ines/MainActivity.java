@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity{
     public static String device_language;
     public static boolean mApplicationLaunch = true;
     public static Configuration mConfiguration;
+    public static String crew_id;
+    public static String old_crew_id;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -197,4 +199,6 @@ public class MainActivity extends AppCompatActivity{
             Log.d("context", String.valueOf(e));
         }
     }
+
+
 }

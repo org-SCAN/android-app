@@ -121,7 +121,9 @@ public class ManagePersonsActivity extends AppCompatActivity {
      * case there have been any changes in the adapter (add, modification or deletion of a person)
      */
     public static void updateAdapter() {
-        mAdapter.update();
+        if (mAdapter != null) {
+            mAdapter.update();
+        }
     }
 
     @Override
