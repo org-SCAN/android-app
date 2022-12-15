@@ -119,7 +119,7 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
                                         }
                                     }
                                 } catch (JSONException e) {
-                                    e.printStackTrace();
+                                    Log.d("context", String.valueOf(e));
                                 }
                             }
 
@@ -258,7 +258,7 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
                                 linkedListValue = field.getLinkedListValue(person);
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            Log.d("context", String.valueOf(e));
                         }
                         if (linkedListValue != null) {
                             holder.mDescriptiveField1.setText(linkedListValue);
@@ -276,7 +276,7 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
                                 linkedListValue = field.getLinkedListValue(person);
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            Log.d("context", String.valueOf(e));
                         }
                         if (linkedListValue != null) {
                             holder.mDescriptiveField2.setText(linkedListValue);

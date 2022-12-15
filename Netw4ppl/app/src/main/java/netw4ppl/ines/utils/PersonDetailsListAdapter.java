@@ -99,11 +99,11 @@ public class PersonDetailsListAdapter extends ArrayAdapter<Field> {
                 try {
                     linkedListValue = field.getLinkedListValue(mPerson);
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    Log.d("context", String.valueOf(e));
                 }
             }
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.d("context", String.valueOf(e));
         }
 
         if (linkedListValue != null) {
