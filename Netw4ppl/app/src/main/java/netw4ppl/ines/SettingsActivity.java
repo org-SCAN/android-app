@@ -1,10 +1,17 @@
 package netw4ppl.ines;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
+
+import java.io.File;
 import java.net.URL;
 
 import androidx.appcompat.app.ActionBar;
@@ -155,16 +162,8 @@ public class SettingsActivity extends AppCompatActivity {
                         .setPositiveButton(R.string.yes, (a,b) -> {
                             // delete the files
                             displayToast(this.getContext(), res.getString(R.string.toast_delete_processing));
-                            // delete the files
-                            boolean result_deletion = FileUtils.clearDirectory(SettingsFragment.this.getContext().getFilesDir() + "/cases/");
-                            // create the new empty ones
-                            String[] filenames = {"persons.json", "relations.json"};
-                            boolean result_creation = FileUtils.createFiles(SettingsFragment.this.getContext().getFilesDir().toString()+"/cases/", filenames);
-                            ManagePersonsActivity.hashmap_persons.clear();
-                            ManagePersonsActivity.updateAdapter();
-                            ManageRelationsActivity.array_relations.clear();
-                            ManageRelationsActivity.updateAdapter();
-                            displayToast(this.getContext(), result_deletion ? res.getString(R.string.toast_delete_success) : res.getString(R.string.toast_delete_fail));
+                            Boolean result = resetData(getContext());
+                            displayToast(this.getContext(), result ? res.getString(R.string.toast_delete_success) : res.getString(R.string.toast_delete_fail));
                         })
                         .setNegativeButton(R.string.button_relation_cancel_title, (a,b) -> {
                             // no op
@@ -230,5 +229,57 @@ public class SettingsActivity extends AppCompatActivity {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public static boolean resetData(Context context) {
+        // delete the files
+        boolean result_deletion = FileUtils.clearDirectory(context.getFilesDir() + "/cases/");
+        // create the new empty ones
+        String[] filenames = {"persons.json", "relations.json"};
+        boolean result_creation = FileUtils.createFiles(context.getFilesDir().toString()+"/cases/", filenames);
+        ManagePersonsActivity.hashmap_persons.clear();
+        ManagePersonsActivity.updateAdapter();
+        ManageRelationsActivity.array_relations.clear();
+        ManageRelationsActivity.updateAdapter();
+
+        return result_deletion && result_creation;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Log.d("life-cycle", "onBackPressed Called");
+        Context context = getApplicationContext();
+        if (!MainActivity.crew_id.equals(MainActivity.old_crew_id)) {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.change_team_back_title)
+                    .setMessage(R.string.change_team_back_message)
+                    .setCancelable(true)
+                    .setPositiveButton(R.string.change_team_back_yes, (a,b) -> {
+                        // delete the files
+                        displayToast(context, context.getString(R.string.toast_delete_processing));
+                        Boolean result = SettingsActivity.resetData(this.getApplicationContext());
+                        if (result) {
+                            MainActivity.old_crew_id = MainActivity.crew_id;
+                            finish();
+                        }
+                        displayToast(context, result ? context.getString(R.string.toast_delete_success) : context.getString(R.string.toast_delete_fail));
+                    })
+                    .setNegativeButton(R.string.change_team_back_send_mail, (a,b) -> {
+                        SubmitData.sendByEmail(context, new File(context.getFilesDir(), context.getString(R.string.directory_files)).getPath());
+                    })
+                    .create()
+                    .show();
+        } else {
+            finish();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return false;
     }
 }

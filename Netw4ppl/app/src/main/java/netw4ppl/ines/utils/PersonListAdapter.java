@@ -15,6 +15,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import org.json.JSONException;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,7 +37,6 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
     private int lastPosition = -1;
     public ArrayList<Person> mObjects;
     public ArrayList<Person> mObjects_tmp;
-    public static HashMap<Person, ArrayList<String>> usedFields = new HashMap<>();
 
     /**
      * A basic ViewHolder to put the BestDescriptiveValue of the Person
@@ -64,8 +65,8 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
         mObjects_tmp = objects;
         for (Person p : mObjects) {
             //check if usedFields contains the person
-            if (!usedFields.containsKey(p)) {
-                usedFields.put(p, new ArrayList<String>());
+            if (!ManagePersonsActivity.usedFields.containsKey(p)) {
+                ManagePersonsActivity.usedFields.put(p, new ArrayList<String>());
             }
         }
     }
@@ -94,14 +95,12 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
                     while (i < length) {
                         Person p = mObjects.get(i);
 
-                        // do the comparison
+                        // compare
                         Iterator<String> keys = p.keys();
                         boolean has_it = false;
                         String key_field;
                         String key_table = "";
 
-                        // on regarde toutes les valeurs des clés en s'arrêtant seulement si :
-                        // plus de clé à regarder ou si on a trouvé ce qu'on cherchait
                         while (keys.hasNext() && !has_it) {
 
                             key_field = keys.next();
@@ -110,14 +109,22 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
                             // si la linked_list associée au field est définie on va regarder dedans
                             Field f = MainActivity.mConfiguration.getFieldFromHashMap(key_field);
                             if (f != null) {
-                                if (!f.getLinkedList().equals("")) {
-                                    String linkedListValue = f.getLinkedListValue(p);
-                                    if (linkedListValue != null) {
-                                        value_field = linkedListValue;
-                                    } else {
-                                        value_field = "";
+                                try {
+                                    if (!f.getLinkedList().equals("")) {
+                                        String linkedListValue = f.getLinkedListValue(p);
+                                        if (linkedListValue != null) {
+                                            value_field = linkedListValue;
+                                        } else {
+                                            value_field = "";
+                                        }
                                     }
+                                } catch (JSONException e) {
+                                    Log.d("context", String.valueOf(e));
                                 }
+                            }
+
+                            if (Arrays.asList(Field.hidden_values).contains(key_field)) {
+                                value_field = "";
                             }
 
                             if (value_field.toLowerCase().contains(constraint.toString().toLowerCase()))
@@ -134,31 +141,21 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
                     filterResults.values = tempList;
                     filterResults.count = tempList.size();
                 }
-                cleanUsedFields();
                 return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 mObjects_tmp = (ArrayList<Person>) results.values;
-                // si on fait la recherche avec une chaine vide (aucun texte saisi)
+                // if we search with empty chain
                 if (constraint.toString().equals("") || constraint == null) {
-                    // réinitialiser la liste de l'adapter
+                    // reset adapter list
                     mObjects_tmp = mObjects;
                 }
                 update();
+                ManagePersonsActivity.cleanUsedFields();
             }
         };
-    }
-
-    public void cleanUsedFields() {
-        usedFields.clear();
-        for (Person p : mObjects) {
-            //check if usedFields contains the person
-            if (!usedFields.containsKey(p)) {
-                usedFields.put(p, new ArrayList<String>());
-            }
-        }
     }
 
     public void update() {
@@ -172,8 +169,8 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
         ManagePersonsActivity.array_persons.addAll(tmp);
         for (Person p : mObjects) {
             //check if usedFields contains the person
-            if (!usedFields.containsKey(p)) {
-                usedFields.put(p, new ArrayList<String>());
+            if (!ManagePersonsActivity.usedFields.containsKey(p)) {
+                ManagePersonsActivity.usedFields.put(p, new ArrayList<String>());
             }
         }
     }
@@ -223,12 +220,13 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
         this.lastPosition = position;
 
         Iterator<String> keys = person.keys();
+
+        // This ugly while loop (and if statement) are used to ignore the fields hidden values,
+        // as editing the persons's field values mess up the field's orders
         while(keys.hasNext()) {
             String linkedListValue = null;
 
             String key = keys.next();
-            // This ugly while loop (and if statement) are used to ignore the fields hidden values,
-            // as editing the persons's field values mess up the field's orders
             while (Arrays.asList(Field.hidden_values).contains(key)) {
                 if (!keys.hasNext()) {
                     break;
@@ -239,43 +237,57 @@ public class PersonListAdapter extends ArrayAdapter<Person> implements Filterabl
                 break;
             }
             Field field = MainActivity.mConfiguration.getFieldFromHashMap(key);
+
             if (field == null) {
                 break;
             }
-            if (usedFields.containsKey(person)) {
-                if (!usedFields.get(person).contains(key)) {
-                    if (!field.isBestDescriptiveValue()) {
-                        if (field.isDescriptiveValue()) {
-                            if (holder.mDescriptiveField1Title.getText().equals("")) {
-                                holder.mDescriptiveField1Title.setText(field + " : ");
-                                if (!field.getLinkedList().equals("")) {
-                                    linkedListValue = field.getLinkedListValue(person);
-                                }
-                                if (linkedListValue != null) {
-                                    holder.mDescriptiveField1.setText(linkedListValue);
-                                } else {
-                                    holder.mDescriptiveField1.setText(String.valueOf(person.getInfoByKey(key)));
-                                }
-                            } else {
-                                holder.mDescriptiveField2Title.setText(field + " : ");
-                                if (!field.getLinkedList().equals("")) {
-                                    linkedListValue = field.getLinkedListValue(person);
-                                }
-                                if (linkedListValue != null) {
-                                    holder.mDescriptiveField2.setText(linkedListValue);
-                                } else {
-                                    holder.mDescriptiveField2.setText(String.valueOf(person.getInfoByKey(key)));
-                                }
+            if (!ManagePersonsActivity.usedFields.containsKey(person)) {
+                break;
+            }
+            if (ManagePersonsActivity.usedFields.get(person).contains(key)) {
+                break;
+            }
+            if (field.isBestDescriptiveValue()) {
+                holder.mBestDescriptiveValue.setText(String.valueOf(person.getInfoByKey(key)));
+            } else {
+                if (field.isDescriptiveValue()) {
+                    if (holder.mDescriptiveField1Title.getText().equals("")) {
+                        holder.mDescriptiveField1Title.setText(field + " : ");
+                        try {
+                            if (!field.getLinkedList().equals("")) {
+                                linkedListValue = field.getLinkedListValue(person);
                             }
+                        } catch (JSONException e) {
+                            Log.d("context", String.valueOf(e));
                         }
-                    } else if (field.isBestDescriptiveValue()) {
-                        holder.mBestDescriptiveValue.setText(String.valueOf(person.getInfoByKey(key)));
+                        if (linkedListValue != null) {
+                            holder.mDescriptiveField1.setText(linkedListValue);
+                        } else {
+                            holder.mDescriptiveField1.setText(String.valueOf(person.getInfoByKey(key)));
+                        }
+                    } else {
+                        // if the first descriptive field is equal to the current field, break
+                        if (holder.mDescriptiveField1Title.getText().equals(field + " : ")) {
+                            break;
+                        }
+                        holder.mDescriptiveField2Title.setText(field + " : ");
+                        try {
+                            if (!field.getLinkedList().equals("")) {
+                                linkedListValue = field.getLinkedListValue(person);
+                            }
+                        } catch (JSONException e) {
+                            Log.d("context", String.valueOf(e));
+                        }
+                        if (linkedListValue != null) {
+                            holder.mDescriptiveField2.setText(linkedListValue);
+                        } else {
+                            holder.mDescriptiveField2.setText(String.valueOf(person.getInfoByKey(key)));
+                        }
                     }
-                    usedFields.get(person).add(key);
                 }
             }
+            ManagePersonsActivity.usedFields.get(person).add(key);
         }
-        cleanUsedFields();
         return result;
     }
 

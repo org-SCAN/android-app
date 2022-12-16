@@ -52,7 +52,7 @@
     <string name="button_add_relation_to">+Hacia</string>
     <string name="button_add_relation_from">+Desde</string>
     <string name="relation_from_indication">Desde</string>
-    <string name="relation_type_indication">Tipo de relación</string>
+    <string name="relation_type_indication">Relación</string>
     <string name="details_title_full_name">Informaciones</string>
     <string name="relation_to_indication">Hacia</string>
     <string name="relation_comment_indication">Comentarios</string>
@@ -79,4 +79,12 @@
     <string name="no_bdv_message">Pide a tu administrador que añada un campo "Mejor valor descriptivo" a tu equipo, en su estado actual la aplicación es inutilizable.</string>
     <string name="no_bdv_confirmation">Salir</string>
     <string name="toast_save_failed">El registro de la nueva persona ha fallado</string>
+    <string name="team_change_title">Te han asignado un nuevo equipo</string>
+    <string name="team_change_message">Esto implica un nuevo formulario para crear personas, todos los datos actualmente no sincronizados almacenados en su aplicación se perderán. Puede guardarlas a continuación enviándolas por correo electrónico.</string>
+    <string name="team_change_send_mail">Enviar mis datos antiguos por correo electrónico</string>
+    <string name="team_change_confirmation">Continuar (Mis datos antiguos se perderán)</string>
+    <string name="change_team_back_title">¡Ten cuidado!</string>
+    <string name="change_team_back_message">¿Ha enviado sus datos por correo electrónico?</string>
+    <string name="change_team_back_yes">Sí, borrar mis datos antiguos y cambiar de equipo</string>
+    <string name="change_team_back_send_mail">No, Enviar mis datos antiguos por correo electrónico</string>
 </resources>

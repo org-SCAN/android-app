@@ -323,7 +323,6 @@ public class DisplayDetailsPersonActivity extends AppCompatActivity {
         }
 
         boolean save_relations = FileUtils.saveRelationsToFile(this, ManageRelationsActivity.formatterJsonFile());
-        ManageRelationsActivity.updateAdapter();
         ManagePersonsActivity.updateAdapter();
 
         return save_relations;

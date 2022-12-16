@@ -39,11 +39,14 @@ public class ManagePersonsActivity extends AppCompatActivity {
     public static HashMap<String, Person> hashmap_persons = new HashMap<>();
     public static ArrayList<Person> array_persons = new ArrayList<Person>();
     public static ArrayList<Person> array_persons_synced = new ArrayList<Person>();
+    public static HashMap<Person, ArrayList<String>> usedFields = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_persons);
+
+        cleanUsedFields();
 
         // lire le fichier files/cases/persons.json et initialiser array_persons
         try {
@@ -76,7 +79,7 @@ public class ManagePersonsActivity extends AppCompatActivity {
                 // si on appuie sur le bouton de recherche
                 if (query.length() > 0) {
                     mAdapter.getFilter().filter(query);
-                    updateAdapter();
+                    mListView.setAdapter(mAdapter);
                 }
                 return false;
             }
@@ -85,7 +88,7 @@ public class ManagePersonsActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 // dès qu'on ajoute ou enlève une lettre
                 mAdapter.getFilter().filter(newText);
-                updateAdapter();
+                mListView.setAdapter(mAdapter);
                 return false;
             }
         });
@@ -103,19 +106,32 @@ public class ManagePersonsActivity extends AppCompatActivity {
 
     }
 
+    public static void cleanUsedFields() {
+        ManagePersonsActivity.usedFields.clear();
+        for (Person p : array_persons) {
+            //check if usedFields contains the person
+            if (!ManagePersonsActivity.usedFields.containsKey(p)) {
+                ManagePersonsActivity.usedFields.put(p, new ArrayList<String>());
+            }
+        }
+    }
+
     /**
      * Function to update the adapter. During an onResume of the activity, this method will be called in
      * case there have been any changes in the adapter (add, modification or deletion of a person)
      */
     public static void updateAdapter() {
-        mAdapter.update();
+        if (mAdapter != null) {
+            mAdapter.update();
+        }
     }
 
     @Override
     protected void onResume () {
         super.onResume();
         mSearchBar.setQuery("", true);
-        updateAdapter();
+        mListView.setAdapter(mAdapter);
+        cleanUsedFields();
     }
 
 

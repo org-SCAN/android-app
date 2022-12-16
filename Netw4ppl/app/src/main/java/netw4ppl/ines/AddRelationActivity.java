@@ -321,7 +321,7 @@ public class AddRelationActivity extends AppCompatActivity {
                     try {
                         relation.setRelationType(type.getString("type"));
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        Log.d("context", String.valueOf(e));
                     }
                     mSpinnerRelationType.setSelection(spinner_adapter_relation_type.getPosition(type));
                 }

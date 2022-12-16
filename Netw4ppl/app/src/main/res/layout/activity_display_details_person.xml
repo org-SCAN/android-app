@@ -104,6 +104,17 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ListView
+                    android:id="@+id/list_details_person"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
             <!--            <RelativeLayout-->
             <!--                android:layout_width="match_parent"-->
             <!--                android:layout_height="wrap_content">-->
@@ -136,18 +147,6 @@
             <!--                    android:layout_margin="5dp"/>-->
 
             <!--            </RelativeLayout>-->
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <ListView
-                    android:id="@+id/list_details_person"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </LinearLayout>
 
         </LinearLayout>
 

@@ -130,7 +130,7 @@ public class Field extends DataElement {
      * @param person
      * @return
      */
-    public String getLinkedListValue(Person person) {
+    public String getLinkedListValue(Person person) throws JSONException {
         String key_table = this.getLinkedList();
         String key_elem = person.getInfoByKey(this.getKey());
         if (MainActivity.mConfiguration.hasElementInTable(key_table, key_elem)) {

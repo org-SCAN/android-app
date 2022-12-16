@@ -6,12 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -23,19 +26,25 @@ import netw4ppl.ines.utils.PersonDetailsListAdapter;
 import netw4ppl.ines.utils.Relation;
 
 /**
- * Class used to display the details about a relation like the ids and names of the person associated,
- * the relation type and finally the comments about this relation if there are any.
+ * Class used to display the details about a relation like the best descriptive value of the person associated,
+ * the relation and finally the comments about this relation if there are any.
  */
 public class DisplayDetailsRelationActivity extends AppCompatActivity {
 
-    TextView mTextViewFullnameTitle;
-    TextView mTextViewFromFullname;
-    TextView mTextViewRelationType;
-    TextView mTextViewToFullname;
-    TextView mTextViewComments;
+    ImageView mButtonEditRelation;
+    ImageView mButtonDeleteRelation;
 
-    Button mButtonEditRelation;
-    Button mButtonDeleteRelation;
+    com.google.android.material.textfield.TextInputLayout mFromTitle;
+    com.google.android.material.textfield.TextInputEditText mFromValue;
+
+    com.google.android.material.textfield.TextInputLayout mRelationTitle;
+    com.google.android.material.textfield.TextInputEditText mRelationValue;
+
+    com.google.android.material.textfield.TextInputLayout mToTitle;
+    com.google.android.material.textfield.TextInputEditText mToValue;
+
+    com.google.android.material.textfield.TextInputLayout mCommentTitle;
+    com.google.android.material.textfield.TextInputEditText mCommentValue;
 
     private int index_relation;
 
@@ -54,13 +63,28 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
             index_relation = 0;
         }
 
-        mTextViewFromFullname = (TextView) findViewById(R.id.relation_from_fullname);
-        mTextViewRelationType = (TextView) findViewById(R.id.relation_type);
-        mTextViewToFullname = (TextView) findViewById(R.id.relation_to_fullname);
-        mTextViewComments = (TextView) findViewById(R.id.relation_comment);
+        mFromTitle = (com.google.android.material.textfield.TextInputLayout) findViewById(R.id.relation_from_title);
+        mFromTitle.setHint(getString(R.string.relation_from_indication));
+        mFromValue = (com.google.android.material.textfield.TextInputEditText) findViewById(R.id.relation_from_value);
+        setStyle(mFromValue);
 
-        mButtonEditRelation = (Button) findViewById(R.id.display_relation_edit);
-        mButtonDeleteRelation = (Button) findViewById(R.id.display_relation_delete);
+        mRelationTitle = (com.google.android.material.textfield.TextInputLayout) findViewById(R.id.relation_title);
+        mRelationTitle.setHint(getString(R.string.relation_indication));
+        mRelationValue = (com.google.android.material.textfield.TextInputEditText) findViewById(R.id.relation_value);
+        setStyle(mRelationValue);
+
+        mToTitle = (com.google.android.material.textfield.TextInputLayout) findViewById(R.id.relation_to_title);
+        mToTitle.setHint(getString(R.string.relation_to_indication));
+        mToValue = (com.google.android.material.textfield.TextInputEditText) findViewById(R.id.relation_to_value);
+        setStyle(mToValue);
+
+        mCommentTitle = (com.google.android.material.textfield.TextInputLayout) findViewById(R.id.relation_comment_title);
+        mCommentTitle.setHint(getString(R.string.relation_comment_indication));
+        mCommentValue = (com.google.android.material.textfield.TextInputEditText) findViewById(R.id.relation_comment_value);
+        setStyle(mCommentValue);
+
+        mButtonEditRelation = (ImageView) findViewById(R.id.display_relation_edit);
+        mButtonDeleteRelation = (ImageView) findViewById(R.id.display_relation_delete);
 
         Relation relation = ManageRelationsActivity.array_relations.get(index_relation);
 
@@ -111,23 +135,22 @@ public class DisplayDetailsRelationActivity extends AppCompatActivity {
 
     }
 
+    private void setStyle(TextInputEditText textInput) {
+        textInput.setEnabled(false);
+        textInput.setInputType(InputType.TYPE_NULL);
+        textInput.setTextColor(0xff000000);
+    }
+
     /**
      * Function to set the views based on a Relation object given in parameters.
      *
      * @param relation a Relation object
      */
     private void setViews(Relation relation){
-        mTextViewFromFullname.setText(relation.getFromBestDescriptiveValue());
-
-        // associate the relation key with its string for a better visualisation
-        String relation_key = relation.getInfoByKey("relation");
-        ArrayAdapter relations_adapter = MainActivity.mConfiguration.getArrayAdapter("ListRelations");
-        int pos_in_adapter = AddRelationActivity.getPositionInAdapter(relations_adapter, relation_key);
-        String text_relation = relations_adapter.getItem(pos_in_adapter).toString();
-
-        mTextViewRelationType.setText(text_relation); // relation.getInfoByKey("relation")
-        mTextViewToFullname.setText(relation.getToBestDescriptiveValue());
-        mTextViewComments.setText(relation.getDetails());
+        mFromValue.setText(relation.getFromBestDescriptiveValue());
+        mToValue.setText(relation.getToBestDescriptiveValue());
+        mRelationValue.setText(relation.getRelation());
+        mCommentValue.setText(relation.getDetails());
     }
 
     @Override

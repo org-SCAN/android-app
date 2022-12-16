@@ -6,7 +6,7 @@
     android:padding="5dp">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/adapter_details_title"
+        android:id="@+id/from_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -14,7 +14,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/adapter_details_text" />
+            android:id="@+id/relation_from_value" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

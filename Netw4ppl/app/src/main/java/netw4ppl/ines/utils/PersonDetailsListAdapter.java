@@ -1,8 +1,6 @@
 package netw4ppl.ines.utils;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,9 +11,10 @@ import android.widget.ArrayAdapter;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
-import netw4ppl.ines.MainActivity;
 import netw4ppl.ines.ManagePersonsActivity;
 import netw4ppl.ines.R;
 
@@ -75,8 +74,8 @@ public class PersonDetailsListAdapter extends ArrayAdapter<Field> {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             convertView = inflater.inflate(mResource, parent, false);
             holder = new PersonDetailsListAdapter.ViewHolder();
-            holder.mTitle = (com.google.android.material.textfield.TextInputLayout) convertView.findViewById(R.id.adapter_details_title);
-            holder.mText = (com.google.android.material.textfield.TextInputEditText) convertView.findViewById(R.id.adapter_details_text);
+            holder.mTitle = (com.google.android.material.textfield.TextInputLayout) convertView.findViewById(R.id.from_title);
+            holder.mText = (com.google.android.material.textfield.TextInputEditText) convertView.findViewById(R.id.relation_from_value);
 
             holder.mText.setEnabled(false);
             holder.mText.setInputType(InputType.TYPE_NULL);
@@ -95,8 +94,16 @@ public class PersonDetailsListAdapter extends ArrayAdapter<Field> {
         String linkedListValue = null;
         String text = mPerson.getInfoByKey(field.getKey());
 
-        if (!field.getLinkedList().equals("")) {
-            linkedListValue = field.getLinkedListValue(mPerson);
+        try {
+            if (!field.getLinkedList().equals("")) {
+                try {
+                    linkedListValue = field.getLinkedListValue(mPerson);
+                } catch (JSONException e) {
+                    Log.d("context", String.valueOf(e));
+                }
+            }
+        } catch (JSONException e) {
+            Log.d("context", String.valueOf(e));
         }
 
         if (linkedListValue != null) {
