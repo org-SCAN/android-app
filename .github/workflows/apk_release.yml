@@ -1,0 +1,52 @@
+name: Release APK
+
+on:
+  push:
+    tags:
+      - 'v*'  # Trigger this workflow when a new tag starting with 'v' is pushed
+
+jobs:
+  release:
+    name: Create Release and Upload APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Build Release APK
+        run: ./gradlew assembleRelease  # This will create a release APK
+
+      - name: Extract Version From Tag
+        id: get_version
+        run: echo "::set-output name=VERSION::${GITHUB_REF/refs\/tags\/v/}"
+
+      - name: Generate Release Notes
+        id: create_notes
+        run: |
+          echo "::set-output name=body::$(git log $(git describe --tags --abbrev=0 HEAD^)..HEAD --pretty=format:'- %s')"
+          
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ steps.get_version.outputs.VERSION }}
+          body: ${{ steps.create_notes.outputs.body }}
+
+      - name: Upload APK to GitHub Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}  # This pulls from the Create GitHub Release step
+          asset_path: app/build/outputs/apk/release/app-release.apk  # Adjust this path to match your project structure
+          asset_name: app-release.apk
+          asset_content_type: application/vnd.android.package-archive
